@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>BC Game 活动详情</title>
   <style>
-    :root { --bg:#f5f6f2; --panel:#fff; --ink:#15201b; --muted:#66736d; --line:#d8ddd4; --green:#0d7658; --blue:#245c9e; --soft:#eef4f0; }
+    :root { --bg:#f5f6f2; --panel:#fff; --ink:#15201b; --muted:#66736d; --line:#d8ddd4; --green:#0d7658; --blue:#245c9e; --amber:#9a6816; --red:#a54040; --soft:#eef4f0; }
     * { box-sizing:border-box; }
     body { margin:0; background:var(--bg); color:var(--ink); font-family:Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; line-height:1.45; }
     .page { max-width:1280px; margin:0 auto; padding:28px 18px 56px; }
@@ -35,6 +35,9 @@
     .visual img { max-height:520px; object-fit:contain; }
     .activity-list { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:14px; }
     .activity-card { background:var(--panel); border:1px solid var(--line); border-radius:8px; padding:16px; }
+    .activity-card.detail-ok { border-left:4px solid var(--green); }
+    .activity-card.detail-limited { border-left:4px solid var(--amber); }
+    .activity-card.detail-missing { border-left:4px solid #a8b1ac; }
     .activity-head { display:grid; grid-template-columns:36px minmax(0,1fr); gap:10px; align-items:start; margin-bottom:12px; }
     .index { display:inline-grid; place-items:center; width:30px; height:30px; border-radius:999px; background:var(--soft); color:var(--green); font-weight:800; }
     dl { display:grid; gap:8px; margin:0; }
@@ -42,6 +45,12 @@
     dt { color:var(--muted); font-size:12px; font-weight:800; }
     dd { margin:0; font-size:13px; }
     .missing-text { color:var(--muted); }
+    .detail-pill { display:inline-flex; align-items:center; border-radius:999px; padding:3px 8px; font-size:12px; font-weight:800; }
+    .ok-pill { background:#e5f3ed; color:var(--green); }
+    .limited-pill { background:#fff4df; color:var(--amber); }
+    .fallback-pill { background:#eef0ea; color:var(--muted); }
+    .detail-excerpt { margin-top:12px; border-top:1px solid var(--line); padding-top:10px; }
+    .detail-excerpt summary { cursor:pointer; color:var(--blue); font-weight:800; }
     .raw { background:var(--panel); border:1px solid var(--line); border-radius:8px; padding:14px; margin-top:16px; }
     pre { white-space:pre-wrap; word-break:break-word; background:#111714; color:#eef6f0; padding:12px; border-radius:8px; max-height:320px; overflow:auto; font-size:12px; }
     a { color:var(--blue); }
@@ -56,11 +65,12 @@
         <p class="eyebrow">Brand Promotion Page</p>
         <h1>BC Game</h1>
         <p class="sub">来源 Source：<a href="https://bc.fun/en-IN/promotions/promotion">https://bc.fun/en-IN/promotions/promotion</a></p>
-        <p class="sub">本页根据浏览器可见内容整理。未显示的字段会标注为“列表页未显示 / Not shown on listing page”。</p>
+        <p class="sub">本页优先使用活动详情页内容；详情页未开放或未匹配时使用列表页兜底。</p>
       </div>
       <div class="meta">
         <b>活动 Activities</b>7<br>
         <b>今日新增 New</b>0<br>
+        <b>详情 Details</b>0<br>
         <b>状态 Status</b>浏览器可访问 / Browser accessible
       </div>
     </section>
@@ -70,117 +80,145 @@
     </section>
 
     <section class="activity-list">
-      <article class="activity-card">
+      <article class="activity-card detail-missing">
     <div class="activity-head">
       <span class="index">1</span>
       <div>
         <h2>IEM ATLANTA 2026 SPIN &amp; WIN BIG REWARDS </h2>
-        <p>综合活动 / General Promotion</p>
+        <p>综合活动 / General Promotion · <span class="detail-pill fallback-pill">列表页兜底 / Listing fallback</span></p>
       </div>
     </div>
     <dl>
       <div><dt>奖励 / Reward</dt><dd>$34,000; up to $1000</dd></div>
+      <div><dt>详情页奖励 / Detail Reward</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
       <div><dt>参与要求 / Requirements</dt><dd>Wager Daily &amp; Draw Daily, Win up to $1000</dd></div>
       <div><dt>开始时间 / Start Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
       <div><dt>结束时间 / End Time</dt><dd>May 18</dd></div>
+      <div><dt>详情页关键日期 / Detail Dates</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>详情页来源 / Detail Source</dt><dd><span class="missing-text">未匹配详情页 / No detail page matched</span></dd></div>
       <div><dt>备注 / Notes</dt><dd>列表页可见 / Visible on listing page</dd></div>
     </dl>
+
   </article>
-<article class="activity-card">
+<article class="activity-card detail-missing">
     <div class="activity-head">
       <span class="index">2</span>
       <div>
         <h2>FREE SPINS GIVEAWAY </h2>
-        <p>免费旋转 / Free Spins</p>
+        <p>免费旋转 / Free Spins · <span class="detail-pill fallback-pill">列表页兜底 / Listing fallback</span></p>
       </div>
     </div>
     <dl>
       <div><dt>奖励 / Reward</dt><dd>20 FREE SPINS; €10; 20 Free Spins</dd></div>
+      <div><dt>详情页奖励 / Detail Reward</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
       <div><dt>参与要求 / Requirements</dt><dd>Bet €10 every day and get 20 Free Spins daily!</dd></div>
       <div><dt>开始时间 / Start Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
       <div><dt>结束时间 / End Time</dt><dd>May 20</dd></div>
+      <div><dt>详情页关键日期 / Detail Dates</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>详情页来源 / Detail Source</dt><dd><span class="missing-text">未匹配详情页 / No detail page matched</span></dd></div>
       <div><dt>备注 / Notes</dt><dd>列表页可见 / Visible on listing page</dd></div>
     </dl>
+
   </article>
-<article class="activity-card">
+<article class="activity-card detail-missing">
     <div class="activity-head">
       <span class="index">3</span>
       <div>
         <h2>NOLIMITCITY EXCLUSIVE 98% RTP </h2>
-        <p>综合活动 / General Promotion</p>
+        <p>综合活动 / General Promotion · <span class="detail-pill fallback-pill">列表页兜底 / Listing fallback</span></p>
       </div>
     </div>
     <dl>
       <div><dt>奖励 / Reward</dt><dd>98%</dd></div>
+      <div><dt>详情页奖励 / Detail Reward</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
       <div><dt>参与要求 / Requirements</dt><dd>Enjoy 98% RTP for higher returns on every bet.</dd></div>
       <div><dt>开始时间 / Start Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
       <div><dt>结束时间 / End Time</dt><dd>May 25</dd></div>
+      <div><dt>详情页关键日期 / Detail Dates</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>详情页来源 / Detail Source</dt><dd><span class="missing-text">未匹配详情页 / No detail page matched</span></dd></div>
       <div><dt>备注 / Notes</dt><dd>列表页可见 / Visible on listing page</dd></div>
     </dl>
+
   </article>
-<article class="activity-card">
+<article class="activity-card detail-missing">
     <div class="activity-head">
       <span class="index">4</span>
       <div>
         <h2>BET €20 DAILY </h2>
-        <p>免费旋转 / Free Spins</p>
+        <p>免费旋转 / Free Spins · <span class="detail-pill fallback-pill">列表页兜底 / Listing fallback</span></p>
       </div>
     </div>
     <dl>
       <div><dt>奖励 / Reward</dt><dd>10 FREE SPINS; €20; 10 free spins</dd></div>
+      <div><dt>详情页奖励 / Detail Reward</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
       <div><dt>参与要求 / Requirements</dt><dd>On Nolimit City selected Slot Games and grab 10 free spins every day!</dd></div>
       <div><dt>开始时间 / Start Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
       <div><dt>结束时间 / End Time</dt><dd>倒计时：20:41:01</dd></div>
+      <div><dt>详情页关键日期 / Detail Dates</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>详情页来源 / Detail Source</dt><dd><span class="missing-text">未匹配详情页 / No detail page matched</span></dd></div>
       <div><dt>备注 / Notes</dt><dd>列表页可见 / Visible on listing page</dd></div>
     </dl>
+
   </article>
-<article class="activity-card">
+<article class="activity-card detail-missing">
     <div class="activity-head">
       <span class="index">5</span>
       <div>
         <h2>CHOP CHOP 7-DAY GIFT </h2>
-        <p>免费旋转 / Free Spins</p>
+        <p>免费旋转 / Free Spins · <span class="detail-pill fallback-pill">列表页兜底 / Listing fallback</span></p>
       </div>
     </div>
     <dl>
       <div><dt>奖励 / Reward</dt><dd>120 FREE SPINS; up to 120 FREE SPINS</dd></div>
+      <div><dt>详情页奖励 / Detail Reward</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
       <div><dt>参与要求 / Requirements</dt><dd>Complete daily tasks for 7 days &amp; win up to 120 FREE SPINS!</dd></div>
       <div><dt>开始时间 / Start Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
       <div><dt>结束时间 / End Time</dt><dd>May 21</dd></div>
+      <div><dt>详情页关键日期 / Detail Dates</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>详情页来源 / Detail Source</dt><dd><span class="missing-text">未匹配详情页 / No detail page matched</span></dd></div>
       <div><dt>备注 / Notes</dt><dd>列表页可见 / Visible on listing page</dd></div>
     </dl>
+
   </article>
-<article class="activity-card">
+<article class="activity-card detail-missing">
     <div class="activity-head">
       <span class="index">6</span>
       <div>
         <h2>3 CURSED CHESTS FREE SPINS </h2>
-        <p>免费旋转 / Free Spins</p>
+        <p>免费旋转 / Free Spins · <span class="detail-pill fallback-pill">列表页兜底 / Listing fallback</span></p>
       </div>
     </div>
     <dl>
       <div><dt>奖励 / Reward</dt><dd>10 FREE SPINS; €10; 10 Free Spins</dd></div>
+      <div><dt>详情页奖励 / Detail Reward</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
       <div><dt>参与要求 / Requirements</dt><dd>Bet €10 daily, get 10 Free Spins</dd></div>
       <div><dt>开始时间 / Start Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
       <div><dt>结束时间 / End Time</dt><dd>May 28</dd></div>
+      <div><dt>详情页关键日期 / Detail Dates</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>详情页来源 / Detail Source</dt><dd><span class="missing-text">未匹配详情页 / No detail page matched</span></dd></div>
       <div><dt>备注 / Notes</dt><dd>列表页可见 / Visible on listing page</dd></div>
     </dl>
+
   </article>
-<article class="activity-card">
+<article class="activity-card detail-missing">
     <div class="activity-head">
       <span class="index">7</span>
       <div>
         <h2>TRIPLE TREASURE COVE </h2>
-        <p>综合活动 / General Promotion</p>
+        <p>综合活动 / General Promotion · <span class="detail-pill fallback-pill">列表页兜底 / Listing fallback</span></p>
       </div>
     </div>
     <dl>
       <div><dt>奖励 / Reward</dt><dd>EARLY RELEASE</dd></div>
+      <div><dt>详情页奖励 / Detail Reward</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
       <div><dt>参与要求 / Requirements</dt><dd>Exclusive early release, only on BC.GAME</dd></div>
       <div><dt>开始时间 / Start Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
       <div><dt>结束时间 / End Time</dt><dd>May 22</dd></div>
+      <div><dt>详情页关键日期 / Detail Dates</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>详情页来源 / Detail Source</dt><dd><span class="missing-text">未匹配详情页 / No detail page matched</span></dd></div>
       <div><dt>备注 / Notes</dt><dd>列表页可见 / Visible on listing page</dd></div>
     </dl>
+
   </article>
     </section>
 

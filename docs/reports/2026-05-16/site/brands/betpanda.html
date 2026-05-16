@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Betpanda 活动详情</title>
   <style>
-    :root { --bg:#f5f6f2; --panel:#fff; --ink:#15201b; --muted:#66736d; --line:#d8ddd4; --green:#0d7658; --blue:#245c9e; --soft:#eef4f0; }
+    :root { --bg:#f5f6f2; --panel:#fff; --ink:#15201b; --muted:#66736d; --line:#d8ddd4; --green:#0d7658; --blue:#245c9e; --amber:#9a6816; --red:#a54040; --soft:#eef4f0; }
     * { box-sizing:border-box; }
     body { margin:0; background:var(--bg); color:var(--ink); font-family:Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; line-height:1.45; }
     .page { max-width:1280px; margin:0 auto; padding:28px 18px 56px; }
@@ -35,6 +35,9 @@
     .visual img { max-height:520px; object-fit:contain; }
     .activity-list { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:14px; }
     .activity-card { background:var(--panel); border:1px solid var(--line); border-radius:8px; padding:16px; }
+    .activity-card.detail-ok { border-left:4px solid var(--green); }
+    .activity-card.detail-limited { border-left:4px solid var(--amber); }
+    .activity-card.detail-missing { border-left:4px solid #a8b1ac; }
     .activity-head { display:grid; grid-template-columns:36px minmax(0,1fr); gap:10px; align-items:start; margin-bottom:12px; }
     .index { display:inline-grid; place-items:center; width:30px; height:30px; border-radius:999px; background:var(--soft); color:var(--green); font-weight:800; }
     dl { display:grid; gap:8px; margin:0; }
@@ -42,6 +45,12 @@
     dt { color:var(--muted); font-size:12px; font-weight:800; }
     dd { margin:0; font-size:13px; }
     .missing-text { color:var(--muted); }
+    .detail-pill { display:inline-flex; align-items:center; border-radius:999px; padding:3px 8px; font-size:12px; font-weight:800; }
+    .ok-pill { background:#e5f3ed; color:var(--green); }
+    .limited-pill { background:#fff4df; color:var(--amber); }
+    .fallback-pill { background:#eef0ea; color:var(--muted); }
+    .detail-excerpt { margin-top:12px; border-top:1px solid var(--line); padding-top:10px; }
+    .detail-excerpt summary { cursor:pointer; color:var(--blue); font-weight:800; }
     .raw { background:var(--panel); border:1px solid var(--line); border-radius:8px; padding:14px; margin-top:16px; }
     pre { white-space:pre-wrap; word-break:break-word; background:#111714; color:#eef6f0; padding:12px; border-radius:8px; max-height:320px; overflow:auto; font-size:12px; }
     a { color:var(--blue); }
@@ -56,11 +65,12 @@
         <p class="eyebrow">Brand Promotion Page</p>
         <h1>Betpanda</h1>
         <p class="sub">来源 Source：<a href="https://betpanda.partners/en/promo/promotions">https://betpanda.partners/en/promo/promotions</a></p>
-        <p class="sub">本页根据浏览器可见内容整理。未显示的字段会标注为“列表页未显示 / Not shown on listing page”。</p>
+        <p class="sub">本页优先使用活动详情页内容；详情页未开放或未匹配时使用列表页兜底。</p>
       </div>
       <div class="meta">
         <b>活动 Activities</b>11<br>
         <b>今日新增 New</b>0<br>
+        <b>详情 Details</b>4<br>
         <b>状态 Status</b>浏览器可访问 / Browser accessible
       </div>
     </section>
@@ -70,181 +80,225 @@
     </section>
 
     <section class="activity-list">
-      <article class="activity-card">
+      <article class="activity-card detail-missing">
     <div class="activity-head">
       <span class="index">1</span>
       <div>
         <h2>Sign-Up Offer </h2>
-        <p>综合活动 / General Promotion</p>
+        <p>综合活动 / General Promotion · <span class="detail-pill fallback-pill">列表页兜底 / Listing fallback</span></p>
       </div>
     </div>
     <dl>
       <div><dt>奖励 / Reward</dt><dd>Up to 1 BTC</dd></div>
+      <div><dt>详情页奖励 / Detail Reward</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
       <div><dt>参与要求 / Requirements</dt><dd>complete the requirement and get rewarded.</dd></div>
       <div><dt>开始时间 / Start Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
       <div><dt>结束时间 / End Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>详情页关键日期 / Detail Dates</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>详情页来源 / Detail Source</dt><dd><span class="missing-text">未匹配详情页 / No detail page matched</span></dd></div>
       <div><dt>备注 / Notes</dt><dd>Up to 1 BTC in our casino bonus complete the requirement and get rewarded.</dd></div>
     </dl>
+
   </article>
-<article class="activity-card">
+<article class="activity-card detail-ok">
     <div class="activity-head">
       <span class="index">2</span>
       <div>
         <h2>Exclusive Rakeback </h2>
-        <p>VIP 或忠诚度 / VIP or Loyalty</p>
+        <p>VIP 或忠诚度 / VIP or Loyalty · <span class="detail-pill ok-pill">详情页已采集 / Detail captured</span></p>
       </div>
     </div>
     <dl>
       <div><dt>奖励 / Reward</dt><dd>Climb to Bamboo Guardian and enjoy daily rakeback on every spin.</dd></div>
+      <div><dt>详情页奖励 / Detail Reward</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
       <div><dt>参与要求 / Requirements</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
       <div><dt>开始时间 / Start Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
       <div><dt>结束时间 / End Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>详情页关键日期 / Detail Dates</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>详情页来源 / Detail Source</dt><dd><a href="https://betpanda.partners/en/promo/daily-rakeback">https://betpanda.partners/en/promo/daily-rakeback</a></dd></div>
       <div><dt>备注 / Notes</dt><dd>Climb to Bamboo Guardian and enjoy daily rakeback on every spin.</dd></div>
     </dl>
+<details class="detail-excerpt"><summary>详情页原文摘要 / Detail excerpt</summary><pre>menu close Casino chevron_right Live Casino chevron_right Sports chevron_right Esports chevron_right Promotions chevron_right Sponsorships language English (en)</pre></details>
   </article>
-<article class="activity-card">
+<article class="activity-card detail-ok">
     <div class="activity-head">
       <span class="index">3</span>
       <div>
         <h2>Weekly Cashback </h2>
-        <p>返现 / Cashback</p>
+        <p>返现 / Cashback · <span class="detail-pill ok-pill">详情页已采集 / Detail captured</span></p>
       </div>
     </div>
     <dl>
       <div><dt>奖励 / Reward</dt><dd>10%</dd></div>
+      <div><dt>详情页奖励 / Detail Reward</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
       <div><dt>参与要求 / Requirements</dt><dd>Cashback Get 10% guaranteed cashback on your real money losses between Wednesdays.</dd></div>
       <div><dt>开始时间 / Start Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
       <div><dt>结束时间 / End Time</dt><dd>倒计时显示在页面顶部</dd></div>
+      <div><dt>详情页关键日期 / Detail Dates</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>详情页来源 / Detail Source</dt><dd><a href="https://betpanda.partners/en/promo/cashback">https://betpanda.partners/en/promo/cashback</a></dd></div>
       <div><dt>备注 / Notes</dt><dd>Get 10% guaranteed cashback on your real money losses between Wednesdays.</dd></div>
     </dl>
+<details class="detail-excerpt"><summary>详情页原文摘要 / Detail excerpt</summary><pre>menu close Casino chevron_right Live Casino chevron_right Sports chevron_right Esports chevron_right Promotions chevron_right Sponsorships language English (en)</pre></details>
   </article>
-<article class="activity-card">
+<article class="activity-card detail-ok">
     <div class="activity-head">
       <span class="index">4</span>
       <div>
         <h2>Live Casino Cashback Boost </h2>
-        <p>返现 / Cashback</p>
+        <p>返现 / Cashback · <span class="detail-pill ok-pill">详情页已采集 / Detail captured</span></p>
       </div>
     </div>
     <dl>
       <div><dt>奖励 / Reward</dt><dd>5% extra; 15%</dd></div>
+      <div><dt>详情页奖励 / Detail Reward</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
       <div><dt>参与要求 / Requirements</dt><dd>Cashback Boost Play live casino with 5% extra cashback, up to 15% back weekly on Evolution live games.</dd></div>
       <div><dt>开始时间 / Start Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
       <div><dt>结束时间 / End Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>详情页关键日期 / Detail Dates</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>详情页来源 / Detail Source</dt><dd><a href="https://betpanda.partners/en/promo/Casino-promotions">https://betpanda.partners/en/promo/Casino-promotions</a></dd></div>
       <div><dt>备注 / Notes</dt><dd>Play live casino with 5% extra cashback, up to 15% back weekly on Evolution live games.</dd></div>
     </dl>
+<details class="detail-excerpt"><summary>详情页原文摘要 / Detail excerpt</summary><pre>menu close Casino chevron_right Live Casino chevron_right Sports chevron_right Esports chevron_right Promotions chevron_right Sponsorships language English (en)</pre></details>
   </article>
-<article class="activity-card">
+<article class="activity-card detail-ok">
     <div class="activity-head">
       <span class="index">5</span>
       <div>
         <h2>Weekly Raffle </h2>
-        <p>竞赛或抽奖 / Tournament or Raffle</p>
+        <p>竞赛或抽奖 / Tournament or Raffle · <span class="detail-pill ok-pill">详情页已采集 / Detail captured</span></p>
       </div>
     </div>
     <dl>
       <div><dt>奖励 / Reward</dt><dd>€500</dd></div>
+      <div><dt>详情页奖励 / Detail Reward</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
       <div><dt>参与要求 / Requirements</dt><dd>Play any slots with real money and collect tickets for a chance to win one of 20 weekly €500 prizes.</dd></div>
       <div><dt>开始时间 / Start Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
       <div><dt>结束时间 / End Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>详情页关键日期 / Detail Dates</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>详情页来源 / Detail Source</dt><dd><a href="https://betpanda.partners/en/promo/weekly-raffle">https://betpanda.partners/en/promo/weekly-raffle</a></dd></div>
       <div><dt>备注 / Notes</dt><dd>Play any slots with real money and collect tickets for a chance to win one of 20 weekly €500 prizes.</dd></div>
     </dl>
+<details class="detail-excerpt"><summary>详情页原文摘要 / Detail excerpt</summary><pre>menu close Casino chevron_right Live Casino chevron_right Sports chevron_right Esports chevron_right Promotions chevron_right Sponsorships language English (en)</pre></details>
   </article>
-<article class="activity-card">
+<article class="activity-card detail-missing">
     <div class="activity-head">
       <span class="index">6</span>
       <div>
         <h2>Get Rewarded For Your Play </h2>
-        <p>综合活动 / General Promotion</p>
+        <p>综合活动 / General Promotion · <span class="detail-pill fallback-pill">列表页兜底 / Listing fallback</span></p>
       </div>
     </div>
     <dl>
       <div><dt>奖励 / Reward</dt><dd>Play as you normally do, and we'll reward you every time you achieve a new level.</dd></div>
+      <div><dt>详情页奖励 / Detail Reward</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
       <div><dt>参与要求 / Requirements</dt><dd>Play Play as you normally do, and we'll reward you every time you achieve a new level.</dd></div>
       <div><dt>开始时间 / Start Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
       <div><dt>结束时间 / End Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>详情页关键日期 / Detail Dates</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>详情页来源 / Detail Source</dt><dd><span class="missing-text">未匹配详情页 / No detail page matched</span></dd></div>
       <div><dt>备注 / Notes</dt><dd>Play as you normally do, and we'll reward you every time you achieve a new level.</dd></div>
     </dl>
+
   </article>
-<article class="activity-card">
+<article class="activity-card detail-missing">
     <div class="activity-head">
       <span class="index">7</span>
       <div>
         <h2>Get a Weekly Free Bet </h2>
-        <p>免费投注 / Free Bet</p>
+        <p>免费投注 / Free Bet · <span class="detail-pill fallback-pill">列表页兜底 / Listing fallback</span></p>
       </div>
     </div>
     <dl>
       <div><dt>奖励 / Reward</dt><dd>Based on your sports betting from the previous 7 days, we’ll credit you with a free bet every Monday.</dd></div>
+      <div><dt>详情页奖励 / Detail Reward</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
       <div><dt>参与要求 / Requirements</dt><dd>Bet Based on your sports betting from the previous 7 days, we’ll credit you with a free bet every Monday.</dd></div>
       <div><dt>开始时间 / Start Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
       <div><dt>结束时间 / End Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>详情页关键日期 / Detail Dates</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>详情页来源 / Detail Source</dt><dd><span class="missing-text">未匹配详情页 / No detail page matched</span></dd></div>
       <div><dt>备注 / Notes</dt><dd>Based on your sports betting from the previous 7 days, we’ll credit you with a free bet every Monday.</dd></div>
     </dl>
+
   </article>
-<article class="activity-card">
+<article class="activity-card detail-missing">
     <div class="activity-head">
       <span class="index">8</span>
       <div>
         <h2>Earn Points On Your Winning Bets </h2>
-        <p>竞赛或抽奖 / Tournament or Raffle</p>
+        <p>竞赛或抽奖 / Tournament or Raffle · <span class="detail-pill fallback-pill">列表页兜底 / Listing fallback</span></p>
       </div>
     </div>
     <dl>
       <div><dt>奖励 / Reward</dt><dd>Join our Weekly Sportsbook Tournament and compete for new prizes every week.</dd></div>
+      <div><dt>详情页奖励 / Detail Reward</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
       <div><dt>参与要求 / Requirements</dt><dd>Bets Join our Weekly Sportsbook Tournament and compete for new prizes every week.</dd></div>
       <div><dt>开始时间 / Start Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
       <div><dt>结束时间 / End Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>详情页关键日期 / Detail Dates</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>详情页来源 / Detail Source</dt><dd><span class="missing-text">未匹配详情页 / No detail page matched</span></dd></div>
       <div><dt>备注 / Notes</dt><dd>Join our Weekly Sportsbook Tournament and compete for new prizes every week.</dd></div>
     </dl>
+
   </article>
-<article class="activity-card">
+<article class="activity-card detail-missing">
     <div class="activity-head">
       <span class="index">9</span>
       <div>
         <h2>Unlock Bigger Wins </h2>
-        <p>综合活动 / General Promotion</p>
+        <p>综合活动 / General Promotion · <span class="detail-pill fallback-pill">列表页兜底 / Listing fallback</span></p>
       </div>
     </div>
     <dl>
       <div><dt>奖励 / Reward</dt><dd>40%</dd></div>
+      <div><dt>详情页奖励 / Detail Reward</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
       <div><dt>参与要求 / Requirements</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
       <div><dt>开始时间 / Start Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
       <div><dt>结束时间 / End Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>详情页关键日期 / Detail Dates</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>详情页来源 / Detail Source</dt><dd><span class="missing-text">未匹配详情页 / No detail page matched</span></dd></div>
       <div><dt>备注 / Notes</dt><dd>Win bigger and boost your profits with up to 40% with our COMBOBOOST feature.</dd></div>
     </dl>
+
   </article>
-<article class="activity-card">
+<article class="activity-card detail-missing">
     <div class="activity-head">
       <span class="index">10</span>
       <div>
         <h2>Build Your Perfect Bet </h2>
-        <p>综合活动 / General Promotion</p>
+        <p>综合活动 / General Promotion · <span class="detail-pill fallback-pill">列表页兜底 / Listing fallback</span></p>
       </div>
     </div>
     <dl>
       <div><dt>奖励 / Reward</dt><dd>Combine multiple markets from the same event into one bet to create your next winning combo.</dd></div>
+      <div><dt>详情页奖励 / Detail Reward</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
       <div><dt>参与要求 / Requirements</dt><dd>Bet Combine multiple markets from the same event into one bet to create your next winning combo.</dd></div>
       <div><dt>开始时间 / Start Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
       <div><dt>结束时间 / End Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>详情页关键日期 / Detail Dates</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>详情页来源 / Detail Source</dt><dd><span class="missing-text">未匹配详情页 / No detail page matched</span></dd></div>
       <div><dt>备注 / Notes</dt><dd>Combine multiple markets from the same event into one bet to create your next winning combo.</dd></div>
     </dl>
+
   </article>
-<article class="activity-card">
+<article class="activity-card detail-missing">
     <div class="activity-head">
       <span class="index">11</span>
       <div>
         <h2>Lock your Profits </h2>
-        <p>综合活动 / General Promotion</p>
+        <p>综合活动 / General Promotion · <span class="detail-pill fallback-pill">列表页兜底 / Listing fallback</span></p>
       </div>
     </div>
     <dl>
       <div><dt>奖励 / Reward</dt><dd>Cash out at the right time bank profits and stay ahead.</dd></div>
+      <div><dt>详情页奖励 / Detail Reward</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
       <div><dt>参与要求 / Requirements</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
       <div><dt>开始时间 / Start Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
       <div><dt>结束时间 / End Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>详情页关键日期 / Detail Dates</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>详情页来源 / Detail Source</dt><dd><span class="missing-text">未匹配详情页 / No detail page matched</span></dd></div>
       <div><dt>备注 / Notes</dt><dd>Cash out at the right time bank profits and stay ahead.</dd></div>
     </dl>
+
   </article>
     </section>
 

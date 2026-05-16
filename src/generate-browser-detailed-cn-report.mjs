@@ -16,6 +16,7 @@ const observations = JSON.parse(await fs.readFile(inputPath, "utf8"));
 
 const previousKeys = await loadPreviousActivityKeys(date);
 const hasPreviousBaseline = previousKeys.size > 0;
+const detailData = await loadPromotionDetails();
 const parsed = observations.results.map((item) => ({
   ...item,
   rows: parseBrand(item)
@@ -26,6 +27,7 @@ for (const item of parsed) {
     row.isNew = hasPreviousBaseline && !previousKeys.has(row.activityKey);
   }
 }
+const detailStats = enrichRowsWithDetails(parsed, detailData);
 
 const totalRows = parsed.reduce((sum, item) => sum + item.rows.length, 0);
 const newRows = parsed.reduce((sum, item) => sum + item.rows.filter((row) => row.isNew).length, 0);
@@ -61,7 +63,7 @@ const html = `<!doctype html>
     h3 { margin: 0 0 8px; font-size: 16px; letter-spacing: 0; }
     p { margin: 0; }
     .sub, .meta, .note { color: var(--muted); }
-    .kpis { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; margin: 18px 0; }
+    .kpis { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 12px; margin: 18px 0; }
     .kpi, .card { background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 16px; }
     .kpi strong { display: block; font-size: 30px; line-height: 1; }
     .kpi span { color: var(--muted); font-size: 13px; }
@@ -114,6 +116,7 @@ const html = `<!doctype html>
       ${kpi(String(parsed.length), "品牌")}
       ${kpi(String(totalRows), "活动条目")}
       ${kpi(String(newRows), "今日新增")}
+      ${kpi(String(detailStats.matched), "详情页匹配")}
       ${kpi(String(parsed.filter((item) => item.status === "ok").length), "浏览器可访问")}
     </section>
 
@@ -187,6 +190,7 @@ function renderSiteIndex(items, rowCount) {
         <b>日期 Date</b>${escapeHtml(date)}<br>
         <b>品牌 Brands</b>${items.length}<br>
         <b>活动 Activities</b>${rowCount}<br>
+        <b>详情 Details</b>${items.reduce((sum, item) => sum + item.rows.filter((row) => row.detailStatus === "ok").length, 0)}<br>
         <b>今日新增 New</b>${items.reduce((sum, item) => sum + item.rows.filter((row) => row.isNew).length, 0)}
       </div>
     </section>
@@ -207,11 +211,13 @@ function renderSiteIndex(items, rowCount) {
 function renderBrandCard(item) {
   const shot = path.join("..", "browser-screenshots", path.basename(item.screenshot));
   const newCount = item.rows.filter((row) => row.isNew).length;
+  const detailCount = item.rows.filter((row) => row.detailStatus === "ok").length;
   return `<a class="brand-card" href="brands/${slug(item.brand)}.html">
     <img src="${escapeHtml(shot)}" alt="${escapeHtml(item.brand)} screenshot">
     <div>
       <h2>${escapeHtml(item.brand)}</h2>
       <p>${item.rows.length} 条活动 / ${item.rows.length} activities</p>
+      <p>${detailCount} 条详情页已匹配 / ${detailCount} detail pages matched</p>
       ${newCount ? `<p><span class="new-badge">今日新增 ${newCount}</span></p>` : ""}
       <span>打开品牌详情 / Open brand page</span>
     </div>
@@ -236,11 +242,12 @@ function renderBrandPage(item) {
         <p class="eyebrow">Brand Promotion Page</p>
         <h1>${escapeHtml(item.brand)}</h1>
         <p class="sub">来源 Source：<a href="${escapeHtml(item.finalUrl)}">${escapeHtml(item.finalUrl)}</a></p>
-        <p class="sub">本页根据浏览器可见内容整理。未显示的字段会标注为“列表页未显示 / Not shown on listing page”。</p>
+        <p class="sub">本页优先使用活动详情页内容；详情页未开放或未匹配时使用列表页兜底。</p>
       </div>
       <div class="meta">
         <b>活动 Activities</b>${item.rows.length}<br>
         <b>今日新增 New</b>${item.rows.filter((row) => row.isNew).length}<br>
+        <b>详情 Details</b>${item.rows.filter((row) => row.detailStatus === "ok").length}<br>
         <b>状态 Status</b>浏览器可访问 / Browser accessible
       </div>
     </section>
@@ -264,27 +271,38 @@ function renderBrandPage(item) {
 
 function renderActivityCard(row, index) {
   const type = inferBilingualType(`${row.title} ${row.reward} ${row.requirement} ${row.note}`);
-  return `<article class="activity-card">
+  const detailClass = row.detailStatus === "ok" ? "detail-ok" : row.detailStatus === "limited" ? "detail-limited" : "detail-missing";
+  return `<article class="activity-card ${detailClass}">
     <div class="activity-head">
       <span class="index">${index + 1}</span>
       <div>
         <h2>${escapeHtml(row.title)} ${row.isNew ? '<span class="new-badge">今日新增 / New Today</span>' : ""}</h2>
-        <p>${escapeHtml(type)}</p>
+        <p>${escapeHtml(type)} · ${detailBadge(row)}</p>
       </div>
     </div>
     <dl>
       <div><dt>奖励 / Reward</dt><dd>${field(row.reward)}</dd></div>
-      <div><dt>参与要求 / Requirements</dt><dd>${field(row.requirement)}</dd></div>
+      <div><dt>详情页奖励 / Detail Reward</dt><dd>${field(row.detailReward || "")}</dd></div>
+      <div><dt>参与要求 / Requirements</dt><dd>${field(row.detailRequirement || row.requirement)}</dd></div>
       <div><dt>开始时间 / Start Time</dt><dd>${field(row.start)}</dd></div>
       <div><dt>结束时间 / End Time</dt><dd>${field(row.end)}</dd></div>
+      <div><dt>详情页关键日期 / Detail Dates</dt><dd>${field(row.detailDates || "")}</dd></div>
+      <div><dt>详情页来源 / Detail Source</dt><dd>${row.detailUrl ? `<a href="${escapeHtml(row.detailUrl)}">${escapeHtml(row.detailUrl)}</a>` : '<span class="missing-text">未匹配详情页 / No detail page matched</span>'}</dd></div>
       <div><dt>备注 / Notes</dt><dd>${escapeHtml(row.note || "列表页可见 / Visible on listing page")}</dd></div>
     </dl>
+${row.detailExcerpt ? `<details class="detail-excerpt"><summary>详情页原文摘要 / Detail excerpt</summary><pre>${escapeHtml(row.detailExcerpt)}</pre></details>` : ""}
   </article>`;
 }
 
 function field(value) {
   if (!value || value === "列表页未显示") return `<span class="missing-text">列表页未显示 / Not shown on listing page</span>`;
   return escapeHtml(value);
+}
+
+function detailBadge(row) {
+  if (row.detailStatus === "ok") return '<span class="detail-pill ok-pill">详情页已采集 / Detail captured</span>';
+  if (row.detailStatus === "limited") return '<span class="detail-pill limited-pill">详情页正文有限 / Limited detail</span>';
+  return '<span class="detail-pill fallback-pill">列表页兜底 / Listing fallback</span>';
 }
 
 function inferBilingualType(text) {
@@ -305,7 +323,7 @@ function redirectHtml(target) {
 
 function siteStyles() {
   return `<style>
-    :root { --bg:#f5f6f2; --panel:#fff; --ink:#15201b; --muted:#66736d; --line:#d8ddd4; --green:#0d7658; --blue:#245c9e; --soft:#eef4f0; }
+    :root { --bg:#f5f6f2; --panel:#fff; --ink:#15201b; --muted:#66736d; --line:#d8ddd4; --green:#0d7658; --blue:#245c9e; --amber:#9a6816; --red:#a54040; --soft:#eef4f0; }
     * { box-sizing:border-box; }
     body { margin:0; background:var(--bg); color:var(--ink); font-family:Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; line-height:1.45; }
     .page { max-width:1280px; margin:0 auto; padding:28px 18px 56px; }
@@ -335,6 +353,9 @@ function siteStyles() {
     .visual img { max-height:520px; object-fit:contain; }
     .activity-list { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:14px; }
     .activity-card { background:var(--panel); border:1px solid var(--line); border-radius:8px; padding:16px; }
+    .activity-card.detail-ok { border-left:4px solid var(--green); }
+    .activity-card.detail-limited { border-left:4px solid var(--amber); }
+    .activity-card.detail-missing { border-left:4px solid #a8b1ac; }
     .activity-head { display:grid; grid-template-columns:36px minmax(0,1fr); gap:10px; align-items:start; margin-bottom:12px; }
     .index { display:inline-grid; place-items:center; width:30px; height:30px; border-radius:999px; background:var(--soft); color:var(--green); font-weight:800; }
     dl { display:grid; gap:8px; margin:0; }
@@ -342,6 +363,12 @@ function siteStyles() {
     dt { color:var(--muted); font-size:12px; font-weight:800; }
     dd { margin:0; font-size:13px; }
     .missing-text { color:var(--muted); }
+    .detail-pill { display:inline-flex; align-items:center; border-radius:999px; padding:3px 8px; font-size:12px; font-weight:800; }
+    .ok-pill { background:#e5f3ed; color:var(--green); }
+    .limited-pill { background:#fff4df; color:var(--amber); }
+    .fallback-pill { background:#eef0ea; color:var(--muted); }
+    .detail-excerpt { margin-top:12px; border-top:1px solid var(--line); padding-top:10px; }
+    .detail-excerpt summary { cursor:pointer; color:var(--blue); font-weight:800; }
     .raw { background:var(--panel); border:1px solid var(--line); border-radius:8px; padding:14px; margin-top:16px; }
     pre { white-space:pre-wrap; word-break:break-word; background:#111714; color:#eef6f0; padding:12px; border-radius:8px; max-height:320px; overflow:auto; font-size:12px; }
     a { color:var(--blue); }
@@ -376,7 +403,7 @@ function renderRow(row, index) {
     <td class="small">${cell(row.requirement)}</td>
     <td>${cell(row.start)}</td>
     <td>${cell(row.end)}</td>
-    <td class="small">${escapeHtml(row.note || "列表页可见")}</td>
+    <td class="small">${escapeHtml(row.detailStatusLabel || row.note || "列表页可见")}</td>
   </tr>`;
 }
 
@@ -471,6 +498,123 @@ async function writeActivityIndex(items) {
     JSON.stringify({ generatedAt: new Date().toISOString(), date, activities }, null, 2),
     "utf8"
   );
+}
+
+async function loadPromotionDetails() {
+  const files = [
+    path.join(reportDir, "browser-promo-details-live.json"),
+    path.join(reportDir, "browser-promo-details.json")
+  ];
+  const byBrand = new Map();
+  for (const file of files) {
+    let payload;
+    try {
+      payload = JSON.parse(await fs.readFile(file, "utf8"));
+    } catch {
+      continue;
+    }
+    for (const result of payload.results || []) {
+      const details = byBrand.get(result.brand) || [];
+      for (const detail of result.details || []) {
+        if (!detail || detail.status === "error") continue;
+        if (looksLikeBrowserError(detail)) continue;
+        const existingIndex = details.findIndex((item) => item.url === detail.url);
+        if (existingIndex >= 0) details[existingIndex] = detail;
+        else details.push(detail);
+      }
+      byBrand.set(result.brand, details);
+    }
+  }
+  return byBrand;
+}
+
+function enrichRowsWithDetails(items, detailByBrand) {
+  const stats = { matched: 0, limited: 0, fallback: 0 };
+  for (const item of items) {
+    const details = detailByBrand.get(item.brand) || [];
+    const used = new Set();
+    for (const row of item.rows) {
+      const detail = bestDetailForRow(row, details, used);
+      if (!detail) {
+        row.detailStatus = "fallback";
+        row.detailStatusLabel = "列表页兜底 / Listing fallback";
+        stats.fallback += 1;
+        continue;
+      }
+      used.add(detail.url);
+      const fields = detail.fields || {};
+      row.detailStatus = detail.status === "ok" ? "ok" : "limited";
+      row.detailStatusLabel = detail.status === "ok" ? "详情页已采集 / Detail captured" : "详情页正文有限 / Limited detail";
+      row.detailUrl = detail.finalUrl || detail.url;
+      row.detailTitle = clean(fields.title || detail.linkText || "");
+      row.detailReward = clean(fields.reward || extractReward(`${detail.linkText || ""} ${detail.text || ""}`));
+      row.detailRequirement = clean(fields.requirement || extractRequirement(`${detail.linkText || ""} ${detail.text || ""}`));
+      row.detailDates = clean(Array.isArray(fields.dates) ? fields.dates.slice(0, 5).join("; ") : "");
+      row.detailExcerpt = clean(fields.excerpt || detail.text || "").slice(0, 2600);
+      if ((!row.reward || row.reward === "列表页未显示") && row.detailReward) row.reward = row.detailReward;
+      if ((!row.requirement || row.requirement === "列表页未显示") && row.detailRequirement) row.requirement = row.detailRequirement;
+      if ((!row.end || row.end === "列表页未显示") && row.detailDates) row.end = row.detailDates;
+      if (row.detailStatus === "ok") stats.matched += 1;
+      else stats.limited += 1;
+    }
+  }
+  return stats;
+}
+
+function bestDetailForRow(row, details, used) {
+  const rowKey = normalizeMatch(row.title);
+  if (!rowKey) return null;
+  let best = null;
+  let bestScore = 0;
+  for (const detail of details) {
+    if (used.has(detail.url)) continue;
+    const fields = detail.fields || {};
+    const candidates = [
+      fields.title,
+      detail.linkText,
+      detail.pageTitle,
+      detail.url && detail.url.split("/").pop()
+    ].map(normalizeMatch).filter(Boolean);
+    let score = 0;
+    for (const candidate of candidates) {
+      score = Math.max(score, matchScore(rowKey, candidate));
+    }
+    if (score > bestScore) {
+      best = detail;
+      bestScore = score;
+    }
+  }
+  return bestScore >= 46 ? best : null;
+}
+
+function matchScore(a, b) {
+  if (!a || !b) return 0;
+  if (a === b) return 100;
+  if (a.includes(b) || b.includes(a)) return 82;
+  const aTokens = new Set(a.split("-").filter((token) => token.length > 2));
+  const bTokens = new Set(b.split("-").filter((token) => token.length > 2));
+  if (!aTokens.size || !bTokens.size) return 0;
+  let overlap = 0;
+  for (const token of aTokens) {
+    if (bTokens.has(token)) overlap += 1;
+  }
+  return Math.round((overlap / Math.max(aTokens.size, bTokens.size)) * 100);
+}
+
+function normalizeMatch(value) {
+  return String(value || "")
+    .toLowerCase()
+    .replace(/bonus offer details|find out more|read more|learn more|select/g, " ")
+    .replace(/[^a-z0-9]+/g, " ")
+    .trim()
+    .split(/\s+/)
+    .filter((token) => token && !["the", "and", "with", "your", "for", "from", "our"].includes(token))
+    .join("-");
+}
+
+function looksLikeBrowserError(detail) {
+  const text = `${detail.error || ""} ${detail.text || ""} ${detail.fields?.title || ""}`;
+  return /blocked browser navigation|this site can.?t be reached|err_connection|took too long to respond/i.test(text);
 }
 
 function activityKey(brand, row) {

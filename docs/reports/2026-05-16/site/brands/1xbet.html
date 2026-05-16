@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>1xBet 活动详情</title>
   <style>
-    :root { --bg:#f5f6f2; --panel:#fff; --ink:#15201b; --muted:#66736d; --line:#d8ddd4; --green:#0d7658; --blue:#245c9e; --soft:#eef4f0; }
+    :root { --bg:#f5f6f2; --panel:#fff; --ink:#15201b; --muted:#66736d; --line:#d8ddd4; --green:#0d7658; --blue:#245c9e; --amber:#9a6816; --red:#a54040; --soft:#eef4f0; }
     * { box-sizing:border-box; }
     body { margin:0; background:var(--bg); color:var(--ink); font-family:Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; line-height:1.45; }
     .page { max-width:1280px; margin:0 auto; padding:28px 18px 56px; }
@@ -35,6 +35,9 @@
     .visual img { max-height:520px; object-fit:contain; }
     .activity-list { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:14px; }
     .activity-card { background:var(--panel); border:1px solid var(--line); border-radius:8px; padding:16px; }
+    .activity-card.detail-ok { border-left:4px solid var(--green); }
+    .activity-card.detail-limited { border-left:4px solid var(--amber); }
+    .activity-card.detail-missing { border-left:4px solid #a8b1ac; }
     .activity-head { display:grid; grid-template-columns:36px minmax(0,1fr); gap:10px; align-items:start; margin-bottom:12px; }
     .index { display:inline-grid; place-items:center; width:30px; height:30px; border-radius:999px; background:var(--soft); color:var(--green); font-weight:800; }
     dl { display:grid; gap:8px; margin:0; }
@@ -42,6 +45,12 @@
     dt { color:var(--muted); font-size:12px; font-weight:800; }
     dd { margin:0; font-size:13px; }
     .missing-text { color:var(--muted); }
+    .detail-pill { display:inline-flex; align-items:center; border-radius:999px; padding:3px 8px; font-size:12px; font-weight:800; }
+    .ok-pill { background:#e5f3ed; color:var(--green); }
+    .limited-pill { background:#fff4df; color:var(--amber); }
+    .fallback-pill { background:#eef0ea; color:var(--muted); }
+    .detail-excerpt { margin-top:12px; border-top:1px solid var(--line); padding-top:10px; }
+    .detail-excerpt summary { cursor:pointer; color:var(--blue); font-weight:800; }
     .raw { background:var(--panel); border:1px solid var(--line); border-radius:8px; padding:14px; margin-top:16px; }
     pre { white-space:pre-wrap; word-break:break-word; background:#111714; color:#eef6f0; padding:12px; border-radius:8px; max-height:320px; overflow:auto; font-size:12px; }
     a { color:var(--blue); }
@@ -56,11 +65,12 @@
         <p class="eyebrow">Brand Promotion Page</p>
         <h1>1xBet</h1>
         <p class="sub">来源 Source：<a href="https://1xlite-19708.pro/en/bonus/rules">https://1xlite-19708.pro/en/bonus/rules</a></p>
-        <p class="sub">本页根据浏览器可见内容整理。未显示的字段会标注为“列表页未显示 / Not shown on listing page”。</p>
+        <p class="sub">本页优先使用活动详情页内容；详情页未开放或未匹配时使用列表页兜底。</p>
       </div>
       <div class="meta">
         <b>活动 Activities</b>54<br>
         <b>今日新增 New</b>0<br>
+        <b>详情 Details</b>50<br>
         <b>状态 Status</b>浏览器可访问 / Browser accessible
       </div>
     </section>
@@ -70,869 +80,1085 @@
     </section>
 
     <section class="activity-list">
-      <article class="activity-card">
+      <article class="activity-card detail-ok">
     <div class="activity-head">
       <span class="index">1</span>
       <div>
         <h2>INFINITE PRIZE LEAGUE </h2>
-        <p>免费投注 / Free Bet</p>
+        <p>免费投注 / Free Bet · <span class="detail-pill ok-pill">详情页已采集 / Detail captured</span></p>
       </div>
     </div>
     <dl>
       <div><dt>奖励 / Reward</dt><dd>Daily prizes, weekly free bets, and superprizes are waiting for you!</dd></div>
-      <div><dt>参与要求 / Requirements</dt><dd>bets, and superprizes are waiting for you!</dd></div>
+      <div><dt>详情页奖励 / Detail Reward</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>参与要求 / Requirements</dt><dd>bets, and superprizes are waiting for you! BONUS OFFER DETAILS</dd></div>
       <div><dt>开始时间 / Start Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
-      <div><dt>结束时间 / End Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>结束时间 / End Time</dt><dd>FROM 00:00 (UTC+3) TO 23:59 (UTC+3), ONCE YOU HAVE ACCUMULATED 5 PROMOTIONAL TICKETS.; START COLLECTING THE NEXT 5 TICKETS TO PRESS THE BALL ONCE YOU HAVE USED YOUR PREVIOUS; START AGAIN. WHAT ARE THE PRIZES? AT THE END OF THE PROMOTION, WINNERS WILL BE SELECTE; FROM AMONG ALL TICKET HOLDERS TO WIN THE FOLLOWING PRIZES: SUPER PRIZES: LAPTOP APPLE</dd></div>
+      <div><dt>详情页关键日期 / Detail Dates</dt><dd>FROM 00:00 (UTC+3) TO 23:59 (UTC+3), ONCE YOU HAVE ACCUMULATED 5 PROMOTIONAL TICKETS.; START COLLECTING THE NEXT 5 TICKETS TO PRESS THE BALL ONCE YOU HAVE USED YOUR PREVIOUS; START AGAIN. WHAT ARE THE PRIZES? AT THE END OF THE PROMOTION, WINNERS WILL BE SELECTE; FROM AMONG ALL TICKET HOLDERS TO WIN THE FOLLOWING PRIZES: SUPER PRIZES: LAPTOP APPLE</dd></div>
+      <div><dt>详情页来源 / Detail Source</dt><dd><a href="https://1xlite-19708.pro/en/promotions/infinite-prize-league">https://1xlite-19708.pro/en/promotions/infinite-prize-league</a></dd></div>
       <div><dt>备注 / Notes</dt><dd>Daily prizes, weekly free bets, and superprizes are waiting for you!</dd></div>
     </dl>
+<details class="detail-excerpt"><summary>详情页原文摘要 / Detail excerpt</summary><pre>1 REGISTRATION LOG IN EN / 11:36 TOP-EVENTS SPORTS LIVE 1XGAMES CASINO LIVE CASINO ESPORTS PROMO MORE Plinko DAILY PRIZES, WEEKLY FREE BETS, AND SUPERPRIZES ARE WAITING FOR YOU! TAKE PART TERMS AND CONDITIONS OPEN THE BALL PLACE BETS OF AT LEAST ON INDIAN PREMIER LEAGUE 2026 MATCHES AND GET PROMOTIONAL TICKETS EVERY DAY, UPON COLLECTING 5 PROMOTIONAL TICKETS, PRESS ON THE BALL AND RECEIVE GUARANTEED BONUSES ACHIEVE A SERIES OF WINNING BETS EVERY WEEK AND GET GUARANTEED FREE BETS OF UP TO ! HOW DO I GET A GUARANTEED BONUS WHEN PRESSING ON THE BALL? THE PROMOTION PAGE FEATURES A CRICKET BALL WITH GUARANTEED BONUSES INSIDE. TO RECEIVE YOUR BONUS, YOU NEED TO COLLECT 5 PROMOTIONAL TICKETS AND PRESS THE BALL. YOU CAN PRESS THE BALL ONCE PER DAY, FROM 00:00 (UTC+3) TO 23:59 (UTC+3), ONCE YOU HAVE ACCUMULATED 5 PROMOTIONAL TICKETS. YOU CAN ONLY START COLLECTING THE NEXT 5 TICKETS TO PRESS THE BALL ONCE YOU HAVE USED YOUR PREVIOUS CHANCE. TAKE PART WHEN YOU PRESS ON THE BALL, YOU CAN RECEIVE ONE OF THE FOLLOWING BONUSES: 1, 3, 5 USD FREE BET 50, 100, 200 , 300, 500 BONUS POINTS 5, 10, 20 PROMOTIONAL TICKETS HOW DO I GET A GUARANTEED FREE BET FOR A SERIES OF WINNING BETS? ACHIEVE A SERIES OF WINNING BETS EVERY WEEK AND GET A FREE BET: 3 WINNING BETS IN A ROW FREE BET 5 WINNING BETS IN A ROW FREE BET *A SERIES OF WINNING BETS INCLUDES BETS PLACED ON INDIAN PREMIER LEAGUE 2026 MATCHES SETTLED AS A WIN. IF A BET LOSES, THE SERIES IS RESET AND YOU CAN START AGAIN. WHAT ARE THE PRIZES? AT THE END OF THE PROMOTION, WINNERS WILL BE SELECTED AT RANDOM FROM AMONG ALL TICKET HOLDERS TO WIN THE FOLLOWING PRIZES: SUPER PRIZES: LAPTOP APPLE MACBOOK PRO 16&quot; CHIP M4 PRO (3 WINNERS) SMARTPHONE APPLE IPHONE 17 PRO MAX (5 WINNERS) SMARTPHONE SAMSUNG GALAXY S25 ULTRA (5 WINNERS) SMARTWATCH APPLE WATCH ULTRA 3 (10 WINNERS) GAME CONSOLE SONY PLAYSTATION 5 PRO (20 WINNERS) SMARTWATCH SAMSUNG GALAXY WATCH ULTRA (2025) (30 WINNERS) HEADPHONES APPLE AIRPODS PRO 3 (40 WINNERS) HEADPHONES SAMSUNG GALAXY BUDS3 PRO (50 WINNERS) BONUS POINTS AND FREE BETS: 5000 BONUS POINTS (10 WINNERS) 3000 BONUS POINTS (20 WINNERS) 2000 BONUS POINTS (30 WINNERS) 1000 BONUS POINTS (50 WINNERS) 500 BONUS POINTS (100 WINNERS) 300 BONUS POINTS (200 WINNERS) 100 BONUS POINTS (300 WINNERS) 50 BONUS POINTS (500 WINNERS) 100 USD FREE BET (10 WINNERS) 50 USD FREE BET (20 WINNERS) 20 USD FREE BET (30 WINNERS) 15 USD FREE BET (50 WINNERS) 10 USD FREE BET (100 WINNERS) 5 USD FREE BET (200 WINNERS) 3 USD FREE BET (300 WINNERS) 1 USD FREE BET (500 WINNERS) RESULTS OF THE DRAW HOW MUCH SHOULD YOU BET TO MAXIMIZE YOUR CHAN</pre></details>
   </article>
-<article class="activity-card">
+<article class="activity-card detail-ok">
     <div class="activity-head">
       <span class="index">2</span>
       <div>
         <h2>LEAGUE OF WINS </h2>
-        <p>免费投注 / Free Bet</p>
+        <p>免费投注 / Free Bet · <span class="detail-pill ok-pill">详情页已采集 / Detail captured</span></p>
       </div>
     </div>
     <dl>
       <div><dt>奖励 / Reward</dt><dd>Place bets on English Premier League matches to get free bets and take part in the prize draw!</dd></div>
-      <div><dt>参与要求 / Requirements</dt><dd>Place bets on English Premier League matches to get free bets and take part in the prize draw!</dd></div>
+      <div><dt>详情页奖励 / Detail Reward</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>参与要求 / Requirements</dt><dd>Place bets on English Premier League matches to get free bets and take part in the prize draw! BONUS OFFER DETAILS</dd></div>
       <div><dt>开始时间 / Start Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
       <div><dt>结束时间 / End Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>详情页关键日期 / Detail Dates</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>详情页来源 / Detail Source</dt><dd><a href="https://1xlite-19708.pro/en/promotions/league-of-wins">https://1xlite-19708.pro/en/promotions/league-of-wins</a></dd></div>
       <div><dt>备注 / Notes</dt><dd>Place bets on English Premier League matches to get free bets and take part in the prize draw!</dd></div>
     </dl>
+<details class="detail-excerpt"><summary>详情页原文摘要 / Detail excerpt</summary><pre>1 REGISTRATION LOG IN EN / 11:36 TOP-EVENTS SPORTS LIVE 1XGAMES CASINO LIVE CASINO ESPORTS PROMO MORE Plinko INFORMATION About us Terms and Conditions Affiliate Program Become an agent Privacy Policy Сookie Policy Contacts BETTING Sports Multi-LIVE Live Toto GAMES Casino 1xGames Live Casino STATISTICS Statistics Results USEFUL LINKS Payment methods Mobile version Registration APPS iOS Android Other apps PARTNERS Copyright © 2026 «1xBet». 1xBet uses cookies to ensure the best user experience. By remaining on the website, you consent to the use of your cookie files on 1xBet. Find out more CUSTOMER SUPPORT 1800812889 18+ MOBILE VERSION CUSTOMER SUPPORT</pre></details>
   </article>
-<article class="activity-card">
+<article class="activity-card detail-ok">
     <div class="activity-head">
       <span class="index">3</span>
       <div>
         <h2>NBA WIN SHOT </h2>
-        <p>综合活动 / General Promotion</p>
+        <p>综合活动 / General Promotion · <span class="detail-pill ok-pill">详情页已采集 / Detail captured</span></p>
       </div>
     </div>
     <dl>
       <div><dt>奖励 / Reward</dt><dd>The season of big matches is your season of big wins!</dd></div>
+      <div><dt>详情页奖励 / Detail Reward</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
       <div><dt>参与要求 / Requirements</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
       <div><dt>开始时间 / Start Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
       <div><dt>结束时间 / End Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>详情页关键日期 / Detail Dates</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>详情页来源 / Detail Source</dt><dd><a href="https://1xlite-19708.pro/en/promotions/nba-win-shot">https://1xlite-19708.pro/en/promotions/nba-win-shot</a></dd></div>
       <div><dt>备注 / Notes</dt><dd>The season of big matches is your season of big wins!</dd></div>
     </dl>
+<details class="detail-excerpt"><summary>详情页原文摘要 / Detail excerpt</summary><pre>1 REGISTRATION LOG IN EN / 11:36 TOP-EVENTS SPORTS LIVE 1XGAMES CASINO LIVE CASINO ESPORTS PROMO MORE Plinko INFORMATION About us Terms and Conditions Affiliate Program Become an agent Privacy Policy Сookie Policy Contacts BETTING Sports Multi-LIVE Live Toto GAMES Casino 1xGames Live Casino STATISTICS Statistics Results USEFUL LINKS Payment methods Mobile version Registration APPS iOS Android Other apps PARTNERS Copyright © 2026 «1xBet». 1xBet uses cookies to ensure the best user experience. By remaining on the website, you consent to the use of your cookie files on 1xBet. Find out more CUSTOMER SUPPORT 1800812889 18+ MOBILE VERSION CUSTOMER SUPPORT</pre></details>
   </article>
-<article class="activity-card">
+<article class="activity-card detail-ok">
     <div class="activity-head">
       <span class="index">4</span>
       <div>
         <h2>BARCA 1XFAMILY </h2>
-        <p>综合活动 / General Promotion</p>
+        <p>综合活动 / General Promotion · <span class="detail-pill ok-pill">详情页已采集 / Detail captured</span></p>
       </div>
     </div>
     <dl>
       <div><dt>奖励 / Reward</dt><dd>Més que un club: bet and win with the Blaugrana!</dd></div>
-      <div><dt>参与要求 / Requirements</dt><dd>bet and win with the Blaugrana!</dd></div>
+      <div><dt>详情页奖励 / Detail Reward</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>参与要求 / Requirements</dt><dd>bet and win with the Blaugrana! BONUS OFFER DETAILS</dd></div>
       <div><dt>开始时间 / Start Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
       <div><dt>结束时间 / End Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>详情页关键日期 / Detail Dates</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>详情页来源 / Detail Source</dt><dd><a href="https://1xlite-19708.pro/en/promotions/barca-1x-family">https://1xlite-19708.pro/en/promotions/barca-1x-family</a></dd></div>
       <div><dt>备注 / Notes</dt><dd>Més que un club: bet and win with the Blaugrana!</dd></div>
     </dl>
+<details class="detail-excerpt"><summary>详情页原文摘要 / Detail excerpt</summary><pre>1 REGISTRATION LOG IN EN / 11:36 TOP-EVENTS SPORTS LIVE 1XGAMES CASINO LIVE CASINO ESPORTS PROMO MORE Plinko INFORMATION About us Terms and Conditions Affiliate Program Become an agent Privacy Policy Сookie Policy Contacts BETTING Sports Multi-LIVE Live Toto GAMES Casino 1xGames Live Casino STATISTICS Statistics Results USEFUL LINKS Payment methods Mobile version Registration APPS iOS Android Other apps PARTNERS Copyright © 2026 «1xBet». 1xBet uses cookies to ensure the best user experience. By remaining on the website, you consent to the use of your cookie files on 1xBet. Find out more CUSTOMER SUPPORT 1800812889 18+ MOBILE VERSION CUSTOMER SUPPORT</pre></details>
   </article>
-<article class="activity-card">
+<article class="activity-card detail-ok">
     <div class="activity-head">
       <span class="index">5</span>
       <div>
         <h2>PSG: CHAMPION’S CONTRACT </h2>
-        <p>竞赛或抽奖 / Tournament or Raffle</p>
+        <p>竞赛或抽奖 / Tournament or Raffle · <span class="detail-pill ok-pill">详情页已采集 / Detail captured</span></p>
       </div>
     </div>
     <dl>
       <div><dt>奖励 / Reward</dt><dd>Sign a contract with PSG and discover the way to exclusive prizes!</dd></div>
+      <div><dt>详情页奖励 / Detail Reward</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
       <div><dt>参与要求 / Requirements</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
       <div><dt>开始时间 / Start Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
       <div><dt>结束时间 / End Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>详情页关键日期 / Detail Dates</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>详情页来源 / Detail Source</dt><dd><a href="https://1xlite-19708.pro/en/promotions/psg-champions-contract">https://1xlite-19708.pro/en/promotions/psg-champions-contract</a></dd></div>
       <div><dt>备注 / Notes</dt><dd>Sign a contract with PSG and discover the way to exclusive prizes!</dd></div>
     </dl>
+<details class="detail-excerpt"><summary>详情页原文摘要 / Detail excerpt</summary><pre>1 REGISTRATION LOG IN EN / 11:36 TOP-EVENTS SPORTS LIVE 1XGAMES CASINO LIVE CASINO ESPORTS PROMO MORE Plinko INFORMATION About us Terms and Conditions Affiliate Program Become an agent Privacy Policy Сookie Policy Contacts BETTING Sports Multi-LIVE Live Toto GAMES Casino 1xGames Live Casino STATISTICS Statistics Results USEFUL LINKS Payment methods Mobile version Registration APPS iOS Android Other apps PARTNERS Copyright © 2026 «1xBet». 1xBet uses cookies to ensure the best user experience. By remaining on the website, you consent to the use of your cookie files on 1xBet. Find out more CUSTOMER SUPPORT 1800812889 18+ MOBILE VERSION CUSTOMER SUPPORT</pre></details>
   </article>
-<article class="activity-card">
+<article class="activity-card detail-ok">
     <div class="activity-head">
       <span class="index">6</span>
       <div>
         <h2>NO RISK BET </h2>
-        <p>免费投注 / Free Bet</p>
+        <p>免费投注 / Free Bet · <span class="detail-pill ok-pill">详情页已采集 / Detail captured</span></p>
       </div>
     </div>
     <dl>
       <div><dt>奖励 / Reward</dt><dd>Get a free bet if your bet loses!</dd></div>
-      <div><dt>参与要求 / Requirements</dt><dd>BET Get a free bet if your bet loses!</dd></div>
+      <div><dt>详情页奖励 / Detail Reward</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>参与要求 / Requirements</dt><dd>BET Get a free bet if your bet loses! BONUS OFFER DETAILS</dd></div>
       <div><dt>开始时间 / Start Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
-      <div><dt>结束时间 / End Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>结束时间 / End Time</dt><dd>MAY 20; starting from 14:00 12.05.2026 (UTC +3) are eligible UEFA CONFERENCE LEAGUE CRYSTAL P; starting from 14:00 12.05.2026 (UTC +3) are eligible UEFA CHAMPIONS LEAGUE PARIS SAIN; starting from 17:00 07.05.2026 (UTC +3) are eligible TERMS AND CONDITIONS: Сделайте о</dd></div>
+      <div><dt>详情页关键日期 / Detail Dates</dt><dd>MAY 20; starting from 14:00 12.05.2026 (UTC +3) are eligible UEFA CONFERENCE LEAGUE CRYSTAL P; starting from 14:00 12.05.2026 (UTC +3) are eligible UEFA CHAMPIONS LEAGUE PARIS SAIN; starting from 17:00 07.05.2026 (UTC +3) are eligible TERMS AND CONDITIONS: Сделайте о</dd></div>
+      <div><dt>详情页来源 / Detail Source</dt><dd><a href="https://1xlite-19708.pro/en/promotions/no-risk-bet">https://1xlite-19708.pro/en/promotions/no-risk-bet</a></dd></div>
       <div><dt>备注 / Notes</dt><dd>Get a free bet if your bet loses!</dd></div>
     </dl>
+<details class="detail-excerpt"><summary>详情页原文摘要 / Detail excerpt</summary><pre>1 REGISTRATION LOG IN EN / 11:36 TOP-EVENTS SPORTS LIVE 1XGAMES CASINO LIVE CASINO ESPORTS PROMO MORE Plinko MAIN PAGESPECIAL OFFERS AND BONUSESNO RISK BET RISK-FREE BET GET A FREE BET IF YOU LOSE! PLACE A BET TERMS AND CONDITIONS LOG IN ON THE 1XBET WEBSITE PLACE BETS ON EVENTS GET A REFUND IF YOUR BET LOSES! UPCOMING EVENTS UEFA EUROPA LEAGUE FREIBURG VS ASTON VILLA 20 MAY 2026 04 DAYS 15 HOURS 23 MINUTES 14 SECONDS PLACE A BET Maximum refund amount: 150 USD. Bets placed starting from 14:00 12.05.2026 (UTC +3) are eligible UEFA CONFERENCE LEAGUE CRYSTAL PALACE VS RAYO VALLECANO 27 MAY 2026 11 DAYS 15 HOURS 23 MINUTES 14 SECONDS PLACE A BET Maximum refund amount: 100 USD. Bets placed starting from 14:00 12.05.2026 (UTC +3) are eligible UEFA CHAMPIONS LEAGUE PARIS SAINT-GERMAIN VS ARSENAL 30 MAY 2026 14 DAYS 12 HOURS 23 MINUTES 14 SECONDS PLACE A BET Maximum refund amount: 150 USD. Bets placed starting from 17:00 07.05.2026 (UTC +3) are eligible TERMS AND CONDITIONS: Сделайте одиночную ставку на точный счет по Линии/Live на матчи, которые представлены на странице акции. Учитывается только первая ставка на матчи с момента начала акции (на один матч засчитывается одна ставка). Если сделанная ставка на точный счет проиграет — вы получите фрибет, равный сумме проигранной ставки, но не более чем максимальная сумма фрибета. Если ваша первая ставка на это событие выиграет (или вид ставки будет отличным от одиночной на точный счет), фрибет в таком случае не зачисляется. В акции учитываются только ставки на основное время матчей. Только зарегистрированные участники могут принимать участие в акции. Обязательны для заполнения поля: фамилия, имя, номер мобильного телефона (активация обязательна), электронный адрес (email), страна проживания. Для участия в акции пользователь должен дать согласие на участие в бонусных акциях в Личном кабинете в настройках аккаунта (Настройки аккаунта — Участие в бонусных акциях). Разместите ставку за собственные средства. В акции не учитываются такие ставки: бонусные ставки, проданные и застрахованные а также сделанные за авансовые средства илина промокод. Пользователи, сделавшие ставку по промокоду или за бонусные средства на матч, который размещен на странице акции, автоматически исключаются из участия в акции по этому матчу. Фрибет будет зачислен в виде промокода. Условия фрибета вы сможете узнать в Личном кабинете — Проверка промокода. Фрибет начисляется в течение 24 часов с момента расчета ставки. Ставки, рассчитанные с коэффициентом 1, не учитываются в текущей акции. Компания 1xBet оставляет за собой право потребовать от любого </pre></details>
   </article>
-<article class="activity-card">
+<article class="activity-card detail-ok">
     <div class="activity-head">
       <span class="index">7</span>
       <div>
         <h2>GOALLESS FOOTBALL </h2>
-        <p>体育投注 / Sports Betting</p>
+        <p>体育投注 / Sports Betting · <span class="detail-pill ok-pill">详情页已采集 / Detail captured</span></p>
       </div>
     </div>
     <dl>
       <div><dt>奖励 / Reward</dt><dd>100%</dd></div>
-      <div><dt>参与要求 / Requirements</dt><dd>bet refund in the event of a goalless draw!</dd></div>
+      <div><dt>详情页奖励 / Detail Reward</dt><dd>100%</dd></div>
+      <div><dt>参与要求 / Requirements</dt><dd>bet refund in the event of a goalless draw! BONUS OFFER DETAILS</dd></div>
       <div><dt>开始时间 / Start Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
       <div><dt>结束时间 / End Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>详情页关键日期 / Detail Dates</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>详情页来源 / Detail Source</dt><dd><a href="https://1xlite-19708.pro/en/promotions/goalless-football">https://1xlite-19708.pro/en/promotions/goalless-football</a></dd></div>
       <div><dt>备注 / Notes</dt><dd>Get a 100% bet refund in the event of a goalless draw!</dd></div>
     </dl>
+<details class="detail-excerpt"><summary>详情页原文摘要 / Detail excerpt</summary><pre>1 REGISTRATION LOG IN EN / 11:36 TOP-EVENTS SPORTS LIVE 1XGAMES CASINO LIVE CASINO ESPORTS PROMO MORE Plinko INFORMATION About us Terms and Conditions Affiliate Program Become an agent Privacy Policy Сookie Policy Contacts BETTING Sports Multi-LIVE Live Toto GAMES Casino 1xGames Live Casino STATISTICS Statistics Results USEFUL LINKS Payment methods Mobile version Registration APPS iOS Android Other apps PARTNERS Copyright © 2026 «1xBet». 1xBet uses cookies to ensure the best user experience. By remaining on the website, you consent to the use of your cookie files on 1xBet. Find out more CUSTOMER SUPPORT 1800812889 18+ MOBILE VERSION CUSTOMER SUPPORT</pre></details>
   </article>
-<article class="activity-card">
+<article class="activity-card detail-ok">
     <div class="activity-head">
       <span class="index">8</span>
       <div>
         <h2>GRAND SLAM TOURNAMENTS </h2>
-        <p>竞赛或抽奖 / Tournament or Raffle</p>
+        <p>竞赛或抽奖 / Tournament or Raffle · <span class="detail-pill ok-pill">详情页已采集 / Detail captured</span></p>
       </div>
     </div>
     <dl>
       <div><dt>奖励 / Reward</dt><dd>Bet on Grand Slam tournaments and win awesome prizes!</dd></div>
-      <div><dt>参与要求 / Requirements</dt><dd>Bet on Grand Slam tournaments and win awesome prizes!</dd></div>
+      <div><dt>详情页奖励 / Detail Reward</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>参与要求 / Requirements</dt><dd>Bet on Grand Slam tournaments and win awesome prizes! BONUS OFFER DETAILS</dd></div>
       <div><dt>开始时间 / Start Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
-      <div><dt>结束时间 / End Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>结束时间 / End Time</dt><dd>ENDS ON THE NUMBER OF ELIGIBLE BETS YOU PLACE ON THE TOURNAMENT: 2-5 BETS 10% OF THE; END OF EACH TOURNAMENT, WINNERS WILL BE SELECTED AT RANDOM FROM AMONG ALL THE PROMOT; 18.05.2026; 07.06.2026</dd></div>
+      <div><dt>详情页关键日期 / Detail Dates</dt><dd>ENDS ON THE NUMBER OF ELIGIBLE BETS YOU PLACE ON THE TOURNAMENT: 2-5 BETS 10% OF THE; END OF EACH TOURNAMENT, WINNERS WILL BE SELECTED AT RANDOM FROM AMONG ALL THE PROMOT; 18.05.2026; 07.06.2026</dd></div>
+      <div><dt>详情页来源 / Detail Source</dt><dd><a href="https://1xlite-19708.pro/en/promotions/grand-slam-tournaments-2026">https://1xlite-19708.pro/en/promotions/grand-slam-tournaments-2026</a></dd></div>
       <div><dt>备注 / Notes</dt><dd>Bet on Grand Slam tournaments and win awesome prizes!</dd></div>
     </dl>
+<details class="detail-excerpt"><summary>详情页原文摘要 / Detail excerpt</summary><pre>1 REGISTRATION LOG IN EN / 11:36 TOP-EVENTS SPORTS LIVE 1XGAMES CASINO LIVE CASINO ESPORTS PROMO MORE Plinko MAIN PAGESPECIAL OFFERS AND BONUSESGRAND SLAM TOURNAMENTS THE PARISIAN CHALLENGE GRAND SLAM TOURNAMENTS TAKE PART TERMS AND CONDITIONS PLACE BETS OF AT LEAST 2 USD ON MATCHES IN THE 2026 GRAND SLAM TOURNAMENTS (AUSTRALIAN OPEN, ROLAND GARROS, WIMBLEDON, AND THE US OPEN) EARN PROMOTIONAL TICKETS FOR EACH BET ON THE FEATURED TOURNAMENTS TO TAKE PART IN SUPERPRIZE DRAWS ON THE OFFER PAGE! GET GUARANTEED BONUSES IN THE FORM OF FREE BETS FOR YOUR BETS! HOW DO I GET A GUARANTEED BONUS? FOR BETS ON THE AUSTRALIAN OPEN, ROLAND GARROS, WIMBLEDON, AND THE US OPEN, PARTICIPANTS WILL RECEIVE A GUARANTEED BONUS UPON COMPLETION OF EACH TOURNAMENT. THE BONUS AMOUNT DEPENDS ON THE NUMBER OF ELIGIBLE BETS YOU PLACE ON THE TOURNAMENT: 2-5 BETS 10% OF THE AVERAGE STAKE 6-8 BETS 20% OF THE AVERAGE STAKE 9-11 BETS 30% OF THE AVERAGE STAKE 12-14 BETS 40% OF THE AVERAGE STAKE 15 OR MORE BETS 50% OF THE AVERAGE STAKE THE MAXIMUM FREE BET AMOUNT IS 300 USD IF THE FREE BET AMOUNT IS LESS THAN 0.5 USD, IT WILL NOT BE CREDITED. YOUR BETS COUNTER 1 10% 2 3 4 5 20% 6 7 8 30% 9 10 11 40% 12 13 14 50% 15+ WHAT ARE THE PRIZES? AT THE END OF EACH TOURNAMENT, WINNERS WILL BE SELECTED AT RANDOM FROM AMONG ALL THE PROMOTIONAL TICKETS ISSUED FOR THE CORRESPONDING TOURNAMENT TO RECEIVE THE FOLLOWING PRIZES: ROLAND GARROS 18.05.2026 — 07.06.2026 PRIZE MONEY 5000 USD 3 WINNERS SMARTPHONE APPLE IPHONE 17 PRO MAX 5 WINNERS SMARTPHONE SAMSUNG GALAXY FLIP7 10 WINNERS SMART WATCH APPLE WATCH ULTRA 2 10 WINNERS HEADPHONES SAMSUNG GALAXY BUDS3 PRO 20 WINNERS FREE BETS 100 USD 10 WINNERS 50 USD 30 WINNERS 20 USD 50 WINNERS 10 USD 70 WINNERS 5 USD 100 WINNERS *CASH PRIZES AND FREE BETS WILL BE CREDITED IN THE CUSTOMER'S ACCOUNT CURRENCY AT THE RELEVANT EXCHANGE RATE. RESULTS OF THE DRAW BONUS POINTS 10 WINNERS BONUS POINTS 20 WINNERS BONUS POINTS 30 WINNERS BONUS POINTS 40 WINNERS BONUS POINTS 50 WINNERS BONUS POINTS 100 WINNERS BONUS POINTS 200 WINNERS HOW MUCH SHOULD YOU BET TO MAXIMIZE YOUR CHANCES? TICKETS ARE AWARDED AS A BONUS FOR BETS YOU PLACE. OF COURSE, THE LARGER YOUR STAKE, THE MORE TICKETS YOU'LL EARN: 2 USD 1 TICKET 5 USD 3 TICKETS 10 USD 10 TICKETS 20 USD 25 TICKETS 40 USD 60 TICKETS 60 USD 90 TICKETS 100 USD 180 TICKETS 200 USD 380 TICKETS 400 USD 800 TICKETS OVER 450 USD 1000 TICKETS THE MORE TICKETS YOU GET, THE HIGHER YOUR CHANCES OF WINNING! TAKE PART INFORMATION About us Terms and Conditions Affiliate Program Become an agent Privacy Policy Сookie Policy Contacts BETTING Sport</pre></details>
   </article>
-<article class="activity-card">
+<article class="activity-card detail-ok">
     <div class="activity-head">
       <span class="index">9</span>
       <div>
         <h2>APP&amp;BONUS </h2>
-        <p>综合活动 / General Promotion</p>
+        <p>综合活动 / General Promotion · <span class="detail-pill ok-pill">详情页已采集 / Detail captured</span></p>
       </div>
     </div>
     <dl>
       <div><dt>奖励 / Reward</dt><dd>Place bets using the mobile app and get a fantastic bonus!</dd></div>
-      <div><dt>参与要求 / Requirements</dt><dd>Place bets using the mobile app and get a fantastic bonus!</dd></div>
+      <div><dt>详情页奖励 / Detail Reward</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>参与要求 / Requirements</dt><dd>Place bets using the mobile app and get a fantastic bonus! BONUS OFFER DETAILS</dd></div>
       <div><dt>开始时间 / Start Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
-      <div><dt>结束时间 / End Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>结束时间 / End Time</dt><dd>start and settlement dates of all selections must be no later than the validity period; period of the bonus have been settled. Any bonus funds remaining after the bonus has be; period, the bonus and all winnings earned using the bonus will expire. This bonus cann; end the terms of the offer, cancel or renew the offer, or refuse participation at an; 22/06/26</dd></div>
+      <div><dt>详情页关键日期 / Detail Dates</dt><dd>start and settlement dates of all selections must be no later than the validity period; period of the bonus have been settled. Any bonus funds remaining after the bonus has be; period, the bonus and all winnings earned using the bonus will expire. This bonus cann; end the terms of the offer, cancel or renew the offer, or refuse participation at an; 22/06/26</dd></div>
+      <div><dt>详情页来源 / Detail Source</dt><dd><a href="https://1xlite-19708.pro/en/bonus/rules/app-bonus">https://1xlite-19708.pro/en/bonus/rules/app-bonus</a></dd></div>
       <div><dt>备注 / Notes</dt><dd>Place bets using the mobile app and get a fantastic bonus!</dd></div>
     </dl>
+<details class="detail-excerpt"><summary>详情页原文摘要 / Detail excerpt</summary><pre>1 REGISTRATION LOG IN EN / 11:36 TOP-EVENTS SPORTS LIVE 1XGAMES CASINO LIVE CASINO ESPORTS PROMO MORE Plinko Promo App&amp;Bonus APP&amp;BONUS Place bets using the mobile app and get a fantastic bonus! REGISTRATION How it works: Register or log in to 1xBet. Press the &quot;Take part&quot; button on the 1xBet bonus offer page Place bets of at least on any sports events using the 1xBet app (iOS or Android). Get weekly cashback credited to your bonus account worth up to 25% of the average stake of your bets placed using the 1xBet app. If you've placed: 3-5 bets - 10% of the average stake 6-9 bets - 15% of the average stake 10 or more bets - 25% of the average stake Bonus details: This bonus offer will continue indefinitely. Only registered customers can take part in this promotion and the following profile fields must be filled in: full name, mobile phone number (must be activated), email address, and country of residence. You must opt in to participating in bonus offers in My Account (Account Settings — Participation in bonus offers). To take part in this bonus offer, you need to press the “Take part” button on the offer page. Place eligible bets between Monday (00:00 +3 UTC) and Sunday (23:59 +3 UTC) to get a cashback bonus based on the average stake of your bets placed using the 1xBet app (iOS or Android). Cashback will be automatically credited to your bonus account every Tuesday based on the results of the preceding week. This bonus offer only applies to eligible bets placed using the 1xBet app (iOS/Android). This bonus offer applies to single bets at odds of 1.50 or higher on any sports events and to accumulator bets comprising 2 or more selections, each selection at odds of 1.40 or higher. The minimum stake is . The maximum bonus is . If the bonus amount is less than , the bonus will not be credited. Only bets placed using real money are included in this offer. Only settled bets are included in this bonus offer. This offer does not apply to any handicap or total bets, bets placed using a bonus account or promo codes, canceled or sold bets, advancebets, or refunded bets. Bets settled at odds of 1.00 are not included in this offer. To wager the bonus, switch to your bonus account and wager 5 times the bonus amount in accumulator bets. Each accumulator bet must contain 4 selections or more. At least 4 selections in each accumulator must be at odds of 1.40 or higher. The start and settlement dates of all selections must be no later than the validity period of this offer. The bonus is deemed to have been wagered only once all bets counting towards the wagering requirement </pre></details>
   </article>
-<article class="activity-card">
+<article class="activity-card detail-ok">
     <div class="activity-head">
       <span class="index">10</span>
       <div>
         <h2>LUCKY DAY </h2>
-        <p>综合活动 / General Promotion</p>
+        <p>综合活动 / General Promotion · <span class="detail-pill ok-pill">详情页已采集 / Detail captured</span></p>
       </div>
     </div>
     <dl>
       <div><dt>奖励 / Reward</dt><dd>500 promo points</dd></div>
+      <div><dt>详情页奖励 / Detail Reward</dt><dd>500 promo points</dd></div>
       <div><dt>参与要求 / Requirements</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
       <div><dt>开始时间 / Start Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
       <div><dt>结束时间 / End Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>详情页关键日期 / Detail Dates</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>详情页来源 / Detail Source</dt><dd><a href="https://1xlite-19708.pro/en/promotions/luckyday">https://1xlite-19708.pro/en/promotions/luckyday</a></dd></div>
       <div><dt>备注 / Notes</dt><dd>Win 500 promo points every day!</dd></div>
     </dl>
+<details class="detail-excerpt"><summary>详情页原文摘要 / Detail excerpt</summary><pre>1 REGISTRATION LOG IN EN / 11:36 TOP-EVENTS SPORTS LIVE 1XGAMES CASINO LIVE CASINO ESPORTS PROMO MORE Plinko INFORMATION About us Terms and Conditions Affiliate Program Become an agent Privacy Policy Сookie Policy Contacts BETTING Sports Multi-LIVE Live Toto GAMES Casino 1xGames Live Casino STATISTICS Statistics Results USEFUL LINKS Payment methods Mobile version Registration APPS iOS Android Other apps PARTNERS Copyright © 2026 «1xBet». 1xBet uses cookies to ensure the best user experience. By remaining on the website, you consent to the use of your cookie files on 1xBet. Find out more CUSTOMER SUPPORT 1800812889 18+ MOBILE VERSION CUSTOMER SUPPORT</pre></details>
   </article>
-<article class="activity-card">
+<article class="activity-card detail-ok">
     <div class="activity-head">
       <span class="index">11</span>
       <div>
         <h2>1XPICK'EM IEM COLOGNE MAJOR </h2>
-        <p>综合活动 / General Promotion</p>
+        <p>综合活动 / General Promotion · <span class="detail-pill ok-pill">详情页已采集 / Detail captured</span></p>
       </div>
     </div>
     <dl>
       <div><dt>奖励 / Reward</dt><dd>Make a prediction and get a guaranteed bonus!</dd></div>
+      <div><dt>详情页奖励 / Detail Reward</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
       <div><dt>参与要求 / Requirements</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
       <div><dt>开始时间 / Start Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
-      <div><dt>结束时间 / End Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>结束时间 / End Time</dt><dd>ends in 16 17 21 59 POSITION THE TEAMS AND SAVE YOUR PREDICTION 1 2 3 - 4 5 - 8 9 - 1; 30/06/26</dd></div>
+      <div><dt>详情页关键日期 / Detail Dates</dt><dd>ends in 16 17 21 59 POSITION THE TEAMS AND SAVE YOUR PREDICTION 1 2 3 - 4 5 - 8 9 - 1; 30/06/26</dd></div>
+      <div><dt>详情页来源 / Detail Source</dt><dd><a href="https://1xlite-19708.pro/en/promotions/cologne-major">https://1xlite-19708.pro/en/promotions/cologne-major</a></dd></div>
       <div><dt>备注 / Notes</dt><dd>Make a prediction and get a guaranteed bonus!</dd></div>
     </dl>
+<details class="detail-excerpt"><summary>详情页原文摘要 / Detail excerpt</summary><pre>1 REGISTRATION LOG IN EN / 11:37 TOP-EVENTS SPORTS LIVE 1XGAMES CASINO LIVE CASINO ESPORTS PROMO MORE Plinko MAIN PAGESPECIAL OFFERS AND BONUSES1XPICK’EM IEM COLOGNE MAJOR TAKE PART TERMS AND CONDITIONS MAKE PREDICTIONS FOR IEM COLOGNE MAJOR BET ON THE TOURNAMENT GET A FREE BET BASED ON THE NUMBER OF BETS YOU PLACE PREDICTIONS BETS Stage ends in 16 17 21 59 POSITION THE TEAMS AND SAVE YOUR PREDICTION 1 2 3 - 4 5 - 8 9 - 11 12 - 14 15 - 16 TAKE PART FREE BET AMOUNTS FOR CORRECT ANSWERS: OF THE BET THAT CONFIRMED YOUR PREDICTION 1 TO 3 POSITIONS PREDICTED CORRECTLY OF THE BET THAT CONFIRMED YOUR PREDICTION 4 TO 10 POSITIONS PREDICTED CORRECTLY OF THE BET THAT CONFIRMED YOUR PREDICTION 11 TO 15 POSITIONS PREDICTED CORRECTLY OF THE BET THAT CONFIRMED YOUR PREDICTION ALL POSITIONS PREDICTED CORRECTLY THE MAXIMUM FREE BET AMOUNT IS 100 USD Free bets for correct predictions will be credited on 30/06/26 TAKE PART INFORMATION About us Terms and Conditions Affiliate Program Become an agent Privacy Policy Сookie Policy Contacts BETTING Sports Multi-LIVE Live Toto GAMES Casino 1xGames Live Casino STATISTICS Statistics Results USEFUL LINKS Payment methods Mobile version Registration APPS iOS Android Other apps PARTNERS Copyright © 2026 «1xBet». 1xBet uses cookies to ensure the best user experience. By remaining on the website, you consent to the use of your cookie files on 1xBet. Find out more CUSTOMER SUPPORT 1800812889 18+ MOBILE VERSION CUSTOMER SUPPORT</pre></details>
   </article>
-<article class="activity-card">
+<article class="activity-card detail-ok">
     <div class="activity-head">
       <span class="index">12</span>
       <div>
         <h2>ESPORTS ERA </h2>
-        <p>免费投注 / Free Bet</p>
+        <p>免费投注 / Free Bet · <span class="detail-pill ok-pill">详情页已采集 / Detail captured</span></p>
       </div>
     </div>
     <dl>
       <div><dt>奖励 / Reward</dt><dd>Choose an event and place a risk-free bet!</dd></div>
-      <div><dt>参与要求 / Requirements</dt><dd>place a risk-free bet!</dd></div>
+      <div><dt>详情页奖励 / Detail Reward</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>参与要求 / Requirements</dt><dd>place a risk-free bet! BONUS OFFER DETAILS</dd></div>
       <div><dt>开始时间 / Start Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
-      <div><dt>结束时间 / End Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>结束时间 / End Time</dt><dd>from the moment it is credited. Only the first bet on each event qualifies for the of</dd></div>
+      <div><dt>详情页关键日期 / Detail Dates</dt><dd>from the moment it is credited. Only the first bet on each event qualifies for the of</dd></div>
+      <div><dt>详情页来源 / Detail Source</dt><dd><a href="https://1xlite-19708.pro/en/promotions/esportsera">https://1xlite-19708.pro/en/promotions/esportsera</a></dd></div>
       <div><dt>备注 / Notes</dt><dd>Choose an event and place a risk-free bet!</dd></div>
     </dl>
+<details class="detail-excerpt"><summary>详情页原文摘要 / Detail excerpt</summary><pre>1 REGISTRATION LOG IN EN / 11:37 TOP-EVENTS SPORTS LIVE 1XGAMES CASINO LIVE CASINO ESPORTS PROMO MORE Plinko MAIN PAGESPECIAL OFFERS AND BONUSESESPORTS ERA WIN NO MATTER HOW YOU BET! TAKE PART TERMS AND CONDITIONS Log in or register on the 1xBet website Place bets on the Correct Score of esports events Get a refund if your bet loses CHOOSE AN EVENT AND PLACE A RISK-FREE BET! The maximum free bet amount is 40 MYR. Dota 2. DreamLeague 00 d 09 hrs 52 m Aurora Gaming VS Vici Gaming PLACE A BET Dota 2. DreamLeague 00 d 06 hrs 22 m Tundra Esports VS BB Team PLACE A BET CS 2. PGL Astana 00 d 06 hrs 22 m MOUZ VS Team Spirit PLACE A BET Dota 2. DreamLeague 00 d 09 hrs 52 m Virtus.pro VS GamerLegion PLACE A BET Dota 2. DreamLeague 00 d 09 hrs 52 m Team Falcons VS Team Spirit PLACE A BET Dota 2. DreamLeague 00 d 13 hrs 22 m Tundra Esports VS Natus Vincere PLACE A BET Dota 2. DreamLeague 00 d 13 hrs 22 m Rekonix VS Nigma Galaxy PLACE A BET Dota 2. DreamLeague 00 d 13 hrs 22 m BB Team VS Xtreme Gaming PLACE A BET HOW TO GET A FREE BET? Register or log in on the 1xBet website or the app. Read the terms of the promotion and press the &quot;Take part&quot; button on the offer page. Place single Correct Score bets on matches featured on the cards on the promo page. If your bet loses, you'll get a bonus in the form of a free bet equal to your lost stake, up to a maximum of 40 MYR. If your bet wins (or if it is not a single Correct Score bet), the bonus will not be credited. The bonus is credited as a free bet in My Account within 24 hours of bet settlement. The refund amount is calculated in the customer's local currency at the exchange rate at the time the bet was settled. The free bet is valid for 48 hours from the moment it is credited. Only the first bet on each event qualifies for the offer. This offer does not apply to void bets. To take part in this bonus offer, you must opt in to participating in bonus offers for sports betting in My Account (Account Settings — Participation in bonus offers). Only bets placed using real money will be included in this offer. This offer does not apply to Advancebets, bets placed using bonus funds (including promo codes) or refunded bets. This offer only includes bets placed on regular time of matches listed on the offer page. Losing bets are eligible for this Promotion. The number of bonus holders is unlimited. 1xBet reserves the right to cancel or recall this offer or to change any provision thereof at any time without notification or explanation. This offer is only available once per account, family, IP address and PC. The use of several ac</pre></details>
   </article>
-<article class="activity-card">
+<article class="activity-card detail-ok">
     <div class="activity-head">
       <span class="index">13</span>
       <div>
         <h2>CHICKPOINT </h2>
-        <p>竞赛或抽奖 / Tournament or Raffle</p>
+        <p>竞赛或抽奖 / Tournament or Raffle · <span class="detail-pill ok-pill">详情页已采集 / Detail captured</span></p>
       </div>
     </div>
     <dl>
       <div><dt>奖励 / Reward</dt><dd>Help the chicken on its way and win superprizes!</dd></div>
+      <div><dt>详情页奖励 / Detail Reward</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
       <div><dt>参与要求 / Requirements</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
       <div><dt>开始时间 / Start Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
-      <div><dt>结束时间 / End Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>结束时间 / End Time</dt><dd>FROM 1XBET! HOW DO I GET A GUARANTEED BONUS FOR COMPLETING STAGES ON THE MAP? STAGES; PERIOD. THE BONUS PERCENTAGE DEPENDS ON THE NUMBER OF BETS YOU PLACED ON THE TOURNAMEN; END OF A PROMOTIONAL STAGE. WHAT ARE THE PRIZES? AT THE END OF EACH ESPORTS TOURNAME; FROM THE TICKETS RECEIVED FOR BETS ON THAT TOURNAMENT. WINNING TICKET HOLDERS WILL RE</dd></div>
+      <div><dt>详情页关键日期 / Detail Dates</dt><dd>FROM 1XBET! HOW DO I GET A GUARANTEED BONUS FOR COMPLETING STAGES ON THE MAP? STAGES; PERIOD. THE BONUS PERCENTAGE DEPENDS ON THE NUMBER OF BETS YOU PLACED ON THE TOURNAMEN; END OF A PROMOTIONAL STAGE. WHAT ARE THE PRIZES? AT THE END OF EACH ESPORTS TOURNAME; FROM THE TICKETS RECEIVED FOR BETS ON THAT TOURNAMENT. WINNING TICKET HOLDERS WILL RE</dd></div>
+      <div><dt>详情页来源 / Detail Source</dt><dd><a href="https://1xlite-19708.pro/en/promotions/chick-point">https://1xlite-19708.pro/en/promotions/chick-point</a></dd></div>
       <div><dt>备注 / Notes</dt><dd>Help the chicken on its way and win superprizes!</dd></div>
     </dl>
+<details class="detail-excerpt"><summary>详情页原文摘要 / Detail excerpt</summary><pre>1 REGISTRATION LOG IN EN / 11:37 TOP-EVENTS SPORTS LIVE 1XGAMES CASINO LIVE CASINO ESPORTS PROMO MORE Plinko CHICK POINT PGL ASTANA 2026 TAKE PART TERMS AND CONDITIONS PLACE BETS AND EARN TICKETS MOVE THE CHICKEN ALONG THE ROUTE WIN SUPERPRIZES FROM 1XBET! HOW DO I GET A GUARANTEED BONUS FOR COMPLETING STAGES ON THE MAP? STAGES CAN ONLY BE COMPLETED DURING THE RELEVANT TOURNAMENT. A MAP CAN BE COMPLETED ONCE PER TOURNAMENT. YOU WILL GET A BONUS BASED ON THE STAGE YOU REACHED ON THE MAP DURING THE RELEVANT TOURNAMENT PERIOD. THE BONUS PERCENTAGE DEPENDS ON THE NUMBER OF BETS YOU PLACED ON THE TOURNAMENT: stage 1 | 3 bets OF THE AVERAGE STAKE stage 2 | 5 bets OF THE AVERAGE STAKE stage 3 | 7 bets OF THE AVERAGE STAKE stage 4 | 9 bets OF THE AVERAGE STAKE stage 5 | 11 bets OF THE AVERAGE STAKE stage 6 | 13 bets OF THE AVERAGE STAKE stage 7 | 15 bets OF THE AVERAGE STAKE stage 8 | 17 bets OF THE AVERAGE STAKE stage 9 | 19 bets OF THE AVERAGE STAKE stage 10 | 21 bet OF THE AVERAGE STAKE THE MAXIMUM FREE BET AMOUNT IS 1 184,83 MYR. THE FREE BET WILL BE CREDITED AUTOMATICALLY WITHIN 48 HOURS AFTER THE END OF A PROMOTIONAL STAGE. WHAT ARE THE PRIZES? AT THE END OF EACH ESPORTS TOURNAMENT PARTICIPATING IN THE PROMOTION, WINNING TICKETS WILL BE SELECTED FROM THE TICKETS RECEIVED FOR BETS ON THAT TOURNAMENT. WINNING TICKET HOLDERS WILL RECEIVE THE FOLLOWING PRIZES: PGL CLUJ-NAPOCA 2026 ESL PRO LEAGUE SEASON 23 BLAST OPEN ROTTERDAM 2026 PGL BUCHAREST 2026 INTEL EXTREME MASTERS RIO 2026 BLAST RIVALS SPRING 2026 PGL ASTANA 2026 CS ASIA CHAMPIONSHIPS 2026 INTEL EXTREME MASTERS COLOGNE MAJOR 2026 ESPORTS WORLD CUP 2026 BLAST OPEN FALL 2026 STARLADDER STARSERIES FALL 2026 ESL PRO LEAGUE SEASON 24 PGL MASTERS BUCHAREST 2026 INTEL EXTREME MASTERS CHINA 2026 BLAST RIVALS FALL 2026 ESPORTS NATION CUP PGL MAJOR SINGAPORE 2026 PLACE LAPTOP MSI STEALTH 14 STUDIO 1 WINNER PLACE GAMING PC HYPERPC PLAY X 1 WINNER PLACE SMARTPHONE GOOGLE PIXEL 9 PRO XL 1 WINNER BUTTERFLY KNIFE | LORE 1 WINNER MICROSOFT XBOX SERIES X 5 WINNERS APPLE WATCH SERIES 10 5 WINNERS LOGITECH G PRO X SUPERLIGHT 2 10 WINNERS FREE BETS 5 WINNERS 10 WINNERS 15 WINNERS RESULTS OF THE DRAW HOW TO GET PROMOTIONAL TICKETS TICKETS WILL BE AWARDED FOR ELIGIBLE BETS ON THE TOURNAMENTS: PGL CLUJ-NAPOCA 2026, ESL PRO LEAGUE SEASON 23, BLAST OPEN ROTTERDAM 2026, PGL BUCHAREST 2026, INTEL EXTREME MASTERS RIO 2026, BLAST RIVALS SPRING 2026, PGL ASTANA 2026, CS ASIA CHAMPIONSHIPS 2026, INTEL EXTREME MASTERS COLOGNE MAJOR 2026, ESPORTS WORLD CUP 2026, BLAST OPEN FALL 2026, STARLADDER STARSERIES FALL 2026, ESL PRO LEAGUE SEAS</pre></details>
   </article>
-<article class="activity-card">
+<article class="activity-card detail-ok">
     <div class="activity-head">
       <span class="index">14</span>
       <div>
         <h2>SPORT SINGLE </h2>
-        <p>综合活动 / General Promotion</p>
+        <p>综合活动 / General Promotion · <span class="detail-pill ok-pill">详情页已采集 / Detail captured</span></p>
       </div>
     </div>
     <dl>
       <div><dt>奖励 / Reward</dt><dd>100%; up to 588 MYR</dd></div>
-      <div><dt>参与要求 / Requirements</dt><dd>bets to the bonus!</dd></div>
+      <div><dt>详情页奖励 / Detail Reward</dt><dd>100%; up to 588 MYR</dd></div>
+      <div><dt>参与要求 / Requirements</dt><dd>bets to the bonus! BONUS OFFER DETAILS</dd></div>
       <div><dt>开始时间 / Start Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
-      <div><dt>结束时间 / End Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>结束时间 / End Time</dt><dd>from 10 MYR. Get a bonus 100% to 588 MYR to your bonus account. Make three winning be; from the first deposit, but not more than 588 MYR. If at least one of the three bets; from the bonus account in the amount of 588 MYR and odds of 2.5. The bet wins and 1,4; expire. This bonus cannot be used in conjunction with any other promotions or special; from your account (or transferred to the casino), otherwise any bonuses or winnings e</dd></div>
+      <div><dt>详情页关键日期 / Detail Dates</dt><dd>from 10 MYR. Get a bonus 100% to 588 MYR to your bonus account. Make three winning be; from the first deposit, but not more than 588 MYR. If at least one of the three bets; from the bonus account in the amount of 588 MYR and odds of 2.5. The bet wins and 1,4; expire. This bonus cannot be used in conjunction with any other promotions or special; from your account (or transferred to the casino), otherwise any bonuses or winnings e</dd></div>
+      <div><dt>详情页来源 / Detail Source</dt><dd><a href="https://1xlite-19708.pro/en/bonus/rules/sport-single">https://1xlite-19708.pro/en/bonus/rules/sport-single</a></dd></div>
       <div><dt>备注 / Notes</dt><dd>100% up to 588 MYR – just 3 bets to the bonus!</dd></div>
     </dl>
+<details class="detail-excerpt"><summary>详情页原文摘要 / Detail excerpt</summary><pre>1 REGISTRATION LOG IN EN / 11:37 TOP-EVENTS SPORTS LIVE 1XGAMES CASINO LIVE CASINO ESPORTS PROMO MORE Plinko Promo Sport Single SPORT SINGLE 100% up to 588 MYR – just 3 bets to the bonus! MAKE A DEPOSIT How to get your bonus Register on the 1xBet website or app. Fill in all the fields with your personal data in My Account and opt in to participation in sports bonus offers. Top up your balance from 10 MYR. Get a bonus 100% to 588 MYR to your bonus account. Make three winning bets in a row using the bonus and 100% of the deposit amount will be credited to your main account. How to wager the bonus To wager the bonus, you must place three winning single bets by using the entire amount of the bonus you receive on each bet. Each bet must be placed as one single bet at odds of 2.00 or higher. After receiving the bonus, you must place a bet worth the entire bonus amount. If you win, the stake and winnings will be credited to your bonus account. After the second win, bet the amount you receive again in full. The bonus is deemed to have been wagered after the third bet you place using your bonus account wins. In case of winning, the amount of the initially received bonus is credited to the main account - 100% from the first deposit, but not more than 588 MYR. If at least one of the three bets loses, the bonus will be deemed to have been lost. Example: The participant tops up the balance at 588 MYR, and this amount is credited to his bonus account. Then he/she makes the first bet from the bonus account in the amount of 588 MYR and odds of 2.5. The bet wins and 1,479 MYR is credited to the bonus account. You place a second bet of 1,479 MYR at odds of 3.00 using your bonus account. The bet wins, and 4,410 MYR is credited to your bonus account. Then the participant makes a third bet for the amount 4,410 MYR with odds of 2. The bet wins and the bonus is considered wiped out. The participant receives to the main account 588 MYR. Terms and Conditions: The user is entitled to receive only 1 bonus. The minimum account replenishment to receive it is 10 MYR. The maximum bonus amount is 588 MYR. This bonus offer only applies to your first deposit. Before making a deposit, you must opt in to receiving sports betting bonuses in your account settings in My Account. The bonus will be credited automatically once you have made your first deposit, provided that you have completed your profile with all your personal data in My Account and activated your phone number. To wager the bonus, you must place three consecutive winning bets, each worth the entire bonus amount you receive. If </pre></details>
   </article>
-<article class="activity-card">
+<article class="activity-card detail-ok">
     <div class="activity-head">
       <span class="index">15</span>
       <div>
         <h2>HAPPY MONDAY </h2>
-        <p>返现 / Cashback</p>
+        <p>返现 / Cashback · <span class="detail-pill ok-pill">详情页已采集 / Detail captured</span></p>
       </div>
     </div>
     <dl>
       <div><dt>奖励 / Reward</dt><dd>Get cashback every Monday!</dd></div>
-      <div><dt>参与要求 / Requirements</dt><dd>cashback every Monday!</dd></div>
+      <div><dt>详情页奖励 / Detail Reward</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>参与要求 / Requirements</dt><dd>cashback every Monday! BONUS OFFER DETAILS</dd></div>
       <div><dt>开始时间 / Start Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
-      <div><dt>结束时间 / End Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>结束时间 / End Time</dt><dd>from 14/05/26 (16:00 +8 UTC) to 17/08/26 (04:59 +8 UTC). Get a bonus of up to 48 MYR; ends on the total amount you deposited from Monday (00:00 +3 UTC) to Sunday (23:59 +3; from 14/05/26 (16:00 +8 UTC) to 17/08/26 (04:59 +8 UTC). Only registered customers ca; period, it will be voided. If you make a deposit on Friday or on Wednesday, then you w; end the terms of the offer, cancel or renew the offer, or refuse participation at an</dd></div>
+      <div><dt>详情页关键日期 / Detail Dates</dt><dd>from 14/05/26 (16:00 +8 UTC) to 17/08/26 (04:59 +8 UTC). Get a bonus of up to 48 MYR; ends on the total amount you deposited from Monday (00:00 +3 UTC) to Sunday (23:59 +3; from 14/05/26 (16:00 +8 UTC) to 17/08/26 (04:59 +8 UTC). Only registered customers ca; period, it will be voided. If you make a deposit on Friday or on Wednesday, then you w; end the terms of the offer, cancel or renew the offer, or refuse participation at an</dd></div>
+      <div><dt>详情页来源 / Detail Source</dt><dd><a href="https://1xlite-19708.pro/en/bonus/rules/happy-monday">https://1xlite-19708.pro/en/bonus/rules/happy-monday</a></dd></div>
       <div><dt>备注 / Notes</dt><dd>Get cashback every Monday!</dd></div>
     </dl>
+<details class="detail-excerpt"><summary>详情页原文摘要 / Detail excerpt</summary><pre>1 REGISTRATION LOG IN EN / 11:37 TOP-EVENTS SPORTS LIVE 1XGAMES CASINO LIVE CASINO ESPORTS PROMO MORE Plinko Promo Happy Monday HAPPY MONDAY Get cashback every Monday! TAKE PART How to take part Register or log in on the 1xBet website or the app. Click the &quot;Take part&quot; button on the offer page. Deposit at least 4 MYR in a week from 14/05/26 (16:00 +8 UTC) to 17/08/26 (04:59 +8 UTC). Get a bonus of up to 48 MYR as a promo code every Monday. The Happy Monday promo code amount depends on the total amount you deposited from Monday (00:00 +3 UTC) to Sunday (23:59 +3 UTC) during the previous week of the bonus offer: 40 MYR to 118.45 MYR 4 MYR 119 MYR to 236.93 MYR 20 MYR 237 MYR to 394.91 MYR 32 MYR 395 MYR or more 48 MYR The maximum bonus amount is 48 MYR. Terms and Conditions: This bonus offer is available from 14/05/26 (16:00 +8 UTC) to 17/08/26 (04:59 +8 UTC). Only registered customers can take part in this promotion. The following fields must be filled in: full name, mobile phone number (must be activated), email address and country of residence. To take part in this bonus offer, you must opt in to taking part in sports bonus offers in your account settings in My Account (Account Settings - Bonuses). To take part in this promotion, you need to press the “Take part” button on the offer page. Place eligible deposits between Monday (00:00 +3 UTC) and Sunday (23:59 +3 UTC) to receive a guaranteed promo code bonus. You can only receive one promo code bonus per week. Cashback for the week is credited on Monday between (00:00 +3 UTC) and (23:59 +3 UTC). The minimum deposit amount is 4 MYR. Deposit a total of between 40 MYR and 118.45 MYR during a week of the bonus offer to get a 4 MYR bonus, between 119 MYR and 236.93 MYR to get a 20 MYR bonus, between 237 MYR and 394.91 MYR to get a 32 MYR bonus, or 395 MYR or more to get a 48 MYR bonus. The minimum weekly cashback amount is 4 MYR. The maximum weekly cashback amount is 48 MYR. Wagering requirement: the promo code amount must be wagered in a pre-match or live accumulator bet on sports matches. The accumulator must include 3 or more selections, each at odds of 1.60 or higher. The promo code is valid for 48 hours after it is credited. If the promo code is not wagered within this period, it will be voided. If you make a deposit on Friday or on Wednesday, then you will receive the &quot;Lucky Friday&quot; and &quot;x2 Wednesday&quot; bonus respectively, and not the &quot;Happy Monday&quot; bonus. In order to receive the &quot;Happy Monday&quot; bonus on that Friday and Wednesday, you must make another deposit. Cryptocurrency deposits and deposits made via </pre></details>
   </article>
-<article class="activity-card">
+<article class="activity-card detail-ok">
     <div class="activity-head">
       <span class="index">16</span>
       <div>
         <h2>ESPORTS CASHBACK BOOM </h2>
-        <p>返现 / Cashback</p>
+        <p>返现 / Cashback · <span class="detail-pill ok-pill">详情页已采集 / Detail captured</span></p>
       </div>
     </div>
     <dl>
       <div><dt>奖励 / Reward</dt><dd>20% cashback</dd></div>
-      <div><dt>参与要求 / Requirements</dt><dd>CASHBACK BOOM Place bets on esports and get up to 20% cashback weekly!</dd></div>
+      <div><dt>详情页奖励 / Detail Reward</dt><dd>20% cashback</dd></div>
+      <div><dt>参与要求 / Requirements</dt><dd>CASHBACK BOOM Place bets on esports and get up to 20% cashback weekly! BONUS OFFER DETAILS</dd></div>
       <div><dt>开始时间 / Start Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
-      <div><dt>结束时间 / End Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>结束时间 / End Time</dt><dd>ends on the total stake of eligible bets you place on esports events over the course; period. When you reach a level, you will get cashback from the total stake of eligible; end of each week during the promotional period, the level you reach is saved, and ca; period, you will go straight to level 3, and your cashback will be 15%. Your level wil; from 01.07.2025 (12:00 +3 UTC) to 31.05.2026 (23:59 +3 UTC). Only registered customer</dd></div>
+      <div><dt>详情页关键日期 / Detail Dates</dt><dd>ends on the total stake of eligible bets you place on esports events over the course; period. When you reach a level, you will get cashback from the total stake of eligible; end of each week during the promotional period, the level you reach is saved, and ca; period, you will go straight to level 3, and your cashback will be 15%. Your level wil; from 01.07.2025 (12:00 +3 UTC) to 31.05.2026 (23:59 +3 UTC). Only registered customer</dd></div>
+      <div><dt>详情页来源 / Detail Source</dt><dd><a href="https://1xlite-19708.pro/en/bonus/rules/esports-cashback-boom">https://1xlite-19708.pro/en/bonus/rules/esports-cashback-boom</a></dd></div>
       <div><dt>备注 / Notes</dt><dd>Place bets on esports and get up to 20% cashback weekly!</dd></div>
     </dl>
+<details class="detail-excerpt"><summary>详情页原文摘要 / Detail excerpt</summary><pre>1 REGISTRATION LOG IN EN / 11:37 TOP-EVENTS SPORTS LIVE 1XGAMES CASINO LIVE CASINO ESPORTS PROMO MORE Plinko Promo Esports Cashback Boom ESPORTS CASHBACK BOOM Place bets on esports and get up to 20% cashback weekly! TAKE PART How to take part in this bonus offer Register or log in on the 1xBet website or the app. Click the &quot;Take part&quot; button on the offer page. Place bets of at least 20 MYR on any esports events. The bonus offer includes single bets at odds of 1.50 or higher on esports events, as well as accumulator bets consisting of 2 or more selections, where each selection is at odds of 1.40 or higher. At least one selection in the accumulator must be on an esports match. Level up every week and get cashback based on the total stake of bets you've placed using your bonus account. The higher your level, the more cashback you'll get! HOW TO REACH DIFFERENT LEVELS Your level depends on the total stake of eligible bets you place on esports events over the course of each week during the bonus offer validity period. When you reach a level, you will get cashback from the total stake of eligible bets placed during the relevant week. At the end of each week during the promotional period, the level you reach is saved, and cashback will be credited according the level you previously reached for following weeks. If your total stake over the course of the week is: between 99 MYR and 1,974.7 MYR, you'll be at level 1, and your cashback will be worth 5% of your total stake. between 1,975 MYR and 3,949.4 MYR, you'll be at level 2, and your cashback will be worth 10% of your total stake. between 3,950 MYR and 9,869.7 MYR, you'll be at level 3, and your cashback will be worth 15% of your total stake. 9,874 MYR or higher, you'll be at level 4, and your cashback will be worth 20% of your total stake The maximum weekly cashback amount is 19,748 MYR. How cashback for levels is calculated: If you place bets with a total stake of 3,950 MYR over the course of the first week of the bonus offer validity period, you will go straight to level 3, and your cashback will be 15%. Your level will be saved for the following week, even if your total stake that week is less than the required amount for level 3. If you place bets with a total stake of 9,874 MYR or higher the following week, you will go to level 4, and you will get the corresponding 20% cashback for all subsequent weeks. The bigger your total stake, the more cashback you'll get! Terms and Conditions: This bonus offer is available from 01.07.2025 (12:00 +3 UTC) to 31.05.2026 (23:59 +3 UTC). Only registered customers can tak</pre></details>
   </article>
-<article class="activity-card">
+<article class="activity-card detail-ok">
     <div class="activity-head">
       <span class="index">17</span>
       <div>
         <h2>OLÉ, LA LIGA! </h2>
-        <p>免费投注 / Free Bet</p>
+        <p>免费投注 / Free Bet · <span class="detail-pill ok-pill">详情页已采集 / Detail captured</span></p>
       </div>
     </div>
     <dl>
       <div><dt>奖励 / Reward</dt><dd>Bet on red-hot matches and get free bets!</dd></div>
-      <div><dt>参与要求 / Requirements</dt><dd>Bet on red-hot matches and get free bets!</dd></div>
+      <div><dt>详情页奖励 / Detail Reward</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>参与要求 / Requirements</dt><dd>Bet on red-hot matches and get free bets! BONUS OFFER DETAILS</dd></div>
       <div><dt>开始时间 / Start Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
-      <div><dt>结束时间 / End Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>结束时间 / End Time</dt><dd>22/06/26; ending any money. Enjoy the game and receive bonuses for active play! Unlimited NEW; from our company – TOTO Make a free TOTO prediction then place any bet on a sporting; end Booster Make a deposit every Friday and get a bonus credited to your main accoun; from Pragmatic Play for deposits on Saturdays! FIND OUT MORE The big game Don't miss</dd></div>
+      <div><dt>详情页关键日期 / Detail Dates</dt><dd>22/06/26; ending any money. Enjoy the game and receive bonuses for active play! Unlimited NEW; from our company – TOTO Make a free TOTO prediction then place any bet on a sporting; end Booster Make a deposit every Friday and get a bonus credited to your main accoun; from Pragmatic Play for deposits on Saturdays! FIND OUT MORE The big game Don't miss</dd></div>
+      <div><dt>详情页来源 / Detail Source</dt><dd><a href="https://1xlite-19708.pro/en/bonus/rules/la-liga">https://1xlite-19708.pro/en/bonus/rules/la-liga</a></dd></div>
       <div><dt>备注 / Notes</dt><dd>Bet on red-hot matches and get free bets!</dd></div>
     </dl>
+<details class="detail-excerpt"><summary>详情页原文摘要 / Detail excerpt</summary><pre>1 REGISTRATION LOG IN EN / 11:37 TOP-EVENTS SPORTS LIVE 1XGAMES CASINO LIVE CASINO ESPORTS PROMO MORE Plinko MAIN PAGE PROMOTIONS AND BONUSES Olé, La Liga! BET ON RED-HOT MATCHES AND GET FREE BETS! BET ON RED-HOT MATCHES AND GET FREE BETS! TAKE PART TERMS AND CONDITIONS REGISTER OR LOG IN ON THE 1XBET WEBSITE OR IN THE APP PLACE BETS OF AT LEAST ON LA LIGA FOOTBALL TOURNAMENT EVENTS GET A BONUS AS A FREE BET EVERY WEEK! Other available bonuses FIND OUT MORE Infinite Prize League Daily prizes, weekly free bets, and superprizes are waiting for you! FIND OUT MORE League of wins Place bets on English Premier League matches to get free bets and take part in the prize draw! BEST FIND OUT MORE NBA Win Shot The season of big matches is your season of big wins! 22/06/26 (21:00 +8 UTC) FIND OUT MORE Barca 1xFamily Més que un club: bet and win with the Blaugrana! FIND OUT MORE PSG: Champion’s Contract Sign a contract with PSG and discover the way to exclusive prizes! FIND OUT MORE No Risk Bet Get a free bet if your bet loses! FIND OUT MORE Goalless Football Get a 100% bet refund in the event of a goalless draw! Unlimited FIND OUT MORE Grand Slam Tournaments Bet on Grand Slam tournaments and win awesome prizes! FIND OUT MORE App&amp;Bonus Place bets using the mobile app and get a fantastic bonus! Unlimited 46 MYR FIND OUT MORE Lucky Day Win 500 promo points every day! Unlimited FIND OUT MORE 1XPICK'EM IEM Cologne Major Make a prediction and get a guaranteed bonus! FIND OUT MORE Esports Era Choose an event and place a risk-free bet! Unlimited 40 MYR FIND OUT MORE ChickPoint Help the chicken on its way and win superprizes! FIND OUT MORE Sport Single 100% up to 588 MYR – just 3 bets to the bonus! FIND OUT MORE Happy Monday Get cashback every Monday! FIND OUT MORE Esports Cashback Boom Place bets on esports and get up to 20% cashback weekly! NEW BEST FIND OUT MORE 1xTennis Challenge Get cashback up to 18% for bets on the best tennis tournaments! FIND OUT MORE Crypto Freebet Top up your account with crypto and get 30% cashback! FIND OUT MORE Promo Code Store at 1xBet Visit our store and buy a bet without spending any money. Enjoy the game and receive bonuses for active play! Unlimited NEW FIND OUT MORE 100% first deposit bonus Register with 1xBet and get a fantastic 100% bonus for your first deposit! FIND OUT MORE Welcome package up to 7688 MYR + 150 FS Make deposits and get bonuses! FIND OUT MORE LOYALTY PAYS OFF GET UP TO 100 FS AND A 50% TENTH DEPOSIT BONUS FOR SLOTS FIND OUT MORE Casino VIP Cashback Thank you for choosing us! As a token of our gratitude, we're offering y</pre></details>
   </article>
-<article class="activity-card">
+<article class="activity-card detail-ok">
     <div class="activity-head">
       <span class="index">18</span>
       <div>
         <h2>1XTENNIS CHALLENGE </h2>
-        <p>返现 / Cashback</p>
+        <p>返现 / Cashback · <span class="detail-pill ok-pill">详情页已采集 / Detail captured</span></p>
       </div>
     </div>
     <dl>
       <div><dt>奖励 / Reward</dt><dd>18%</dd></div>
-      <div><dt>参与要求 / Requirements</dt><dd>cashback up to 18% for bets on the best tennis tournaments!</dd></div>
+      <div><dt>详情页奖励 / Detail Reward</dt><dd>18%</dd></div>
+      <div><dt>参与要求 / Requirements</dt><dd>cashback up to 18% for bets on the best tennis tournaments! BONUS OFFER DETAILS</dd></div>
       <div><dt>开始时间 / Start Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
-      <div><dt>结束时间 / End Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>结束时间 / End Time</dt><dd>from 12 MYR on tennis tournament matches ATP, WTA, Davis Cup, Billie Jean King Cup, U; ends on the number of eligible bets you placed during the week: 10-15 bets - 8% of th; from 28.01.2026 (11:00+3 UTC) to 30.11.2026 (23:59 +3 UTC). Only registered customers; from 1.4. At least one event in the express bet must be on matches of tennis tourname; ends on the number of bets placed on matches in each of the tennis tournaments during</dd></div>
+      <div><dt>详情页关键日期 / Detail Dates</dt><dd>from 12 MYR on tennis tournament matches ATP, WTA, Davis Cup, Billie Jean King Cup, U; ends on the number of eligible bets you placed during the week: 10-15 bets - 8% of th; from 28.01.2026 (11:00+3 UTC) to 30.11.2026 (23:59 +3 UTC). Only registered customers; from 1.4. At least one event in the express bet must be on matches of tennis tourname; ends on the number of bets placed on matches in each of the tennis tournaments during</dd></div>
+      <div><dt>详情页来源 / Detail Source</dt><dd><a href="https://1xlite-19708.pro/en/bonus/rules/1xtennis-challenge">https://1xlite-19708.pro/en/bonus/rules/1xtennis-challenge</a></dd></div>
       <div><dt>备注 / Notes</dt><dd>Get cashback up to 18% for bets on the best tennis tournaments!</dd></div>
     </dl>
+<details class="detail-excerpt"><summary>详情页原文摘要 / Detail excerpt</summary><pre>1 REGISTRATION LOG IN EN / 11:37 TOP-EVENTS SPORTS LIVE 1XGAMES CASINO LIVE CASINO ESPORTS PROMO MORE Plinko Promo 1xTennis Challenge 1XTENNIS CHALLENGE Get cashback up to 18% for bets on the best tennis tournaments! TAKE PART How to take part Register or log in on the 1xBet website or the app. Click the &quot;Take part&quot; button on the offer page. Place bets from 12 MYR on tennis tournament matches ATP, WTA, Davis Cup, Billie Jean King Cup, United Cup, Laver Cup, Challenger, ITF, UTR. Get a free bet bonus of up to 18% every week! How is the free bet amount calculated? The bonus size depends on the number of eligible bets you placed during the week: 10-15 bets - 8% of the total stake 16-25 bets - 10% of the total stake 26 or more - 18% of the total stake The bigger your total stake, the larger the bonus you'll get! Terms and Conditions: The bonus offer is available from 28.01.2026 (11:00+3 UTC) to 30.11.2026 (23:59 +3 UTC). Only registered customers can take part in this bonus offer. The following profile fields must be filled in: full name, mobile phone number (must be activated), email address, and country of residence. You must opt in to participating in bonus offers in My Account (Account Settings — Participation in bonus offers). To take part in this promotion, you need to press the “Take part” button on the offer page. The bonus offer takes into account single bets with odds of 1.5 and higher on matches of tennis tournaments ATP, WTA, Davis Cup, Billie Jean King Cup, United Cup, Laver Cup, Challenger, ITF, UTR, as well as express bets consisting of 2 or more events. The odds of each event - from 1.4. At least one event in the express bet must be on matches of tennis tournaments ATP, WTA, Davis Cup, Billie Jean King Cup, United Cup, Laver Cup, Challenger, ITF, UTR. The minimum stake is 12 MYR. Only bets placed using real money are included in this bonus offer. This offer does not apply to any handicap or total bets, bets placed using a bonus account or promo codes, canceled or sold bets, advancebets, or refunded bets. The percentage of the freebet bonus depends on the number of bets placed on matches in each of the tennis tournaments during their period - ATP, WTA, Davis Cup, Billie Jean King Cup, United Cup, Laver Cup, Challenger, ITF, UTR. Only calculated bets are taken into account in the bonus offer. Participants who place bets from Monday (00:00 +3 UTC) to Sunday (23:59 +3 UTC) that meet the terms of the bonus offer are guaranteed to receive a cashback bonus. The cashback amount is equal to the difference between the total stake of all bets (settled a</pre></details>
   </article>
-<article class="activity-card">
+<article class="activity-card detail-ok">
     <div class="activity-head">
       <span class="index">19</span>
       <div>
         <h2>CRYPTO FREEBET </h2>
-        <p>返现 / Cashback</p>
+        <p>返现 / Cashback · <span class="detail-pill ok-pill">详情页已采集 / Detail captured</span></p>
       </div>
     </div>
     <dl>
       <div><dt>奖励 / Reward</dt><dd>30% cashback</dd></div>
-      <div><dt>参与要求 / Requirements</dt><dd>BET Top up your account with crypto and get 30% cashback!</dd></div>
+      <div><dt>详情页奖励 / Detail Reward</dt><dd>30% cashback</dd></div>
+      <div><dt>参与要求 / Requirements</dt><dd>BET Top up your account with crypto and get 30% cashback! BONUS OFFER DETAILS</dd></div>
       <div><dt>开始时间 / Start Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
-      <div><dt>结束时间 / End Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>结束时间 / End Time</dt><dd>from 27/04/26 (05:00 +8 UTC) and will continue indefinitely. Only registered customer; from Monday (00:00 UTC+3) to Sunday (23:59 UTC+3). At least 3 deposits must be made o; from the moment it is awarded. If the promo code is not wagered within this time peri; end the terms of the offer, cancel or renew the offer, or refuse to allow participat; ending customer's account and freeze their remaining balance. TAKE PART Other avail</dd></div>
+      <div><dt>详情页关键日期 / Detail Dates</dt><dd>from 27/04/26 (05:00 +8 UTC) and will continue indefinitely. Only registered customer; from Monday (00:00 UTC+3) to Sunday (23:59 UTC+3). At least 3 deposits must be made o; from the moment it is awarded. If the promo code is not wagered within this time peri; end the terms of the offer, cancel or renew the offer, or refuse to allow participat; ending customer's account and freeze their remaining balance. TAKE PART Other avail</dd></div>
+      <div><dt>详情页来源 / Detail Source</dt><dd><a href="https://1xlite-19708.pro/en/bonus/rules/crypto-freebet">https://1xlite-19708.pro/en/bonus/rules/crypto-freebet</a></dd></div>
       <div><dt>备注 / Notes</dt><dd>Top up your account with crypto and get 30% cashback!</dd></div>
     </dl>
+<details class="detail-excerpt"><summary>详情页原文摘要 / Detail excerpt</summary><pre>1 REGISTRATION LOG IN EN / 11:37 TOP-EVENTS SPORTS LIVE 1XGAMES CASINO LIVE CASINO ESPORTS PROMO MORE Plinko Promo Crypto Freebet CRYPTO FREEBET Top up your account with crypto and get 30% cashback! TAKE PART How do I get cashback? Register or log in on the 1xBet website or the app. Top up your account using any cryptocurrency (the minimum required deposit is 20 MYR). Get cashback worth 30% of the average amount of your deposits as a promo code. How to redeem a promo code: Wager the promo code amount in pre-match or live accumulator bets with 4 or more selections, each selection at odds of at least 1.6. Terms and Conditions: This bonus offer runs from 27/04/26 (05:00 +8 UTC) and will continue indefinitely. Only registered customers may take part. The following fields must be filled in: full name, mobile phone number (must be activated), email address, country of residence. To take part in this bonus offer, you must opt in to taking part in sports bonus offers in your account settings in My Account (Account Settings - Bonuses). To take part in this promotion, you need to press the “Take part” button on the offer page. Cashback in the form of a promo code is credited 1 time on Monday based on the results of the previous week. The cashback amount is calculated as 30% of your average deposit amount, i.e. of the total amount of all deposits you made during the week divided by the number of deposits made. The minimum deposit is 20 MYR. The maximum cashback amount is 1,185 MYR. The minimum cashback amount is 1.98 MYR. To get cashback, you must make at least 5 deposits during the week from Monday (00:00 UTC+3) to Sunday (23:59 UTC+3). At least 3 deposits must be made on different days. The promo code is valid for 24 hours from the moment it is awarded. If the promo code is not wagered within this time period, it will be voided. Any types of handicap or total bet do not count towards the promo code wagering requirement. You must opt in to participate in bonus offers in My Account. All the company's decisions shall be deemed as final and binding in all matters related to this offer. 1xBet has the right to amend the terms of the offer, cancel or renew the offer, or refuse to allow participation at any time without prior notice. 1xBet reserves the right to review customers' transaction records and logs for any reason. If, upon such review, it appears that a customer is participating in strategies that 1xBet at its sole discretion deems to be abusive, 1xBet reserves the right to revoke the entitlement of such customers to participate in the promotion and reclaim the </pre></details>
   </article>
-<article class="activity-card">
+<article class="activity-card detail-ok">
     <div class="activity-head">
       <span class="index">20</span>
       <div>
         <h2>PROMO </h2>
-        <p>综合活动 / General Promotion</p>
+        <p>综合活动 / General Promotion · <span class="detail-pill ok-pill">详情页已采集 / Detail captured</span></p>
       </div>
     </div>
     <dl>
       <div><dt>奖励 / Reward</dt><dd>Visit our store and buy a bet without spending any money. Enjoy the game and receive bonuses for active play!</dd></div>
+      <div><dt>详情页奖励 / Detail Reward</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
       <div><dt>参与要求 / Requirements</dt><dd>bet without spending any money. Enjoy the game and receive bonuses for active play!</dd></div>
       <div><dt>开始时间 / Start Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
-      <div><dt>结束时间 / End Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>结束时间 / End Time</dt><dd>ending any money. Enjoy the game and receive bonuses for active play! BONUS OFFER D; END BOOSTER Make a deposit every Friday and get a bonus credited to your main accoun; from Pragmatic Play for deposits on Saturdays! BONUS OFFER DETAILS THE BIG GAME Don't; END New look, same thrills! Bet on FIFA / EA FC in the promo and bag prizes! BONUS O; ENDS! Join the 1xBet referral program and earn extra income by inviting friends! BON</dd></div>
+      <div><dt>详情页关键日期 / Detail Dates</dt><dd>ending any money. Enjoy the game and receive bonuses for active play! BONUS OFFER D; END BOOSTER Make a deposit every Friday and get a bonus credited to your main accoun; from Pragmatic Play for deposits on Saturdays! BONUS OFFER DETAILS THE BIG GAME Don't; END New look, same thrills! Bet on FIFA / EA FC in the promo and bag prizes! BONUS O; ENDS! Join the 1xBet referral program and earn extra income by inviting friends! BON</dd></div>
+      <div><dt>详情页来源 / Detail Source</dt><dd><a href="https://1xlite-19708.pro/en/bonus/rules">https://1xlite-19708.pro/en/bonus/rules</a></dd></div>
       <div><dt>备注 / Notes</dt><dd>Visit our store and buy a bet without spending any money. Enjoy the game and receive bonuses for active play!</dd></div>
     </dl>
+<details class="detail-excerpt"><summary>详情页原文摘要 / Detail excerpt</summary><pre>1 REGISTRATION LOG IN EN / 11:36 TOP-EVENTS SPORTS LIVE 1XGAMES CASINO LIVE CASINO ESPORTS PROMO MORE Plinko Promo INFINITE PRIZE LEAGUE Daily prizes, weekly free bets, and superprizes are waiting for you! BONUS OFFER DETAILS LEAGUE OF WINS Place bets on English Premier League matches to get free bets and take part in the prize draw! BONUS OFFER DETAILS NBA WIN SHOT The season of big matches is your season of big wins! BONUS OFFER DETAILS BARCA 1XFAMILY Més que un club: bet and win with the Blaugrana! BONUS OFFER DETAILS PSG: CHAMPION’S CONTRACT Sign a contract with PSG and discover the way to exclusive prizes! BONUS OFFER DETAILS NO RISK BET Get a free bet if your bet loses! BONUS OFFER DETAILS GOALLESS FOOTBALL Get a 100% bet refund in the event of a goalless draw! BONUS OFFER DETAILS GRAND SLAM TOURNAMENTS Bet on Grand Slam tournaments and win awesome prizes! BONUS OFFER DETAILS APP&amp;BONUS Place bets using the mobile app and get a fantastic bonus! BONUS OFFER DETAILS LUCKY DAY Win 500 promo points every day! BONUS OFFER DETAILS 1XPICK'EM IEM COLOGNE MAJOR Make a prediction and get a guaranteed bonus! BONUS OFFER DETAILS ESPORTS ERA Choose an event and place a risk-free bet! BONUS OFFER DETAILS CHICKPOINT Help the chicken on its way and win superprizes! BONUS OFFER DETAILS SPORT SINGLE 100% up to 588 MYR – just 3 bets to the bonus! BONUS OFFER DETAILS HAPPY MONDAY Get cashback every Monday! BONUS OFFER DETAILS ESPORTS CASHBACK BOOM Place bets on esports and get up to 20% cashback weekly! BONUS OFFER DETAILS OLÉ, LA LIGA! Bet on red-hot matches and get free bets! BONUS OFFER DETAILS 1XTENNIS CHALLENGE Get cashback up to 18% for bets on the best tennis tournaments! BONUS OFFER DETAILS CRYPTO FREEBET Top up your account with crypto and get 30% cashback! BONUS OFFER DETAILS PROMO Visit our store and buy a bet without spending any money. Enjoy the game and receive bonuses for active play! BONUS OFFER DETAILS 100% FIRST DEPOSIT BONUS Register with 1xBet and get a fantastic 100% bonus for your first deposit! BONUS OFFER DETAILS WELCOME PACKAGE UP TO 7688 MYR + 150 FS Make deposits and get bonuses! BONUS OFFER DETAILS LOYALTY PAYS OFF GET UP TO 100 FS AND A 50% TENTH DEPOSIT BONUS FOR SLOTS BONUS OFFER DETAILS CASINO VIP CASHBACK Thank you for choosing us! As a token of our gratitude, we're offering you the chance to join our new loyalty program and get VIP cashback BONUS OFFER DETAILS DAILY GAMES TOURNAMENT Win amazing prizes just by playing your favorite Games BONUS OFFER DETAILS YOUR BIRTHDAY WITH 1XBET! Is it your birthday? We would like to wish you a Happy</pre></details>
   </article>
-<article class="activity-card">
+<article class="activity-card detail-ok">
     <div class="activity-head">
       <span class="index">21</span>
       <div>
         <h2>100% FIRST DEPOSIT BONUS </h2>
-        <p>充值或欢迎奖励 / Deposit or Welcome Bonus</p>
+        <p>充值或欢迎奖励 / Deposit or Welcome Bonus · <span class="detail-pill ok-pill">详情页已采集 / Detail captured</span></p>
       </div>
     </div>
     <dl>
       <div><dt>奖励 / Reward</dt><dd>100%; 100% bonus</dd></div>
-      <div><dt>参与要求 / Requirements</dt><dd>DEPOSIT BONUS Register with 1xBet and get a fantastic 100% bonus for your first deposit!</dd></div>
+      <div><dt>详情页奖励 / Detail Reward</dt><dd>100%; 100% bonus</dd></div>
+      <div><dt>参与要求 / Requirements</dt><dd>DEPOSIT BONUS Register with 1xBet and get a fantastic 100% bonus for your first deposit! BONUS OFFER DETAILS</dd></div>
       <div><dt>开始时间 / Start Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
       <div><dt>结束时间 / End Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>详情页关键日期 / Detail Dates</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>详情页来源 / Detail Source</dt><dd><a href="https://1xlite-19708.pro/en/promotions/1st">https://1xlite-19708.pro/en/promotions/1st</a></dd></div>
       <div><dt>备注 / Notes</dt><dd>Register with 1xBet and get a fantastic 100% bonus for your first deposit!</dd></div>
     </dl>
+<details class="detail-excerpt"><summary>详情页原文摘要 / Detail excerpt</summary><pre>1 REGISTRATION LOG IN EN / 11:37 TOP-EVENTS SPORTS LIVE 1XGAMES CASINO LIVE CASINO ESPORTS PROMO MORE Plinko 100% BONUS FOR THE FIRST DEPOSIT TOP UP YOUR ACCOUNT RIGHT NOW! MAKE A DEPOSIT TERMS AND CONDITIONS REGISTER ON THE 1XBET WEBSITE OR THE APP AND OPT IN TO PARTICIPATING IN SPORTS BETTING BONUS OFFERS FILL IN ALL THE FIELDS WITH YOUR PERSONAL DETAILS IN MY ACCOUNT AND MAKE A DEPOSIT OF AT LEAST 10 MYR GET A BONUS WORTH 100% OF YOUR DEPOSIT AMOUNT, UP TO 588 MYR, CREDITED TO YOUR BONUS ACCOUNT INFORMATION About us Terms and Conditions Affiliate Program Become an agent Privacy Policy Сookie Policy Contacts BETTING Sports Multi-LIVE Live Toto GAMES Casino 1xGames Live Casino STATISTICS Statistics Results USEFUL LINKS Payment methods Mobile version Registration APPS iOS Android Other apps PARTNERS Copyright © 2026 «1xBet». 1xBet uses cookies to ensure the best user experience. By remaining on the website, you consent to the use of your cookie files on 1xBet. Find out more CUSTOMER SUPPORT 1800812889 18+ MOBILE VERSION CUSTOMER SUPPORT</pre></details>
   </article>
-<article class="activity-card">
+<article class="activity-card detail-ok">
     <div class="activity-head">
       <span class="index">22</span>
       <div>
         <h2>WELCOME PACKAGE UP TO 7688 MYR + 150 FS </h2>
-        <p>免费旋转 / Free Spins</p>
+        <p>免费旋转 / Free Spins · <span class="detail-pill ok-pill">详情页已采集 / Detail captured</span></p>
       </div>
     </div>
     <dl>
       <div><dt>奖励 / Reward</dt><dd>UP TO 7688 MYR; 150 FS</dd></div>
-      <div><dt>参与要求 / Requirements</dt><dd>deposits and get bonuses!</dd></div>
+      <div><dt>详情页奖励 / Detail Reward</dt><dd>UP TO 7688 MYR; 150 FS</dd></div>
+      <div><dt>参与要求 / Requirements</dt><dd>deposits and get bonuses! BONUS OFFER DETAILS</dd></div>
       <div><dt>开始时间 / Start Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
-      <div><dt>结束时间 / End Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>结束时间 / End Time</dt><dd>from Pragmatic Play for your first deposit: for a deposit of at least 15 MYR you will; from Pragmatic Play. Terms and conditions The bonus will be available to you if you h; from the bonus account, and the maximum allowed stake is 25 MYR. Each free spin has a; from the free spins must be wagered x15 times within 3 days of receipt. The bonus mus; from wagering. Excluded game categories: Sic-Bo, Poker, Roulette, Bingo, Blackjack, K</dd></div>
+      <div><dt>详情页关键日期 / Detail Dates</dt><dd>from Pragmatic Play for your first deposit: for a deposit of at least 15 MYR you will; from Pragmatic Play. Terms and conditions The bonus will be available to you if you h; from the bonus account, and the maximum allowed stake is 25 MYR. Each free spin has a; from the free spins must be wagered x15 times within 3 days of receipt. The bonus mus; from wagering. Excluded game categories: Sic-Bo, Poker, Roulette, Bingo, Blackjack, K</dd></div>
+      <div><dt>详情页来源 / Detail Source</dt><dd><a href="https://1xlite-19708.pro/en/bonus/casino/promotions/slot_first_deposit">https://1xlite-19708.pro/en/bonus/casino/promotions/slot_first_deposit</a></dd></div>
       <div><dt>备注 / Notes</dt><dd>Make deposits and get bonuses!</dd></div>
     </dl>
+<details class="detail-excerpt"><summary>详情页原文摘要 / Detail excerpt</summary><pre>1 REGISTRATION LOG IN EN / 11:37 TOP-EVENTS SPORTS LIVE 1XGAMES CASINO LIVE CASINO ESPORTS PROMO MORE Plinko Promo Welcome package up to 7688 MYR + 150 FS WELCOME PACKAGE UP TO 7688 MYR + 150 FS Make deposits and get bonuses! How to get the bonus Create an account, complete your profile, and activate your phone number. Make your first deposit of at least 15 MYR to get a 100% bonus credited to your bonus account, up to a maximum of 2388 MYR. Additionally, you will also receive up to 150 FS in Gates of Olympus™ from Pragmatic Play for your first deposit: for a deposit of at least 15 MYR you will receive 20 FS for a deposit of at least 25 MYR you will receive 30 FS for a deposit of at least 35 MYR you will receive 50 FS for a deposit of at least 75 MYR you will receive 100 FS for a deposit of at least 125 MYR you will receive 150 FS 200% bonus for your 2nd deposit, up to a maximum of 5300 MYR. The minimum deposit amount required to receive this bonus is 15 MYR. Free spins (FS) are awarded in Gates of Olympus™ from Pragmatic Play. Terms and conditions The bonus will be available to you if you have filled in your first name and surname and activated your phone number. Before making a deposit, you must opt in to receiving casino bonuses in My Account in the account settings or directly on the Deposit page. If you make a deposit before you have finished wagering the previous bonus, the next deposit bonus will not be awarded. For example, the second deposit bonus will only be credited for the deposit that was made once all the terms of the first deposit bonus have been met. You can use each new deposit bonus once the previous bonus has been redeemed. When you make a deposit, the money may take a little time to appear in your account. Please bear this in mind when receiving and wagering bonuses. All cash bonuses based on a percentage of the deposit will be credited to the customer's bonus account and are subject to wagering x25 times within 7 days of activation. The bonus must be wagered using the funds from the bonus account, and the maximum allowed stake is 25 MYR. Each free spin has a 0,6 MYR stake. You must activate your free spins within 3 days after making your 1st deposit. Winnings from the free spins must be wagered x15 times within 3 days of receipt. The bonus must be wagered using real money, and the maximum permitted stake when wagering is 25 MYR. When you have a bonus active, bets you place in the 1xGames section will count twice towards the wagering requirement. For example, if you place a bet of 100 currency units, 200 currency units will be conside</pre></details>
   </article>
-<article class="activity-card">
+<article class="activity-card detail-ok">
     <div class="activity-head">
       <span class="index">23</span>
       <div>
         <h2>LOYALTY PAYS OFF </h2>
-        <p>免费旋转 / Free Spins</p>
+        <p>免费旋转 / Free Spins · <span class="detail-pill ok-pill">详情页已采集 / Detail captured</span></p>
       </div>
     </div>
     <dl>
       <div><dt>奖励 / Reward</dt><dd>UP TO 100 FS; 50%</dd></div>
-      <div><dt>参与要求 / Requirements</dt><dd>DEPOSIT BONUS FOR SLOTS</dd></div>
+      <div><dt>详情页奖励 / Detail Reward</dt><dd>UP TO 100 FS; 50%</dd></div>
+      <div><dt>参与要求 / Requirements</dt><dd>DEPOSIT BONUS FOR SLOTS BONUS OFFER DETAILS</dd></div>
       <div><dt>开始时间 / Start Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
-      <div><dt>结束时间 / End Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>结束时间 / End Time</dt><dd>until the bonus is fully wagered. Also, remember that deposits made while a bonus is b; from the 1xGames section. In Climb to Victory games, the value of your stake is count; expired. 12. For every 22.96 MYR already in your main account at the time you make you; from Mancala, or in any other slot available in your region, at the Company's discret; from your account. Once the bonus has been wagered, any remaining bonus funds, up a m</dd></div>
+      <div><dt>详情页关键日期 / Detail Dates</dt><dd>until the bonus is fully wagered. Also, remember that deposits made while a bonus is b; from the 1xGames section. In Climb to Victory games, the value of your stake is count; expired. 12. For every 22.96 MYR already in your main account at the time you make you; from Mancala, or in any other slot available in your region, at the Company's discret; from your account. Once the bonus has been wagered, any remaining bonus funds, up a m</dd></div>
+      <div><dt>详情页来源 / Detail Source</dt><dd><a href="https://1xlite-19708.pro/en/bonus/casino/promotions/slot_ten_deposit">https://1xlite-19708.pro/en/bonus/casino/promotions/slot_ten_deposit</a></dd></div>
       <div><dt>备注 / Notes</dt><dd>GET UP TO 100 FS AND A 50% TENTH DEPOSIT BONUS FOR SLOTS</dd></div>
     </dl>
+<details class="detail-excerpt"><summary>详情页原文摘要 / Detail excerpt</summary><pre>1 REGISTRATION LOG IN EN / 11:37 TOP-EVENTS SPORTS LIVE 1XGAMES CASINO LIVE CASINO ESPORTS PROMO MORE Plinko Promo LOYALTY PAYS OFF LOYALTY PAYS OFF GET UP TO 100 FS AND A 50% TENTH DEPOSIT BONUS FOR SLOTS How can I receive a bonus for my tenth deposit? • create an account, enter your personal details, and activate your phone number • select the casino bonus either in your account settings in My Account, or directly on the deposit page • make your tenth deposit* • if all the conditions of the promotion are met, the bonus will be credited to your account automatically. *while making deposits, do not switch between bonus types (sports or casino) and do not opt out of taking part in bonus offers until the bonus is fully wagered. Also, remember that deposits made while a bonus is being wagered will not be taken into account (see paragraph 3). Terms 1. The bonus is available if all your personal details have been entered, all fields have been filled out, and your phone number has been activated. You must also have selected the casino bonus during registration and must not have switched between bonus types or received deposit bonuses of the other type (sports). 2. If you decline participation in the Company's bonus program, you will lose the right to receive bonuses for subsequent deposits as part of the welcome package and the 50% tenth deposit bonus. 3. Deposits made before the wagering requirements of a bonus have been met are not assigned a sequence number and do not take part in the Company’s bonus offers. For example, if a customer has an active Welcome Bonus for their 4th deposit and they make another deposit before that bonus has been wagered, the new deposit will not be considered to be the 5th deposit according to the Terms and Conditions of the promotion. The 5th deposit is that which is made AFTER the previous (4th) deposit bonus has been fully wagered. 4. To receive the free spins, your phone number must have been activated by the time you make a deposit. If your phone number has not been activated, the free spins will not be credited to your account. 5. When you make a deposit, the money may take a little time to appear in your account. Please bear this in mind when receiving and wagering bonuses. 6. The minimum deposit amount required to receive this bonus is 45 MYR. 7. The maximum bonus amount is 1400 MYR. 8. The bonus must be wagered х35 times within 48 hours of activation. The maximum stake when wagering the bonus is 25 MYR. 9. When you have an active bonus, eligible bets you place in the 1xGames section will count twice towards the wagering </pre></details>
   </article>
-<article class="activity-card">
+<article class="activity-card detail-ok">
     <div class="activity-head">
       <span class="index">24</span>
       <div>
         <h2>CASINO VIP CASHBACK </h2>
-        <p>返现 / Cashback</p>
+        <p>返现 / Cashback · <span class="detail-pill ok-pill">详情页已采集 / Detail captured</span></p>
       </div>
     </div>
     <dl>
       <div><dt>奖励 / Reward</dt><dd>Thank you for choosing us! As a token of our gratitude, we're offering you the chance to join our new loyalty program and get VIP cashback</dd></div>
-      <div><dt>参与要求 / Requirements</dt><dd>CASHBACK Thank you for choosing us! As a token of our gratitude, we're offering you the chance to join our new loyalty program a; cashback</dd></div>
+      <div><dt>详情页奖励 / Detail Reward</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>参与要求 / Requirements</dt><dd>CASHBACK Thank you for choosing us! As a token of our gratitude, we're offering you the chance to join our new loyalty program a; cashback BONUS OFFER DETAILS</dd></div>
       <div><dt>开始时间 / Start Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
-      <div><dt>结束时间 / End Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>结束时间 / End Time</dt><dd>start at level 1 (Copper). To advance to the next level, keep playing your favorite ga; from Pragmatic Play for deposits on Saturdays! FIND OUT MORE 100 FREE SPINS FOR A SUB; end Booster Make a deposit every Friday and get a bonus credited to your main accoun; ENDS Join in the race for prizes and become one of the winners! FIND OUT MORE CRASH R</dd></div>
+      <div><dt>详情页关键日期 / Detail Dates</dt><dd>start at level 1 (Copper). To advance to the next level, keep playing your favorite ga; from Pragmatic Play for deposits on Saturdays! FIND OUT MORE 100 FREE SPINS FOR A SUB; end Booster Make a deposit every Friday and get a bonus credited to your main accoun; ENDS Join in the race for prizes and become one of the winners! FIND OUT MORE CRASH R</dd></div>
+      <div><dt>详情页来源 / Detail Source</dt><dd><a href="https://1xlite-19708.pro/en/bonus/casino/promotions/vip_cashback">https://1xlite-19708.pro/en/bonus/casino/promotions/vip_cashback</a></dd></div>
       <div><dt>备注 / Notes</dt><dd>Thank you for choosing us! As a token of our gratitude, we're offering you the chance to join our new loyalty program and get VIP cashback</dd></div>
     </dl>
+<details class="detail-excerpt"><summary>详情页原文摘要 / Detail excerpt</summary><pre>1 REGISTRATION LOG IN EN / 11:37 TOP-EVENTS SPORTS LIVE 1XGAMES CASINO LIVE CASINO ESPORTS PROMO MORE Plinko Promo Casino VIP Cashback CASINO VIP CASHBACK Thank you for choosing us! As a token of our gratitude, we're offering you the chance to join our new loyalty program and get VIP cashback TAKE PART What is a loyalty program and how does it work? There are 8 levels in our loyalty program. All customers start at level 1 (Copper). To advance to the next level, keep playing your favorite games in our casino. The higher your level, the bigger your cashback! Players who reach the highest level get exclusive offers, VIP support, and their cashback is calculated based on all their bets, regardless of whether they win or lose. Available for authorized users only. All types of bonus are disabled for cryptocurrencies, without exception. TAKE PART Other available bonuses FIND OUT MORE Welcome package up to 7688 MYR + 150 FS Make deposits and get bonuses! FIND OUT MORE LOYALTY PAYS OFF GET UP TO 100 FS AND A 50% TENTH DEPOSIT BONUS FOR SLOTS FIND OUT MORE Casino VIP Cashback Thank you for choosing us! As a token of our gratitude, we're offering you the chance to join our new loyalty program and get VIP cashback FIND OUT MORE Born to Win Let's celebrate together - have a slots bonus on us! T&amp;Cs apply. 18+. Рlease gamble responsibly. FIND OUT MORE Jacky's bet Jacky Bett here. I've cooked up something special for you: 50 FS! But only if you follow me on Instagram and DM me the code word &quot;FREE&quot;! FIND OUT MORE The big game Don't miss your chance! Make a deposit between 00:01 and 23:59 (GMT+0) every Sunday and get up to 200 FS FIND OUT MORE AVIATOR THURSDAY Make a deposit every Thursday and get up to 50 free bets in Aviator! FIND OUT MORE WILD SPIN HUNT Get up to 750 FS from Pragmatic Play for deposits on Saturdays! FIND OUT MORE 100 FREE SPINS FOR A SUBSCRIPTION! Subscribe to our Telegram channel and get a gift FIND OUT MORE Weekend Booster Make a deposit every Friday and get a bonus credited to your main account! FIND OUT MORE DEAL OF THE DAY Make a deposit every Tuesday and we'll add 50% on top! FIND OUT MORE WHEEL OF FORTUNE Enjoy a variety of games and take part in a prize draw! FIND OUT MORE SPRING FLING Join in the race for prizes and become one of the winners! FIND OUT MORE MAY FORTUNE Join in the race for prizes and become one of the winners! FIND OUT MORE FORTUNE CLASH Become one of those who will take a share of the prize pool! FIND OUT MORE MARS CROSSING Join in the race for prizes and become one of the winners! FIND OUT MORE COSMIC VAULT Join the tournamen</pre></details>
   </article>
-<article class="activity-card">
+<article class="activity-card detail-ok">
     <div class="activity-head">
       <span class="index">25</span>
       <div>
         <h2>DAILY GAMES TOURNAMENT </h2>
-        <p>竞赛或抽奖 / Tournament or Raffle</p>
+        <p>竞赛或抽奖 / Tournament or Raffle · <span class="detail-pill ok-pill">详情页已采集 / Detail captured</span></p>
       </div>
     </div>
     <dl>
       <div><dt>奖励 / Reward</dt><dd>Win amazing prizes just by playing your favorite Games</dd></div>
-      <div><dt>参与要求 / Requirements</dt><dd>playing your favorite Games</dd></div>
+      <div><dt>详情页奖励 / Detail Reward</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>参与要求 / Requirements</dt><dd>playing your favorite Games BONUS OFFER DETAILS</dd></div>
       <div><dt>开始时间 / Start Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
       <div><dt>结束时间 / End Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>详情页关键日期 / Detail Dates</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>详情页来源 / Detail Source</dt><dd><a href="https://1xlite-19708.pro/en/promotions/daily-tournament">https://1xlite-19708.pro/en/promotions/daily-tournament</a></dd></div>
       <div><dt>备注 / Notes</dt><dd>Win amazing prizes just by playing your favorite Games</dd></div>
     </dl>
+<details class="detail-excerpt"><summary>详情页原文摘要 / Detail excerpt</summary><pre>1 REGISTRATION LOG IN EN / 11:37 TOP-EVENTS SPORTS LIVE 1XGAMES CASINO LIVE CASINO ESPORTS PROMO MORE Plinko INFORMATION About us Terms and Conditions Affiliate Program Become an agent Privacy Policy Сookie Policy Contacts BETTING Sports Multi-LIVE Live Toto GAMES Casino 1xGames Live Casino STATISTICS Statistics Results USEFUL LINKS Payment methods Mobile version Registration APPS iOS Android Other apps PARTNERS Copyright © 2026 «1xBet». 1xBet uses cookies to ensure the best user experience. By remaining on the website, you consent to the use of your cookie files on 1xBet. Find out more CUSTOMER SUPPORT 1800812889 18+ MOBILE VERSION CUSTOMER SUPPORT</pre></details>
   </article>
-<article class="activity-card">
+<article class="activity-card detail-ok">
     <div class="activity-head">
       <span class="index">26</span>
       <div>
         <h2>YOUR BIRTHDAY WITH 1XBET! </h2>
-        <p>综合活动 / General Promotion</p>
+        <p>综合活动 / General Promotion · <span class="detail-pill ok-pill">详情页已采集 / Detail captured</span></p>
       </div>
     </div>
     <dl>
       <div><dt>奖励 / Reward</dt><dd>Is it your birthday? We would like to wish you a Happy Birthday and offer you a personal bonus!</dd></div>
-      <div><dt>参与要求 / Requirements</dt><dd>BET! Is it your birthday? We would like to wish you a Happy Birthday and offer you a personal bonus!</dd></div>
+      <div><dt>详情页奖励 / Detail Reward</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>参与要求 / Requirements</dt><dd>BET! Is it your birthday? We would like to wish you a Happy Birthday and offer you a personal bonus! BONUS OFFER DETAILS</dd></div>
       <div><dt>开始时间 / Start Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
-      <div><dt>结束时间 / End Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>结束时间 / End Time</dt><dd>22/06/26; ending any money. Enjoy the game and receive bonuses for active play! Unlimited NEW; from our company – TOTO Make a free TOTO prediction then place any bet on a sporting; from Pragmatic Play for deposits on Saturdays! FIND OUT MORE 100 FREE SPINS FOR A SUB; end Booster Make a deposit every Friday and get a bonus credited to your main accoun</dd></div>
+      <div><dt>详情页关键日期 / Detail Dates</dt><dd>22/06/26; ending any money. Enjoy the game and receive bonuses for active play! Unlimited NEW; from our company – TOTO Make a free TOTO prediction then place any bet on a sporting; from Pragmatic Play for deposits on Saturdays! FIND OUT MORE 100 FREE SPINS FOR A SUB; end Booster Make a deposit every Friday and get a bonus credited to your main accoun</dd></div>
+      <div><dt>详情页来源 / Detail Source</dt><dd><a href="https://1xlite-19708.pro/en/bonus/rules/birthday">https://1xlite-19708.pro/en/bonus/rules/birthday</a></dd></div>
       <div><dt>备注 / Notes</dt><dd>Is it your birthday? We would like to wish you a Happy Birthday and offer you a personal bonus!</dd></div>
     </dl>
+<details class="detail-excerpt"><summary>详情页原文摘要 / Detail excerpt</summary><pre>1 REGISTRATION LOG IN EN / 11:37 TOP-EVENTS SPORTS LIVE 1XGAMES CASINO LIVE CASINO ESPORTS PROMO MORE Plinko Promo Your birthday with 1xBet! YOUR BIRTHDAY WITH 1XBET! Is it your birthday? We would like to wish you a Happy Birthday and offer you a personal bonus! Is it your birthday? We would like to wish you a Happy Birthday and offer you a personal bonus! 1xBet offers a very special bonus to its most active customers - a free bet for your birthday! We hope your days are filled with joy and your wallet with winnings! May all your dreams come true on your birthday! Your free bet will be sent to you as a promo code in an SMS and directly to your account. You can use the promo code in the Promo section. All types of bonus are disabled for cryptocurrencies, without exception. We are glad that you have chosen us! Other available bonuses FIND OUT MORE Infinite Prize League Daily prizes, weekly free bets, and superprizes are waiting for you! FIND OUT MORE League of wins Place bets on English Premier League matches to get free bets and take part in the prize draw! BEST FIND OUT MORE NBA Win Shot The season of big matches is your season of big wins! 22/06/26 (21:00 +8 UTC) FIND OUT MORE Barca 1xFamily Més que un club: bet and win with the Blaugrana! FIND OUT MORE PSG: Champion’s Contract Sign a contract with PSG and discover the way to exclusive prizes! FIND OUT MORE No Risk Bet Get a free bet if your bet loses! FIND OUT MORE Goalless Football Get a 100% bet refund in the event of a goalless draw! Unlimited FIND OUT MORE Grand Slam Tournaments Bet on Grand Slam tournaments and win awesome prizes! FIND OUT MORE App&amp;Bonus Place bets using the mobile app and get a fantastic bonus! Unlimited 46 MYR FIND OUT MORE Lucky Day Win 500 promo points every day! Unlimited FIND OUT MORE 1XPICK'EM IEM Cologne Major Make a prediction and get a guaranteed bonus! FIND OUT MORE Esports Era Choose an event and place a risk-free bet! Unlimited 40 MYR FIND OUT MORE ChickPoint Help the chicken on its way and win superprizes! FIND OUT MORE Sport Single 100% up to 588 MYR – just 3 bets to the bonus! FIND OUT MORE Happy Monday Get cashback every Monday! FIND OUT MORE Esports Cashback Boom Place bets on esports and get up to 20% cashback weekly! NEW BEST FIND OUT MORE Olé, La Liga! Bet on red-hot matches and get free bets! 460 MYR NEW BEST FIND OUT MORE 1xTennis Challenge Get cashback up to 18% for bets on the best tennis tournaments! FIND OUT MORE Crypto Freebet Top up your account with crypto and get 30% cashback! FIND OUT MORE Promo Code Store at 1xBet Visit our store and buy a bet with</pre></details>
   </article>
-<article class="activity-card">
+<article class="activity-card detail-ok">
     <div class="activity-head">
       <span class="index">27</span>
       <div>
         <h2>ADVANCEBET </h2>
-        <p>综合活动 / General Promotion</p>
+        <p>综合活动 / General Promotion · <span class="detail-pill ok-pill">详情页已采集 / Detail captured</span></p>
       </div>
     </div>
     <dl>
       <div><dt>奖励 / Reward</dt><dd>We offer a fantastic bonus, Advancebet, which is available to customers who have unsettled bets in their accounts.</dd></div>
-      <div><dt>参与要求 / Requirements</dt><dd>BET We offer a fantastic bonus, Advancebet, which is available to customers who have unsettled bets in their accounts.</dd></div>
+      <div><dt>详情页奖励 / Detail Reward</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>参与要求 / Requirements</dt><dd>BET We offer a fantastic bonus, Advancebet, which is available to customers who have unsettled bets in their accounts. BONU</dd></div>
       <div><dt>开始时间 / Start Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
       <div><dt>结束时间 / End Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>详情页关键日期 / Detail Dates</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>详情页来源 / Detail Source</dt><dd><a href="https://1xlite-19708.pro/en/bonus/rules/doverie">https://1xlite-19708.pro/en/bonus/rules/doverie</a></dd></div>
       <div><dt>备注 / Notes</dt><dd>We offer a fantastic bonus, Advancebet, which is available to customers who have unsettled bets in their accounts.</dd></div>
     </dl>
+<details class="detail-excerpt"><summary>详情页原文摘要 / Detail excerpt</summary><pre>REGISTRATION TOP-EVENTS SPORTS LIVE 1XGAMES MORE</pre></details>
   </article>
-<article class="activity-card">
+<article class="activity-card detail-ok">
     <div class="activity-head">
       <span class="index">28</span>
       <div>
         <h2>BONUS FOR A SERIES OF LOSING BETS </h2>
-        <p>综合活动 / General Promotion</p>
+        <p>综合活动 / General Promotion · <span class="detail-pill ok-pill">详情页已采集 / Detail captured</span></p>
       </div>
     </div>
     <dl>
       <div><dt>奖励 / Reward</dt><dd>We offer support to our players during difficult times by giving them a bonus for a series of losing bets!</dd></div>
-      <div><dt>参与要求 / Requirements</dt><dd>BETS We offer support to our players during difficult times by giving them a bonus for a series of losing bets!</dd></div>
+      <div><dt>详情页奖励 / Detail Reward</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>参与要求 / Requirements</dt><dd>BETS We offer support to our players during difficult times by giving them a bonus for a series of losing bets! BONUS OFFER</dd></div>
       <div><dt>开始时间 / Start Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
-      <div><dt>结束时间 / End Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>结束时间 / End Time</dt><dd>from 9 MYR — 413 MYR bonus. Stakes from 21 MYR — 1,033 MYR bonus. Stakes from 41 MYR; period of 30 days. Minimum stake amount* – 9 MYR. The odds must not exceed 3.00. The of; 22/06/26; ending any money. Enjoy the game and receive bonuses for active play! Unlimited NEW; from our company – TOTO Make a free TOTO prediction then place any bet on a sporting</dd></div>
+      <div><dt>详情页关键日期 / Detail Dates</dt><dd>from 9 MYR — 413 MYR bonus. Stakes from 21 MYR — 1,033 MYR bonus. Stakes from 41 MYR; period of 30 days. Minimum stake amount* – 9 MYR. The odds must not exceed 3.00. The of; 22/06/26; ending any money. Enjoy the game and receive bonuses for active play! Unlimited NEW; from our company – TOTO Make a free TOTO prediction then place any bet on a sporting</dd></div>
+      <div><dt>详情页来源 / Detail Source</dt><dd><a href="https://1xlite-19708.pro/en/bonus/rules/loss20">https://1xlite-19708.pro/en/bonus/rules/loss20</a></dd></div>
       <div><dt>备注 / Notes</dt><dd>We offer support to our players during difficult times by giving them a bonus for a series of losing bets!</dd></div>
     </dl>
+<details class="detail-excerpt"><summary>详情页原文摘要 / Detail excerpt</summary><pre>1 REGISTRATION LOG IN EN / 11:37 TOP-EVENTS SPORTS LIVE 1XGAMES CASINO LIVE CASINO ESPORTS PROMO MORE Plinko Promo Bonus for a series of losing bets BONUS FOR A SERIES OF LOSING BETS We offer support to our players during difficult times by giving them a bonus for a series of losing bets! Bonus for a series of losing bets 1xBet offers support to its players during difficult times by giving them a bonus for a series of losing bets! For a series of 20 losing bets you will receive: Stakes from 9 MYR — 413 MYR bonus. Stakes from 21 MYR — 1,033 MYR bonus. Stakes from 41 MYR — 2,065 MYR bonus How to qualify for the bonus: Register with 1xBet (on the website or at a betting shop). You must have placed 20 losing bets in a row on different sports events. All the bets must be placed within a period of 30 days. Minimum stake amount* – 9 MYR. The odds must not exceed 3.00. The offer includes only single bets and accumulators (TOTO bets, system and chain bets, and bets with odds higher than 3.00 do not qualify for the bonus). Accumulator bets must be placed on different sports and different outcomes. All selections in the accumulator bet must lose. All types of bonus are disabled for cryptocurrencies, without exception. Does your series of losing bets meet all the requirements? Then email us at info-ms@1xbet-team.com stating your account number and putting &quot;Series of losing bets&quot; in the subject line. The bonus is available only for one account per person, family, household, computer or IP address. If it is suspected that the rules have been violated by creating multiple accounts (using fake IDs, cooperating with other players), 1xBet will cancel the bonus. * with incomplete or quick registration, the bonus will not be credited. Other available bonuses FIND OUT MORE Infinite Prize League Daily prizes, weekly free bets, and superprizes are waiting for you! FIND OUT MORE League of wins Place bets on English Premier League matches to get free bets and take part in the prize draw! BEST FIND OUT MORE NBA Win Shot The season of big matches is your season of big wins! 22/06/26 (21:00 +8 UTC) FIND OUT MORE Barca 1xFamily Més que un club: bet and win with the Blaugrana! FIND OUT MORE PSG: Champion’s Contract Sign a contract with PSG and discover the way to exclusive prizes! FIND OUT MORE No Risk Bet Get a free bet if your bet loses! FIND OUT MORE Goalless Football Get a 100% bet refund in the event of a goalless draw! Unlimited FIND OUT MORE Grand Slam Tournaments Bet on Grand Slam tournaments and win awesome prizes! FIND OUT MORE App&amp;Bonus Place bets using the mobile app and </pre></details>
   </article>
-<article class="activity-card">
+<article class="activity-card detail-ok">
     <div class="activity-head">
       <span class="index">29</span>
       <div>
         <h2>TOTO </h2>
-        <p>综合活动 / General Promotion</p>
+        <p>综合活动 / General Promotion · <span class="detail-pill ok-pill">详情页已采集 / Detail captured</span></p>
       </div>
     </div>
     <dl>
       <div><dt>奖励 / Reward</dt><dd>Make a free TOTO prediction then place any bet on a sporting event to receive bonuses!</dd></div>
-      <div><dt>参与要求 / Requirements</dt><dd>place any bet on a sporting event to receive bonuses!</dd></div>
+      <div><dt>详情页奖励 / Detail Reward</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>参与要求 / Requirements</dt><dd>place any bet on a sporting event to receive bonuses! BONUS OFFER DETAILS</dd></div>
       <div><dt>开始时间 / Start Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
-      <div><dt>结束时间 / End Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>结束时间 / End Time</dt><dd>from our company – TOTO TOTO Make a free TOTO prediction then place any bet on a spor; from us 1xBet offers a daily TOTO bet slip combining top sporting events. TOTO bet sl; until the first match included in the TOTO starts. Bet slips submitted after the first; started will be deemed invalid. A TOTO bet slip goes live when the first match includ; starts (actual time, not scheduled time). Matches deemed void are not taken into accoun</dd></div>
+      <div><dt>详情页关键日期 / Detail Dates</dt><dd>from our company – TOTO TOTO Make a free TOTO prediction then place any bet on a spor; from us 1xBet offers a daily TOTO bet slip combining top sporting events. TOTO bet sl; until the first match included in the TOTO starts. Bet slips submitted after the first; started will be deemed invalid. A TOTO bet slip goes live when the first match includ; starts (actual time, not scheduled time). Matches deemed void are not taken into accoun</dd></div>
+      <div><dt>详情页来源 / Detail Source</dt><dd><a href="https://1xlite-19708.pro/en/bonus/rules/toto_free">https://1xlite-19708.pro/en/bonus/rules/toto_free</a></dd></div>
       <div><dt>备注 / Notes</dt><dd>Make a free TOTO prediction then place any bet on a sporting event to receive bonuses!</dd></div>
     </dl>
+<details class="detail-excerpt"><summary>详情页原文摘要 / Detail excerpt</summary><pre>1 REGISTRATION LOG IN EN / 11:37 TOP-EVENTS SPORTS LIVE 1XGAMES CASINO LIVE CASINO ESPORTS PROMO MORE Plinko Promo A new special offer from our company – TOTO TOTO Make a free TOTO prediction then place any bet on a sporting event to receive bonuses! A special TOTO offer from us 1xBet offers a daily TOTO bet slip combining top sporting events. TOTO bet slip – the customer must determine the results of the 12 events specified, submitting this as a free prediction once done. On the TOTO bet slip, results are represented as: &quot;1&quot; for Home Win &quot;2&quot; for Away Win &quot;X&quot; for Draw Only one outcome can be selected for each event. Predictions are accepted until the first match included in the TOTO starts. Bet slips submitted after the first TOTO match has started will be deemed invalid. A TOTO bet slip goes live when the first match included in the TOTO selection starts (actual time, not scheduled time). Matches deemed void are not taken into account. The start dates and times of the matches shown on the bet slip are for information purposes only. An incorrectly stated event time is not regarded as a reason for cancellation of the bet. If an event is considered void, all the outcomes of this event in all bet slips are considered winning. If one or more events are considered void: If 4 or more events are considered void, a TOTO bet is regarded as canceled. If 3 events are considered void, no points are awarded for 8 and 9 correctly predicted outcomes. If 1 or 2 events are considered void, no points are awarded for 8 correctly predicted outcomes. A match included in a TOTO bet slip is considered void if it is regarded as void according to the rules of 1xBet Betting Company. Winnings distribution: 100 bonus points are awarded for 8 correctly predicted outcomes 250 bonus points are awarded for 9 correctly predicted outcomes 1000 bonus points are awarded for 10 correctly predicted outcomes 3000 bonus points are awarded for 11 correctly predicted outcomes 7000 bonus points are awarded for 12 correctly predicted outcomes How does it work? A new round of TOTO is held every day. Make your prediction for free. Before a TOTO draw starts, confirm your free TOTO prediction by placing a bet on a sporting event. The minimum stake to confirm your prediction is 10.86 MYR, and the odds must be 2 or higher. Only the first bet placed after your TOTO prediction has been made will count as confirmation of that prediction. Bets placed using promo codes and bonus points, as well as Advancebets, sold bets, bets refunded at odds of 1.00, and system bets will not count as confirmation of a TOTO </pre></details>
   </article>
-<article class="activity-card">
+<article class="activity-card detail-ok">
     <div class="activity-head">
       <span class="index">30</span>
       <div>
         <h2>LUCKY FRIDAY </h2>
-        <p>综合活动 / General Promotion</p>
+        <p>综合活动 / General Promotion · <span class="detail-pill ok-pill">详情页已采集 / Detail captured</span></p>
       </div>
     </div>
     <dl>
       <div><dt>奖励 / Reward</dt><dd>Get up to 300€ on Friday!</dd></div>
+      <div><dt>详情页奖励 / Detail Reward</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
       <div><dt>参与要求 / Requirements</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
       <div><dt>开始时间 / Start Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
-      <div><dt>结束时间 / End Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>结束时间 / End Time</dt><dd>from 00:00 to 23:59 22/05/26 MAKE A DEPOSIT TERMS AND CONDITIONS “LUCKY FRIDAY” PROMO; 22/05/26</dd></div>
+      <div><dt>详情页关键日期 / Detail Dates</dt><dd>from 00:00 to 23:59 22/05/26 MAKE A DEPOSIT TERMS AND CONDITIONS “LUCKY FRIDAY” PROMO; 22/05/26</dd></div>
+      <div><dt>详情页来源 / Detail Source</dt><dd><a href="https://1xlite-19708.pro/en/promotions/lucky-friday">https://1xlite-19708.pro/en/promotions/lucky-friday</a></dd></div>
       <div><dt>备注 / Notes</dt><dd>Get up to 300€ on Friday!</dd></div>
     </dl>
+<details class="detail-excerpt"><summary>详情页原文摘要 / Detail excerpt</summary><pre>1 REGISTRATION LOG IN EN / 11:37 TOP-EVENTS SPORTS LIVE 1XGAMES CASINO LIVE CASINO ESPORTS PROMO MORE Plinko MAIN PAGESPECIAL OFFERS AND BONUSESLUCKY FRIDAY LUCKY FRIDAY LUCKY FRIDAY LUCKY FRIDAY MAKE A DEPOSIT AND GET A BONUS OF UP TO 1,500 MYR Take part from 00:00 to 23:59 22/05/26 MAKE A DEPOSIT TERMS AND CONDITIONS “LUCKY FRIDAY” PROMOTION You've only got 24 hours to win up to 1,500 MYR! The promotion is only valid on 22/05/26 between 00:00 and 23:59 after your funds are credited to your account. HOW TO GET YOUR BONUS Register or log in to the 1xBet website or app. Deposit at least 5 MYR into your account on Friday, 22/05/26. The bonus will be credited to your account automatically once you make a deposit. WHO IS ELIGIBLE FOR THE BONUS? This bonus is only available to 1xBet customers. Haven't registered? No problem. Register now and take part in the &quot;Lucky Friday&quot; promotion! MAKE A DEPOSIT INFORMATION About us Terms and Conditions Affiliate Program Become an agent Privacy Policy Сookie Policy Contacts BETTING Sports Multi-LIVE Live Toto GAMES Casino 1xGames Live Casino STATISTICS Statistics Results USEFUL LINKS Payment methods Mobile version Registration APPS iOS Android Other apps PARTNERS Copyright © 2026 «1xBet». 1xBet uses cookies to ensure the best user experience. By remaining on the website, you consent to the use of your cookie files on 1xBet. Find out more CUSTOMER SUPPORT 1800812889 18+ MOBILE VERSION CUSTOMER SUPPORT</pre></details>
   </article>
-<article class="activity-card">
+<article class="activity-card detail-ok">
     <div class="activity-head">
       <span class="index">31</span>
       <div>
         <h2>TVBET JACKPOT </h2>
-        <p>综合活动 / General Promotion</p>
+        <p>综合活动 / General Promotion · <span class="detail-pill ok-pill">详情页已采集 / Detail captured</span></p>
       </div>
     </div>
     <dl>
       <div><dt>奖励 / Reward</dt><dd>Don’t miss your chance to hit the jackpot!</dd></div>
-      <div><dt>参与要求 / Requirements</dt><dd>BET JACKPOT Don’t miss your chance to hit the jackpot!</dd></div>
+      <div><dt>详情页奖励 / Detail Reward</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>参与要求 / Requirements</dt><dd>BET JACKPOT Don’t miss your chance to hit the jackpot! BONUS OFFER DETAILS</dd></div>
       <div><dt>开始时间 / Start Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
       <div><dt>结束时间 / End Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>详情页关键日期 / Detail Dates</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>详情页来源 / Detail Source</dt><dd><a href="https://1xlite-19708.pro/en/bonus/casino/tv-bet-jackpot">https://1xlite-19708.pro/en/bonus/casino/tv-bet-jackpot</a></dd></div>
       <div><dt>备注 / Notes</dt><dd>Don’t miss your chance to hit the jackpot!</dd></div>
     </dl>
+<details class="detail-excerpt"><summary>详情页原文摘要 / Detail excerpt</summary><pre>1 REGISTRATION LOG IN EN / 11:38 TOP-EVENTS SPORTS LIVE 1XGAMES CASINO LIVE CASINO ESPORTS PROMO MORE Plinko TV BET TV BET 0 MYR DON’T MISS YOUR CHANCE TO HIT THE JACKPOT! PLACE A BET TERMS AND CONDITIONS PLAY TVBET PLACE BETS HIT THE JACKPOT! JACKPOT: 0 MYR STANDINGS: - DATE WINNER'S NAME AMOUNT PLACE A BET INFORMATION About us Terms and Conditions Affiliate Program Become an agent Privacy Policy Сookie Policy Contacts BETTING Sports Multi-LIVE Live Toto GAMES Casino 1xGames Live Casino STATISTICS Statistics Results USEFUL LINKS Payment methods Mobile version Registration APPS iOS Android Other apps PARTNERS Copyright © 2026 «1xBet». 1xBet uses cookies to ensure the best user experience. By remaining on the website, you consent to the use of your cookie files on 1xBet. Find out more CUSTOMER SUPPORT 1800812889 18+ MOBILE VERSION CUSTOMER SUPPORT To take part in this offer, you need to log in or register! LOG IN REGISTRATION</pre></details>
   </article>
-<article class="activity-card">
+<article class="activity-card detail-ok">
     <div class="activity-head">
       <span class="index">32</span>
       <div>
         <h2>BORN TO WIN </h2>
-        <p>综合活动 / General Promotion</p>
+        <p>综合活动 / General Promotion · <span class="detail-pill ok-pill">详情页已采集 / Detail captured</span></p>
       </div>
     </div>
     <dl>
       <div><dt>奖励 / Reward</dt><dd>Let's celebrate together - have a slots bonus on us! T&amp;Cs apply. 18+. Рlease gamble responsibly.</dd></div>
+      <div><dt>详情页奖励 / Detail Reward</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
       <div><dt>参与要求 / Requirements</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
       <div><dt>开始时间 / Start Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
-      <div><dt>结束时间 / End Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>结束时间 / End Time</dt><dd>from the free spins must be wagered x25 times within 7 days in the Bonus Wagering sec; period will count toward the wagering requirement 6. Payouts from bets placed after the; expired will not count toward the wagering requirement 7. If the bonus has expired or; end or terminate this offer at any time Other available bonuses FIND OUT MORE Welcom; from Pragmatic Play for deposits on Saturdays! FIND OUT MORE 100 FREE SPINS FOR A SUB</dd></div>
+      <div><dt>详情页关键日期 / Detail Dates</dt><dd>from the free spins must be wagered x25 times within 7 days in the Bonus Wagering sec; period will count toward the wagering requirement 6. Payouts from bets placed after the; expired will not count toward the wagering requirement 7. If the bonus has expired or; end or terminate this offer at any time Other available bonuses FIND OUT MORE Welcom; from Pragmatic Play for deposits on Saturdays! FIND OUT MORE 100 FREE SPINS FOR A SUB</dd></div>
+      <div><dt>详情页来源 / Detail Source</dt><dd><a href="https://1xlite-19708.pro/en/bonus/casino/promotions/born_to_win">https://1xlite-19708.pro/en/bonus/casino/promotions/born_to_win</a></dd></div>
       <div><dt>备注 / Notes</dt><dd>Let's celebrate together - have a slots bonus on us! T&amp;Cs apply. 18+. Рlease gamble responsibly.</dd></div>
     </dl>
+<details class="detail-excerpt"><summary>详情页原文摘要 / Detail excerpt</summary><pre>1 REGISTRATION LOG IN EN / 11:38 TOP-EVENTS SPORTS LIVE 1XGAMES CASINO LIVE CASINO ESPORTS PROMO MORE Plinko Promo Born to Win BORN TO WIN Let's celebrate together - have a slots bonus on us! T&amp;Cs apply. 18+. Рlease gamble responsibly. To receive the bonus, please make sure you have complied with the rules: Your account was registered more than 30 days ago All the fields in your personal profile must be filled in Your phone number has been confirmed You must have opted in to receiving bonuses: Account settings - Participation in bonus offers- Select the Casino bonus You have made deposits worth at least €10 in the last 90 days. The more active you are on the platform leading up to your birthday, the bigger your bonus! Terms of the Bonus 1. This bonus is available if you have fulfilled all the requirements and confirmed your phone number 2. The bonus will be credited in My Account one day before your birthday as specified in your profile. 3. The free spins must be activated within 5 days. Winnings from the free spins must be wagered x25 times within 7 days in the Bonus Wagering section 4. You can withdraw the bonus to your main account once it has been fully wagered. 5. Only bets placed during the bonus validity period will count toward the wagering requirement 6. Payouts from bets placed after the bonus has expired will not count toward the wagering requirement 7. If the bonus has expired or you have canceled it, the bonus and all associated winnings will be voided 8. Bonuses are not available for cryptocurrency accounts. 9. The following game categories are not included in this promotion: Sic-Bo, Poker, 1xGames, Table Games, Hunting, Roulette, Bingo, Blackjack, Keno, Live Slots, Hunting and Fishing, Other Games, Board Games, Provably Fair, Backgammon, Legion Poker, Baccarat, Live Casino, Virtual Sports, Mini Slots, TV Games, 18+, OurBrand, IDN Poker, Spigo, VULKAN, Scratch Cards, Wiseodds, Card Games, Lottery, Skill Games, Crash Games, and Hold'em. The list of available games may vary between the desktop and mobile versions of the website and can be changed at any time 10. By taking part in this promotion, you accept its terms and conditions 11. The website’s general Terms and Conditions apply 12. The company reserves the right to amend or terminate this offer at any time Other available bonuses FIND OUT MORE Welcome package up to 7688 MYR + 150 FS Make deposits and get bonuses! FIND OUT MORE LOYALTY PAYS OFF GET UP TO 100 FS AND A 50% TENTH DEPOSIT BONUS FOR SLOTS FIND OUT MORE Casino VIP Cashback Thank you for choosing us! As a token of our gratitude,</pre></details>
   </article>
-<article class="activity-card">
+<article class="activity-card detail-ok">
     <div class="activity-head">
       <span class="index">33</span>
       <div>
         <h2>WILD SPIN HUNT </h2>
-        <p>免费旋转 / Free Spins</p>
+        <p>免费旋转 / Free Spins · <span class="detail-pill ok-pill">详情页已采集 / Detail captured</span></p>
       </div>
     </div>
     <dl>
       <div><dt>奖励 / Reward</dt><dd>up to 750 FS</dd></div>
-      <div><dt>参与要求 / Requirements</dt><dd>Play for deposits on Saturdays!</dd></div>
+      <div><dt>详情页奖励 / Detail Reward</dt><dd>up to 750 FS</dd></div>
+      <div><dt>参与要求 / Requirements</dt><dd>Play for deposits on Saturdays! BONUS OFFER DETAILS REGISTRATION EN / 12:32 TOP-EVENTS SPORTS LIVE 1XGAMES CASINO LIVE CASIN; BETTING Sports Multi-LIVE Live Toto GAMES Casino 1xGames Live Casino STATISTICS Statistics Results USEFUL LINKS Payment met; Bet». 1xBet uses cookies to ensure the best user experience. By remaining on the website, you consent to the use of your co</dd></div>
       <div><dt>开始时间 / Start Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
       <div><dt>结束时间 / End Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>详情页关键日期 / Detail Dates</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>详情页来源 / Detail Source</dt><dd><a href="https://1xlite-19708.pro/en/bonus/casino/promotions/wild_spin_chase">https://1xlite-19708.pro/en/bonus/casino/promotions/wild_spin_chase</a></dd></div>
       <div><dt>备注 / Notes</dt><dd>Get up to 750 FS from Pragmatic Play for deposits on Saturdays!</dd></div>
     </dl>
+<details class="detail-excerpt"><summary>详情页原文摘要 / Detail excerpt</summary><pre>REGISTRATION EN / 12:32 TOP-EVENTS LIVE 1XGAMES LIVE CASINO ESPORTS PROMO MORE INFORMATION About us Terms and Conditions Affiliate Program Become an agent Privacy Policy Сookie Policy Contacts BETTING Multi-LIVE Live Toto GAMES 1xGames Live Casino STATISTICS Statistics Results USEFUL LINKS Payment methods Mobile version Registration APPS iOS Android Other apps PARTNERS Copyright © 2026 «1xBet». 1xBet uses cookies to ensure the best user experience. By remaining on the website, you consent to the use of your cookie files on 1xBet. Find out more CUSTOMER SUPPORT 1800812889 18+ MOBILE VERSION CUSTOMER SUPPORT</pre></details>
   </article>
-<article class="activity-card">
+<article class="activity-card detail-ok">
     <div class="activity-head">
       <span class="index">34</span>
       <div>
         <h2>WEEKEND BOOSTER </h2>
-        <p>充值或欢迎奖励 / Deposit or Welcome Bonus</p>
+        <p>充值或欢迎奖励 / Deposit or Welcome Bonus · <span class="detail-pill ok-pill">详情页已采集 / Detail captured</span></p>
       </div>
     </div>
     <dl>
       <div><dt>奖励 / Reward</dt><dd>Make a deposit every Friday and get a bonus credited to your main account!</dd></div>
-      <div><dt>参与要求 / Requirements</dt><dd>deposit every Friday and get a bonus credited to your main account!</dd></div>
+      <div><dt>详情页奖励 / Detail Reward</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>参与要求 / Requirements</dt><dd>deposit every Friday and get a bonus credited to your main account! BONUS OFFER DETAILS</dd></div>
       <div><dt>开始时间 / Start Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
       <div><dt>结束时间 / End Time</dt><dd>END BOOSTER Make a deposit every Friday and get a bonus credited</dd></div>
+      <div><dt>详情页关键日期 / Detail Dates</dt><dd>end Booster WEEKEND BOOSTER Make a deposit every Friday and get a bonus credited to; from Endorphina for every 13 MYR in your deposit. 2. 50% of the deposit you made into; ends on the amount you have in your account prior to making a deposit. 5. Free spins; from Endorphina. If that game is unavailable, customer support will suggest another g; from the free spins x25 times within 5 days. The maximum stake when wagering the bonu</dd></div>
+      <div><dt>详情页来源 / Detail Source</dt><dd><a href="https://1xlite-19708.pro/en/bonus/casino/promotions/weekend_booster">https://1xlite-19708.pro/en/bonus/casino/promotions/weekend_booster</a></dd></div>
       <div><dt>备注 / Notes</dt><dd>Make a deposit every Friday and get a bonus credited to your main account!</dd></div>
     </dl>
+<details class="detail-excerpt"><summary>详情页原文摘要 / Detail excerpt</summary><pre>1 REGISTRATION LOG IN EN / 11:38 TOP-EVENTS SPORTS LIVE 1XGAMES CASINO LIVE CASINO ESPORTS PROMO MORE Plinko Promo Weekend Booster WEEKEND BOOSTER Make a deposit every Friday and get a bonus credited to your main account! Make a deposit every Friday and get: 1. 2 FS in Water Tiger from Endorphina for every 13 MYR in your deposit. 2. 50% of the deposit you made into your real money account How to take part • Register, complete your profile, and confirm your phone number • Don't withdraw money throughout the week • Make a deposit of at least 50 MYR every Friday Cash bonus 1. This is the amount that you receive as a gift immediately after making a deposit on a Friday 2. The minimum deposit required to receive the bonus is 50 MYR 3. The maximum bonus amount is 500 MYR Free spins 1. These are spins in games that cost you nothing 2. Get 2 FS for every 13 MYR you had in your account prior to Friday's deposit 3. Any further deposits will not affect the number of FS 4. You can get up to 100 FS at a time. The exact number depends on the amount you have in your account prior to making a deposit. 5. Free spins will be awarded for Water Tiger from Endorphina. If that game is unavailable, customer support will suggest another game. Wager the bonus and winnings from the free spins x25 times within 5 days. The maximum stake when wagering the bonus is 25 MYR Main Account / Customer Account Bonus account This is virtual money, a gift from the casino. To convert the funds in your bonus account into real money, you need to meet the promotion requirements General terms • You must have placed bets in slots worth at least 950 MYR in total during the past 6 days and your account must have been created at least 30 days ago. • Before making a deposit: – confirm your phone number – make sure that you have opted in to receiving bonuses in My Account: Account Settings → Participation in bonus offers → Select casino bonus • Previous bonuses must have been fully wagered or have expired • Deposits made while a bonus is being wagered will not be taken into account • Bonuses are not available for cryptocurrency accounts • The bonus will not be awarded if you withdraw funds before making a deposit • This offer does not include the following games: PF Dice, PF Roulette, PF Pokerlight, Lucky Wheel, Greyhound Racing, Monkeys, African Roulette, Crown &amp; Anchor, Derby Racing, Roulette, Apple Of Fortune, Witch: Game Of Thrones, Dragon's Gold, Swamp Land, Eastern Nights, Minesweeper, Kamikaze, Battle City, Island, Egg Catcher, Royal Feast, Cyber2077, Hi-lo Triple Chance, Cases, Crash, Jackpot Gam</pre></details>
   </article>
-<article class="activity-card">
+<article class="activity-card detail-ok">
     <div class="activity-head">
       <span class="index">35</span>
       <div>
         <h2>DEAL OF THE DAY </h2>
-        <p>充值或欢迎奖励 / Deposit or Welcome Bonus</p>
+        <p>充值或欢迎奖励 / Deposit or Welcome Bonus · <span class="detail-pill ok-pill">详情页已采集 / Detail captured</span></p>
       </div>
     </div>
     <dl>
       <div><dt>奖励 / Reward</dt><dd>50%</dd></div>
-      <div><dt>参与要求 / Requirements</dt><dd>deposit every Tuesday and we'll add 50% on top!</dd></div>
+      <div><dt>详情页奖励 / Detail Reward</dt><dd>50%</dd></div>
+      <div><dt>参与要求 / Requirements</dt><dd>deposit every Tuesday and we'll add 50% on top! BONUS OFFER DETAILS</dd></div>
       <div><dt>开始时间 / Start Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
-      <div><dt>结束时间 / End Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>结束时间 / End Time</dt><dd>expired If all the conditions are met, the bonus is credited within 24 hours Wager the; expired or you have canceled it, the bonus and all associated winnings will be voided; until the bonus has been wagered General Terms: 1. Before making a deposit, make sure; from Pragmatic Play for deposits on Saturdays! FIND OUT MORE 100 FREE SPINS FOR A SUB; end Booster Make a deposit every Friday and get a bonus credited to your main accoun</dd></div>
+      <div><dt>详情页关键日期 / Detail Dates</dt><dd>expired If all the conditions are met, the bonus is credited within 24 hours Wager the; expired or you have canceled it, the bonus and all associated winnings will be voided; until the bonus has been wagered General Terms: 1. Before making a deposit, make sure; from Pragmatic Play for deposits on Saturdays! FIND OUT MORE 100 FREE SPINS FOR A SUB; end Booster Make a deposit every Friday and get a bonus credited to your main accoun</dd></div>
+      <div><dt>详情页来源 / Detail Source</dt><dd><a href="https://1xlite-19708.pro/en/bonus/casino/promotions/deal_of_the_day">https://1xlite-19708.pro/en/bonus/casino/promotions/deal_of_the_day</a></dd></div>
       <div><dt>备注 / Notes</dt><dd>Make a deposit every Tuesday and we'll add 50% on top!</dd></div>
     </dl>
+<details class="detail-excerpt"><summary>详情页原文摘要 / Detail excerpt</summary><pre>1 REGISTRATION LOG IN EN / 11:38 TOP-EVENTS SPORTS LIVE 1XGAMES CASINO LIVE CASINO ESPORTS PROMO MORE Plinko Promo DEAL OF THE DAY DEAL OF THE DAY Make a deposit every Tuesday and we'll add 50% on top! How to take part 1. Register on the 1xBet website 2. Complete your profile and confirm your phone number 3. Deposit 50 MYR or more every Tuesday to get a 50% bonus Terms of the Bonus: You can only receive 1 bonus per day This offer only applies to deposits made between 00:01 and 23:59 (GMT+0) on Tuesdays The minimum deposit required to receive this bonus is 50 MYR The bonus is worth 50% of your deposit amount, up to a maximum of 3000 MYR To be eligible for this bonus, any previous bonuses must have been fully wagered or have expired If all the conditions are met, the bonus is credited within 24 hours Wager the bonus in the &quot;Bonus Wagering&quot; category of the Casino section. The wagering requirement is x25, to be completed within 5 days, the maximum allowed stake is 20 MYR The bonus must be wagered using your main account balance. Both winning and losing bets are eligible If the bonus has expired or you have canceled it, the bonus and all associated winnings will be voided Do not reject bonus offers until the bonus has been wagered General Terms: 1. Before making a deposit, make sure that you have opted in to receiving Casino + 1xGames bonuses in your account settings in My Account 2. To receive the bonus, fill in all your personal information (surname, first name, country) and confirm your phone number 3. This bonus is not available for cryptocurrency accounts 4. By participating in this promotion, you accept its terms 5. Please follow the website's terms and conditions Other available bonuses FIND OUT MORE Welcome package up to 7688 MYR + 150 FS Make deposits and get bonuses! FIND OUT MORE LOYALTY PAYS OFF GET UP TO 100 FS AND A 50% TENTH DEPOSIT BONUS FOR SLOTS FIND OUT MORE Casino VIP Cashback Thank you for choosing us! As a token of our gratitude, we're offering you the chance to join our new loyalty program and get VIP cashback FIND OUT MORE Born to Win Let's celebrate together - have a slots bonus on us! T&amp;Cs apply. 18+. Рlease gamble responsibly. FIND OUT MORE Jacky's bet Jacky Bett here. I've cooked up something special for you: 50 FS! But only if you follow me on Instagram and DM me the code word &quot;FREE&quot;! FIND OUT MORE The big game Don't miss your chance! Make a deposit between 00:01 and 23:59 (GMT+0) every Sunday and get up to 200 FS FIND OUT MORE AVIATOR THURSDAY Make a deposit every Thursday and get up to 50 free bets in Aviator! FIND OUT MORE WILD</pre></details>
   </article>
-<article class="activity-card">
+<article class="activity-card detail-ok">
     <div class="activity-head">
       <span class="index">36</span>
       <div>
         <h2>AVIATOR THURSDAY </h2>
-        <p>免费投注 / Free Bet</p>
+        <p>免费投注 / Free Bet · <span class="detail-pill ok-pill">详情页已采集 / Detail captured</span></p>
       </div>
     </div>
     <dl>
       <div><dt>奖励 / Reward</dt><dd>Make a deposit every Thursday and get up to 50 free bets in Aviator!</dd></div>
-      <div><dt>参与要求 / Requirements</dt><dd>deposit every Thursday and get up to 50 free bets in Aviator!</dd></div>
+      <div><dt>详情页奖励 / Detail Reward</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>参与要求 / Requirements</dt><dd>deposit every Thursday and get up to 50 free bets in Aviator! BONUS OFFER DETAILS REGISTRATION EN / 12:32 TOP-EVENTS SPORTS LIV; BETTING Sports Multi-LIVE Live Toto GAMES Casino 1xGames Live Casino STATISTICS Statistics Results USEFUL LINKS Payment met; Bet». 1xBet uses cookies to ensure the best user experience. By remaining on the website, you consent to the use of your co</dd></div>
       <div><dt>开始时间 / Start Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
       <div><dt>结束时间 / End Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>详情页关键日期 / Detail Dates</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>详情页来源 / Detail Source</dt><dd><a href="https://1xlite-19708.pro/en/bonus/casino/promotions/aviator-thursday">https://1xlite-19708.pro/en/bonus/casino/promotions/aviator-thursday</a></dd></div>
       <div><dt>备注 / Notes</dt><dd>Make a deposit every Thursday and get up to 50 free bets in Aviator!</dd></div>
     </dl>
+<details class="detail-excerpt"><summary>详情页原文摘要 / Detail excerpt</summary><pre>REGISTRATION EN / 12:32 TOP-EVENTS LIVE 1XGAMES LIVE CASINO ESPORTS PROMO MORE INFORMATION About us Terms and Conditions Affiliate Program Become an agent Privacy Policy Сookie Policy Contacts BETTING Multi-LIVE Live Toto GAMES 1xGames Live Casino STATISTICS Statistics Results USEFUL LINKS Payment methods Mobile version Registration APPS iOS Android Other apps PARTNERS Copyright © 2026 «1xBet». 1xBet uses cookies to ensure the best user experience. By remaining on the website, you consent to the use of your cookie files on 1xBet. Find out more CUSTOMER SUPPORT 1800812889 18+ MOBILE VERSION CUSTOMER SUPPORT</pre></details>
   </article>
-<article class="activity-card">
+<article class="activity-card detail-ok">
     <div class="activity-head">
       <span class="index">37</span>
       <div>
         <h2>100 FREE SPINS FOR A SUBSCRIPTION! </h2>
-        <p>免费旋转 / Free Spins</p>
+        <p>免费旋转 / Free Spins · <span class="detail-pill ok-pill">详情页已采集 / Detail captured</span></p>
       </div>
     </div>
     <dl>
       <div><dt>奖励 / Reward</dt><dd>100 FREE SPINS</dd></div>
-      <div><dt>参与要求 / Requirements</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>详情页奖励 / Detail Reward</dt><dd>100 FREE SPINS</dd></div>
+      <div><dt>参与要求 / Requirements</dt><dd>BETTING Sports Multi-LIVE Live Toto GAMES Casino 1xGames Live Casino STATISTICS Statistics Results USEFUL LINKS Payment met; Bet». 1xBet uses cookies to ensure the best user experience. By remaining on the website, you consent to the use of your co; Bet. Find out more CUSTOMER SUPPORT 1800812889 18+ MOBILE VERSION CUSTOMER SUPPORT</dd></div>
       <div><dt>开始时间 / Start Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
       <div><dt>结束时间 / End Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>详情页关键日期 / Detail Dates</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>详情页来源 / Detail Source</dt><dd><a href="https://1xlite-19708.pro/en/bonus/casino/promotions/spins_for_subscribe">https://1xlite-19708.pro/en/bonus/casino/promotions/spins_for_subscribe</a></dd></div>
       <div><dt>备注 / Notes</dt><dd>Subscribe to our Telegram channel and get a gift</dd></div>
     </dl>
+<details class="detail-excerpt"><summary>详情页原文摘要 / Detail excerpt</summary><pre>REGISTRATION EN / 12:32 TOP-EVENTS LIVE 1XGAMES LIVE CASINO ESPORTS PROMO MORE INFORMATION About us Terms and Conditions Affiliate Program Become an agent Privacy Policy Сookie Policy Contacts BETTING Multi-LIVE Live Toto GAMES 1xGames Live Casino STATISTICS Statistics Results USEFUL LINKS Payment methods Mobile version Registration APPS iOS Android Other apps PARTNERS Copyright © 2026 «1xBet». 1xBet uses cookies to ensure the best user experience. By remaining on the website, you consent to the use of your cookie files on 1xBet. Find out more CUSTOMER SUPPORT 1800812889 18+ MOBILE VERSION CUSTOMER SUPPORT</pre></details>
   </article>
-<article class="activity-card">
+<article class="activity-card detail-ok">
     <div class="activity-head">
       <span class="index">38</span>
       <div>
         <h2>THE BIG GAME </h2>
-        <p>免费旋转 / Free Spins</p>
+        <p>免费旋转 / Free Spins · <span class="detail-pill ok-pill">详情页已采集 / Detail captured</span></p>
       </div>
     </div>
     <dl>
       <div><dt>奖励 / Reward</dt><dd>up to 200 FS</dd></div>
-      <div><dt>参与要求 / Requirements</dt><dd>deposit between 00:01 and 23:59 (GMT+0) every Sunday and get up to 200 FS</dd></div>
+      <div><dt>详情页奖励 / Detail Reward</dt><dd>up to 200 FS</dd></div>
+      <div><dt>参与要求 / Requirements</dt><dd>deposit between 00:01 and 23:59 (GMT+0) every Sunday and get up to 200 FS BONUS OFFER DETAILS</dd></div>
       <div><dt>开始时间 / Start Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
-      <div><dt>结束时间 / End Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>结束时间 / End Time</dt><dd>from your main account. 7. Both winning and losing bets placed during the gift validi; period count towards the gift wagering requirement. 8. By participating in this promoti; period expires, or if the bonus is canceled. 10. All of the general Terms and Condition; from Pragmatic Play for deposits on Saturdays! FIND OUT MORE 100 FREE SPINS FOR A SUB; end Booster Make a deposit every Friday and get a bonus credited to your main accoun</dd></div>
+      <div><dt>详情页关键日期 / Detail Dates</dt><dd>from your main account. 7. Both winning and losing bets placed during the gift validi; period count towards the gift wagering requirement. 8. By participating in this promoti; period expires, or if the bonus is canceled. 10. All of the general Terms and Condition; from Pragmatic Play for deposits on Saturdays! FIND OUT MORE 100 FREE SPINS FOR A SUB; end Booster Make a deposit every Friday and get a bonus credited to your main accoun</dd></div>
+      <div><dt>详情页来源 / Detail Source</dt><dd><a href="https://1xlite-19708.pro/en/bonus/casino/promotions/big_play_day">https://1xlite-19708.pro/en/bonus/casino/promotions/big_play_day</a></dd></div>
       <div><dt>备注 / Notes</dt><dd>Don't miss your chance! Make a deposit between 00:01 and 23:59 (GMT+0) every Sunday and get up to 200 FS</dd></div>
     </dl>
+<details class="detail-excerpt"><summary>详情页原文摘要 / Detail excerpt</summary><pre>1 REGISTRATION LOG IN EN / 11:38 TOP-EVENTS SPORTS LIVE 1XGAMES CASINO LIVE CASINO ESPORTS PROMO MORE Plinko Promo The big game THE BIG GAME Don't miss your chance! Make a deposit between 00:01 and 23:59 (GMT+0) every Sunday and get up to 200 FS TAKE PART How do I get my gift? Top up your account and get one of the prizes! deposit at least 25 MYR to get 20 FS deposit at least 50 MYR to get 50 FS deposit at least 140 MYR to get 70 FS deposit at least 300 MYR to get 150 FS deposit at least 450 MYR to get 200 FS Terms of bonus crediting: 1. The minimum deposit amount required to receive this bonus is 25 MYR. Deposits are not added together. 2. This offer only applies to deposits made between 00:01 and 23:59 (GMT+0) on Sunday. 3. To receive this bonus, you must have filled in all your personal details in your profile and opted in to receiving casino bonuses. The following information must be filled in: full name, email address and phone number (must be activated), country. 4. The number of bonuses is limited: you can only receive one bonus per day as part of this promotion. 5. The gift is valid for 3 days after you receive it. You must wager your FS winnings x30 times within 5 days in the &quot;Bonus Wagering&quot; section. Some game categories are not eligible for fulfilling the wagering requirement. Excluded game categories: Sic-Bo, Poker, Roulette, Bingo, Blackjack, Keno, Hunting and Fishing, Other, Board Games, Provably Fair, Zeppelin, Backgammon, Legion Poker, Baccarat, Live Casino, Virtual Sports, Mini Slots, TV Games, 18+, OurBrand, IDN Poker, Spigo, VULKAN, Scratch Cards, Wiseodds, Card Games, Lottery, Skill Games, Crash Games, JetX, TVBet, Hold'em, 1xGames. 6. The bonus must be wagered using real money from your main account. 7. Both winning and losing bets placed during the gift validity period count towards the gift wagering requirement. 8. By participating in this promotion, you confirm that you have read and accepted its terms and conditions. 9. Both the bonus and any associated winnings will be voided once the bonus validity period expires, or if the bonus is canceled. 10. All of the general Terms and Conditions apply. 11. All types of bonus are disabled for cryptocurrencies, without exception. TAKE PART Other available bonuses FIND OUT MORE Welcome package up to 7688 MYR + 150 FS Make deposits and get bonuses! FIND OUT MORE LOYALTY PAYS OFF GET UP TO 100 FS AND A 50% TENTH DEPOSIT BONUS FOR SLOTS FIND OUT MORE Casino VIP Cashback Thank you for choosing us! As a token of our gratitude, we're offering you the chance to join our new loyalty program and get</pre></details>
   </article>
-<article class="activity-card">
+<article class="activity-card detail-ok">
     <div class="activity-head">
       <span class="index">39</span>
       <div>
         <h2>JACKY'S BET </h2>
-        <p>免费旋转 / Free Spins</p>
+        <p>免费旋转 / Free Spins · <span class="detail-pill ok-pill">详情页已采集 / Detail captured</span></p>
       </div>
     </div>
     <dl>
       <div><dt>奖励 / Reward</dt><dd>50 FS</dd></div>
-      <div><dt>参与要求 / Requirements</dt><dd>BET Jacky Bett here. I've cooked up something special for you: 50 FS! But only if you follow me on Instagram and DM me the</dd></div>
+      <div><dt>详情页奖励 / Detail Reward</dt><dd>50 FS</dd></div>
+      <div><dt>参与要求 / Requirements</dt><dd>BET Jacky Bett here. I've cooked up something special for you: 50 FS! But only if you follow me on Instagram and DM me the; BETTING Sports Multi-LIVE Live Toto GAMES Casino 1xGames Live Casino STATISTICS Statistics Results USEFUL LINKS Payment met; Bet». 1xBet uses cookies to ensure the best user experience. By remaining on the website, you consent to the use of your co</dd></div>
       <div><dt>开始时间 / Start Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
       <div><dt>结束时间 / End Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>详情页关键日期 / Detail Dates</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>详情页来源 / Detail Source</dt><dd><a href="https://1xlite-19708.pro/en/bonus/casino/promotions/jackys_bet">https://1xlite-19708.pro/en/bonus/casino/promotions/jackys_bet</a></dd></div>
       <div><dt>备注 / Notes</dt><dd>Jacky Bett here. I've cooked up something special for you: 50 FS! But only if you follow me on Instagram and DM me the code word &quot;FREE&quot;!</dd></div>
     </dl>
+<details class="detail-excerpt"><summary>详情页原文摘要 / Detail excerpt</summary><pre>REGISTRATION EN / 12:32 TOP-EVENTS LIVE 1XGAMES LIVE CASINO ESPORTS PROMO MORE Plinko INFORMATION About us Terms and Conditions Affiliate Program Become an agent Privacy Policy Сookie Policy Contacts BETTING Multi-LIVE Live Toto GAMES 1xGames Live Casino STATISTICS Statistics Results USEFUL LINKS Payment methods Mobile version Registration APPS iOS Android Other apps PARTNERS Copyright © 2026 «1xBet». 1xBet uses cookies to ensure the best user experience. By remaining on the website, you consent to the use of your cookie files on 1xBet. Find out more CUSTOMER SUPPORT 1800812889 18+ MOBILE VERSION CUSTOMER SUPPORT</pre></details>
   </article>
-<article class="activity-card">
+<article class="activity-card detail-ok">
     <div class="activity-head">
       <span class="index">40</span>
       <div>
         <h2>BEAT 1XBET </h2>
-        <p>综合活动 / General Promotion</p>
+        <p>综合活动 / General Promotion · <span class="detail-pill ok-pill">详情页已采集 / Detail captured</span></p>
       </div>
     </div>
     <dl>
       <div><dt>奖励 / Reward</dt><dd>up to 1387 MYR</dd></div>
-      <div><dt>参与要求 / Requirements</dt><dd>BET Get a bonus of up to 1387 MYR for all 1xGames</dd></div>
+      <div><dt>详情页奖励 / Detail Reward</dt><dd>up to 1387 MYR</dd></div>
+      <div><dt>参与要求 / Requirements</dt><dd>BET Get a bonus of up to 1387 MYR for all 1xGames BONUS OFFER DETAILS 1 REGISTRATION LOG IN EN / 12:32 TOP-EVENTS SPORTS LI; BETTING Sports Multi-LIVE Live Toto GAMES Casino 1xGames Live Casino STATISTICS Statistics Results USEFUL LINKS Payment met; Bet». 1xBet uses cookies to ensure the best user experience. By remaining on the website, you consent to the use of your co</dd></div>
       <div><dt>开始时间 / Start Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
       <div><dt>结束时间 / End Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>详情页关键日期 / Detail Dates</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>详情页来源 / Detail Source</dt><dd><a href="https://1xlite-19708.pro/en/promotions/landing-beatus">https://1xlite-19708.pro/en/promotions/landing-beatus</a></dd></div>
       <div><dt>备注 / Notes</dt><dd>Get a bonus of up to 1387 MYR for all 1xGames</dd></div>
     </dl>
+<details class="detail-excerpt"><summary>详情页原文摘要 / Detail excerpt</summary><pre>1 REGISTRATION LOG IN EN / 12:32 TOP-EVENTS LIVE 1XGAMES LIVE CASINO ESPORTS PROMO MORE Plinko INFORMATION About us Terms and Conditions Affiliate Program Become an agent Privacy Policy Сookie Policy Contacts BETTING Multi-LIVE Live Toto GAMES 1xGames Live Casino STATISTICS Statistics Results USEFUL LINKS Payment methods Mobile version Registration APPS iOS Android Other apps PARTNERS Copyright © 2026 «1xBet». 1xBet uses cookies to ensure the best user experience. By remaining on the website, you consent to the use of your cookie files on 1xBet. Find out more CUSTOMER SUPPORT 1800812889 18+ MOBILE VERSION CUSTOMER SUPPORT</pre></details>
   </article>
-<article class="activity-card">
+<article class="activity-card detail-ok">
     <div class="activity-head">
       <span class="index">41</span>
       <div>
         <h2>BECOME A LEGEND </h2>
-        <p>竞赛或抽奖 / Tournament or Raffle</p>
+        <p>竞赛或抽奖 / Tournament or Raffle · <span class="detail-pill ok-pill">详情页已采集 / Detail captured</span></p>
       </div>
     </div>
     <dl>
       <div><dt>奖励 / Reward</dt><dd>New look, same thrills! Bet on FIFA / EA FC in the promo and bag prizes!</dd></div>
-      <div><dt>参与要求 / Requirements</dt><dd>Bet on FIFA / EA FC in the promo and bag prizes!</dd></div>
+      <div><dt>详情页奖励 / Detail Reward</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>参与要求 / Requirements</dt><dd>Place a bet of at least on FIFA / EA SPORTS FC matches Win division cups and collect tickets for the prize draw Win prizes from 1xBet! iPhone 17 Pro Max Apple iMac 24 PlayStat; ELIGIBLE BETS Place live single bets of at least on FIFA / EA SPORTS FC matches at odds of 1.8 or higher DIVISIONS Beginner cups 0 points 0/5 Reward 1 ticket Select division Amat; ming PC + Thunderobot gaming monitor Apple iPhone 17 Pro Max smartphone Valve Steam Deck game console Microsoft Xbox Series X gaming console + EA Sports FC 26 game Apple Mac</dd></div>
       <div><dt>开始时间 / Start Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
       <div><dt>结束时间 / End Time</dt><dd>END New look, same thrills! Bet on FIFA / EA FC in the promo and</dd></div>
+      <div><dt>详情页关键日期 / Detail Dates</dt><dd>END TAKE PART Terms and Conditions Select division Place a bet of at least on FIFA / EA SPORTS; from 1xBet! iPhone 17 Pro Max Apple iMac 24 PlayStation 5 Pro + EA Sports FC 26 ELIGIBLE BETS P; end cups 0 points 0/800 Reward 75 tickets 2 promo codes worth Select division PRIZE FUND TAKE; from 1000 points RESULTS OF THE DRAW Previous stage Current stage Thunderobot Warrior Turbo gam</dd></div>
+      <div><dt>详情页来源 / Detail Source</dt><dd><a href="https://1xlite-19708.pro/en/promotions/become-legend">https://1xlite-19708.pro/en/promotions/become-legend</a></dd></div>
       <div><dt>备注 / Notes</dt><dd>New look, same thrills! Bet on FIFA / EA FC in the promo and bag prizes!</dd></div>
     </dl>
+<details class="detail-excerpt"><summary>详情页原文摘要 / Detail excerpt</summary><pre>REGISTRATION TOP-EVENTS LIVE 1XGAMES MORE MAIN PAGE SPECIAL OFFERS AND BONUSES BECOME A LEGEND TAKE PART Terms and Conditions Select division Place a bet of at least on FIFA / EA SPORTS FC matches Win division cups and collect tickets for the prize draw Win prizes from 1xBet! iPhone 17 Pro Max Apple iMac 24 PlayStation 5 Pro + EA Sports FC 26 ELIGIBLE BETS Place live single bets of at least on FIFA / EA SPORTS FC matches at odds of 1.8 or higher DIVISIONS Beginner cups 0 points 0/5 Reward 1 ticket Select division Amateur cups 0 points 0/15 Reward 2 tickets 1 promo code worth Select division Semi-pro cups 0 points 0/35 Reward 6 tickets 1 promo code worth Select division Pro cups 0 points 0/105 Reward 15 tickets 1 promo code worth Select division World Class cups 0 points 0/350 Reward 40 tickets 1 promo code worth Select division Legend cups 0 points 0/800 Reward 75 tickets 2 promo codes worth Select division PRIZE FUND TAKE PART AMOUNT - POINTS MYR Points - 1</pre></details>
   </article>
-<article class="activity-card">
+<article class="activity-card detail-ok">
     <div class="activity-head">
       <span class="index">42</span>
       <div>
         <h2>CRICKET FREE BET </h2>
-        <p>免费投注 / Free Bet</p>
+        <p>免费投注 / Free Bet · <span class="detail-pill ok-pill">详情页已采集 / Detail captured</span></p>
       </div>
     </div>
     <dl>
       <div><dt>奖励 / Reward</dt><dd>A guaranteed free bet for your losing bet</dd></div>
-      <div><dt>参与要求 / Requirements</dt><dd>BET A guaranteed free bet for your losing bet</dd></div>
+      <div><dt>详情页奖励 / Detail Reward</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>参与要求 / Requirements</dt><dd>BET A guaranteed free bet for your losing bet BONUS OFFER DETAILS 1 REGISTRATION LOG IN EN / 12:32 TOP-EVENTS SPORTS LIVE 1; BETTING Sports Multi-LIVE Live Toto GAMES Casino 1xGames Live Casino STATISTICS Statistics Results USEFUL LINKS Payment met; Bet». 1xBet uses cookies to ensure the best user experience. By remaining on the website, you consent to the use of your co</dd></div>
       <div><dt>开始时间 / Start Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
       <div><dt>结束时间 / End Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>详情页关键日期 / Detail Dates</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>详情页来源 / Detail Source</dt><dd><a href="https://1xlite-19708.pro/en/promotions/cricket-free-bet">https://1xlite-19708.pro/en/promotions/cricket-free-bet</a></dd></div>
       <div><dt>备注 / Notes</dt><dd>A guaranteed free bet for your losing bet</dd></div>
     </dl>
+<details class="detail-excerpt"><summary>详情页原文摘要 / Detail excerpt</summary><pre>1 REGISTRATION LOG IN EN / 12:32 TOP-EVENTS LIVE 1XGAMES LIVE CASINO ESPORTS PROMO MORE Plinko INFORMATION About us Terms and Conditions Affiliate Program Become an agent Privacy Policy Сookie Policy Contacts BETTING Multi-LIVE Live Toto GAMES 1xGames Live Casino STATISTICS Statistics Results USEFUL LINKS Payment methods Mobile version Registration APPS iOS Android Other apps PARTNERS Copyright © 2026 «1xBet». 1xBet uses cookies to ensure the best user experience. By remaining on the website, you consent to the use of your cookie files on 1xBet. Find out more CUSTOMER SUPPORT 1800812889 18+ MOBILE VERSION CUSTOMER SUPPORT</pre></details>
   </article>
-<article class="activity-card">
+<article class="activity-card detail-ok">
     <div class="activity-head">
       <span class="index">43</span>
       <div>
         <h2>200% WINNINGS </h2>
-        <p>综合活动 / General Promotion</p>
+        <p>综合活动 / General Promotion · <span class="detail-pill ok-pill">详情页已采集 / Detail captured</span></p>
       </div>
     </div>
     <dl>
       <div><dt>奖励 / Reward</dt><dd>200%</dd></div>
-      <div><dt>参与要求 / Requirements</dt><dd>PLAY 1xGames — GET X2 YOUR WINNINGS!</dd></div>
+      <div><dt>详情页奖励 / Detail Reward</dt><dd>200%</dd></div>
+      <div><dt>参与要求 / Requirements</dt><dd>PLAY 1xGames — GET X2 YOUR WINNINGS! BONUS OFFER DETAILS 1 REGISTRATION EN / 12:33 TOP-EVENTS SPORTS LIVE 1XGAMES CASINO LIV; BETTING Sports Multi-LIVE Live Toto GAMES Casino 1xGames Live Casino STATISTICS Statistics Results USEFUL LINKS Payment met; Bet». 1xBet uses cookies to ensure the best user experience. By remaining on the website, you consent to the use of your co</dd></div>
       <div><dt>开始时间 / Start Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
       <div><dt>结束时间 / End Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>详情页关键日期 / Detail Dates</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>详情页来源 / Detail Source</dt><dd><a href="https://1xlite-19708.pro/en/promotions/two-hundred-percentage">https://1xlite-19708.pro/en/promotions/two-hundred-percentage</a></dd></div>
       <div><dt>备注 / Notes</dt><dd>PLAY 1xGames — GET X2 YOUR WINNINGS!</dd></div>
     </dl>
+<details class="detail-excerpt"><summary>详情页原文摘要 / Detail excerpt</summary><pre>1 REGISTRATION EN / 12:33 TOP-EVENTS LIVE 1XGAMES LIVE CASINO ESPORTS PROMO MORE Plinko INFORMATION About us Terms and Conditions Affiliate Program Become an agent Privacy Policy Сookie Policy Contacts BETTING Multi-LIVE Live Toto GAMES 1xGames Live Casino STATISTICS Statistics Results USEFUL LINKS Payment methods Mobile version Registration APPS iOS Android Other apps PARTNERS Copyright © 2026 «1xBet». 1xBet uses cookies to ensure the best user experience. By remaining on the website, you consent to the use of your cookie files on 1xBet. Find out more CUSTOMER SUPPORT 1800812889 18+ MOBILE VERSION CUSTOMER SUPPORT</pre></details>
   </article>
-<article class="activity-card">
+<article class="activity-card detail-ok">
     <div class="activity-head">
       <span class="index">44</span>
       <div>
         <h2>10% CASHBACK </h2>
-        <p>返现 / Cashback</p>
+        <p>返现 / Cashback · <span class="detail-pill ok-pill">详情页已采集 / Detail captured</span></p>
       </div>
     </div>
     <dl>
       <div><dt>奖励 / Reward</dt><dd>10% CASHBACK; 10%</dd></div>
-      <div><dt>参与要求 / Requirements</dt><dd>CASHBACK Get cashback worth 10% of your deposit as a promo code!</dd></div>
+      <div><dt>详情页奖励 / Detail Reward</dt><dd>10% CASHBACK; 10%</dd></div>
+      <div><dt>参与要求 / Requirements</dt><dd>CASHBACK BONUS Get 10% of your deposit as cashback in the form of a promo code. BONUS OFFER DETAILS REGISTRATION EN / 12:33 TOP-; BETTING Sports Multi-LIVE Live Toto GAMES Casino 1xGames Live Casino STATISTICS Statistics Results USEFUL LINKS Payment met; Bet». 1xBet uses cookies to ensure the best user experience. By remaining on the website, you consent to the use of your co</dd></div>
       <div><dt>开始时间 / Start Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
       <div><dt>结束时间 / End Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>详情页关键日期 / Detail Dates</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>详情页来源 / Detail Source</dt><dd><a href="https://1xlite-19708.pro/en/bonus/rules/cashback-my">https://1xlite-19708.pro/en/bonus/rules/cashback-my</a></dd></div>
       <div><dt>备注 / Notes</dt><dd>Get cashback worth 10% of your deposit as a promo code!</dd></div>
     </dl>
+<details class="detail-excerpt"><summary>详情页原文摘要 / Detail excerpt</summary><pre>REGISTRATION EN / 12:33 TOP-EVENTS LIVE 1XGAMES LIVE CASINO ESPORTS PROMO MORE INFORMATION About us Terms and Conditions Affiliate Program Become an agent Privacy Policy Сookie Policy Contacts BETTING Multi-LIVE Live Toto GAMES 1xGames Live Casino STATISTICS Statistics Results USEFUL LINKS Payment methods Mobile version Registration APPS iOS Android Other apps PARTNERS Copyright © 2026 «1xBet». 1xBet uses cookies to ensure the best user experience. By remaining on the website, you consent to the use of your cookie files on 1xBet. Find out more CUSTOMER SUPPORT 1800812889 18+ MOBILE VERSION CUSTOMER SUPPORT</pre></details>
   </article>
-<article class="activity-card">
+<article class="activity-card detail-ok">
     <div class="activity-head">
       <span class="index">45</span>
       <div>
         <h2>INVITE FRIENDS! </h2>
-        <p>综合活动 / General Promotion</p>
+        <p>综合活动 / General Promotion · <span class="detail-pill ok-pill">详情页已采集 / Detail captured</span></p>
       </div>
     </div>
     <dl>
       <div><dt>奖励 / Reward</dt><dd>Join the 1xBet referral program and earn extra income by inviting friends!</dd></div>
-      <div><dt>参与要求 / Requirements</dt><dd>Bet referral program and earn extra income by inviting friends!</dd></div>
+      <div><dt>详情页奖励 / Detail Reward</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>参与要求 / Requirements</dt><dd>Bet referral program and earn extra income by inviting friends! BONUS OFFER DETAILS REGISTRATION EN / 12:33 TOP-EVENTS SPOR; BETTING Sports Multi-LIVE Live Toto GAMES Casino 1xGames Live Casino STATISTICS Statistics Results USEFUL LINKS Payment met; Bet». 1xBet uses cookies to ensure the best user experience. By remaining on the website, you consent to the use of your co</dd></div>
       <div><dt>开始时间 / Start Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
       <div><dt>结束时间 / End Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>详情页关键日期 / Detail Dates</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>详情页来源 / Detail Source</dt><dd><a href="https://1xlite-19708.pro/en/bonus/rules/bonus-friends">https://1xlite-19708.pro/en/bonus/rules/bonus-friends</a></dd></div>
       <div><dt>备注 / Notes</dt><dd>Join the 1xBet referral program and earn extra income by inviting friends!</dd></div>
     </dl>
+<details class="detail-excerpt"><summary>详情页原文摘要 / Detail excerpt</summary><pre>REGISTRATION EN / 12:33 TOP-EVENTS LIVE 1XGAMES LIVE CASINO ESPORTS PROMO MORE Plinko INFORMATION About us Terms and Conditions Affiliate Program Become an agent Privacy Policy Сookie Policy Contacts BETTING Multi-LIVE Live Toto GAMES 1xGames Live Casino STATISTICS Statistics Results USEFUL LINKS Payment methods Mobile version Registration APPS iOS Android Other apps PARTNERS Copyright © 2026 «1xBet». 1xBet uses cookies to ensure the best user experience. By remaining on the website, you consent to the use of your cookie files on 1xBet. Find out more CUSTOMER SUPPORT 1800812889 18+ MOBILE VERSION CUSTOMER SUPPORT</pre></details>
   </article>
-<article class="activity-card">
+<article class="activity-card detail-ok">
     <div class="activity-head">
       <span class="index">46</span>
       <div>
         <h2>10% CASHBACK BONUS </h2>
-        <p>返现 / Cashback</p>
+        <p>返现 / Cashback · <span class="detail-pill ok-pill">详情页已采集 / Detail captured</span></p>
       </div>
     </div>
     <dl>
       <div><dt>奖励 / Reward</dt><dd>10% CASHBACK; 10%</dd></div>
-      <div><dt>参与要求 / Requirements</dt><dd>CASHBACK BONUS Get 10% of your deposit as cashback in the form of a promo code.</dd></div>
+      <div><dt>详情页奖励 / Detail Reward</dt><dd>250%</dd></div>
+      <div><dt>参与要求 / Requirements</dt><dd>BETTING Sports Multi-LIVE Live Toto GAMES Casino 1xGames Live Casino STATISTICS Statistics Results USEFUL LINKS Payment met; Bet». 1xBet uses cookies to ensure the best user experience. By remaining on the website, you consent to the use of your co; Bet. Find out more CUSTOMER SUPPORT 1800812889 18+ MOBILE VERSION CUSTOMER SUPPORT</dd></div>
       <div><dt>开始时间 / Start Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
       <div><dt>结束时间 / End Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>详情页关键日期 / Detail Dates</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>详情页来源 / Detail Source</dt><dd><a href="https://1xlite-19708.pro/en/bonus/rules/hyper_bonus">https://1xlite-19708.pro/en/bonus/rules/hyper_bonus</a></dd></div>
       <div><dt>备注 / Notes</dt><dd>Get 10% of your deposit as cashback in the form of a promo code.</dd></div>
     </dl>
+<details class="detail-excerpt"><summary>详情页原文摘要 / Detail excerpt</summary><pre>REGISTRATION EN / 12:33 TOP-EVENTS LIVE 1XGAMES LIVE CASINO ESPORTS PROMO MORE INFORMATION About us Terms and Conditions Affiliate Program Become an agent Privacy Policy Сookie Policy Contacts BETTING Multi-LIVE Live Toto GAMES 1xGames Live Casino STATISTICS Statistics Results USEFUL LINKS Payment methods Mobile version Registration APPS iOS Android Other apps PARTNERS Copyright © 2026 «1xBet». 1xBet uses cookies to ensure the best user experience. By remaining on the website, you consent to the use of your cookie files on 1xBet. Find out more CUSTOMER SUPPORT 1800812889 18+ MOBILE VERSION CUSTOMER SUPPORT</pre></details>
   </article>
-<article class="activity-card">
+<article class="activity-card detail-ok">
     <div class="activity-head">
       <span class="index">47</span>
       <div>
         <h2>X2 WEDNESDAY PROMOTION </h2>
-        <p>综合活动 / General Promotion</p>
+        <p>综合活动 / General Promotion · <span class="detail-pill ok-pill">详情页已采集 / Detail captured</span></p>
       </div>
     </div>
     <dl>
       <div><dt>奖励 / Reward</dt><dd>up to 1500 MYR</dd></div>
-      <div><dt>参与要求 / Requirements</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>详情页奖励 / Detail Reward</dt><dd>up to 1500 MYR</dd></div>
+      <div><dt>参与要求 / Requirements</dt><dd>BETTING Sports Multi-LIVE Live Toto GAMES Casino 1xGames Live Casino STATISTICS Statistics Results USEFUL LINKS Payment met; Bet». 1xBet uses cookies to ensure the best user experience. By remaining on the website, you consent to the use of your co; Bet. Find out more CUSTOMER SUPPORT 1800812889 18+ MOBILE VERSION CUSTOMER SUPPORT</dd></div>
       <div><dt>开始时间 / Start Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
       <div><dt>结束时间 / End Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>详情页关键日期 / Detail Dates</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>详情页来源 / Detail Source</dt><dd><a href="https://1xlite-19708.pro/en/bonus/rules/multiply2">https://1xlite-19708.pro/en/bonus/rules/multiply2</a></dd></div>
       <div><dt>备注 / Notes</dt><dd>Get up to 1500 MYR this Wednesday! The bonus is only available to Lucky Friday participants.</dd></div>
     </dl>
+<details class="detail-excerpt"><summary>详情页原文摘要 / Detail excerpt</summary><pre>REGISTRATION EN / 12:33 TOP-EVENTS LIVE 1XGAMES LIVE CASINO ESPORTS PROMO MORE INFORMATION About us Terms and Conditions Affiliate Program Become an agent Privacy Policy Сookie Policy Contacts BETTING Multi-LIVE Live Toto GAMES 1xGames Live Casino STATISTICS Statistics Results USEFUL LINKS Payment methods Mobile version Registration APPS iOS Android Other apps PARTNERS Copyright © 2026 «1xBet». 1xBet uses cookies to ensure the best user experience. By remaining on the website, you consent to the use of your cookie files on 1xBet. Find out more CUSTOMER SUPPORT 1800812889 18+ MOBILE VERSION CUSTOMER SUPPORT</pre></details>
   </article>
-<article class="activity-card">
+<article class="activity-card detail-ok">
     <div class="activity-head">
       <span class="index">48</span>
       <div>
         <h2>ACCUMULATOR OF THE DAY </h2>
-        <p>体育投注 / Sports Betting</p>
+        <p>体育投注 / Sports Betting · <span class="detail-pill ok-pill">详情页已采集 / Detail captured</span></p>
       </div>
     </div>
     <dl>
       <div><dt>奖励 / Reward</dt><dd>Choose your bet from a number of accumulators we offer on the most exciting sporting events of the day!</dd></div>
-      <div><dt>参与要求 / Requirements</dt><dd>bet from a number of accumulators we offer on the most exciting sporting events of the day!</dd></div>
+      <div><dt>详情页奖励 / Detail Reward</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>参与要求 / Requirements</dt><dd>bet from a number of accumulators we offer on the most exciting sporting events of the day! BONUS OFFER DETAILS 1 REGISTRAT; BETTING Sports Multi-LIVE Live Toto GAMES Casino 1xGames Live Casino STATISTICS Statistics Results USEFUL LINKS Payment met; Bet». 1xBet uses cookies to ensure the best user experience. By remaining on the website, you consent to the use of your co</dd></div>
       <div><dt>开始时间 / Start Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
       <div><dt>结束时间 / End Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>详情页关键日期 / Detail Dates</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>详情页来源 / Detail Source</dt><dd><a href="https://1xlite-19708.pro/en/bonus/rules/express">https://1xlite-19708.pro/en/bonus/rules/express</a></dd></div>
       <div><dt>备注 / Notes</dt><dd>Choose your bet from a number of accumulators we offer on the most exciting sporting events of the day!</dd></div>
     </dl>
+<details class="detail-excerpt"><summary>详情页原文摘要 / Detail excerpt</summary><pre>1 REGISTRATION EN / 12:33 TOP-EVENTS LIVE 1XGAMES LIVE CASINO ESPORTS PROMO MORE Plinko INFORMATION About us Terms and Conditions Affiliate Program Become an agent Privacy Policy Сookie Policy Contacts BETTING Multi-LIVE Live Toto GAMES 1xGames Live Casino STATISTICS Statistics Results USEFUL LINKS Payment methods Mobile version Registration APPS iOS Android Other apps PARTNERS Copyright © 2026 «1xBet». 1xBet uses cookies to ensure the best user experience. By remaining on the website, you consent to the use of your cookie files on 1xBet. Find out more CUSTOMER SUPPORT 1800812889 18+ MOBILE VERSION CUSTOMER SUPPORT</pre></details>
   </article>
-<article class="activity-card">
+<article class="activity-card detail-ok">
     <div class="activity-head">
       <span class="index">49</span>
       <div>
         <h2>RACE </h2>
-        <p>综合活动 / General Promotion</p>
+        <p>综合活动 / General Promotion · <span class="detail-pill ok-pill">详情页已采集 / Detail captured</span></p>
       </div>
     </div>
     <dl>
       <div><dt>奖励 / Reward</dt><dd>Take part in the Race: Place bets on Sports and Live events and receive free promotional codes. Start the race right now and don’t stop!</dd></div>
-      <div><dt>参与要求 / Requirements</dt><dd>Place bets on Sports and Live events and receive free promotional codes. Start the race right now and don’t stop!</dd></div>
+      <div><dt>详情页奖励 / Detail Reward</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>参与要求 / Requirements</dt><dd>Place bets on Sports and Live events and receive free promotional codes. Start the race right now and don’t stop! BONUS OFFER; BETTING Sports Multi-LIVE Live Toto GAMES Casino 1xGames Live Casino STATISTICS Statistics Results USEFUL LINKS Payment met; Bet». 1xBet uses cookies to ensure the best user experience. By remaining on the website, you consent to the use of your co</dd></div>
       <div><dt>开始时间 / Start Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
       <div><dt>结束时间 / End Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>详情页关键日期 / Detail Dates</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>详情页来源 / Detail Source</dt><dd><a href="https://1xlite-19708.pro/en/bonus/rules/race">https://1xlite-19708.pro/en/bonus/rules/race</a></dd></div>
       <div><dt>备注 / Notes</dt><dd>Take part in the Race: Place bets on Sports and Live events and receive free promotional codes. Start the race right now and don’t stop!</dd></div>
     </dl>
+<details class="detail-excerpt"><summary>详情页原文摘要 / Detail excerpt</summary><pre>REGISTRATION EN / 12:33 TOP-EVENTS LIVE 1XGAMES LIVE CASINO ESPORTS PROMO MORE INFORMATION About us Terms and Conditions Affiliate Program Become an agent Privacy Policy Сookie Policy Contacts BETTING Multi-LIVE Live Toto GAMES 1xGames Live Casino STATISTICS Statistics Results USEFUL LINKS Payment methods Mobile version Registration APPS iOS Android Other apps PARTNERS Copyright © 2026 «1xBet». 1xBet uses cookies to ensure the best user experience. By remaining on the website, you consent to the use of your cookie files on 1xBet. Find out more CUSTOMER SUPPORT 1800812889 18+ MOBILE VERSION CUSTOMER SUPPORT</pre></details>
   </article>
-<article class="activity-card">
+<article class="activity-card detail-missing">
     <div class="activity-head">
       <span class="index">50</span>
       <div>
         <h2>HYPER BONUS </h2>
-        <p>综合活动 / General Promotion</p>
+        <p>综合活动 / General Promotion · <span class="detail-pill fallback-pill">列表页兜底 / Listing fallback</span></p>
       </div>
     </div>
     <dl>
       <div><dt>奖励 / Reward</dt><dd>250%</dd></div>
+      <div><dt>详情页奖励 / Detail Reward</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
       <div><dt>参与要求 / Requirements</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
       <div><dt>开始时间 / Start Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
       <div><dt>结束时间 / End Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>详情页关键日期 / Detail Dates</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>详情页来源 / Detail Source</dt><dd><span class="missing-text">未匹配详情页 / No detail page matched</span></dd></div>
       <div><dt>备注 / Notes</dt><dd>Win and get a guaranteed bonus of up to 250%!</dd></div>
     </dl>
+
   </article>
-<article class="activity-card">
+<article class="activity-card detail-limited">
     <div class="activity-head">
       <span class="index">51</span>
       <div>
         <h2>STAR LEAGUE </h2>
-        <p>竞赛或抽奖 / Tournament or Raffle</p>
+        <p>竞赛或抽奖 / Tournament or Raffle · <span class="detail-pill limited-pill">详情页正文有限 / Limited detail</span></p>
       </div>
     </div>
     <dl>
       <div><dt>奖励 / Reward</dt><dd>Bet on Champions League stars and win 70,000 USD!</dd></div>
-      <div><dt>参与要求 / Requirements</dt><dd>Bet on Champions League stars and win 70,000 USD!</dd></div>
+      <div><dt>详情页奖励 / Detail Reward</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>参与要求 / Requirements</dt><dd>Bet on Champions League stars and win 70,000 USD! BONUS OFFER DETAILS REGISTRATION TOP-EVENTS SPORTS LIVE 1XGAMES MORE</dd></div>
       <div><dt>开始时间 / Start Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
       <div><dt>结束时间 / End Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>详情页关键日期 / Detail Dates</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>详情页来源 / Detail Source</dt><dd><a href="https://1xlite-19708.pro/en/promotions/star-league">https://1xlite-19708.pro/en/promotions/star-league</a></dd></div>
       <div><dt>备注 / Notes</dt><dd>Bet on Champions League stars and win 70,000 USD!</dd></div>
     </dl>
+<details class="detail-excerpt"><summary>详情页原文摘要 / Detail excerpt</summary><pre>REGISTRATION TOP-EVENTS LIVE 1XGAMES MORE</pre></details>
   </article>
-<article class="activity-card">
+<article class="activity-card detail-limited">
     <div class="activity-head">
       <span class="index">52</span>
       <div>
         <h2>IN PURSUIT OF THE SCUDETTO </h2>
-        <p>综合活动 / General Promotion</p>
+        <p>综合活动 / General Promotion · <span class="detail-pill limited-pill">详情页正文有限 / Limited detail</span></p>
       </div>
     </div>
     <dl>
       <div><dt>奖励 / Reward</dt><dd>Support your favorite Serie A club, multiply your points, and collect Scudettos from all the divisions!</dd></div>
+      <div><dt>详情页奖励 / Detail Reward</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
       <div><dt>参与要求 / Requirements</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
       <div><dt>开始时间 / Start Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
       <div><dt>结束时间 / End Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>详情页关键日期 / Detail Dates</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>详情页来源 / Detail Source</dt><dd><a href="https://1xlite-19708.pro/en/promotions/in-pursuit-of-the-scudetto">https://1xlite-19708.pro/en/promotions/in-pursuit-of-the-scudetto</a></dd></div>
       <div><dt>备注 / Notes</dt><dd>Support your favorite Serie A club, multiply your points, and collect Scudettos from all the divisions!</dd></div>
     </dl>
+<details class="detail-excerpt"><summary>详情页原文摘要 / Detail excerpt</summary><pre>REGISTRATION TOP-EVENTS LIVE 1XGAMES MORE</pre></details>
   </article>
-<article class="activity-card">
+<article class="activity-card detail-ok">
     <div class="activity-head">
       <span class="index">53</span>
       <div>
         <h2>GO ROSH </h2>
-        <p>竞赛或抽奖 / Tournament or Raffle</p>
+        <p>竞赛或抽奖 / Tournament or Raffle · <span class="detail-pill ok-pill">详情页已采集 / Detail captured</span></p>
       </div>
     </div>
     <dl>
       <div><dt>奖励 / Reward</dt><dd>Win superprizes by betting on Dota 2</dd></div>
-      <div><dt>参与要求 / Requirements</dt><dd>betting on Dota 2</dd></div>
+      <div><dt>详情页奖励 / Detail Reward</dt><dd>3 USD; 5 USD; 10 USD; 20 USD; 40 USD; 60 USD; 100 USD; 200 USD</dd></div>
+      <div><dt>参与要求 / Requirements</dt><dd>MING YOUR PARTICIPATION IN THE PROMOTION FOR EACH TOURNAMENT, SELECT THE SIDE YOU WANT TO COMPETE FOR - THE RADIANT OR THE DIRE - AND PRESS &quot;CONFIRM&quot;. YOU CAN ONLY CHOOSE YO; MING PC MANE-MADE PRIME V.4 (1 WINNER) RESULTS OF THE DRAW HOW DO I GET A PROMO TICKET? TICKETS ARE AWARDED FOR PLACING ELIGIBLE BETS ON THE TOURNAMENTS THAT ARE INCLUDED IN</dd></div>
       <div><dt>开始时间 / Start Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
       <div><dt>结束时间 / End Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>详情页关键日期 / Detail Dates</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>详情页来源 / Detail Source</dt><dd><a href="https://1xlite-19708.pro/en/promotions/go-rosh">https://1xlite-19708.pro/en/promotions/go-rosh</a></dd></div>
       <div><dt>备注 / Notes</dt><dd>Win superprizes by betting on Dota 2</dd></div>
     </dl>
+<details class="detail-excerpt"><summary>详情页原文摘要 / Detail excerpt</summary><pre>1 REGISTRATION LOG IN EN / 12:33 TOP-EVENTS LIVE 1XGAMES LIVE CASINO ESPORTS PROMO MORE Plinko MAIN PAGE SPECIAL OFFERS AND BONUSES GO ROSH WIN SUPERPRIZES FOR BETS ON DOTA 2 TAKE PART TERMS AND CONDITIONS COMPETE FOR THE RADIANT OR THE DIRE IN THE SELECTED TOURNAMENT GET PROMOTIONAL TICKETS FOR SETTLED BETS DID YOUR SIDE WIN? TAKE PART IN THE SUPERPRIZE DRAW HOW DO I CHOOSE WHICH SIDE I WANT TO COMPETE FOR IN THIS PROMOTION? AFTER CONFIRMING YOUR PARTICIPATION IN THE PROMOTION FOR EACH TOURNAMENT, SELECT THE SIDE YOU WANT TO COMPETE FOR - THE RADIANT OR THE DIRE - AND PRESS &quot;CONFIRM&quot;. YOU CAN ONLY CHOOSE YOUR SIDE FOR EACH TOURNAMENT ONCE, AND YOUR CHOICE CANNOT BE CHANGED. THE HUNT FOR ROSHAN CHOOSE A TEAM TAKE PART TAKE PART YOU CAN CHOOSE YOUR SIDE FOR THE NEXT TOURNAMENT ONCE THE PREVIOUS TOURNAMENT HAS ENDED PARTICIPANTS WHO CHOSE THE SIDE WHICH HAS EARNED THE MOST PROMOTIONAL TICKETS WILL TAKE PART IN THE MAIN SUPERPRIZE DRAW. PARTICIPANTS WHO CHOSE THE SIDE WHICH HAS EARNED THE LOWEST NUMBER OF TICKETS WILL TAKE PART IN THE PRIZE DRAW. SUPERPRIZES MAIN SUPERPRIZES PRIZES THE MAIN SUPERPRIZE DRAW INCLUDES CUSTOMERS WHO CHOSE THE SIDE WHICH HAS EARNED THE MOST TICKETS. GAMING PC MANE-MADE PRIME V.4 (1 WINNER) RESULTS OF THE DRAW HOW DO I GET A PROMO TICKET? TICKETS ARE AWARDED FOR PLACING ELIGIBLE BETS ON THE TOURNAMENTS THAT ARE INCLUDED IN THE PROMOTION. THE LARGER YOUR STAKE, THE MORE TICKETS YOU'LL GET: 3 USD 1 TICKET 5 USD 3 TICKETS 10 USD 10 TICKETS 20 USD 25 TICKETS 40 USD 60 TICKETS 60 USD 90 TICKETS 100 USD 180 TICKETS 200 USD 380 TICKETS 400 USD 800 TICKETS 450 USD 1000 TICKETS TAKE PART INFORMATION About us Terms and Conditions Affiliate Program Become an agent Privacy Policy Сookie Policy Contacts BETTING Multi-LIVE Live Toto GAMES 1xGames Live Casino STATISTICS Statistics Results</pre></details>
   </article>
-<article class="activity-card">
+<article class="activity-card detail-limited">
     <div class="activity-head">
       <span class="index">54</span>
       <div>
         <h2>30% CASHBACK BONUS </h2>
-        <p>返现 / Cashback</p>
+        <p>返现 / Cashback · <span class="detail-pill limited-pill">详情页正文有限 / Limited detail</span></p>
       </div>
     </div>
     <dl>
       <div><dt>奖励 / Reward</dt><dd>30% CASHBACK; 30% cashback</dd></div>
-      <div><dt>参与要求 / Requirements</dt><dd>CASHBACK BONUS Get 30% cashback credited to your bonus account!</dd></div>
+      <div><dt>详情页奖励 / Detail Reward</dt><dd>30% CASHBACK; 30% cashback</dd></div>
+      <div><dt>参与要求 / Requirements</dt><dd>CASHBACK BONUS Get 30% cashback credited to your bonus account! BONUS OFFER DETAILS REGISTRATION TOP-EVENTS SPORTS LIVE 1XGAMES</dd></div>
       <div><dt>开始时间 / Start Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
       <div><dt>结束时间 / End Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>详情页关键日期 / Detail Dates</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>详情页来源 / Detail Source</dt><dd><a href="https://1xlite-19708.pro/en/bonus/rules/cashback30">https://1xlite-19708.pro/en/bonus/rules/cashback30</a></dd></div>
       <div><dt>备注 / Notes</dt><dd>Get 30% cashback credited to your bonus account!</dd></div>
     </dl>
+<details class="detail-excerpt"><summary>详情页原文摘要 / Detail excerpt</summary><pre>REGISTRATION TOP-EVENTS LIVE 1XGAMES MORE</pre></details>
   </article>
     </section>
 

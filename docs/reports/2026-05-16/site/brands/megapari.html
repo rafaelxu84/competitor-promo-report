@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Megapari 活动详情</title>
   <style>
-    :root { --bg:#f5f6f2; --panel:#fff; --ink:#15201b; --muted:#66736d; --line:#d8ddd4; --green:#0d7658; --blue:#245c9e; --soft:#eef4f0; }
+    :root { --bg:#f5f6f2; --panel:#fff; --ink:#15201b; --muted:#66736d; --line:#d8ddd4; --green:#0d7658; --blue:#245c9e; --amber:#9a6816; --red:#a54040; --soft:#eef4f0; }
     * { box-sizing:border-box; }
     body { margin:0; background:var(--bg); color:var(--ink); font-family:Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; line-height:1.45; }
     .page { max-width:1280px; margin:0 auto; padding:28px 18px 56px; }
@@ -35,6 +35,9 @@
     .visual img { max-height:520px; object-fit:contain; }
     .activity-list { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:14px; }
     .activity-card { background:var(--panel); border:1px solid var(--line); border-radius:8px; padding:16px; }
+    .activity-card.detail-ok { border-left:4px solid var(--green); }
+    .activity-card.detail-limited { border-left:4px solid var(--amber); }
+    .activity-card.detail-missing { border-left:4px solid #a8b1ac; }
     .activity-head { display:grid; grid-template-columns:36px minmax(0,1fr); gap:10px; align-items:start; margin-bottom:12px; }
     .index { display:inline-grid; place-items:center; width:30px; height:30px; border-radius:999px; background:var(--soft); color:var(--green); font-weight:800; }
     dl { display:grid; gap:8px; margin:0; }
@@ -42,6 +45,12 @@
     dt { color:var(--muted); font-size:12px; font-weight:800; }
     dd { margin:0; font-size:13px; }
     .missing-text { color:var(--muted); }
+    .detail-pill { display:inline-flex; align-items:center; border-radius:999px; padding:3px 8px; font-size:12px; font-weight:800; }
+    .ok-pill { background:#e5f3ed; color:var(--green); }
+    .limited-pill { background:#fff4df; color:var(--amber); }
+    .fallback-pill { background:#eef0ea; color:var(--muted); }
+    .detail-excerpt { margin-top:12px; border-top:1px solid var(--line); padding-top:10px; }
+    .detail-excerpt summary { cursor:pointer; color:var(--blue); font-weight:800; }
     .raw { background:var(--panel); border:1px solid var(--line); border-radius:8px; padding:14px; margin-top:16px; }
     pre { white-space:pre-wrap; word-break:break-word; background:#111714; color:#eef6f0; padding:12px; border-radius:8px; max-height:320px; overflow:auto; font-size:12px; }
     a { color:var(--blue); }
@@ -56,11 +65,12 @@
         <p class="eyebrow">Brand Promotion Page</p>
         <h1>Megapari</h1>
         <p class="sub">来源 Source：<a href="https://5189305mp.pro/en/bonus/rules">https://5189305mp.pro/en/bonus/rules</a></p>
-        <p class="sub">本页根据浏览器可见内容整理。未显示的字段会标注为“列表页未显示 / Not shown on listing page”。</p>
+        <p class="sub">本页优先使用活动详情页内容；详情页未开放或未匹配时使用列表页兜底。</p>
       </div>
       <div class="meta">
         <b>活动 Activities</b>34<br>
         <b>今日新增 New</b>0<br>
+        <b>详情 Details</b>30<br>
         <b>状态 Status</b>浏览器可访问 / Browser accessible
       </div>
     </section>
@@ -70,549 +80,685 @@
     </section>
 
     <section class="activity-list">
-      <article class="activity-card">
+      <article class="activity-card detail-ok">
     <div class="activity-head">
       <span class="index">1</span>
       <div>
         <h2>UEFA BOOST </h2>
-        <p>免费投注 / Free Bet</p>
+        <p>免费投注 / Free Bet · <span class="detail-pill ok-pill">详情页已采集 / Detail captured</span></p>
       </div>
     </div>
     <dl>
       <div><dt>奖励 / Reward</dt><dd>up to 597 MYR</dd></div>
-      <div><dt>参与要求 / Requirements</dt><dd>bet of up to 597 MYR!</dd></div>
+      <div><dt>详情页奖励 / Detail Reward</dt><dd>up to 597 MYR</dd></div>
+      <div><dt>参与要求 / Requirements</dt><dd>bet of up to 597 MYR! FIND OUT MORE REGISTRATION LOG IN 12:33 EN CRICKET LIVE SPORTS BONUSES LIVE CASINO CASINO MEGAGAMES E; BETTING Basketball Football TURF Baseball Ice Hockey Multi-LIVE GAMES Crystal Crash Dice STATISTICS Statistics Results USEF</dd></div>
       <div><dt>开始时间 / Start Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
       <div><dt>结束时间 / End Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>详情页关键日期 / Detail Dates</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>详情页来源 / Detail Source</dt><dd><a href="https://5189305mp.pro/en/promotions/uefa-boost">https://5189305mp.pro/en/promotions/uefa-boost</a></dd></div>
       <div><dt>备注 / Notes</dt><dd>Get a free bet of up to 597 MYR!</dd></div>
     </dl>
+<details class="detail-excerpt"><summary>详情页原文摘要 / Detail excerpt</summary><pre>REGISTRATION LOG IN 12:33 EN CRICKET LIVE BONUSES LIVE CASINO MEGAGAMES ESPORTS MORE INFORMATION About us Careers Contacts Affiliate Program Terms and Conditions BETTING Basketball Football TURF Baseball Ice Hockey Multi-LIVE GAMES Crystal Crash Dice STATISTICS Statistics Results USEFUL LINKS Mobile version Registration Become an agent APPS iOS Android AWARDS Copyright © 2019 - 2026 «Megapari». Megapari uses cookies to ensure the best user experience. By remaining on the website, you consent to the use of your cookie files on Megapari. Find out more CUSTOMER SUPPORT +441863440619 +35780092576 18+ MOBILE VERSION CUSTOMER SUPPORT</pre></details>
   </article>
-<article class="activity-card">
+<article class="activity-card detail-missing">
     <div class="activity-head">
       <span class="index">2</span>
       <div>
         <h2>Get a free bet of up to 597 MYR! </h2>
-        <p>免费投注 / Free Bet</p>
+        <p>免费投注 / Free Bet · <span class="detail-pill fallback-pill">列表页兜底 / Listing fallback</span></p>
       </div>
     </div>
     <dl>
       <div><dt>奖励 / Reward</dt><dd>up to 597 MYR</dd></div>
+      <div><dt>详情页奖励 / Detail Reward</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
       <div><dt>参与要求 / Requirements</dt><dd>bet of up to 597 MYR! BONUS FOR A SERIES OF LOSING BETS</dd></div>
       <div><dt>开始时间 / Start Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
       <div><dt>结束时间 / End Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>详情页关键日期 / Detail Dates</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>详情页来源 / Detail Source</dt><dd><span class="missing-text">未匹配详情页 / No detail page matched</span></dd></div>
       <div><dt>备注 / Notes</dt><dd>BONUS FOR A SERIES OF LOSING BETS</dd></div>
     </dl>
+
   </article>
-<article class="activity-card">
+<article class="activity-card detail-ok">
     <div class="activity-head">
       <span class="index">3</span>
       <div>
         <h2>ADVANCEBET </h2>
-        <p>综合活动 / General Promotion</p>
+        <p>综合活动 / General Promotion · <span class="detail-pill ok-pill">详情页已采集 / Detail captured</span></p>
       </div>
     </div>
     <dl>
       <div><dt>奖励 / Reward</dt><dd>We offer a fantastic Advancebet bonus, which is available to customers who have unsettled bets in their accounts.</dd></div>
-      <div><dt>参与要求 / Requirements</dt><dd>BET We offer a fantastic Advancebet bonus, which is available to customers who have unsettled bets in their accounts.</dd></div>
+      <div><dt>详情页奖励 / Detail Reward</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>参与要求 / Requirements</dt><dd>BET We offer a fantastic Advancebet bonus, which is available to customers who have unsettled bets in their accounts. FIND; BETTING Basketball Football TURF Baseball Ice Hockey Multi-LIVE GAMES Crystal Crash Dice STATISTICS Statistics Results USEF</dd></div>
       <div><dt>开始时间 / Start Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
       <div><dt>结束时间 / End Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>详情页关键日期 / Detail Dates</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>详情页来源 / Detail Source</dt><dd><a href="https://5189305mp.pro/en/bonus/rules/advancebet">https://5189305mp.pro/en/bonus/rules/advancebet</a></dd></div>
       <div><dt>备注 / Notes</dt><dd>We offer a fantastic Advancebet bonus, which is available to customers who have unsettled bets in their accounts.</dd></div>
     </dl>
+<details class="detail-excerpt"><summary>详情页原文摘要 / Detail excerpt</summary><pre>REGISTRATION MP 12:31 EN CRICKET LIVE BONUSES LIVE CASINO MEGAGAMES ESPORTS MORE INFORMATION About us Careers Contacts Affiliate Program Terms and Conditions BETTING Basketball Football TURF Baseball Ice Hockey Multi-LIVE GAMES Crystal Crash Dice STATISTICS Statistics Results USEFUL LINKS Mobile version Registration Become an agent APPS iOS Android AWARDS Copyright © 2019 - 2026 «Megapari». Megapari uses cookies to ensure the best user experience. By remaining on the website, you consent to the use of your cookie files on Megapari. Find out more CUSTOMER SUPPORT +441863440619 +35780092576 18+ MOBILE VERSION CUSTOMER SUPPORT</pre></details>
   </article>
-<article class="activity-card">
+<article class="activity-card detail-ok">
     <div class="activity-head">
       <span class="index">4</span>
       <div>
         <h2>SPRING SPORT BONUS </h2>
-        <p>充值或欢迎奖励 / Deposit or Welcome Bonus</p>
+        <p>充值或欢迎奖励 / Deposit or Welcome Bonus · <span class="detail-pill ok-pill">详情页已采集 / Detail captured</span></p>
       </div>
     </div>
     <dl>
       <div><dt>奖励 / Reward</dt><dd>100%</dd></div>
-      <div><dt>参与要求 / Requirements</dt><dd>deposit bonus!</dd></div>
+      <div><dt>详情页奖励 / Detail Reward</dt><dd>100%</dd></div>
+      <div><dt>参与要求 / Requirements</dt><dd>deposit bonus! FIND OUT MORE REGISTRATION MP 12:31 EN CRICKET LIVE SPORTS BONUSES LIVE CASINO CASINO MEGAGAMES ESPORTS MORE INF; BETTING Basketball Football TURF Baseball Ice Hockey Multi-LIVE GAMES Crystal Crash Dice STATISTICS Statistics Results USEF</dd></div>
       <div><dt>开始时间 / Start Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
       <div><dt>结束时间 / End Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>详情页关键日期 / Detail Dates</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>详情页来源 / Detail Source</dt><dd><a href="https://5189305mp.pro/en/bonus/rules/spring-bonus">https://5189305mp.pro/en/bonus/rules/spring-bonus</a></dd></div>
       <div><dt>备注 / Notes</dt><dd>Up to 100% deposit bonus!</dd></div>
     </dl>
+<details class="detail-excerpt"><summary>详情页原文摘要 / Detail excerpt</summary><pre>REGISTRATION MP 12:31 EN CRICKET LIVE BONUSES LIVE CASINO MEGAGAMES ESPORTS MORE INFORMATION About us Careers Contacts Affiliate Program Terms and Conditions BETTING Basketball Football TURF Baseball Ice Hockey Multi-LIVE GAMES Crystal Crash Dice STATISTICS Statistics Results USEFUL LINKS Mobile version Registration Become an agent APPS iOS Android AWARDS Copyright © 2019 - 2026 «Megapari». Megapari uses cookies to ensure the best user experience. By remaining on the website, you consent to the use of your cookie files on Megapari. Find out more CUSTOMER SUPPORT +441863440619 +35780092576 18+ MOBILE VERSION CUSTOMER SUPPORT</pre></details>
   </article>
-<article class="activity-card">
+<article class="activity-card detail-ok">
     <div class="activity-head">
       <span class="index">5</span>
       <div>
         <h2>TRIP LOTTERY: CHAMPIONS CUP 2026 </h2>
-        <p>竞赛或抽奖 / Tournament or Raffle</p>
+        <p>竞赛或抽奖 / Tournament or Raffle · <span class="detail-pill ok-pill">详情页已采集 / Detail captured</span></p>
       </div>
     </div>
     <dl>
       <div><dt>奖励 / Reward</dt><dd>Take part in a prize draw for a trip to the 2026 World Cup!</dd></div>
-      <div><dt>参与要求 / Requirements</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>详情页奖励 / Detail Reward</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>参与要求 / Requirements</dt><dd>BETTING Basketball Football TURF Baseball Ice Hockey Multi-LIVE GAMES Crystal Crash Dice STATISTICS Statistics Results USEF</dd></div>
       <div><dt>开始时间 / Start Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
       <div><dt>结束时间 / End Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>详情页关键日期 / Detail Dates</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>详情页来源 / Detail Source</dt><dd><a href="https://5189305mp.pro/en/promotions/trip-lottery-champions-cup-2026">https://5189305mp.pro/en/promotions/trip-lottery-champions-cup-2026</a></dd></div>
       <div><dt>备注 / Notes</dt><dd>Take part in a prize draw for a trip to the 2026 World Cup!</dd></div>
     </dl>
+<details class="detail-excerpt"><summary>详情页原文摘要 / Detail excerpt</summary><pre>1 REGISTRATION LOG IN 12:31 EN CRICKET LIVE BONUSES LIVE CASINO MEGAGAMES ESPORTS MORE INFORMATION About us Careers Contacts Affiliate Program Terms and Conditions BETTING Basketball Football TURF Baseball Ice Hockey Multi-LIVE GAMES Crystal Crash Dice STATISTICS Statistics Results USEFUL LINKS Mobile version Registration Become an agent APPS iOS Android AWARDS Copyright © 2019 - 2026 «Megapari». Megapari uses cookies to ensure the best user experience. By remaining on the website, you consent to the use of your cookie files on Megapari. Find out more CUSTOMER SUPPORT +441863440619 +35780092576 18+ MOBILE VERSION CUSTOMER SUPPORT</pre></details>
   </article>
-<article class="activity-card">
+<article class="activity-card detail-ok">
     <div class="activity-head">
       <span class="index">6</span>
       <div>
         <h2>WELCOME PACKAGE UP TO 1000 MYR </h2>
-        <p>充值或欢迎奖励 / Deposit or Welcome Bonus</p>
+        <p>充值或欢迎奖励 / Deposit or Welcome Bonus · <span class="detail-pill ok-pill">详情页已采集 / Detail captured</span></p>
       </div>
     </div>
     <dl>
       <div><dt>奖励 / Reward</dt><dd>UP TO 1000 MYR; 200% bonus</dd></div>
-      <div><dt>参与要求 / Requirements</dt><dd>deposits</dd></div>
+      <div><dt>详情页奖励 / Detail Reward</dt><dd>UP TO 1000 MYR; 200% bonus</dd></div>
+      <div><dt>参与要求 / Requirements</dt><dd>deposits FIND OUT MORE REGISTRATION LOG IN 12:31 EN CRICKET LIVE SPORTS BONUSES LIVE CASINO CASINO MEGAGAMES ESPORTS MORE INFOR; BETTING Basketball Football TURF Baseball Ice Hockey Multi-LIVE GAMES Crystal Crash Dice STATISTICS Statistics Results USEF</dd></div>
       <div><dt>开始时间 / Start Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
       <div><dt>结束时间 / End Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>详情页关键日期 / Detail Dates</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>详情页来源 / Detail Source</dt><dd><a href="https://5189305mp.pro/en/bonus/rules/1st">https://5189305mp.pro/en/bonus/rules/1st</a></dd></div>
       <div><dt>备注 / Notes</dt><dd>Get a 200% bonus for the first 2 deposits</dd></div>
     </dl>
+<details class="detail-excerpt"><summary>详情页原文摘要 / Detail excerpt</summary><pre>REGISTRATION LOG IN 12:31 EN CRICKET LIVE BONUSES LIVE CASINO MEGAGAMES ESPORTS MORE INFORMATION About us Careers Contacts Affiliate Program Terms and Conditions BETTING Basketball Football TURF Baseball Ice Hockey Multi-LIVE GAMES Crystal Crash Dice STATISTICS Statistics Results USEFUL LINKS Mobile version Registration Become an agent APPS iOS Android AWARDS Copyright © 2019 - 2026 «Megapari». Megapari uses cookies to ensure the best user experience. By remaining on the website, you consent to the use of your cookie files on Megapari. Find out more CUSTOMER SUPPORT +441863440619 +35780092576 18+ MOBILE VERSION CUSTOMER SUPPORT</pre></details>
   </article>
-<article class="activity-card">
+<article class="activity-card detail-ok">
     <div class="activity-head">
       <span class="index">7</span>
       <div>
         <h2>WELCOME PACKAGE UP TO 7160 MYR + 150 FS </h2>
-        <p>免费旋转 / Free Spins</p>
+        <p>免费旋转 / Free Spins · <span class="detail-pill ok-pill">详情页已采集 / Detail captured</span></p>
       </div>
     </div>
     <dl>
       <div><dt>奖励 / Reward</dt><dd>UP TO 7160 MYR; 150 FS</dd></div>
-      <div><dt>参与要求 / Requirements</dt><dd>deposit!</dd></div>
+      <div><dt>详情页奖励 / Detail Reward</dt><dd>UP TO 7160 MYR; 150 FS</dd></div>
+      <div><dt>参与要求 / Requirements</dt><dd>deposit! FIND OUT MORE 1 REGISTRATION LOG IN 12:31 EN CRICKET LIVE SPORTS BONUSES LIVE CASINO CASINO MEGAGAMES ESPORTS MORE INF; BETTING Basketball Football TURF Baseball Ice Hockey Multi-LIVE GAMES Crystal Crash Dice STATISTICS Statistics Results USEF</dd></div>
       <div><dt>开始时间 / Start Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
       <div><dt>结束时间 / End Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>详情页关键日期 / Detail Dates</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>详情页来源 / Detail Source</dt><dd><a href="https://5189305mp.pro/en/bonus/casino/promotions/slot_first_deposit">https://5189305mp.pro/en/bonus/casino/promotions/slot_first_deposit</a></dd></div>
       <div><dt>备注 / Notes</dt><dd>More bonuses with every deposit!</dd></div>
     </dl>
+<details class="detail-excerpt"><summary>详情页原文摘要 / Detail excerpt</summary><pre>1 REGISTRATION LOG IN 12:31 EN CRICKET LIVE BONUSES LIVE CASINO MEGAGAMES ESPORTS MORE INFORMATION About us Careers Contacts Affiliate Program Terms and Conditions BETTING Basketball Football TURF Baseball Ice Hockey Multi-LIVE GAMES Crystal Crash Dice STATISTICS Statistics Results USEFUL LINKS Mobile version Registration Become an agent APPS iOS Android AWARDS Copyright © 2019 - 2026 «Megapari». Megapari uses cookies to ensure the best user experience. By remaining on the website, you consent to the use of your cookie files on Megapari. Find out more CUSTOMER SUPPORT +441863440619 +35780092576 18+ MOBILE VERSION CUSTOMER SUPPORT</pre></details>
   </article>
-<article class="activity-card">
+<article class="activity-card detail-missing">
     <div class="activity-head">
       <span class="index">8</span>
       <div>
         <h2>More bonuses with every deposit! </h2>
-        <p>充值或欢迎奖励 / Deposit or Welcome Bonus</p>
+        <p>充值或欢迎奖励 / Deposit or Welcome Bonus · <span class="detail-pill fallback-pill">列表页兜底 / Listing fallback</span></p>
       </div>
     </div>
     <dl>
       <div><dt>奖励 / Reward</dt><dd>50% BONUS; UP TO 1377 MYR</dd></div>
+      <div><dt>详情页奖励 / Detail Reward</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
       <div><dt>参与要求 / Requirements</dt><dd>deposit! GET A 50% BONUS OF UP TO 1377 MYR FOR YOUR 10TH CASINO DEPOSIT!</dd></div>
       <div><dt>开始时间 / Start Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
       <div><dt>结束时间 / End Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>详情页关键日期 / Detail Dates</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>详情页来源 / Detail Source</dt><dd><span class="missing-text">未匹配详情页 / No detail page matched</span></dd></div>
       <div><dt>备注 / Notes</dt><dd>GET A 50% BONUS OF UP TO 1377 MYR FOR YOUR 10TH CASINO DEPOSIT!</dd></div>
     </dl>
+
   </article>
-<article class="activity-card">
+<article class="activity-card detail-ok">
     <div class="activity-head">
       <span class="index">9</span>
       <div>
         <h2>SPIN TO WIN </h2>
-        <p>综合活动 / General Promotion</p>
+        <p>体育投注 / Sports Betting · <span class="detail-pill ok-pill">详情页已采集 / Detail captured</span></p>
       </div>
     </div>
     <dl>
       <div><dt>奖励 / Reward</dt><dd>Spin the wheel and get bonuses!</dd></div>
-      <div><dt>参与要求 / Requirements</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>详情页奖励 / Detail Reward</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>参与要求 / Requirements</dt><dd>BETTING Basketball Football TURF Baseball Ice Hockey Multi-LIVE GAMES Crystal Crash Dice STATISTICS Statistics Results USEF</dd></div>
       <div><dt>开始时间 / Start Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
       <div><dt>结束时间 / End Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>详情页关键日期 / Detail Dates</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>详情页来源 / Detail Source</dt><dd><a href="https://5189305mp.pro/en/bonus/casino/spin-to-win">https://5189305mp.pro/en/bonus/casino/spin-to-win</a></dd></div>
       <div><dt>备注 / Notes</dt><dd>Spin the wheel and get bonuses!</dd></div>
     </dl>
+<details class="detail-excerpt"><summary>详情页原文摘要 / Detail excerpt</summary><pre>REGISTRATION MP 12:33 EN CRICKET LIVE BONUSES LIVE CASINO MEGAGAMES ESPORTS MORE MP INFORMATION About us Careers Contacts Affiliate Program Terms and Conditions BETTING Basketball Football TURF Baseball Ice Hockey Multi-LIVE GAMES Crystal Crash Dice STATISTICS Statistics Results USEFUL LINKS Mobile version Registration Become an agent APPS iOS Android AWARDS Copyright © 2019 - 2026 «Megapari». Megapari uses cookies to ensure the best user experience. By remaining on the website, you consent to the use of your cookie files on Megapari. Find out more CUSTOMER SUPPORT +441863440619 +35780092576 18+ MOBILE VERSION CUSTOMER SUPPORT</pre></details>
   </article>
-<article class="activity-card">
+<article class="activity-card detail-ok">
     <div class="activity-head">
       <span class="index">10</span>
       <div>
         <h2>CASINO CASHBACK </h2>
-        <p>返现 / Cashback</p>
+        <p>返现 / Cashback · <span class="detail-pill ok-pill">详情页已采集 / Detail captured</span></p>
       </div>
     </div>
     <dl>
       <div><dt>奖励 / Reward</dt><dd>Thank you for choosing us! As a token of our gratitude, we're offering you the chance to join our loyalty program and get Casino cashback</dd></div>
-      <div><dt>参与要求 / Requirements</dt><dd>CASHBACK Thank you for choosing us! As a token of our gratitude, we're offering you the chance to join our loyalty program and g; cashback</dd></div>
+      <div><dt>详情页奖励 / Detail Reward</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>参与要求 / Requirements</dt><dd>CASHBACK Thank you for choosing us! As a token of our gratitude, we're offering you the chance to join our loyalty program and g; cashback FIND OUT MORE 1 REGISTRATION LOG IN 12:31 EN CRICKET LIVE SPORTS BONUSES LIVE CASINO CASINO MEGAGAMES ESPORTS MORE INFO; BETTING Basketball Football TURF Baseball Ice Hockey Multi-LIVE GAMES Crystal Crash Dice STATISTICS Statistics Results USEF</dd></div>
       <div><dt>开始时间 / Start Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
       <div><dt>结束时间 / End Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>详情页关键日期 / Detail Dates</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>详情页来源 / Detail Source</dt><dd><a href="https://5189305mp.pro/en/bonus/casino/promotions/vip_cashback">https://5189305mp.pro/en/bonus/casino/promotions/vip_cashback</a></dd></div>
       <div><dt>备注 / Notes</dt><dd>Thank you for choosing us! As a token of our gratitude, we're offering you the chance to join our loyalty program and get Casino cashback</dd></div>
     </dl>
+<details class="detail-excerpt"><summary>详情页原文摘要 / Detail excerpt</summary><pre>1 REGISTRATION LOG IN 12:31 EN CRICKET LIVE BONUSES LIVE CASINO MEGAGAMES ESPORTS MORE INFORMATION About us Careers Contacts Affiliate Program Terms and Conditions BETTING Basketball Football TURF Baseball Ice Hockey Multi-LIVE GAMES Crystal Crash Dice STATISTICS Statistics Results USEFUL LINKS Mobile version Registration Become an agent APPS iOS Android AWARDS Copyright © 2019 - 2026 «Megapari». Megapari uses cookies to ensure the best user experience. By remaining on the website, you consent to the use of your cookie files on Megapari. Find out more CUSTOMER SUPPORT +441863440619 +35780092576 18+ MOBILE VERSION CUSTOMER SUPPORT</pre></details>
   </article>
-<article class="activity-card">
+<article class="activity-card detail-ok">
     <div class="activity-head">
       <span class="index">11</span>
       <div>
         <h2>SUNDAY FREE SPINS IN AVIATOR! </h2>
-        <p>免费旋转 / Free Spins</p>
+        <p>免费旋转 / Free Spins · <span class="detail-pill ok-pill">详情页已采集 / Detail captured</span></p>
       </div>
     </div>
     <dl>
       <div><dt>奖励 / Reward</dt><dd>up to 60 free spins</dd></div>
-      <div><dt>参与要求 / Requirements</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>详情页奖励 / Detail Reward</dt><dd>up to 60 free spins</dd></div>
+      <div><dt>参与要求 / Requirements</dt><dd>BETTING Basketball Football TURF Baseball Ice Hockey Multi-LIVE GAMES Crystal Crash Dice STATISTICS Statistics Results USEF</dd></div>
       <div><dt>开始时间 / Start Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
       <div><dt>结束时间 / End Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>详情页关键日期 / Detail Dates</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>详情页来源 / Detail Source</dt><dd><a href="https://5189305mp.pro/en/bonus/casino/bonus-aviator">https://5189305mp.pro/en/bonus/casino/bonus-aviator</a></dd></div>
       <div><dt>备注 / Notes</dt><dd>Bag up to 60 free spins every Sunday!</dd></div>
     </dl>
+<details class="detail-excerpt"><summary>详情页原文摘要 / Detail excerpt</summary><pre>1 REGISTRATION LOG IN 12:31 EN CRICKET LIVE BONUSES LIVE CASINO MEGAGAMES ESPORTS MORE MP INFORMATION About us Careers Contacts Affiliate Program Terms and Conditions BETTING Basketball Football TURF Baseball Ice Hockey Multi-LIVE GAMES Crystal Crash Dice STATISTICS Statistics Results USEFUL LINKS Mobile version Registration Become an agent APPS iOS Android AWARDS Copyright © 2019 - 2026 «Megapari». Megapari uses cookies to ensure the best user experience. By remaining on the website, you consent to the use of your cookie files on Megapari. Find out more CUSTOMER SUPPORT +441863440619 +35780092576 18+ MOBILE VERSION CUSTOMER SUPPORT</pre></details>
   </article>
-<article class="activity-card">
+<article class="activity-card detail-ok">
     <div class="activity-head">
       <span class="index">12</span>
       <div>
         <h2>BETS VIA TELEGRAM </h2>
-        <p>综合活动 / General Promotion</p>
+        <p>综合活动 / General Promotion · <span class="detail-pill ok-pill">详情页已采集 / Detail captured</span></p>
       </div>
     </div>
     <dl>
       <div><dt>奖励 / Reward</dt><dd>Keep chatting with your friends and place bets with Megapari without leaving the app</dd></div>
-      <div><dt>参与要求 / Requirements</dt><dd>BETS VIA TELEGRAM Keep chatting with your friends and place bets with Megapari without leaving the app</dd></div>
+      <div><dt>详情页奖励 / Detail Reward</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>参与要求 / Requirements</dt><dd>BETS VIA TELEGRAM Keep chatting with your friends and place bets with Megapari without leaving the app FIND OUT MORE REGIST; BETTING Basketball Football TURF Baseball Ice Hockey Multi-LIVE GAMES Crystal Crash Dice STATISTICS Statistics Results USEF</dd></div>
       <div><dt>开始时间 / Start Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
       <div><dt>结束时间 / End Time</dt><dd>ends and place bets with Megapari without leaving the app</dd></div>
+      <div><dt>详情页关键日期 / Detail Dates</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>详情页来源 / Detail Source</dt><dd><a href="https://5189305mp.pro/en/bonus/rules/telegram-megapari">https://5189305mp.pro/en/bonus/rules/telegram-megapari</a></dd></div>
       <div><dt>备注 / Notes</dt><dd>Keep chatting with your friends and place bets with Megapari without leaving the app</dd></div>
     </dl>
+<details class="detail-excerpt"><summary>详情页原文摘要 / Detail excerpt</summary><pre>REGISTRATION MP 12:31 EN CRICKET LIVE BONUSES LIVE CASINO MEGAGAMES ESPORTS MORE INFORMATION About us Careers Contacts Affiliate Program Terms and Conditions BETTING Basketball Football TURF Baseball Ice Hockey Multi-LIVE GAMES Crystal Crash Dice STATISTICS Statistics Results USEFUL LINKS Mobile version Registration Become an agent APPS iOS Android AWARDS Copyright © 2019 - 2026 «Megapari». Megapari uses cookies to ensure the best user experience. By remaining on the website, you consent to the use of your cookie files on Megapari. Find out more CUSTOMER SUPPORT +441863440619 +35780092576 18+ MOBILE VERSION CUSTOMER SUPPORT</pre></details>
   </article>
-<article class="activity-card">
+<article class="activity-card detail-ok">
     <div class="activity-head">
       <span class="index">13</span>
       <div>
         <h2>SPORTS CASHBACK </h2>
-        <p>返现 / Cashback</p>
+        <p>返现 / Cashback · <span class="detail-pill ok-pill">详情页已采集 / Detail captured</span></p>
       </div>
     </div>
     <dl>
       <div><dt>奖励 / Reward</dt><dd>The Company offers a &quot;Weekly Cashback Bonus&quot; program.</dd></div>
-      <div><dt>参与要求 / Requirements</dt><dd>CASHBACK The Company offers a &quot;Weekly Cashback Bonus&quot; program.</dd></div>
+      <div><dt>详情页奖励 / Detail Reward</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>参与要求 / Requirements</dt><dd>CASHBACK The Company offers a &quot;Weekly Cashback Bonus&quot; program. FIND OUT MORE REGISTRATION MP 12:31 EN CRICKET LIVE SPORTS BONUSE; BETTING Basketball Football TURF Baseball Ice Hockey Multi-LIVE GAMES Crystal Crash Dice STATISTICS Statistics Results USEF</dd></div>
       <div><dt>开始时间 / Start Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
       <div><dt>结束时间 / End Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>详情页关键日期 / Detail Dates</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>详情页来源 / Detail Source</dt><dd><a href="https://5189305mp.pro/en/bonus/rules/sportcash">https://5189305mp.pro/en/bonus/rules/sportcash</a></dd></div>
       <div><dt>备注 / Notes</dt><dd>The Company offers a &quot;Weekly Cashback Bonus&quot; program.</dd></div>
     </dl>
+<details class="detail-excerpt"><summary>详情页原文摘要 / Detail excerpt</summary><pre>REGISTRATION MP 12:31 EN CRICKET LIVE BONUSES LIVE CASINO MEGAGAMES ESPORTS MORE INFORMATION About us Careers Contacts Affiliate Program Terms and Conditions BETTING Basketball Football TURF Baseball Ice Hockey Multi-LIVE GAMES Crystal Crash Dice STATISTICS Statistics Results USEFUL LINKS Mobile version Registration Become an agent APPS iOS Android AWARDS Copyright © 2019 - 2026 «Megapari». Megapari uses cookies to ensure the best user experience. By remaining on the website, you consent to the use of your cookie files on Megapari. Find out more CUSTOMER SUPPORT +441863440619 +35780092576 18+ MOBILE VERSION CUSTOMER SUPPORT</pre></details>
   </article>
-<article class="activity-card">
+<article class="activity-card detail-ok">
     <div class="activity-head">
       <span class="index">14</span>
       <div>
         <h2>FREE BET ON YOUR FIRST DEPOSIT </h2>
-        <p>免费投注 / Free Bet</p>
+        <p>免费投注 / Free Bet · <span class="detail-pill ok-pill">详情页已采集 / Detail captured</span></p>
       </div>
     </div>
     <dl>
       <div><dt>奖励 / Reward</dt><dd>15%</dd></div>
-      <div><dt>参与要求 / Requirements</dt><dd>BET ON YOUR FIRST DEPOSIT Make your first deposit and get 15% of the deposit amount as a free bet</dd></div>
+      <div><dt>详情页奖励 / Detail Reward</dt><dd>15%</dd></div>
+      <div><dt>参与要求 / Requirements</dt><dd>BET ON YOUR FIRST DEPOSIT Make your first deposit and get 15% of the deposit amount as a free bet FIND OUT MORE 1 REGISTRAT; BETTING Basketball Football TURF Baseball Ice Hockey Multi-LIVE GAMES Crystal Crash Dice STATISTICS Statistics Results USEF</dd></div>
       <div><dt>开始时间 / Start Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
       <div><dt>结束时间 / End Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>详情页关键日期 / Detail Dates</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>详情页来源 / Detail Source</dt><dd><a href="https://5189305mp.pro/en/bonus/rules/freebet_first_deposit">https://5189305mp.pro/en/bonus/rules/freebet_first_deposit</a></dd></div>
       <div><dt>备注 / Notes</dt><dd>Make your first deposit and get 15% of the deposit amount as a free bet</dd></div>
     </dl>
+<details class="detail-excerpt"><summary>详情页原文摘要 / Detail excerpt</summary><pre>1 REGISTRATION LOG IN 12:31 EN CRICKET LIVE BONUSES LIVE CASINO MEGAGAMES ESPORTS MORE INFORMATION About us Careers Contacts Affiliate Program Terms and Conditions BETTING Basketball Football TURF Baseball Ice Hockey Multi-LIVE GAMES Crystal Crash Dice STATISTICS Statistics Results USEFUL LINKS Mobile version Registration Become an agent APPS iOS Android AWARDS Copyright © 2019 - 2026 «Megapari». Megapari uses cookies to ensure the best user experience. By remaining on the website, you consent to the use of your cookie files on Megapari. Find out more CUSTOMER SUPPORT +441863440619 +35780092576 18+ MOBILE VERSION CUSTOMER SUPPORT</pre></details>
   </article>
-<article class="activity-card">
+<article class="activity-card detail-ok">
     <div class="activity-head">
       <span class="index">15</span>
       <div>
         <h2>FRIDAY CASINO BОNUS </h2>
-        <p>充值或欢迎奖励 / Deposit or Welcome Bonus</p>
+        <p>充值或欢迎奖励 / Deposit or Welcome Bonus · <span class="detail-pill ok-pill">详情页已采集 / Detail captured</span></p>
       </div>
     </div>
     <dl>
       <div><dt>奖励 / Reward</dt><dd>100%</dd></div>
-      <div><dt>参与要求 / Requirements</dt><dd>deposit bonus every Friday</dd></div>
+      <div><dt>详情页奖励 / Detail Reward</dt><dd>100%</dd></div>
+      <div><dt>参与要求 / Requirements</dt><dd>deposit bonus every Friday FIND OUT MORE 1 REGISTRATION LOG IN 12:31 EN CRICKET LIVE SPORTS BONUSES LIVE CASINO CASINO MEGAGAME; BETTING Basketball Football TURF Baseball Ice Hockey Multi-LIVE GAMES Crystal Crash Dice STATISTICS Statistics Results USEF</dd></div>
       <div><dt>开始时间 / Start Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
       <div><dt>结束时间 / End Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>详情页关键日期 / Detail Dates</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>详情页来源 / Detail Source</dt><dd><a href="https://5189305mp.pro/en/bonus/casino/reload-bonus">https://5189305mp.pro/en/bonus/casino/reload-bonus</a></dd></div>
       <div><dt>备注 / Notes</dt><dd>Get a 100% deposit bonus every Friday</dd></div>
     </dl>
+<details class="detail-excerpt"><summary>详情页原文摘要 / Detail excerpt</summary><pre>1 REGISTRATION LOG IN 12:31 EN CRICKET LIVE BONUSES LIVE CASINO MEGAGAMES ESPORTS MORE MP INFORMATION About us Careers Contacts Affiliate Program Terms and Conditions BETTING Basketball Football TURF Baseball Ice Hockey Multi-LIVE GAMES Crystal Crash Dice STATISTICS Statistics Results USEFUL LINKS Mobile version Registration Become an agent APPS iOS Android AWARDS Copyright © 2019 - 2026 «Megapari». Megapari uses cookies to ensure the best user experience. By remaining on the website, you consent to the use of your cookie files on Megapari. Find out more CUSTOMER SUPPORT +441863440619 +35780092576 18+ MOBILE VERSION CUSTOMER SUPPORT</pre></details>
   </article>
-<article class="activity-card">
+<article class="activity-card detail-ok">
     <div class="activity-head">
       <span class="index">16</span>
       <div>
         <h2>100% SATURDAY FOOTBALL BONUS </h2>
-        <p>充值或欢迎奖励 / Deposit or Welcome Bonus</p>
+        <p>充值或欢迎奖励 / Deposit or Welcome Bonus · <span class="detail-pill ok-pill">详情页已采集 / Detail captured</span></p>
       </div>
     </div>
     <dl>
       <div><dt>奖励 / Reward</dt><dd>100%; up to 460 MYR</dd></div>
-      <div><dt>参与要求 / Requirements</dt><dd>deposit</dd></div>
+      <div><dt>详情页奖励 / Detail Reward</dt><dd>100%; up to 460 MYR</dd></div>
+      <div><dt>参与要求 / Requirements</dt><dd>deposit FIND OUT MORE REGISTRATION MP 12:31 EN CRICKET LIVE SPORTS BONUSES LIVE CASINO CASINO MEGAGAMES ESPORTS MORE INFORMATIO; BETTING Basketball Football TURF Baseball Ice Hockey Multi-LIVE GAMES Crystal Crash Dice STATISTICS Statistics Results USEF</dd></div>
       <div><dt>开始时间 / Start Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
       <div><dt>结束时间 / End Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>详情页关键日期 / Detail Dates</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>详情页来源 / Detail Source</dt><dd><a href="https://5189305mp.pro/en/promotions/100-saturday-football-bonus">https://5189305mp.pro/en/promotions/100-saturday-football-bonus</a></dd></div>
       <div><dt>备注 / Notes</dt><dd>Bonus up to 460 MYR for your deposit</dd></div>
     </dl>
+<details class="detail-excerpt"><summary>详情页原文摘要 / Detail excerpt</summary><pre>REGISTRATION MP 12:31 EN CRICKET LIVE BONUSES LIVE CASINO MEGAGAMES ESPORTS MORE INFORMATION About us Careers Contacts Affiliate Program Terms and Conditions BETTING Basketball Football TURF Baseball Ice Hockey Multi-LIVE GAMES Crystal Crash Dice STATISTICS Statistics Results USEFUL LINKS Mobile version Registration Become an agent APPS iOS Android AWARDS Copyright © 2019 - 2026 «Megapari». Megapari uses cookies to ensure the best user experience. By remaining on the website, you consent to the use of your cookie files on Megapari. Find out more CUSTOMER SUPPORT +441863440619 +35780092576 18+ MOBILE VERSION CUSTOMER SUPPORT</pre></details>
   </article>
-<article class="activity-card">
+<article class="activity-card detail-ok">
     <div class="activity-head">
       <span class="index">17</span>
       <div>
         <h2>FREE BET HOUR </h2>
-        <p>返现 / Cashback</p>
+        <p>返现 / Cashback · <span class="detail-pill ok-pill">详情页已采集 / Detail captured</span></p>
       </div>
     </div>
     <dl>
       <div><dt>奖励 / Reward</dt><dd>50% cashback</dd></div>
-      <div><dt>参与要求 / Requirements</dt><dd>BET HOUR Place bets on football from 19:00 to 20:00 and get 50% cashback from your losses as a free bet</dd></div>
+      <div><dt>详情页奖励 / Detail Reward</dt><dd>50% cashback</dd></div>
+      <div><dt>参与要求 / Requirements</dt><dd>BET HOUR Place bets on football from 19:00 to 20:00 and get 50% cashback from your losses as a free bet FIND OUT MORE 1 REG; BETTING Basketball Football TURF Baseball Ice Hockey Multi-LIVE GAMES Crystal Crash Dice STATISTICS Statistics Results USEF</dd></div>
       <div><dt>开始时间 / Start Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
       <div><dt>结束时间 / End Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>详情页关键日期 / Detail Dates</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>详情页来源 / Detail Source</dt><dd><a href="https://5189305mp.pro/en/promotions/free-bet-hour">https://5189305mp.pro/en/promotions/free-bet-hour</a></dd></div>
       <div><dt>备注 / Notes</dt><dd>Place bets on football from 19:00 to 20:00 and get 50% cashback from your losses as a free bet</dd></div>
     </dl>
+<details class="detail-excerpt"><summary>详情页原文摘要 / Detail excerpt</summary><pre>1 REGISTRATION LOG IN 12:31 EN CRICKET LIVE BONUSES LIVE CASINO MEGAGAMES ESPORTS MORE INFORMATION About us Careers Contacts Affiliate Program Terms and Conditions BETTING Basketball Football TURF Baseball Ice Hockey Multi-LIVE GAMES Crystal Crash Dice STATISTICS Statistics Results USEFUL LINKS Mobile version Registration Become an agent APPS iOS Android AWARDS Copyright © 2019 - 2026 «Megapari». Megapari uses cookies to ensure the best user experience. By remaining on the website, you consent to the use of your cookie files on Megapari. Find out more CUSTOMER SUPPORT +441863440619 +35780092576 18+ MOBILE VERSION CUSTOMER SUPPORT</pre></details>
   </article>
-<article class="activity-card">
+<article class="activity-card detail-ok">
     <div class="activity-head">
       <span class="index">18</span>
       <div>
         <h2>ICE QUEST </h2>
-        <p>免费投注 / Free Bet</p>
+        <p>免费投注 / Free Bet · <span class="detail-pill ok-pill">详情页已采集 / Detail captured</span></p>
       </div>
     </div>
     <dl>
       <div><dt>奖励 / Reward</dt><dd>Complete tasks and get free bets!</dd></div>
-      <div><dt>参与要求 / Requirements</dt><dd>Complete tasks and get free bets!</dd></div>
+      <div><dt>详情页奖励 / Detail Reward</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>参与要求 / Requirements</dt><dd>Complete tasks and get free bets! FIND OUT MORE 1 REGISTRATION LOG IN 12:31 EN CRICKET LIVE SPORTS BONUSES LIVE CASINO CASINO ME; BETTING Basketball Football TURF Baseball Ice Hockey Multi-LIVE GAMES Crystal Crash Dice STATISTICS Statistics Results USEF</dd></div>
       <div><dt>开始时间 / Start Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
       <div><dt>结束时间 / End Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>详情页关键日期 / Detail Dates</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>详情页来源 / Detail Source</dt><dd><a href="https://5189305mp.pro/en/promotions/ice-quest">https://5189305mp.pro/en/promotions/ice-quest</a></dd></div>
       <div><dt>备注 / Notes</dt><dd>Complete tasks and get free bets!</dd></div>
     </dl>
+<details class="detail-excerpt"><summary>详情页原文摘要 / Detail excerpt</summary><pre>1 REGISTRATION LOG IN 12:31 EN CRICKET LIVE BONUSES LIVE CASINO MEGAGAMES ESPORTS MORE INFORMATION About us Careers Contacts Affiliate Program Terms and Conditions BETTING Basketball Football TURF Baseball Ice Hockey Multi-LIVE GAMES Crystal Crash Dice STATISTICS Statistics Results USEFUL LINKS Mobile version Registration Become an agent APPS iOS Android AWARDS Copyright © 2019 - 2026 «Megapari». Megapari uses cookies to ensure the best user experience. By remaining on the website, you consent to the use of your cookie files on Megapari. Find out more CUSTOMER SUPPORT +441863440619 +35780092576 18+ MOBILE VERSION CUSTOMER SUPPORT</pre></details>
   </article>
-<article class="activity-card">
+<article class="activity-card detail-ok">
     <div class="activity-head">
       <span class="index">19</span>
       <div>
         <h2>WHEEL OF FORTUNE </h2>
-        <p>竞赛或抽奖 / Tournament or Raffle</p>
+        <p>竞赛或抽奖 / Tournament or Raffle · <span class="detail-pill ok-pill">详情页已采集 / Detail captured</span></p>
       </div>
     </div>
     <dl>
       <div><dt>奖励 / Reward</dt><dd>Enjoy a variety of games and take part in a prize draw!</dd></div>
-      <div><dt>参与要求 / Requirements</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>详情页奖励 / Detail Reward</dt><dd>€ 250,000</dd></div>
+      <div><dt>参与要求 / Requirements</dt><dd>Play for free PLAY Lightning Juicy Coins Play for free PLAY Champions Road BB Play for free PLAY Legend of Freeren Play for free PLAY Golden Railway Journey Play for free PLA; Play for free PLAY Willie Wild Bonanza Play for free PLAY Sky Rail Riches Play for free PLAY Royalty of Olympus Xmas Play for free PLAY Hot Diego Hold and Spin Play for free; PLAY Rise of Aztecs Play for free PLAY Wolves and Coins Hold and Spin Play for free PLAY Goldhorn Wild Herd Play for free PLAY Wild Catch Bonanza Play for free PLAY Goldhorn; Play for free PLAY Lightning Coins Hold and Spin Play for free PLAY Gems Digger TERMS AND CONDITIONS Your points are calculated by multiplying your winnings by 100 INFORMATIO</dd></div>
       <div><dt>开始时间 / Start Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
-      <div><dt>结束时间 / End Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>结束时间 / End Time</dt><dd>07.05.26; 17.05.26; ENDS IN 0 0 D 0 0 H 0 0 M 0 0 S Enjoy a variety of games and take part in a prize draw! TERMS A; end of Freeren Play for free PLAY Golden Railway Journey Play for free PLAY Big Mammoth Play f; end Play for free PLAY Lightning Coins Hold and Spin Play for free PLAY Gems Digger TERMS AND</dd></div>
+      <div><dt>详情页关键日期 / Detail Dates</dt><dd>07.05.26; 17.05.26; ENDS IN 0 0 D 0 0 H 0 0 M 0 0 S Enjoy a variety of games and take part in a prize draw! TERMS A; end of Freeren Play for free PLAY Golden Railway Journey Play for free PLAY Big Mammoth Play f; end Play for free PLAY Lightning Coins Hold and Spin Play for free PLAY Gems Digger TERMS AND</dd></div>
+      <div><dt>详情页来源 / Detail Source</dt><dd><a href="https://5189305mp.pro/en/bonus/casino/tournaments/wheel-of-fortune">https://5189305mp.pro/en/bonus/casino/tournaments/wheel-of-fortune</a></dd></div>
       <div><dt>备注 / Notes</dt><dd>Enjoy a variety of games and take part in a prize draw!</dd></div>
     </dl>
+<details class="detail-excerpt"><summary>详情页原文摘要 / Detail excerpt</summary><pre>REGISTRATION MP 12:32 EN CRICKET LIVE BONUSES LIVE CASINO MEGAGAMES ESPORTS MORE MP PRIZE FUND € 250,000 WHEEL OF FORTUNE 07.05.26 00:00 GMT 17.05.26 23:45 GMT TOURNAMENT ENDS IN 0 0 D 0 0 H 0 0 M 0 0 S Enjoy a variety of games and take part in a prize draw! TERMS AND CONDITIONS Play for free PLAY Lightning Juicy Coins Play for free PLAY Champions Road BB Play for free PLAY Legend of Freeren Play for free PLAY Golden Railway Journey Play for free PLAY Big Mammoth Play for free PLAY Willie Wild Bonanza Play for free PLAY Sky Rail Riches Play for free PLAY Royalty of Olympus Xmas Play for free PLAY Hot Diego Hold and Spin Play for free PLAY Rise of Aztecs Play for free PLAY Wolves and Coins Hold and Spin Play for free PLAY Goldhorn Wild Herd Play for free PLAY Wild Catch Bonanza Play for free PLAY Goldhorn Legend Play for free PLAY Lightning Coins Hold and Spin Play for free</pre></details>
   </article>
-<article class="activity-card">
+<article class="activity-card detail-ok">
     <div class="activity-head">
       <span class="index">20</span>
       <div>
         <h2>SEASON OF LEGENDS </h2>
-        <p>竞赛或抽奖 / Tournament or Raffle</p>
+        <p>竞赛或抽奖 / Tournament or Raffle · <span class="detail-pill ok-pill">详情页已采集 / Detail captured</span></p>
       </div>
     </div>
     <dl>
       <div><dt>奖励 / Reward</dt><dd>Join in the race for prizes and become one of the winners!</dd></div>
-      <div><dt>参与要求 / Requirements</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>详情页奖励 / Detail Reward</dt><dd>€ 383,000; €0.20</dd></div>
+      <div><dt>参与要求 / Requirements</dt><dd>Play for free PLAY Gems of Ra Play for free PLAY Love and Luck Joker Play for free PLAY Hot Rio Samba Play for free PLAY Three Trojan Horses Play for free PLAY Sunstone Riche; Play for free PLAY Train of Riches: Capital Express Play for free PLAY Luck Reactor Play for free PLAY Mega Greatest Catch Blue Marlin Play for free PLAY Young Eagle Song PLA; Play for free PLAY Young Buffalo Coins Play for free PLAY Basket Bounty Play for free PLAY Diamonds Hustle Play for free PLAY Belfry Bliss Hold and Win Play for free PLAY Lav; Play for free PLAY Young Buffalo Song TERMS AND CONDITIONS Total Winnings: The participant with the highest total winnings during the phase wins. Total Spin: Every spin = 1 p; minimum stake is €0.20 INFORMATION About us Careers Contacts Affiliate Program Terms and Conditions BETTING Basketball Football TURF Baseball Ice Hockey Multi-LIVE GAMES Crystal</dd></div>
       <div><dt>开始时间 / Start Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
       <div><dt>结束时间 / End Time</dt><dd>ENDS Join in the race for prizes and become one of the winners!</dd></div>
+      <div><dt>详情页关键日期 / Detail Dates</dt><dd>ENDS 25.03.26 00:01 GMT 29.05.26 23:59 GMT TOURNAMENT ENDS IN 0 0 D 0 0 H 0 0 M 0 0 S Join in t</dd></div>
+      <div><dt>详情页来源 / Detail Source</dt><dd><a href="https://5189305mp.pro/en/bonus/casino/tournaments/season-of-legends">https://5189305mp.pro/en/bonus/casino/tournaments/season-of-legends</a></dd></div>
       <div><dt>备注 / Notes</dt><dd>Join in the race for prizes and become one of the winners!</dd></div>
     </dl>
+<details class="detail-excerpt"><summary>详情页原文摘要 / Detail excerpt</summary><pre>REGISTRATION MP 12:32 EN CRICKET LIVE BONUSES LIVE CASINO MEGAGAMES ESPORTS MORE MP PRIZE FUND € 383,000 SEASON OF LEGENDS 25.03.26 00:01 GMT 29.05.26 23:59 GMT TOURNAMENT ENDS IN 0 0 D 0 0 H 0 0 M 0 0 S Join in the race for prizes and become one of the winners! TERMS AND CONDITIONS Play for free PLAY Gems of Ra Play for free PLAY Love and Luck Joker Play for free PLAY Hot Rio Samba Play for free PLAY Three Trojan Horses Play for free PLAY Sunstone Riches Play for free PLAY Train of Riches: Capital Express Play for free PLAY Luck Reactor Play for free PLAY Mega Greatest Catch Blue Marlin Play for free PLAY Young Eagle Song PLAY Imperial Relics: Three Pots Play for free PLAY Young Buffalo Coins Play for free PLAY Basket Bounty Play for free PLAY Diamonds Hustle Play for free PLAY Belfry Bliss Hold and Win Play for free PLAY Lava Burst Play for free PLAY</pre></details>
   </article>
-<article class="activity-card">
+<article class="activity-card detail-ok">
     <div class="activity-head">
       <span class="index">21</span>
       <div>
         <h2>CRASH ROYALE WEEKLY COMPETITION </h2>
-        <p>竞赛或抽奖 / Tournament or Raffle</p>
+        <p>竞赛或抽奖 / Tournament or Raffle · <span class="detail-pill ok-pill">详情页已采集 / Detail captured</span></p>
       </div>
     </div>
     <dl>
       <div><dt>奖励 / Reward</dt><dd>Enjoy a variety of games and take part in a prize draw!</dd></div>
-      <div><dt>参与要求 / Requirements</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>详情页奖励 / Detail Reward</dt><dd>€ 10,000; €0.50</dd></div>
+      <div><dt>参与要求 / Requirements</dt><dd>Play for free PLAY Crash Royale TERMS AND CONDITIONS Customers will be automatically registered for the tournament if they meet the minimum stake requirement of €0.50 The ten; minimum stake requirement, will be eligible for cash prizes at the end of each week. INFORMATION About us Careers Contacts Affiliate Program Terms and Conditions BETTING Basketb</dd></div>
       <div><dt>开始时间 / Start Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
-      <div><dt>结束时间 / End Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>结束时间 / End Time</dt><dd>12.01.26; 31.05.26; ENDS IN 0 0 D 0 0 H 0 0 M 0 0 S Enjoy a variety of games and take part in a prize draw! TERMS A; end of each week. INFORMATION About us Careers Contacts Affiliate Program Terms and Conditions</dd></div>
+      <div><dt>详情页关键日期 / Detail Dates</dt><dd>12.01.26; 31.05.26; ENDS IN 0 0 D 0 0 H 0 0 M 0 0 S Enjoy a variety of games and take part in a prize draw! TERMS A; end of each week. INFORMATION About us Careers Contacts Affiliate Program Terms and Conditions</dd></div>
+      <div><dt>详情页来源 / Detail Source</dt><dd><a href="https://5189305mp.pro/en/bonus/casino/tournaments/crash-royale-weekly-competition">https://5189305mp.pro/en/bonus/casino/tournaments/crash-royale-weekly-competition</a></dd></div>
       <div><dt>备注 / Notes</dt><dd>Enjoy a variety of games and take part in a prize draw!</dd></div>
     </dl>
+<details class="detail-excerpt"><summary>详情页原文摘要 / Detail excerpt</summary><pre>1 REGISTRATION LOG IN 12:32 EN CRICKET LIVE BONUSES LIVE CASINO MEGAGAMES ESPORTS MORE MP PRIZE FUND € 10,000 CRASH ROYALE WEEKLY COMPETITION 12.01.26 12:00 GMT 31.05.26 12:00 GMT TOURNAMENT ENDS IN 0 0 D 0 0 H 0 0 M 0 0 S Enjoy a variety of games and take part in a prize draw! TERMS AND CONDITIONS Play for free PLAY Crash Royale TERMS AND CONDITIONS Customers will be automatically registered for the tournament if they meet the minimum stake requirement of €0.50 The ten participants with the highest winning multipliers, who have also met the minimum stake requirement, will be eligible for cash prizes at the end of each week. INFORMATION About us Careers Contacts Affiliate Program Terms and Conditions BETTING Basketball Football TURF Baseball Ice Hockey Multi-LIVE GAMES Crystal Crash Dice STATISTICS Statistics Results USEFUL LINKS Mobile version Registration Become an agent APPS iOS Android AWARDS Copyright © 2019 - 2026 «Megapari». Megapari uses cookies to ensure the best user experience. By remaining on the website, you consent to the use of your cookie files on Megapari. Find out more CUSTOMER SUPPORT +441863440619 +35780092576 18+ MOBILE VERSION CUSTOMER SUPPORT</pre></details>
   </article>
-<article class="activity-card">
+<article class="activity-card detail-ok">
     <div class="activity-head">
       <span class="index">22</span>
       <div>
         <h2>BOOK OF BILLIONAIRE </h2>
-        <p>竞赛或抽奖 / Tournament or Raffle</p>
+        <p>竞赛或抽奖 / Tournament or Raffle · <span class="detail-pill ok-pill">详情页已采集 / Detail captured</span></p>
       </div>
     </div>
     <dl>
       <div><dt>奖励 / Reward</dt><dd>Join the race for prizes!</dd></div>
-      <div><dt>参与要求 / Requirements</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>详情页奖励 / Detail Reward</dt><dd>€ 1.5; €1; €0.20</dd></div>
+      <div><dt>参与要求 / Requirements</dt><dd>Play for free PLAY Trump It Bonanza X1000 PLAY Bonanza Link: Midnight Train x1000 Play for free PLAY Golden Link Express Play for free PLAY Atomic Coins 2: Running Wins Play; PLAY Striking Diamond 3 Play for free PLAY Mega Thunder: Running Wins™ Play for free PLAY Bonanza Link: Cash Train X1000 Play for free PLAY Coin Blitz: Running Wins™ Play for; PLAY Trump It Mania: Hot Bonus Play for free PLAY Striking Diamond 2 Play for free PLAY Power Coin Play for free PLAY Fireball Fury: Hot Bonus Play for free PLAY Fireball Vol; Play for free PLAY Inferno Fireballs 2 Play for free PLAY Coin Rush: Gorilla Boost Play for free PLAY Trinity Egypt Link TERMS AND CONDITIONS You get 2 points for every €1 in; minimum stake is €0.20 INFORMATION About us Careers Contacts Affiliate Program Terms and Conditions BETTING Basketball Football TURF Baseball Ice Hockey Multi-LIVE GAMES Crystal</dd></div>
       <div><dt>开始时间 / Start Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
-      <div><dt>结束时间 / End Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>结束时间 / End Time</dt><dd>01.05.26; 31.05.26; ENDS IN 0 0 D 0 0 H 0 0 M 0 0 S Join the race for prizes! TERMS AND CONDITIONS Play for free PL</dd></div>
+      <div><dt>详情页关键日期 / Detail Dates</dt><dd>01.05.26; 31.05.26; ENDS IN 0 0 D 0 0 H 0 0 M 0 0 S Join the race for prizes! TERMS AND CONDITIONS Play for free PL</dd></div>
+      <div><dt>详情页来源 / Detail Source</dt><dd><a href="https://5189305mp.pro/en/bonus/casino/tournaments/book-of-billionaire">https://5189305mp.pro/en/bonus/casino/tournaments/book-of-billionaire</a></dd></div>
       <div><dt>备注 / Notes</dt><dd>Join the race for prizes!</dd></div>
     </dl>
+<details class="detail-excerpt"><summary>详情页原文摘要 / Detail excerpt</summary><pre>REGISTRATION MP 12:32 EN CRICKET LIVE BONUSES LIVE CASINO MEGAGAMES ESPORTS MORE MP PRIZE FUND € 1.5M BOOK OF BILLIONAIRE 01.05.26 15:00 GMT 31.05.26 21:00 GMT TOURNAMENT ENDS IN 0 0 D 0 0 H 0 0 M 0 0 S Join the race for prizes! TERMS AND CONDITIONS Play for free PLAY Trump It Bonanza X1000 PLAY Bonanza Link: Midnight Train x1000 Play for free PLAY Golden Link Express Play for free PLAY Atomic Coins 2: Running Wins Play for free PLAY Striking Diamond 3 Play for free PLAY Mega Thunder: Running Wins™ Play for free PLAY Bonanza Link: Cash Train X1000 Play for free PLAY Coin Blitz: Running Wins™ Play for free PLAY Trump It Mania: Hot Bonus Play for free PLAY Striking Diamond 2 Play for free PLAY Power Coin Play for free PLAY Fireball Fury: Hot Bonus Play for free PLAY Fireball Volcanoes: Trinity Series Play for free PLAY Inferno Fireballs 2 Play for free PLAY Coin Rush: Gorilla Boost Play for free PLAY</pre></details>
   </article>
-<article class="activity-card">
+<article class="activity-card detail-ok">
     <div class="activity-head">
       <span class="index">23</span>
       <div>
         <h2>TAKE CASH BEFORE THE CRASH! </h2>
-        <p>竞赛或抽奖 / Tournament or Raffle</p>
+        <p>竞赛或抽奖 / Tournament or Raffle · <span class="detail-pill ok-pill">详情页已采集 / Detail captured</span></p>
       </div>
     </div>
     <dl>
       <div><dt>奖励 / Reward</dt><dd>Enjoy a variety of games and take part in a prize draw!</dd></div>
-      <div><dt>参与要求 / Requirements</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>详情页奖励 / Detail Reward</dt><dd>€ 4</dd></div>
+      <div><dt>参与要求 / Requirements</dt><dd>Play for free PLAY Aviatrix Play for free PLAY Aviatrix TERMS AND CONDITIONS There is no minimum stake amount for participating in the promotion. To participate in the daily; requirements: 1. During Stage 1, you must place at least one bet using the NFT plane within 24 hours. 2. During Stage 2, you must claim a reward if you have one active. If a plane w; player points equivalent to the bet amount. The points are added up and displayed in the tournament table. To participate in the tournament, one player can use only one custo; minimum betting turnover (minimum stake) of one of the planes equals one chance (ticket). The chances of all other participating planes will be proportionate to this minimum tur; placed). The more game experience a plane has, the greater its cash reward. To receive a cash prize, you must press the &quot;Collect prize&quot; button, after which the winnings will b</dd></div>
       <div><dt>开始时间 / Start Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
-      <div><dt>结束时间 / End Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>结束时间 / End Time</dt><dd>01.03.26; 31.05.26; ENDS IN 0 0 D 0 0 H 0 0 M 0 0 S Enjoy a variety of games and take part in a prize draw! TERMS A; end on its overall game experience. The more game experience a plane has the larger the reward; end on the participant's overall game experience (total stake of bets placed). The more game e</dd></div>
+      <div><dt>详情页关键日期 / Detail Dates</dt><dd>01.03.26; 31.05.26; ENDS IN 0 0 D 0 0 H 0 0 M 0 0 S Enjoy a variety of games and take part in a prize draw! TERMS A; end on its overall game experience. The more game experience a plane has the larger the reward; end on the participant's overall game experience (total stake of bets placed). The more game e</dd></div>
+      <div><dt>详情页来源 / Detail Source</dt><dd><a href="https://5189305mp.pro/en/bonus/casino/tournaments/take-cash-before-crash">https://5189305mp.pro/en/bonus/casino/tournaments/take-cash-before-crash</a></dd></div>
       <div><dt>备注 / Notes</dt><dd>Enjoy a variety of games and take part in a prize draw!</dd></div>
     </dl>
+<details class="detail-excerpt"><summary>详情页原文摘要 / Detail excerpt</summary><pre>REGISTRATION 12:32 EN CRICKET LIVE BONUSES LIVE CASINO MEGAGAMES ESPORTS MORE MP PRIZE FUND € 4M TAKE CASH BEFORE THE CRASH! 01.03.26 00:01 GMT 31.05.26 23:59 GMT TOURNAMENT ENDS IN 0 0 D 0 0 H 0 0 M 0 0 S Enjoy a variety of games and take part in a prize draw! TERMS AND CONDITIONS Play for free PLAY Aviatrix Play for free PLAY Aviatrix TERMS AND CONDITIONS There is no minimum stake amount for participating in the promotion. To participate in the daily tournament you need to fulfil 2 requirements: 1. During Stage 1, you must place at least one bet using the NFT plane within 24 hours. 2. During Stage 2, you must claim a reward if you have one active. If a plane wins the daily tournament, the amount of winnings will depend on its overall game experience. The more game experience a plane has the larger the reward will be. Each bet brings the player points equivalent to the bet amount. The points are added up and displayed in the tournament table. To participate in the tournament, one player can use only one customer account, and the number of NFT planes is not limited. During each tournament, the minimum betting turnover (minimum stake) of one of the planes equals one chance (ticket). The chances of all other participating planes will be proportionate to this minimum turnover. After passing to the second stage, all participants will receive winnings, the amount of which will depend on the participant's overall game experience (total stake of bets placed). The more game experience a plane has, the greater its cash reward. To receive a cash prize, you must press the &quot;Collect prize&quot; button, after which the winnings will be credited to your account. INFORMATION About us Careers Contacts Affiliate Program Terms and Conditions BETTING Basketball Football TURF Baseball Ice Hockey Multi-LIVE GAMES Crystal Crash Dice STATISTICS Statistics Results USEFUL LINKS Mobile version Registration Become an agent APPS iOS Android AWARDS Copyright © 2019 - 2026 «Megapari». Megapari uses cookies to ensure the best user experience. By remaining on the website, you consent to the use of your cookie files on Megapari. Find out more CUSTOMER SUPPORT +441863440619</pre></details>
   </article>
-<article class="activity-card">
+<article class="activity-card detail-ok">
     <div class="activity-head">
       <span class="index">24</span>
       <div>
         <h2>JACKPOT HEATWAVE </h2>
-        <p>竞赛或抽奖 / Tournament or Raffle</p>
+        <p>竞赛或抽奖 / Tournament or Raffle · <span class="detail-pill ok-pill">详情页已采集 / Detail captured</span></p>
       </div>
     </div>
     <dl>
       <div><dt>奖励 / Reward</dt><dd>Enjoy a variety of games and take part in a prize draw!</dd></div>
-      <div><dt>参与要求 / Requirements</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>详情页奖励 / Detail Reward</dt><dd>€ 108,000; €0.20.</dd></div>
+      <div><dt>参与要求 / Requirements</dt><dd>Play for free PLAY Hot Prize Paradise Play for free PLAY Fun Fair Fruits 100 Play for free PLAY Sizzling 777 Classic Play for free PLAY Blazing Fireballs Play for free PLAY B; Play for free PLAY Mystic Pot Treasures Play for free PLAY Hellfire Peppers Play for free PLAY Reel Hit Play for free PLAY The Joker Show Play for free PLAY Blazing Lucky Sev; Play for free PLAY Yappy Scrappy Play for free PLAY Dragon's Fireworks Play for free PLAY Mega Fishing Mania Play for free PLAY Sizzling Super Sevens Play for free PLAY Candy; Play for free PLAY Book of Reels TERMS AND CONDITIONS The tournament consists of three campaigns running simultaneously: the Jackpot Heatwave tournament, the Jackpot Heatwave; minimum stake is €0.20. Additionally, in each stage there will be a Wheel of Fortune. Additionally, there will be Random Prize Drops in each phase. INFORMATION About us Careers</dd></div>
       <div><dt>开始时间 / Start Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
-      <div><dt>结束时间 / End Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>结束时间 / End Time</dt><dd>22.04.26; 24.06.26; ENDS IN 0 0 D 0 0 H 0 0 M 0 0 S Enjoy a variety of games and take part in a prize draw! TERMS A; 22/04/2026; 27/04/2026</dd></div>
+      <div><dt>详情页关键日期 / Detail Dates</dt><dd>22.04.26; 24.06.26; ENDS IN 0 0 D 0 0 H 0 0 M 0 0 S Enjoy a variety of games and take part in a prize draw! TERMS A; 22/04/2026; 27/04/2026</dd></div>
+      <div><dt>详情页来源 / Detail Source</dt><dd><a href="https://5189305mp.pro/en/bonus/casino/tournaments/jackpot-heatwave">https://5189305mp.pro/en/bonus/casino/tournaments/jackpot-heatwave</a></dd></div>
       <div><dt>备注 / Notes</dt><dd>Enjoy a variety of games and take part in a prize draw!</dd></div>
     </dl>
+<details class="detail-excerpt"><summary>详情页原文摘要 / Detail excerpt</summary><pre>1 REGISTRATION MP 12:32 EN CRICKET LIVE BONUSES LIVE CASINO MEGAGAMES ESPORTS MORE MP PRIZE FUND € 108,000 JACKPOT HEATWAVE 22.04.26 00:01 GMT 24.06.26 23:59 GMT TOURNAMENT ENDS IN 0 0 D 0 0 H 0 0 M 0 0 S Enjoy a variety of games and take part in a prize draw! TERMS AND CONDITIONS Play for free PLAY Hot Prize Paradise Play for free PLAY Fun Fair Fruits 100 Play for free PLAY Sizzling 777 Classic Play for free PLAY Blazing Fireballs Play for free PLAY Book of Reels Hold and Win Play for free PLAY Mystic Pot Treasures Play for free PLAY Hellfire Peppers Play for free PLAY Reel Hit Play for free PLAY The Joker Show Play for free PLAY Blazing Lucky Sevens Play for free PLAY Yappy Scrappy Play for free PLAY Dragon's Fireworks Play for free PLAY Mega Fishing Mania Play for free PLAY Sizzling Super Sevens Play for free PLAY Candy Luck</pre></details>
   </article>
-<article class="activity-card">
+<article class="activity-card detail-ok">
     <div class="activity-head">
       <span class="index">25</span>
       <div>
         <h2>SPIN &amp; WIN </h2>
-        <p>竞赛或抽奖 / Tournament or Raffle</p>
+        <p>竞赛或抽奖 / Tournament or Raffle · <span class="detail-pill ok-pill">详情页已采集 / Detail captured</span></p>
       </div>
     </div>
     <dl>
       <div><dt>奖励 / Reward</dt><dd>Join in the race for prizes and become one of the winners!</dd></div>
-      <div><dt>参与要求 / Requirements</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>详情页奖励 / Detail Reward</dt><dd>€ 4; €0.10; up to €500; €1,000,000</dd></div>
+      <div><dt>参与要求 / Requirements</dt><dd>Play for free PLAY Gems Crown Charging Wilds Play for free PLAY Power of Tiger Play for free PLAY Multi Fruits - Charging Wilds Play for free PLAY Gates of Merlyn Play for fr; PLAY Chicken Ways Play for free PLAY Cheesy Road Classic PLAY Bottle Mania Play for free PLAY Dice Jungle TERMS AND CONDITIONS The minimum stake to participate is €0.10 (or i; playing, you can be randomly awarded a spin of the prize wheel. Pressing the SPIN button on the wheel will give you a chance to win a cash prize of up to €500 (or its equival</dd></div>
       <div><dt>开始时间 / Start Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
-      <div><dt>结束时间 / End Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>结束时间 / End Time</dt><dd>02.03.26; 28.06.26; ENDS IN 0 0 D 0 0 H 0 0 M 0 0 S Join in the race for prizes and become one of the winners! TERM; 02.03.2026; 29.03.2026</dd></div>
+      <div><dt>详情页关键日期 / Detail Dates</dt><dd>02.03.26; 28.06.26; ENDS IN 0 0 D 0 0 H 0 0 M 0 0 S Join in the race for prizes and become one of the winners! TERM; 02.03.2026; 29.03.2026</dd></div>
+      <div><dt>详情页来源 / Detail Source</dt><dd><a href="https://5189305mp.pro/en/bonus/casino/tournaments/spin-and-win">https://5189305mp.pro/en/bonus/casino/tournaments/spin-and-win</a></dd></div>
       <div><dt>备注 / Notes</dt><dd>Join in the race for prizes and become one of the winners!</dd></div>
     </dl>
+<details class="detail-excerpt"><summary>详情页原文摘要 / Detail excerpt</summary><pre>REGISTRATION LOG IN 12:34 EN CRICKET LIVE BONUSES LIVE CASINO MEGAGAMES ESPORTS MORE MP PRIZE FUND € 4M SPIN &amp; WIN 02.03.26 07:00 GMT 28.06.26 07:00 GMT TOURNAMENT ENDS IN 0 0 D 0 0 H 0 0 M 0 0 S Join in the race for prizes and become one of the winners! TERMS AND CONDITIONS Play for free PLAY Gems Crown Charging Wilds Play for free PLAY Power of Tiger Play for free PLAY Multi Fruits - Charging Wilds Play for free PLAY Gates of Merlyn Play for free PLAY Chicken Ways Play for free PLAY Cheesy Road Classic PLAY Bottle Mania Play for free PLAY Dice Jungle TERMS AND CONDITIONS The minimum stake to participate is €0.10 (or its equivalent) While playing, you can be randomly awarded a spin of the prize wheel. Pressing the SPIN button on the wheel will give you a chance to win a cash prize of up to €500 (or its equivalent) The prize pool for each stage is €1,000,000 March: 02.03.2026 - 29.03.2026 April: 02.04.2026 - 29.04.2026 May: 04.05.2026 - 31.05.2026 June: 02.06.2026 - 28.06.2026 INFORMATION About us Careers Contacts Affiliate Program Terms and Conditions BETTING Basketball Football TURF Baseball Ice Hockey Multi-LIVE GAMES Crystal Crash Dice STATISTICS</pre></details>
   </article>
-<article class="activity-card">
+<article class="activity-card detail-ok">
     <div class="activity-head">
       <span class="index">26</span>
       <div>
         <h2>SPINERGY RUN </h2>
-        <p>竞赛或抽奖 / Tournament or Raffle</p>
+        <p>竞赛或抽奖 / Tournament or Raffle · <span class="detail-pill ok-pill">详情页已采集 / Detail captured</span></p>
       </div>
     </div>
     <dl>
       <div><dt>奖励 / Reward</dt><dd>€500,000</dd></div>
-      <div><dt>参与要求 / Requirements</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>详情页奖励 / Detail Reward</dt><dd>€ 500,000; €500,000; €0.20; €50,000</dd></div>
+      <div><dt>参与要求 / Requirements</dt><dd>Play for free PLAY Volcanizer PLAY Sizzling Love Play for free PLAY Sky Of Olympus Play for free PLAY Santa Coin Reel 2: Hold to Win Play for free PLAY Lucky Princess Play fo; PLAY Prime Coins: Hold to Win Play for free PLAY Molly Treats Play for free PLAY Full Hot Play for free PLAY Book of Maat Play for free PLAY Coin Dice: Hold to Win Play for f; PLAY Wild Dice Play for free PLAY Dice Fortune 27 Play for free PLAY Coin Era 2 Play for free PLAY Sizzling Chilli Play for free PLAY Blazing Cricket Play for free PLAY 27 Eg; minimum stake is €0.20 To participate in the tournament, you must make 1 qualifying spin using real money. The tournament stages will be held on the following dates: Stage 1 — 1</dd></div>
       <div><dt>开始时间 / Start Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
-      <div><dt>结束时间 / End Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>结束时间 / End Time</dt><dd>13.03.26; 21.12.26; ENDS IN 0 0 D 0 0 H 0 0 M 0 0 S Ready, set, go after those prizes! A slice of the €500,000 priz; 23.03.26; 10.04.26</dd></div>
+      <div><dt>详情页关键日期 / Detail Dates</dt><dd>13.03.26; 21.12.26; ENDS IN 0 0 D 0 0 H 0 0 M 0 0 S Ready, set, go after those prizes! A slice of the €500,000 priz; 23.03.26; 10.04.26</dd></div>
+      <div><dt>详情页来源 / Detail Source</dt><dd><a href="https://5189305mp.pro/en/bonus/casino/tournaments/spinergy-run">https://5189305mp.pro/en/bonus/casino/tournaments/spinergy-run</a></dd></div>
       <div><dt>备注 / Notes</dt><dd>Ready, set, go after those prizes! A slice of the €500,000 prize pie awaits</dd></div>
     </dl>
+<details class="detail-excerpt"><summary>详情页原文摘要 / Detail excerpt</summary><pre>REGISTRATION 12:34 EN CRICKET LIVE BONUSES LIVE CASINO MEGAGAMES ESPORTS MORE MP PRIZE FUND € 500,000 SPINERGY RUN 13.03.26 13:00 GMT 21.12.26 12:59 GMT TOURNAMENT ENDS IN 0 0 D 0 0 H 0 0 M 0 0 S Ready, set, go after those prizes! A slice of the €500,000 prize pie awaits TERMS AND CONDITIONS Play for free PLAY Volcanizer PLAY Sizzling Love Play for free PLAY Sky Of Olympus Play for free PLAY Santa Coin Reel 2: Hold to Win Play for free PLAY Lucky Princess Play for free PLAY Prime Coins: Hold to Win Play for free PLAY Molly Treats Play for free PLAY Full Hot Play for free PLAY Book of Maat Play for free PLAY Coin Dice: Hold to Win Play for free PLAY Wild Dice Play for free PLAY Dice Fortune 27 Play for free PLAY Coin Era 2 Play for free PLAY Sizzling Chilli Play for free PLAY Blazing Cricket Play for free PLAY 27 Eggs</pre></details>
   </article>
-<article class="activity-card">
+<article class="activity-card detail-ok">
     <div class="activity-head">
       <span class="index">27</span>
       <div>
         <h2>SPINOLEAGUE </h2>
-        <p>竞赛或抽奖 / Tournament or Raffle</p>
+        <p>竞赛或抽奖 / Tournament or Raffle · <span class="detail-pill ok-pill">详情页已采集 / Detail captured</span></p>
       </div>
     </div>
     <dl>
       <div><dt>奖励 / Reward</dt><dd>Enjoy a variety of games and take part in a prize draw!</dd></div>
-      <div><dt>参与要求 / Requirements</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>详情页奖励 / Detail Reward</dt><dd>€ 12</dd></div>
+      <div><dt>参与要求 / Requirements</dt><dd>Play for free PLAY Icy Rampage Play for free PLAY Majestic Santa Play for free PLAY Joker's Wild Ride - Valentine's Play for free PLAY Castle Of The Beast Play for free PLAY; Play for free PLAY Wild Cobra Riches Play for free PLAY Night Wolf Hold and Hit Play for free PLAY Story of Cinderella Play for free PLAY Majestic Claws - Wild Snow Play for; PLAY Wolf Fang - Northern Spirits Play for free PLAY Super Wild Fruits - On Ice Play for free PLAY Egyptian Marvel Play for free PLAY Trout's Treasure - Frosty Fins Play for; PLAY New Year's Eve Fortune Play for free PLAY Book Of Frosty Play for free PLAY Wild Santa - Hold and Hit TERMS AND CONDITIONS Each win will earn the customer a certain numb; play) count as one bet and will only award points within the Max Bet Limit. Each player’s rank on the Leaderboard for each round will be displayed once they reach the qualify</dd></div>
       <div><dt>开始时间 / Start Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
-      <div><dt>结束时间 / End Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>结束时间 / End Time</dt><dd>05.03.26; 01.03.27; ENDS IN 0 0 D 0 0 H 0 0 M 0 0 S Enjoy a variety of games and take part in a prize draw! TERMS A; end of each round, the Leaderboard will reset. Customers may multiply their share of the tourn; end of a round, the customer who reached that number of points first will be ranked higher. On</dd></div>
+      <div><dt>详情页关键日期 / Detail Dates</dt><dd>05.03.26; 01.03.27; ENDS IN 0 0 D 0 0 H 0 0 M 0 0 S Enjoy a variety of games and take part in a prize draw! TERMS A; end of each round, the Leaderboard will reset. Customers may multiply their share of the tourn; end of a round, the customer who reached that number of points first will be ranked higher. On</dd></div>
+      <div><dt>详情页来源 / Detail Source</dt><dd><a href="https://5189305mp.pro/en/bonus/casino/tournaments/spinoleague">https://5189305mp.pro/en/bonus/casino/tournaments/spinoleague</a></dd></div>
       <div><dt>备注 / Notes</dt><dd>Enjoy a variety of games and take part in a prize draw!</dd></div>
     </dl>
+<details class="detail-excerpt"><summary>详情页原文摘要 / Detail excerpt</summary><pre>1 REGISTRATION LOG IN 12:34 EN CRICKET LIVE BONUSES LIVE CASINO MEGAGAMES ESPORTS MORE MP PRIZE FUND € 12M SPINOLEAGUE 05.03.26 13:00 GMT 01.03.27 12:59 GMT TOURNAMENT ENDS IN 0 0 D 0 0 H 0 0 M 0 0 S Enjoy a variety of games and take part in a prize draw! TERMS AND CONDITIONS Play for free PLAY Icy Rampage Play for free PLAY Majestic Santa Play for free PLAY Joker's Wild Ride - Valentine's Play for free PLAY Castle Of The Beast Play for free PLAY Majestic Wild Buffalo - Winter Wonderland Play for free PLAY Wild Cobra Riches Play for free PLAY Night Wolf Hold and Hit Play for free PLAY Story of Cinderella Play for free PLAY Majestic Claws - Wild Snow Play for free PLAY Wolf Fang - Northern Spirits Play for free PLAY Super Wild Fruits - On Ice Play for free PLAY Egyptian Marvel Play for free PLAY Trout's Treasure - Frosty Fins Play for free PLAY New Year's Eve Fortune Play for free PLAY Book Of Frosty</pre></details>
   </article>
-<article class="activity-card">
+<article class="activity-card detail-ok">
     <div class="activity-head">
       <span class="index">28</span>
       <div>
         <h2>DROPS &amp; WINS </h2>
-        <p>竞赛或抽奖 / Tournament or Raffle</p>
+        <p>竞赛或抽奖 / Tournament or Raffle · <span class="detail-pill ok-pill">详情页已采集 / Detail captured</span></p>
       </div>
     </div>
     <dl>
       <div><dt>奖励 / Reward</dt><dd>Join in the race for prizes and become one of the winners!</dd></div>
-      <div><dt>参与要求 / Requirements</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>详情页奖励 / Detail Reward</dt><dd>€ 25; €20,000; €350,000</dd></div>
+      <div><dt>参与要求 / Requirements</dt><dd>Play for free PLAY Mummy's Jewels 100 Play for free PLAY Fire Stampede Ultimate Ridin' the Respin Play for free PLAY 3 Magic Eggs Play for free PLAY Zeus vs Hades - Gods of W; Play for free PLAY Cyberheist City Play for free PLAY Sugar Rush Super Scatter Play for free PLAY Fortune of Olympus Play for free PLAY Big Bass Splash 1000 Play for free PLA; Play for free PLAY Bigger Barn House Bonanza Play for free PLAY Sweet Rush Bonanza Play for free PLAY Big Bass Reel Repeat Play for free PLAY Sweet Bonanza Super Scatter Play; PLAY Big Bass Boxing Bonus Round Play for free PLAY Gates of Hades Play for free PLAY Gates of Olympus Super Scatter TERMS AND CONDITIONS Daily Tournaments: The winners are d; mined based on the highest winning multiplier (winnings/stake amount) Expected daily prize pool of €20,000 in total across 500 cash prizes. Weekly Wheel Drops winning criter; complete the wheel and qualify for a prize. Once completed, they are taken to a full-screen wheel, which they can tap or spin to receive a reward. Expected weekly prize pool of €</dd></div>
       <div><dt>开始时间 / Start Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
-      <div><dt>结束时间 / End Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>结束时间 / End Time</dt><dd>04.03.26; 03.03.27; ENDS IN 0 0 D 0 0 H 0 0 M 0 0 S Join in the race for prizes and become one of the winners! TERM</dd></div>
+      <div><dt>详情页关键日期 / Detail Dates</dt><dd>04.03.26; 03.03.27; ENDS IN 0 0 D 0 0 H 0 0 M 0 0 S Join in the race for prizes and become one of the winners! TERM</dd></div>
+      <div><dt>详情页来源 / Detail Source</dt><dd><a href="https://5189305mp.pro/en/bonus/casino/tournaments/drops-and-wins">https://5189305mp.pro/en/bonus/casino/tournaments/drops-and-wins</a></dd></div>
       <div><dt>备注 / Notes</dt><dd>Join in the race for prizes and become one of the winners!</dd></div>
     </dl>
+<details class="detail-excerpt"><summary>详情页原文摘要 / Detail excerpt</summary><pre>REGISTRATION MP 12:34 EN CRICKET LIVE BONUSES LIVE CASINO MEGAGAMES ESPORTS MORE MP PRIZE FUND € 25M DROPS &amp; WINS 04.03.26 18:01 GMT 03.03.27 17:59 GMT TOURNAMENT ENDS IN 0 0 D 0 0 H 0 0 M 0 0 S Join in the race for prizes and become one of the winners! TERMS AND CONDITIONS Play for free PLAY Mummy's Jewels 100 Play for free PLAY Fire Stampede Ultimate Ridin' the Respin Play for free PLAY 3 Magic Eggs Play for free PLAY Zeus vs Hades - Gods of War 250 Play for free PLAY Cyberheist City Play for free PLAY Sugar Rush Super Scatter Play for free PLAY Fortune of Olympus Play for free PLAY Big Bass Splash 1000 Play for free PLAY Starlight Princess Super Scatter Play for free PLAY Bigger Barn House Bonanza Play for free PLAY Sweet Rush Bonanza Play for free PLAY Big Bass Reel Repeat Play for free PLAY Sweet Bonanza Super Scatter Play for free PLAY Big Bass Boxing Bonus Round Play for free PLAY Gates of Hades Play for free</pre></details>
   </article>
-<article class="activity-card">
+<article class="activity-card detail-ok">
     <div class="activity-head">
       <span class="index">29</span>
       <div>
         <h2>Megapari </h2>
-        <p>综合活动 / General Promotion</p>
+        <p>体育投注 / Sports Betting · <span class="detail-pill ok-pill">详情页已采集 / Detail captured</span></p>
       </div>
     </div>
     <dl>
       <div><dt>奖励 / Reward</dt><dd>All Bonuses</dd></div>
-      <div><dt>参与要求 / Requirements</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>详情页奖励 / Detail Reward</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>参与要求 / Requirements</dt><dd>BETS FIND OUT MORE REGISTRATION LOG IN 12:33 EN CRICKET LIVE SPORTS BONUSES LIVE CASINO CASINO MEGAGAMES ESPORTS MORE INFOR; BETTING Basketball Football TURF Baseball Ice Hockey Multi-LIVE GAMES Crystal Crash Dice STATISTICS Statistics Results USEF</dd></div>
       <div><dt>开始时间 / Start Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
       <div><dt>结束时间 / End Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>详情页关键日期 / Detail Dates</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>详情页来源 / Detail Source</dt><dd><a href="https://5189305mp.pro/en/bonus/rules/loss20">https://5189305mp.pro/en/bonus/rules/loss20</a></dd></div>
       <div><dt>备注 / Notes</dt><dd>All Bonuses</dd></div>
     </dl>
+<details class="detail-excerpt"><summary>详情页原文摘要 / Detail excerpt</summary><pre>REGISTRATION LOG IN 12:33 EN CRICKET LIVE BONUSES LIVE CASINO MEGAGAMES ESPORTS MORE INFORMATION About us Careers Contacts Affiliate Program Terms and Conditions BETTING Basketball Football TURF Baseball Ice Hockey Multi-LIVE GAMES Crystal Crash Dice STATISTICS Statistics Results USEFUL LINKS Mobile version Registration Become an agent APPS iOS Android AWARDS Copyright © 2019 - 2026 «Megapari». Megapari uses cookies to ensure the best user experience. By remaining on the website, you consent to the use of your cookie files on Megapari. Find out more CUSTOMER SUPPORT +441863440619 +35780092576 18+ MOBILE VERSION CUSTOMER SUPPORT</pre></details>
   </article>
-<article class="activity-card">
+<article class="activity-card detail-missing">
     <div class="activity-head">
       <span class="index">30</span>
       <div>
         <h2>All Bonuses </h2>
-        <p>综合活动 / General Promotion</p>
+        <p>综合活动 / General Promotion · <span class="detail-pill fallback-pill">列表页兜底 / Listing fallback</span></p>
       </div>
     </div>
     <dl>
       <div><dt>奖励 / Reward</dt><dd>SPRING SPORT BONUS</dd></div>
+      <div><dt>详情页奖励 / Detail Reward</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
       <div><dt>参与要求 / Requirements</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
       <div><dt>开始时间 / Start Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
       <div><dt>结束时间 / End Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>详情页关键日期 / Detail Dates</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>详情页来源 / Detail Source</dt><dd><span class="missing-text">未匹配详情页 / No detail page matched</span></dd></div>
       <div><dt>备注 / Notes</dt><dd>SPRING SPORT BONUS</dd></div>
     </dl>
+
   </article>
-<article class="activity-card">
+<article class="activity-card detail-ok">
     <div class="activity-head">
       <span class="index">31</span>
       <div>
         <h2>Get a 50% bonus of up to 1377 MYR for your 10th casino deposit! </h2>
-        <p>返现 / Cashback</p>
+        <p>返现 / Cashback · <span class="detail-pill ok-pill">详情页已采集 / Detail captured</span></p>
       </div>
     </div>
     <dl>
       <div><dt>奖励 / Reward</dt><dd>50% bonus; up to 1377 MYR</dd></div>
-      <div><dt>参与要求 / Requirements</dt><dd>deposit! Casino Cashback</dd></div>
+      <div><dt>详情页奖励 / Detail Reward</dt><dd>50% BONUS; UP TO 1377 MYR</dd></div>
+      <div><dt>参与要求 / Requirements</dt><dd>DEPOSIT! FIND OUT MORE REGISTRATION MP 12:31 EN CRICKET LIVE SPORTS BONUSES LIVE CASINO CASINO MEGAGAMES ESPORTS MORE INFORMATI; BETTING Basketball Football TURF Baseball Ice Hockey Multi-LIVE GAMES Crystal Crash Dice STATISTICS Statistics Results USEF</dd></div>
       <div><dt>开始时间 / Start Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
       <div><dt>结束时间 / End Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>详情页关键日期 / Detail Dates</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>详情页来源 / Detail Source</dt><dd><a href="https://5189305mp.pro/en/bonus/casino/promotions/slot_ten_deposit">https://5189305mp.pro/en/bonus/casino/promotions/slot_ten_deposit</a></dd></div>
       <div><dt>备注 / Notes</dt><dd>Casino Cashback</dd></div>
     </dl>
+<details class="detail-excerpt"><summary>详情页原文摘要 / Detail excerpt</summary><pre>REGISTRATION MP 12:31 EN CRICKET LIVE BONUSES LIVE CASINO MEGAGAMES ESPORTS MORE INFORMATION About us Careers Contacts Affiliate Program Terms and Conditions BETTING Basketball Football TURF Baseball Ice Hockey Multi-LIVE GAMES Crystal Crash Dice STATISTICS Statistics Results USEFUL LINKS Mobile version Registration Become an agent APPS iOS Android AWARDS Copyright © 2019 - 2026 «Megapari». Megapari uses cookies to ensure the best user experience. By remaining on the website, you consent to the use of your cookie files on Megapari. Find out more CUSTOMER SUPPORT +441863440619 +35780092576 18+ MOBILE VERSION CUSTOMER SUPPORT</pre></details>
   </article>
-<article class="activity-card">
+<article class="activity-card detail-ok">
     <div class="activity-head">
       <span class="index">32</span>
       <div>
         <h2>Your birthday with Megapari! </h2>
-        <p>综合活动 / General Promotion</p>
+        <p>综合活动 / General Promotion · <span class="detail-pill ok-pill">详情页已采集 / Detail captured</span></p>
       </div>
     </div>
     <dl>
       <div><dt>奖励 / Reward</dt><dd>Bets via Telegram</dd></div>
-      <div><dt>参与要求 / Requirements</dt><dd>Bets via Telegram</dd></div>
+      <div><dt>详情页奖励 / Detail Reward</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>参与要求 / Requirements</dt><dd>BETTING Basketball Football TURF Baseball Ice Hockey Multi-LIVE GAMES Crystal Crash Dice STATISTICS Statistics Results USEF</dd></div>
       <div><dt>开始时间 / Start Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
       <div><dt>结束时间 / End Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>详情页关键日期 / Detail Dates</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>详情页来源 / Detail Source</dt><dd><a href="https://5189305mp.pro/en/bonus/rules/birthday">https://5189305mp.pro/en/bonus/rules/birthday</a></dd></div>
       <div><dt>备注 / Notes</dt><dd>Bets via Telegram</dd></div>
     </dl>
+<details class="detail-excerpt"><summary>详情页原文摘要 / Detail excerpt</summary><pre>1 REGISTRATION LOG IN 12:34 EN CRICKET LIVE BONUSES LIVE CASINO MEGAGAMES ESPORTS MORE INFORMATION About us Careers Contacts Affiliate Program Terms and Conditions BETTING Basketball Football TURF Baseball Ice Hockey Multi-LIVE GAMES Crystal Crash Dice STATISTICS Statistics Results USEFUL LINKS Mobile version Registration Become an agent APPS iOS Android AWARDS Copyright © 2019 - 2026 «Megapari». Megapari uses cookies to ensure the best user experience. By remaining on the website, you consent to the use of your cookie files on Megapari. Find out more CUSTOMER SUPPORT +441863440619 +35780092576 18+ MOBILE VERSION CUSTOMER SUPPORT</pre></details>
   </article>
-<article class="activity-card">
+<article class="activity-card detail-missing">
     <div class="activity-head">
       <span class="index">33</span>
       <div>
         <h2>Bonus for a series of losing bets </h2>
-        <p>免费投注 / Free Bet</p>
+        <p>免费投注 / Free Bet · <span class="detail-pill fallback-pill">列表页兜底 / Listing fallback</span></p>
       </div>
     </div>
     <dl>
       <div><dt>奖励 / Reward</dt><dd>Free bet on your first deposit</dd></div>
+      <div><dt>详情页奖励 / Detail Reward</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
       <div><dt>参与要求 / Requirements</dt><dd>bets Free bet on your first deposit</dd></div>
       <div><dt>开始时间 / Start Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
       <div><dt>结束时间 / End Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>详情页关键日期 / Detail Dates</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>详情页来源 / Detail Source</dt><dd><span class="missing-text">未匹配详情页 / No detail page matched</span></dd></div>
       <div><dt>备注 / Notes</dt><dd>Free bet on your first deposit</dd></div>
     </dl>
+
   </article>
-<article class="activity-card">
+<article class="activity-card detail-ok">
     <div class="activity-head">
       <span class="index">34</span>
       <div>
         <h2>Accumulator Of The Day </h2>
-        <p>体育投注 / Sports Betting</p>
+        <p>体育投注 / Sports Betting · <span class="detail-pill ok-pill">详情页已采集 / Detail captured</span></p>
       </div>
     </div>
     <dl>
       <div><dt>奖励 / Reward</dt><dd>Spin to Win</dd></div>
-      <div><dt>参与要求 / Requirements</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>详情页奖励 / Detail Reward</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>参与要求 / Requirements</dt><dd>BETTING Basketball Football TURF Baseball Ice Hockey Multi-LIVE GAMES Crystal Crash Dice STATISTICS Statistics Results USEF</dd></div>
       <div><dt>开始时间 / Start Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
       <div><dt>结束时间 / End Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>详情页关键日期 / Detail Dates</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>详情页来源 / Detail Source</dt><dd><a href="https://5189305mp.pro/en/bonus/rules/express">https://5189305mp.pro/en/bonus/rules/express</a></dd></div>
       <div><dt>备注 / Notes</dt><dd>Spin to Win</dd></div>
     </dl>
+<details class="detail-excerpt"><summary>详情页原文摘要 / Detail excerpt</summary><pre>1 REGISTRATION LOG IN 12:34 EN CRICKET LIVE BONUSES LIVE CASINO MEGAGAMES ESPORTS MORE INFORMATION About us Careers Contacts Affiliate Program Terms and Conditions BETTING Basketball Football TURF Baseball Ice Hockey Multi-LIVE GAMES Crystal Crash Dice STATISTICS Statistics Results USEFUL LINKS Mobile version Registration Become an agent APPS iOS Android AWARDS Copyright © 2019 - 2026 «Megapari». Megapari uses cookies to ensure the best user experience. By remaining on the website, you consent to the use of your cookie files on Megapari. Find out more CUSTOMER SUPPORT +441863440619 +35780092576 18+ MOBILE VERSION CUSTOMER SUPPORT</pre></details>
   </article>
     </section>
 

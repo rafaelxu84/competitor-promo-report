@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>竞品活动站点 2026-05-16</title>
   <style>
-    :root { --bg:#f5f6f2; --panel:#fff; --ink:#15201b; --muted:#66736d; --line:#d8ddd4; --green:#0d7658; --blue:#245c9e; --soft:#eef4f0; }
+    :root { --bg:#f5f6f2; --panel:#fff; --ink:#15201b; --muted:#66736d; --line:#d8ddd4; --green:#0d7658; --blue:#245c9e; --amber:#9a6816; --red:#a54040; --soft:#eef4f0; }
     * { box-sizing:border-box; }
     body { margin:0; background:var(--bg); color:var(--ink); font-family:Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; line-height:1.45; }
     .page { max-width:1280px; margin:0 auto; padding:28px 18px 56px; }
@@ -35,6 +35,9 @@
     .visual img { max-height:520px; object-fit:contain; }
     .activity-list { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:14px; }
     .activity-card { background:var(--panel); border:1px solid var(--line); border-radius:8px; padding:16px; }
+    .activity-card.detail-ok { border-left:4px solid var(--green); }
+    .activity-card.detail-limited { border-left:4px solid var(--amber); }
+    .activity-card.detail-missing { border-left:4px solid #a8b1ac; }
     .activity-head { display:grid; grid-template-columns:36px minmax(0,1fr); gap:10px; align-items:start; margin-bottom:12px; }
     .index { display:inline-grid; place-items:center; width:30px; height:30px; border-radius:999px; background:var(--soft); color:var(--green); font-weight:800; }
     dl { display:grid; gap:8px; margin:0; }
@@ -42,6 +45,12 @@
     dt { color:var(--muted); font-size:12px; font-weight:800; }
     dd { margin:0; font-size:13px; }
     .missing-text { color:var(--muted); }
+    .detail-pill { display:inline-flex; align-items:center; border-radius:999px; padding:3px 8px; font-size:12px; font-weight:800; }
+    .ok-pill { background:#e5f3ed; color:var(--green); }
+    .limited-pill { background:#fff4df; color:var(--amber); }
+    .fallback-pill { background:#eef0ea; color:var(--muted); }
+    .detail-excerpt { margin-top:12px; border-top:1px solid var(--line); padding-top:10px; }
+    .detail-excerpt summary { cursor:pointer; color:var(--blue); font-weight:800; }
     .raw { background:var(--panel); border:1px solid var(--line); border-radius:8px; padding:14px; margin-top:16px; }
     pre { white-space:pre-wrap; word-break:break-word; background:#111714; color:#eef6f0; padding:12px; border-radius:8px; max-height:320px; overflow:auto; font-size:12px; }
     a { color:var(--blue); }
@@ -60,6 +69,7 @@
         <b>日期 Date</b>2026-05-16<br>
         <b>品牌 Brands</b>10<br>
         <b>活动 Activities</b>202<br>
+        <b>详情 Details</b>103<br>
         <b>今日新增 New</b>0
       </div>
     </section>
@@ -75,6 +85,7 @@
     <div>
       <h2>Stake</h2>
       <p>12 条活动 / 12 activities</p>
+      <p>10 条详情页已匹配 / 10 detail pages matched</p>
       
       <span>打开品牌详情 / Open brand page</span>
     </div>
@@ -84,6 +95,7 @@
     <div>
       <h2>BC Game</h2>
       <p>7 条活动 / 7 activities</p>
+      <p>0 条详情页已匹配 / 0 detail pages matched</p>
       
       <span>打开品牌详情 / Open brand page</span>
     </div>
@@ -93,6 +105,7 @@
     <div>
       <h2>1xBet</h2>
       <p>54 条活动 / 54 activities</p>
+      <p>50 条详情页已匹配 / 50 detail pages matched</p>
       
       <span>打开品牌详情 / Open brand page</span>
     </div>
@@ -102,6 +115,7 @@
     <div>
       <h2>JustCasino</h2>
       <p>12 条活动 / 12 activities</p>
+      <p>0 条详情页已匹配 / 0 detail pages matched</p>
       
       <span>打开品牌详情 / Open brand page</span>
     </div>
@@ -111,6 +125,7 @@
     <div>
       <h2>Betpanda</h2>
       <p>11 条活动 / 11 activities</p>
+      <p>4 条详情页已匹配 / 4 detail pages matched</p>
       
       <span>打开品牌详情 / Open brand page</span>
     </div>
@@ -120,6 +135,7 @@
     <div>
       <h2>CoinCasino</h2>
       <p>9 条活动 / 9 activities</p>
+      <p>8 条详情页已匹配 / 8 detail pages matched</p>
       
       <span>打开品牌详情 / Open brand page</span>
     </div>
@@ -129,6 +145,7 @@
     <div>
       <h2>Velobet</h2>
       <p>15 条活动 / 15 activities</p>
+      <p>0 条详情页已匹配 / 0 detail pages matched</p>
       
       <span>打开品牌详情 / Open brand page</span>
     </div>
@@ -138,6 +155,7 @@
     <div>
       <h2>Megapari</h2>
       <p>34 条活动 / 34 activities</p>
+      <p>30 条详情页已匹配 / 30 detail pages matched</p>
       
       <span>打开品牌详情 / Open brand page</span>
     </div>
@@ -147,6 +165,7 @@
     <div>
       <h2>Funbet</h2>
       <p>15 条活动 / 15 activities</p>
+      <p>0 条详情页已匹配 / 0 detail pages matched</p>
       
       <span>打开品牌详情 / Open brand page</span>
     </div>
@@ -156,6 +175,7 @@
     <div>
       <h2>Campeonbet</h2>
       <p>33 条活动 / 33 activities</p>
+      <p>1 条详情页已匹配 / 1 detail pages matched</p>
       
       <span>打开品牌详情 / Open brand page</span>
     </div>
