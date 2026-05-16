@@ -1,0 +1,728 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Campeonbet 活动详情</title>
+  <style>
+    :root { --bg:#f5f6f2; --panel:#fff; --ink:#15201b; --muted:#66736d; --line:#d8ddd4; --green:#0d7658; --blue:#245c9e; --soft:#eef4f0; }
+    * { box-sizing:border-box; }
+    body { margin:0; background:var(--bg); color:var(--ink); font-family:Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; line-height:1.45; }
+    .page { max-width:1280px; margin:0 auto; padding:28px 18px 56px; }
+    .hero { background:var(--panel); border:1px solid var(--line); border-radius:8px; padding:24px; display:grid; grid-template-columns:minmax(0,1fr) 280px; gap:18px; align-items:end; margin-bottom:18px; }
+    .brand-hero { margin-bottom:16px; }
+    .eyebrow { margin:0 0 8px; color:var(--green); font-size:12px; font-weight:800; text-transform:uppercase; letter-spacing:.04em; }
+    h1 { margin:0 0 8px; font-size:32px; line-height:1.12; letter-spacing:0; }
+    h2 { margin:0 0 6px; font-size:18px; letter-spacing:0; }
+    p { margin:0; }
+    .sub, .meta { color:var(--muted); }
+    .meta { background:#f8faf7; border:1px solid var(--line); border-radius:8px; padding:14px; }
+    .meta b { display:inline-block; min-width:92px; color:var(--ink); }
+    .brand-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:14px; }
+    .brand-card { display:grid; grid-template-columns:220px minmax(0,1fr); gap:14px; padding:14px; color:var(--ink); text-decoration:none; background:var(--panel); border:1px solid var(--line); border-radius:8px; }
+    .brand-card img, .visual img { width:100%; border:1px solid var(--line); border-radius:8px; background:#edf0ea; object-fit:cover; }
+    .brand-card img { aspect-ratio:16/10; }
+    .brand-card span { display:inline-flex; margin-top:10px; color:var(--blue); font-weight:700; }
+    .new-summary { background:var(--panel); border:1px solid var(--line); border-radius:8px; padding:16px; margin-bottom:18px; }
+    .new-summary h2 { margin:0 0 10px; font-size:20px; }
+    .new-list { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:10px; }
+    .new-item { border:1px solid var(--line); border-radius:8px; padding:10px; background:#fbfcfa; }
+    .new-item strong { display:block; }
+    .new-badge { display:inline-flex; align-items:center; border-radius:999px; background:#fff4df; color:#9a6816; padding:3px 8px; font-size:12px; font-weight:800; margin-left:6px; vertical-align:middle; }
+    .topnav { margin-bottom:12px; }
+    .topnav a { color:var(--blue); font-weight:700; text-decoration:none; }
+    .visual { background:var(--panel); border:1px solid var(--line); border-radius:8px; padding:14px; margin-bottom:16px; }
+    .visual img { max-height:520px; object-fit:contain; }
+    .activity-list { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:14px; }
+    .activity-card { background:var(--panel); border:1px solid var(--line); border-radius:8px; padding:16px; }
+    .activity-head { display:grid; grid-template-columns:36px minmax(0,1fr); gap:10px; align-items:start; margin-bottom:12px; }
+    .index { display:inline-grid; place-items:center; width:30px; height:30px; border-radius:999px; background:var(--soft); color:var(--green); font-weight:800; }
+    dl { display:grid; gap:8px; margin:0; }
+    dl div { display:grid; grid-template-columns:150px minmax(0,1fr); gap:10px; border-top:1px solid var(--line); padding-top:8px; }
+    dt { color:var(--muted); font-size:12px; font-weight:800; }
+    dd { margin:0; font-size:13px; }
+    .missing-text { color:var(--muted); }
+    .raw { background:var(--panel); border:1px solid var(--line); border-radius:8px; padding:14px; margin-top:16px; }
+    pre { white-space:pre-wrap; word-break:break-word; background:#111714; color:#eef6f0; padding:12px; border-radius:8px; max-height:320px; overflow:auto; font-size:12px; }
+    a { color:var(--blue); }
+    @media (max-width:900px) { .hero, .brand-grid, .brand-card, .activity-list, .new-list { grid-template-columns:1fr; } h1 { font-size:27px; } dl div { grid-template-columns:1fr; } }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <nav class="topnav"><a href="../index.html">返回品牌入口 / Back to brands</a></nav>
+    <section class="hero brand-hero">
+      <div>
+        <p class="eyebrow">Brand Promotion Page</p>
+        <h1>Campeonbet</h1>
+        <p class="sub">来源 Source：<a href="https://campeonbet.io/promotions">https://campeonbet.io/promotions</a></p>
+        <p class="sub">本页根据浏览器可见内容整理。未显示的字段会标注为“列表页未显示 / Not shown on listing page”。</p>
+      </div>
+      <div class="meta">
+        <b>活动 Activities</b>33<br>
+        <b>今日新增 New</b>0<br>
+        <b>状态 Status</b>浏览器可访问 / Browser accessible
+      </div>
+    </section>
+
+    <section class="visual">
+      <img src="../../browser-screenshots/campeonbet.png" alt="Campeonbet screenshot">
+    </section>
+
+    <section class="activity-list">
+      <article class="activity-card">
+    <div class="activity-head">
+      <span class="index">1</span>
+      <div>
+        <h2>Welcome Casino Package </h2>
+        <p>免费旋转 / Free Spins</p>
+      </div>
+    </div>
+    <dl>
+      <div><dt>奖励 / Reward</dt><dd>350%; up to €2000; 1000 FS</dd></div>
+      <div><dt>参与要求 / Requirements</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>开始时间 / Start Time</dt><dd>Start with 350% up to €2000 &amp; 1000 FS</dd></div>
+      <div><dt>结束时间 / End Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>备注 / Notes</dt><dd>Start with 350% up to €2000 &amp; 1000 FS</dd></div>
+    </dl>
+  </article>
+<article class="activity-card">
+    <div class="activity-head">
+      <span class="index">2</span>
+      <div>
+        <h2>Campeonbet is shortlisted </h2>
+        <p>免费旋转 / Free Spins</p>
+      </div>
+    </div>
+    <dl>
+      <div><dt>奖励 / Reward</dt><dd>€20; 150 FS</dd></div>
+      <div><dt>参与要求 / Requirements</dt><dd>bet is shortlisted One vote brings €20 Free Bet &amp; 150 FS!</dd></div>
+      <div><dt>开始时间 / Start Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>结束时间 / End Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>备注 / Notes</dt><dd>One vote brings €20 Free Bet &amp; 150 FS!</dd></div>
+    </dl>
+  </article>
+<article class="activity-card">
+    <div class="activity-head">
+      <span class="index">3</span>
+      <div>
+        <h2>Drops &amp; Wins - 2026 Edition </h2>
+        <p>综合活动 / General Promotion</p>
+      </div>
+    </div>
+    <dl>
+      <div><dt>奖励 / Reward</dt><dd>€25.000.000</dd></div>
+      <div><dt>参与要求 / Requirements</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>开始时间 / Start Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>结束时间 / End Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>备注 / Notes</dt><dd>Claim your share of €25.000.000!</dd></div>
+    </dl>
+  </article>
+<article class="activity-card">
+    <div class="activity-head">
+      <span class="index">4</span>
+      <div>
+        <h2>Rewards Every Sunday </h2>
+        <p>综合活动 / General Promotion</p>
+      </div>
+    </div>
+    <dl>
+      <div><dt>奖励 / Reward</dt><dd>€25,000</dd></div>
+      <div><dt>参与要求 / Requirements</dt><dd>Playson &amp; Booongo Games</dd></div>
+      <div><dt>开始时间 / Start Time</dt><dd>from Playson &amp; Booongo Games</dd></div>
+      <div><dt>结束时间 / End Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>备注 / Notes</dt><dd>€25,000 from Playson &amp; Booongo Games</dd></div>
+    </dl>
+  </article>
+<article class="activity-card">
+    <div class="activity-head">
+      <span class="index">5</span>
+      <div>
+        <h2>Season of Legends by Evoplay </h2>
+        <p>竞赛或抽奖 / Tournament or Raffle</p>
+      </div>
+    </div>
+    <dl>
+      <div><dt>奖励 / Reward</dt><dd>€512,000</dd></div>
+      <div><dt>参与要求 / Requirements</dt><dd>play €512,000 in total prizes</dd></div>
+      <div><dt>开始时间 / Start Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>结束时间 / End Time</dt><dd>ends by Evoplay €512,000 in total prizes</dd></div>
+      <div><dt>备注 / Notes</dt><dd>€512,000 in total prizes</dd></div>
+    </dl>
+  </article>
+<article class="activity-card">
+    <div class="activity-head">
+      <span class="index">6</span>
+      <div>
+        <h2>Spinoleague 2026 by Spinomenal! </h2>
+        <p>竞赛或抽奖 / Tournament or Raffle</p>
+      </div>
+    </div>
+    <dl>
+      <div><dt>奖励 / Reward</dt><dd>€12,000,000</dd></div>
+      <div><dt>参与要求 / Requirements</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>开始时间 / Start Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>结束时间 / End Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>备注 / Notes</dt><dd>€12,000,000 in cash prizes</dd></div>
+    </dl>
+  </article>
+<article class="activity-card">
+    <div class="activity-head">
+      <span class="index">7</span>
+      <div>
+        <h2>Kash Drops by Kalamba Games </h2>
+        <p>竞赛或抽奖 / Tournament or Raffle</p>
+      </div>
+    </div>
+    <dl>
+      <div><dt>奖励 / Reward</dt><dd>€10,000,000</dd></div>
+      <div><dt>参与要求 / Requirements</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>开始时间 / Start Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>结束时间 / End Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>备注 / Notes</dt><dd>€10,000,000 total prizes!</dd></div>
+    </dl>
+  </article>
+<article class="activity-card">
+    <div class="activity-head">
+      <span class="index">8</span>
+      <div>
+        <h2>Welcome Sports Bonus </h2>
+        <p>充值或欢迎奖励 / Deposit or Welcome Bonus</p>
+      </div>
+    </div>
+    <dl>
+      <div><dt>奖励 / Reward</dt><dd>100%; up to €100</dd></div>
+      <div><dt>参与要求 / Requirements</dt><dd>bets with a 100% up to €100 Bonus!</dd></div>
+      <div><dt>开始时间 / Start Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>结束时间 / End Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>备注 / Notes</dt><dd>Boost your bets with a 100% up to €100 Bonus!</dd></div>
+    </dl>
+  </article>
+<article class="activity-card">
+    <div class="activity-head">
+      <span class="index">9</span>
+      <div>
+        <h2>Welcome Sports Freebet </h2>
+        <p>免费投注 / Free Bet</p>
+      </div>
+    </div>
+    <dl>
+      <div><dt>奖励 / Reward</dt><dd>€25</dd></div>
+      <div><dt>参与要求 / Requirements</dt><dd>bet Kick off with a €25 Freebet!</dd></div>
+      <div><dt>开始时间 / Start Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>结束时间 / End Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>备注 / Notes</dt><dd>Kick off with a €25 Freebet!</dd></div>
+    </dl>
+  </article>
+<article class="activity-card">
+    <div class="activity-head">
+      <span class="index">10</span>
+      <div>
+        <h2>Welcome Crypto COMBO </h2>
+        <p>免费旋转 / Free Spins</p>
+      </div>
+    </div>
+    <dl>
+      <div><dt>奖励 / Reward</dt><dd>150%; up to 1 BTC; 150 FS</dd></div>
+      <div><dt>参与要求 / Requirements</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>开始时间 / Start Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>结束时间 / End Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>备注 / Notes</dt><dd>150% Crypto Bonus up to 1 BTC &amp; 150 FS!</dd></div>
+    </dl>
+  </article>
+<article class="activity-card">
+    <div class="activity-head">
+      <span class="index">11</span>
+      <div>
+        <h2>Monday's Reload Bonus </h2>
+        <p>充值或欢迎奖励 / Deposit or Welcome Bonus</p>
+      </div>
+    </div>
+    <dl>
+      <div><dt>奖励 / Reward</dt><dd>100%</dd></div>
+      <div><dt>参与要求 / Requirements</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>开始时间 / Start Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>结束时间 / End Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>备注 / Notes</dt><dd>100% Casino Reload Bonus lined up for you!</dd></div>
+    </dl>
+  </article>
+<article class="activity-card">
+    <div class="activity-head">
+      <span class="index">12</span>
+      <div>
+        <h2>Tuesday on the reels </h2>
+        <p>免费旋转 / Free Spins</p>
+      </div>
+    </div>
+    <dl>
+      <div><dt>奖励 / Reward</dt><dd>1000 FS</dd></div>
+      <div><dt>参与要求 / Requirements</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>开始时间 / Start Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>结束时间 / End Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>备注 / Notes</dt><dd>1000 FS to spin you around!</dd></div>
+    </dl>
+  </article>
+<article class="activity-card">
+    <div class="activity-head">
+      <span class="index">13</span>
+      <div>
+        <h2>Wednesday's double fun </h2>
+        <p>免费旋转 / Free Spins</p>
+      </div>
+    </div>
+    <dl>
+      <div><dt>奖励 / Reward</dt><dd>€5; 150 FS</dd></div>
+      <div><dt>参与要求 / Requirements</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>开始时间 / Start Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>结束时间 / End Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>备注 / Notes</dt><dd>Get €5 Live Casino Bonus &amp; 150 FS</dd></div>
+    </dl>
+  </article>
+<article class="activity-card">
+    <div class="activity-head">
+      <span class="index">14</span>
+      <div>
+        <h2>Live Casino Thursday </h2>
+        <p>返现 / Cashback</p>
+      </div>
+    </div>
+    <dl>
+      <div><dt>奖励 / Reward</dt><dd>25% Cashback</dd></div>
+      <div><dt>参与要求 / Requirements</dt><dd>Cashback to fuel more action!</dd></div>
+      <div><dt>开始时间 / Start Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>结束时间 / End Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>备注 / Notes</dt><dd>25% Cashback to fuel more action!</dd></div>
+    </dl>
+  </article>
+<article class="activity-card">
+    <div class="activity-head">
+      <span class="index">15</span>
+      <div>
+        <h2>Friday's Free Spins </h2>
+        <p>免费旋转 / Free Spins</p>
+      </div>
+    </div>
+    <dl>
+      <div><dt>奖励 / Reward</dt><dd>350 FS</dd></div>
+      <div><dt>参与要求 / Requirements</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>开始时间 / Start Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>结束时间 / End Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>备注 / Notes</dt><dd>Let 350 FS kick off the fun</dd></div>
+    </dl>
+  </article>
+<article class="activity-card">
+    <div class="activity-head">
+      <span class="index">16</span>
+      <div>
+        <h2>Saturday's action is LIVE </h2>
+        <p>充值或欢迎奖励 / Deposit or Welcome Bonus</p>
+      </div>
+    </div>
+    <dl>
+      <div><dt>奖励 / Reward</dt><dd>100%; up to €150</dd></div>
+      <div><dt>参与要求 / Requirements</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>开始时间 / Start Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>结束时间 / End Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>备注 / Notes</dt><dd>100% Live Casino Reload Bonus up to €150</dd></div>
+    </dl>
+  </article>
+<article class="activity-card">
+    <div class="activity-head">
+      <span class="index">17</span>
+      <div>
+        <h2>Sunday's Spinning Treat </h2>
+        <p>免费旋转 / Free Spins</p>
+      </div>
+    </div>
+    <dl>
+      <div><dt>奖励 / Reward</dt><dd>350 Free Spins</dd></div>
+      <div><dt>参与要求 / Requirements</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>开始时间 / Start Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>结束时间 / End Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>备注 / Notes</dt><dd>350 Free Spins up for grabs!</dd></div>
+    </dl>
+  </article>
+<article class="activity-card">
+    <div class="activity-head">
+      <span class="index">18</span>
+      <div>
+        <h2>Unlock a Crypto Bonus of up to 1 BTC! </h2>
+        <p>综合活动 / General Promotion</p>
+      </div>
+    </div>
+    <dl>
+      <div><dt>奖励 / Reward</dt><dd>100%; up to 1 BTC</dd></div>
+      <div><dt>参与要求 / Requirements</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>开始时间 / Start Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>结束时间 / End Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>备注 / Notes</dt><dd>100% Crypto Bonus</dd></div>
+    </dl>
+  </article>
+<article class="activity-card">
+    <div class="activity-head">
+      <span class="index">19</span>
+      <div>
+        <h2>Weekend Sports Reload Bonus </h2>
+        <p>充值或欢迎奖励 / Deposit or Welcome Bonus</p>
+      </div>
+    </div>
+    <dl>
+      <div><dt>奖励 / Reward</dt><dd>50%; up to €100</dd></div>
+      <div><dt>参与要求 / Requirements</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>开始时间 / Start Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>结束时间 / End Time</dt><dd>end Sports Reload Bonus Enjoy all the weekend sports action with</dd></div>
+      <div><dt>备注 / Notes</dt><dd>Enjoy all the weekend sports action with a 50% up to up to €100 Sports Reload!</dd></div>
+    </dl>
+  </article>
+<article class="activity-card">
+    <div class="activity-head">
+      <span class="index">20</span>
+      <div>
+        <h2>Midweek Sports Reload </h2>
+        <p>充值或欢迎奖励 / Deposit or Welcome Bonus</p>
+      </div>
+    </div>
+    <dl>
+      <div><dt>奖励 / Reward</dt><dd>50%; up to €100</dd></div>
+      <div><dt>参与要求 / Requirements</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>开始时间 / Start Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>结束时间 / End Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>备注 / Notes</dt><dd>Cheer with a 50% up to €100 Reload!</dd></div>
+    </dl>
+  </article>
+<article class="activity-card">
+    <div class="activity-head">
+      <span class="index">21</span>
+      <div>
+        <h2>Accumulator Boost </h2>
+        <p>体育投注 / Sports Betting</p>
+      </div>
+    </div>
+    <dl>
+      <div><dt>奖励 / Reward</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>参与要求 / Requirements</dt><dd>bet</dd></div>
+      <div><dt>开始时间 / Start Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>结束时间 / End Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>备注 / Notes</dt><dd>Boost you winning bet</dd></div>
+    </dl>
+  </article>
+<article class="activity-card">
+    <div class="activity-head">
+      <span class="index">22</span>
+      <div>
+        <h2>Betting on sports is more exciting with our unmatched '3+1' offer! </h2>
+        <p>免费投注 / Free Bet</p>
+      </div>
+    </div>
+    <dl>
+      <div><dt>奖励 / Reward</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>参与要求 / Requirements</dt><dd>bet is free Betting on sports is more exciting with our unmatched '3+1' offer!</dd></div>
+      <div><dt>开始时间 / Start Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>结束时间 / End Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>备注 / Notes</dt><dd>3+1 Every 4th bet is free</dd></div>
+    </dl>
+  </article>
+<article class="activity-card">
+    <div class="activity-head">
+      <span class="index">23</span>
+      <div>
+        <h2>The best odds every day </h2>
+        <p>体育投注 / Sports Betting</p>
+      </div>
+    </div>
+    <dl>
+      <div><dt>奖励 / Reward</dt><dd>0%</dd></div>
+      <div><dt>参与要求 / Requirements</dt><dd>odds every day</dd></div>
+      <div><dt>开始时间 / Start Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>结束时间 / End Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>备注 / Notes</dt><dd>0% Margin</dd></div>
+    </dl>
+  </article>
+<article class="activity-card">
+    <div class="activity-head">
+      <span class="index">24</span>
+      <div>
+        <h2>Early Payout Football </h2>
+        <p>体育投注 / Sports Betting</p>
+      </div>
+    </div>
+    <dl>
+      <div><dt>奖励 / Reward</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>参与要求 / Requirements</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>开始时间 / Start Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>结束时间 / End Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>备注 / Notes</dt><dd>Win early if your team is two goals ahead!</dd></div>
+    </dl>
+  </article>
+<article class="activity-card">
+    <div class="activity-head">
+      <span class="index">25</span>
+      <div>
+        <h2>Early Payout Basketball </h2>
+        <p>综合活动 / General Promotion</p>
+      </div>
+    </div>
+    <dl>
+      <div><dt>奖励 / Reward</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>参与要求 / Requirements</dt><dd>bet early if your team leads by 20 points at any stage of the match!</dd></div>
+      <div><dt>开始时间 / Start Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>结束时间 / End Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>备注 / Notes</dt><dd>Win your bet early if your team leads by 20 points at any stage of the match!</dd></div>
+    </dl>
+  </article>
+<article class="activity-card">
+    <div class="activity-head">
+      <span class="index">26</span>
+      <div>
+        <h2>Early Payout Tennis </h2>
+        <p>综合活动 / General Promotion</p>
+      </div>
+    </div>
+    <dl>
+      <div><dt>奖励 / Reward</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>参与要求 / Requirements</dt><dd>bet early if your player is leading by a set and a break at any point in the match!</dd></div>
+      <div><dt>开始时间 / Start Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>结束时间 / End Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>备注 / Notes</dt><dd>Win your bet early if your player is leading by a set and a break at any point in the match!</dd></div>
+    </dl>
+  </article>
+<article class="activity-card">
+    <div class="activity-head">
+      <span class="index">27</span>
+      <div>
+        <h2>Early Payout Ice Hockey </h2>
+        <p>综合活动 / General Promotion</p>
+      </div>
+    </div>
+    <dl>
+      <div><dt>奖励 / Reward</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>参与要求 / Requirements</dt><dd>bet early if your team leads by 3 goals at any stage of the match!</dd></div>
+      <div><dt>开始时间 / Start Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>结束时间 / End Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>备注 / Notes</dt><dd>Win your bet early if your team leads by 3 goals at any stage of the match!</dd></div>
+    </dl>
+  </article>
+<article class="activity-card">
+    <div class="activity-head">
+      <span class="index">28</span>
+      <div>
+        <h2>Early Payout Volleyball </h2>
+        <p>综合活动 / General Promotion</p>
+      </div>
+    </div>
+    <dl>
+      <div><dt>奖励 / Reward</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>参与要求 / Requirements</dt><dd>bet early if your team takes a 12-point lead in any set at any stage of the match!</dd></div>
+      <div><dt>开始时间 / Start Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>结束时间 / End Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>备注 / Notes</dt><dd>Win your bet early if your team takes a 12-point lead in any set at any stage of the match!</dd></div>
+    </dl>
+  </article>
+<article class="activity-card">
+    <div class="activity-head">
+      <span class="index">29</span>
+      <div>
+        <h2>Early Payout American Football </h2>
+        <p>体育投注 / Sports Betting</p>
+      </div>
+    </div>
+    <dl>
+      <div><dt>奖励 / Reward</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>参与要求 / Requirements</dt><dd>bet early if your team leads by 17 points at any stage of the match!</dd></div>
+      <div><dt>开始时间 / Start Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>结束时间 / End Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>备注 / Notes</dt><dd>Win your bet early if your team leads by 17 points at any stage of the match!</dd></div>
+    </dl>
+  </article>
+<article class="activity-card">
+    <div class="activity-head">
+      <span class="index">30</span>
+      <div>
+        <h2>Rugby Early Payout </h2>
+        <p>综合活动 / General Promotion</p>
+      </div>
+    </div>
+    <dl>
+      <div><dt>奖励 / Reward</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>参与要求 / Requirements</dt><dd>Bet pays early if your team takes a 12+ point lead!</dd></div>
+      <div><dt>开始时间 / Start Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>结束时间 / End Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>备注 / Notes</dt><dd>Bet pays early if your team takes a 12+ point lead!</dd></div>
+    </dl>
+  </article>
+<article class="activity-card">
+    <div class="activity-head">
+      <span class="index">31</span>
+      <div>
+        <h2>Early Payout Baseball </h2>
+        <p>综合活动 / General Promotion</p>
+      </div>
+    </div>
+    <dl>
+      <div><dt>奖励 / Reward</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>参与要求 / Requirements</dt><dd>bet early if your team takes a 5-run lead at any point in the match!</dd></div>
+      <div><dt>开始时间 / Start Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>结束时间 / End Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>备注 / Notes</dt><dd>Win your bet early if your team takes a 5-run lead at any point in the match!</dd></div>
+    </dl>
+  </article>
+<article class="activity-card">
+    <div class="activity-head">
+      <span class="index">32</span>
+      <div>
+        <h2>Bore Draw Bonus </h2>
+        <p>综合活动 / General Promotion</p>
+      </div>
+    </div>
+    <dl>
+      <div><dt>奖励 / Reward</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>参与要求 / Requirements</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>开始时间 / Start Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>结束时间 / End Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>备注 / Notes</dt><dd>Make 0-0 your favourite match result!</dd></div>
+    </dl>
+  </article>
+<article class="activity-card">
+    <div class="activity-head">
+      <span class="index">33</span>
+      <div>
+        <h2>Bet Builder </h2>
+        <p>体育投注 / Sports Betting</p>
+      </div>
+    </div>
+    <dl>
+      <div><dt>奖励 / Reward</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>参与要求 / Requirements</dt><dd>Bet Builder Create your own bet combination!</dd></div>
+      <div><dt>开始时间 / Start Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>结束时间 / End Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>备注 / Notes</dt><dd>Create your own bet combination!</dd></div>
+    </dl>
+  </article>
+    </section>
+
+    <details class="raw">
+      <summary>查看原始页面文字 / Raw visible text</summary>
+      <pre>LOGIN
+REGISTER
+Promotions
+ALL
+CASINO
+SPORTS
+Welcome Casino Package
+Start with 350% up to €2000 &amp; 1000 FS
+Learn more
+Campeonbet is shortlisted
+One vote brings €20 Free Bet &amp; 150 FS!
+Learn more
+Drops &amp; Wins - 2026 Edition
+Claim your share of €25.000.000!
+Learn more
+Rewards Every Sunday
+€25,000 from Playson &amp; Booongo Games
+Learn more
+Season of Legends by Evoplay
+€512,000 in total prizes
+Learn more
+Spinoleague 2026 by Spinomenal!
+€12,000,000 in cash prizes
+Learn more
+Kash Drops by Kalamba Games
+€10,000,000 total prizes!
+Learn more
+Welcome Sports Bonus
+Boost your bets with a 100% up to €100 Bonus!
+Learn more
+Welcome Sports Freebet
+Kick off with a €25 Freebet!
+Learn more
+Welcome Crypto COMBO
+150% Crypto Bonus up to 1 BTC &amp; 150 FS!
+Learn more
+Monday's Reload Bonus
+100% Casino Reload Bonus lined up for you!
+Learn more
+Tuesday on the reels
+1000 FS to spin you around!
+Learn more
+Wednesday's double fun
+Get €5 Live Casino Bonus &amp; 150 FS
+Learn more
+Live Casino Thursday
+25% Cashback to fuel more action!
+Learn more
+Friday's Free Spins
+Let 350 FS kick off the fun
+Learn more
+Saturday's action is LIVE
+100% Live Casino Reload Bonus up to €150
+Learn more
+Sunday's Spinning Treat
+350 Free Spins up for grabs!
+Learn more
+100% Crypto Bonus
+Unlock a Crypto Bonus of up to 1 BTC!
+Learn more
+Weekend Sports Reload Bonus
+Enjoy all the weekend sports action with a 50% up to up to €100 Sports Reload!
+Learn more
+Midweek Sports Reload
+Cheer with a 50% up to €100 Reload!
+Learn more
+Accumulator Boost
+Boost you winning bet
+Learn more
+3+1 Every 4th bet is free
+Betting on sports is more exciting with our unmatched '3+1' offer!
+Learn more
+0% Margin
+The best odds every day
+Learn more
+Early Payout Football
+Win early if your team is two goals ahead!
+Learn more
+Early Payout Basketball
+Win your bet early if your team leads by 20 points at any stage of the match!
+Learn more
+Early Payout Tennis
+Win your bet early if your player is leading by a set and a break at any point in the match!
+Learn more
+Early Payout Ice Hockey
+Win your bet early if your team leads by 3 goals at any stage of the match!
+Learn more
+Early Payout Volleyball
+Win your bet early if your team takes a 12-point lead in any set at any stage of the match!
+Learn more
+Early Payout American Football
+Win your bet early if your team leads by 17 points at any stage of the match!
+Learn more
+Rugby Early Payout
+Bet pays early if your team takes a 12+ point lead!
+Learn more
+Early Payout Baseball
+Win your bet early if your team takes a 5-run lead at any point in the match!
+Learn more
+Bore Draw Bonus
+Make 0-0 your favourite match result!
+Learn more
+Bet Builder
+Create your own bet combination!
+Learn more
+General Bonus T&amp;Cs
+About Us
+Terms &amp; Conditions
+Privacy policy
+FAQ
+Responsible Gaming &amp; Self-Exclusion Policy
+Contact us
+KYC &amp; AML Policies
+Underage Gaming Policy
+Sport Betting Rules
+Payments &amp; Withdrawals
+SHOW ALL
+campeonbet.io is owned and operated by Green Champions Leader SRL, registration number: 3-102-917157, registered address: Costa Rica, San José, Montes de Oca, San Pedro, Los Yoses, Avenidas Ocho y Diez, Calle Treinta y Nueve, LY Center. Contact us [support@campeonbet.io]. campeonbet.io is licensed and regulated by the Government of the Autonomous Island of Anjouan, Union of Comoros and operates under License ALSI-202502014-FI1. Payment processor is Widoma Trading Co. Limited (reg. nr. HE 468781) a company having its registered address at Lefkonos 22, 2nd floor, Strovolos 2064, Nicosia, Cyprus. campeonbet.io has passed all regulatory compliance and is legally authorized to conduct gaming operations for any and all games of chance and wagering.
+© 2026 Campeonbet | All rights reserved.
+Gambling can be addictive</pre>
+    </details>
+  </main>
+</body>
+</html>

@@ -1,0 +1,405 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>BC Game 活动详情</title>
+  <style>
+    :root { --bg:#f5f6f2; --panel:#fff; --ink:#15201b; --muted:#66736d; --line:#d8ddd4; --green:#0d7658; --blue:#245c9e; --soft:#eef4f0; }
+    * { box-sizing:border-box; }
+    body { margin:0; background:var(--bg); color:var(--ink); font-family:Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; line-height:1.45; }
+    .page { max-width:1280px; margin:0 auto; padding:28px 18px 56px; }
+    .hero { background:var(--panel); border:1px solid var(--line); border-radius:8px; padding:24px; display:grid; grid-template-columns:minmax(0,1fr) 280px; gap:18px; align-items:end; margin-bottom:18px; }
+    .brand-hero { margin-bottom:16px; }
+    .eyebrow { margin:0 0 8px; color:var(--green); font-size:12px; font-weight:800; text-transform:uppercase; letter-spacing:.04em; }
+    h1 { margin:0 0 8px; font-size:32px; line-height:1.12; letter-spacing:0; }
+    h2 { margin:0 0 6px; font-size:18px; letter-spacing:0; }
+    p { margin:0; }
+    .sub, .meta { color:var(--muted); }
+    .meta { background:#f8faf7; border:1px solid var(--line); border-radius:8px; padding:14px; }
+    .meta b { display:inline-block; min-width:92px; color:var(--ink); }
+    .brand-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:14px; }
+    .brand-card { display:grid; grid-template-columns:220px minmax(0,1fr); gap:14px; padding:14px; color:var(--ink); text-decoration:none; background:var(--panel); border:1px solid var(--line); border-radius:8px; }
+    .brand-card img, .visual img { width:100%; border:1px solid var(--line); border-radius:8px; background:#edf0ea; object-fit:cover; }
+    .brand-card img { aspect-ratio:16/10; }
+    .brand-card span { display:inline-flex; margin-top:10px; color:var(--blue); font-weight:700; }
+    .new-summary { background:var(--panel); border:1px solid var(--line); border-radius:8px; padding:16px; margin-bottom:18px; }
+    .new-summary h2 { margin:0 0 10px; font-size:20px; }
+    .new-list { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:10px; }
+    .new-item { border:1px solid var(--line); border-radius:8px; padding:10px; background:#fbfcfa; }
+    .new-item strong { display:block; }
+    .new-badge { display:inline-flex; align-items:center; border-radius:999px; background:#fff4df; color:#9a6816; padding:3px 8px; font-size:12px; font-weight:800; margin-left:6px; vertical-align:middle; }
+    .topnav { margin-bottom:12px; }
+    .topnav a { color:var(--blue); font-weight:700; text-decoration:none; }
+    .visual { background:var(--panel); border:1px solid var(--line); border-radius:8px; padding:14px; margin-bottom:16px; }
+    .visual img { max-height:520px; object-fit:contain; }
+    .activity-list { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:14px; }
+    .activity-card { background:var(--panel); border:1px solid var(--line); border-radius:8px; padding:16px; }
+    .activity-head { display:grid; grid-template-columns:36px minmax(0,1fr); gap:10px; align-items:start; margin-bottom:12px; }
+    .index { display:inline-grid; place-items:center; width:30px; height:30px; border-radius:999px; background:var(--soft); color:var(--green); font-weight:800; }
+    dl { display:grid; gap:8px; margin:0; }
+    dl div { display:grid; grid-template-columns:150px minmax(0,1fr); gap:10px; border-top:1px solid var(--line); padding-top:8px; }
+    dt { color:var(--muted); font-size:12px; font-weight:800; }
+    dd { margin:0; font-size:13px; }
+    .missing-text { color:var(--muted); }
+    .raw { background:var(--panel); border:1px solid var(--line); border-radius:8px; padding:14px; margin-top:16px; }
+    pre { white-space:pre-wrap; word-break:break-word; background:#111714; color:#eef6f0; padding:12px; border-radius:8px; max-height:320px; overflow:auto; font-size:12px; }
+    a { color:var(--blue); }
+    @media (max-width:900px) { .hero, .brand-grid, .brand-card, .activity-list, .new-list { grid-template-columns:1fr; } h1 { font-size:27px; } dl div { grid-template-columns:1fr; } }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <nav class="topnav"><a href="../index.html">返回品牌入口 / Back to brands</a></nav>
+    <section class="hero brand-hero">
+      <div>
+        <p class="eyebrow">Brand Promotion Page</p>
+        <h1>BC Game</h1>
+        <p class="sub">来源 Source：<a href="https://bc.fun/en-IN/promotions/promotion">https://bc.fun/en-IN/promotions/promotion</a></p>
+        <p class="sub">本页根据浏览器可见内容整理。未显示的字段会标注为“列表页未显示 / Not shown on listing page”。</p>
+      </div>
+      <div class="meta">
+        <b>活动 Activities</b>7<br>
+        <b>今日新增 New</b>0<br>
+        <b>状态 Status</b>浏览器可访问 / Browser accessible
+      </div>
+    </section>
+
+    <section class="visual">
+      <img src="../../browser-screenshots/bc-game.png" alt="BC Game screenshot">
+    </section>
+
+    <section class="activity-list">
+      <article class="activity-card">
+    <div class="activity-head">
+      <span class="index">1</span>
+      <div>
+        <h2>IEM ATLANTA 2026 SPIN &amp; WIN BIG REWARDS </h2>
+        <p>综合活动 / General Promotion</p>
+      </div>
+    </div>
+    <dl>
+      <div><dt>奖励 / Reward</dt><dd>$34,000; up to $1000</dd></div>
+      <div><dt>参与要求 / Requirements</dt><dd>Wager Daily &amp; Draw Daily, Win up to $1000</dd></div>
+      <div><dt>开始时间 / Start Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>结束时间 / End Time</dt><dd>May 18</dd></div>
+      <div><dt>备注 / Notes</dt><dd>列表页可见 / Visible on listing page</dd></div>
+    </dl>
+  </article>
+<article class="activity-card">
+    <div class="activity-head">
+      <span class="index">2</span>
+      <div>
+        <h2>FREE SPINS GIVEAWAY </h2>
+        <p>免费旋转 / Free Spins</p>
+      </div>
+    </div>
+    <dl>
+      <div><dt>奖励 / Reward</dt><dd>20 FREE SPINS; €10; 20 Free Spins</dd></div>
+      <div><dt>参与要求 / Requirements</dt><dd>Bet €10 every day and get 20 Free Spins daily!</dd></div>
+      <div><dt>开始时间 / Start Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>结束时间 / End Time</dt><dd>May 20</dd></div>
+      <div><dt>备注 / Notes</dt><dd>列表页可见 / Visible on listing page</dd></div>
+    </dl>
+  </article>
+<article class="activity-card">
+    <div class="activity-head">
+      <span class="index">3</span>
+      <div>
+        <h2>NOLIMITCITY EXCLUSIVE 98% RTP </h2>
+        <p>综合活动 / General Promotion</p>
+      </div>
+    </div>
+    <dl>
+      <div><dt>奖励 / Reward</dt><dd>98%</dd></div>
+      <div><dt>参与要求 / Requirements</dt><dd>Enjoy 98% RTP for higher returns on every bet.</dd></div>
+      <div><dt>开始时间 / Start Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>结束时间 / End Time</dt><dd>May 25</dd></div>
+      <div><dt>备注 / Notes</dt><dd>列表页可见 / Visible on listing page</dd></div>
+    </dl>
+  </article>
+<article class="activity-card">
+    <div class="activity-head">
+      <span class="index">4</span>
+      <div>
+        <h2>BET €20 DAILY </h2>
+        <p>免费旋转 / Free Spins</p>
+      </div>
+    </div>
+    <dl>
+      <div><dt>奖励 / Reward</dt><dd>10 FREE SPINS; €20; 10 free spins</dd></div>
+      <div><dt>参与要求 / Requirements</dt><dd>On Nolimit City selected Slot Games and grab 10 free spins every day!</dd></div>
+      <div><dt>开始时间 / Start Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>结束时间 / End Time</dt><dd>倒计时：20:41:01</dd></div>
+      <div><dt>备注 / Notes</dt><dd>列表页可见 / Visible on listing page</dd></div>
+    </dl>
+  </article>
+<article class="activity-card">
+    <div class="activity-head">
+      <span class="index">5</span>
+      <div>
+        <h2>CHOP CHOP 7-DAY GIFT </h2>
+        <p>免费旋转 / Free Spins</p>
+      </div>
+    </div>
+    <dl>
+      <div><dt>奖励 / Reward</dt><dd>120 FREE SPINS; up to 120 FREE SPINS</dd></div>
+      <div><dt>参与要求 / Requirements</dt><dd>Complete daily tasks for 7 days &amp; win up to 120 FREE SPINS!</dd></div>
+      <div><dt>开始时间 / Start Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>结束时间 / End Time</dt><dd>May 21</dd></div>
+      <div><dt>备注 / Notes</dt><dd>列表页可见 / Visible on listing page</dd></div>
+    </dl>
+  </article>
+<article class="activity-card">
+    <div class="activity-head">
+      <span class="index">6</span>
+      <div>
+        <h2>3 CURSED CHESTS FREE SPINS </h2>
+        <p>免费旋转 / Free Spins</p>
+      </div>
+    </div>
+    <dl>
+      <div><dt>奖励 / Reward</dt><dd>10 FREE SPINS; €10; 10 Free Spins</dd></div>
+      <div><dt>参与要求 / Requirements</dt><dd>Bet €10 daily, get 10 Free Spins</dd></div>
+      <div><dt>开始时间 / Start Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>结束时间 / End Time</dt><dd>May 28</dd></div>
+      <div><dt>备注 / Notes</dt><dd>列表页可见 / Visible on listing page</dd></div>
+    </dl>
+  </article>
+<article class="activity-card">
+    <div class="activity-head">
+      <span class="index">7</span>
+      <div>
+        <h2>TRIPLE TREASURE COVE </h2>
+        <p>综合活动 / General Promotion</p>
+      </div>
+    </div>
+    <dl>
+      <div><dt>奖励 / Reward</dt><dd>EARLY RELEASE</dd></div>
+      <div><dt>参与要求 / Requirements</dt><dd>Exclusive early release, only on BC.GAME</dd></div>
+      <div><dt>开始时间 / Start Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>结束时间 / End Time</dt><dd>May 22</dd></div>
+      <div><dt>备注 / Notes</dt><dd>列表页可见 / Visible on listing page</dd></div>
+    </dl>
+  </article>
+    </section>
+
+    <details class="raw">
+      <summary>查看原始页面文字 / Raw visible text</summary>
+      <pre>Promotion
+All
+Casino
+BC Exclusive
+New Release
+$34,000 PRIZE
+IEM ATLANTA 2026 SPIN &amp; WIN BIG REWARDS
+Wager Daily &amp; Draw Daily, Win up to $1000
+Ends
+May 18
+20 FREE SPINS
+FREE SPINS GIVEAWAY
+Bet €10 every day and get 20 Free Spins daily!
+Ends
+May 20
+EXCLUSIVE
+98% RTP
+NOLIMITCITY EXCLUSIVE 98% RTP
+Enjoy 98% RTP for higher returns on every bet.
+Ends
+May 25
+10 FREE SPINS
+FREE SPINS GIVEAWAY
+Play Jelly Express, get 10 Free Spins randomly.
+Ends
+May 18
+SLOTS
+10 FREE SPINS
+BET €20 DAILY
+On Nolimit City selected Slot Games and grab 10 free spins every day!
+Ends in
+20:41:01
+120 FREE SPINS
+CHOP CHOP 7-DAY GIFT
+Complete daily tasks for 7 days &amp; win up to 120 FREE SPINS!
+Ends
+May 21
+10 FREE SPINS
+3 CURSED CHESTS FREE SPINS
+Bet €10 daily, get 10 Free Spins
+Ends
+May 28
+EARLY RELEASE
+TRIPLE TREASURE COVE
+Exclusive early release, only on BC.GAME
+Ends
+May 22
+Archived
+Casino
+Casino Home
+Slots
+Live Casino
+New Releases
+Recommended
+Table Game
+BlackJack
+Roulette
+Baccarat
+Sports
+Sports Home
+Live
+Rules
+Sport Betting Insights
+Promo
+VIP Club
+Referral
+Promotions
+Lottery
+Refer a friend
+BC Store
+Support/Legal
+Licenses
+Help Center
+Gamble Aware
+Fairness
+FAQ
+Privacy Policy
+Terms Of Service
+Law Enforcement
+Responsible Gambling
+AML
+Design Resources
+Live Support
+About Us
+News
+Business Contacts
+Help Desk
+Verify Representative
+Verify This Site
+Join Our Global Community
+Join Our Local Community
+🇮🇳
+
+The ultimate crypto gaming destination, trusted by millions worldwide. We bring bold entertainment, cutting-edge experiences, and a thriving community together for non-stop thrills. Play, win, and stay untamed.
+
+Your use of and access to BC.GAME signifies that you fully understand and agree to be legally bound by the contents of our Terms of Service and Responsible Gaming Policy
+
+Crypto trading is not gambling by definition, therefore it is not covered by our gaming license.
+
+BC.GAME is operated by Twocent Technology Limited, a limited liability company registered in Belize with company registration number 41939, with registered address at Sea Urchin Street #2, San Pedro, Ambergris Caye, Belize. BC.GAME is licensed and regulated by the Government of the Autonomous Island of Anjouan, Union of Comoros and operates under License No. ALSI-202410011-FI1.
+
+BC.GAME has passed all regulatory compliance and is legally authorized to conduct gaming operations for any and all games of chance and wagering.
+
+Copyright ©2026 Twocent Technology Limited ALL RIGHTS RESERVED. 1BTC=$79,167.89
+Explore 1000+ slots, live dealer tables, crash and original games, plus full sports betting with pre-match and in-play odds. Instant deposits, low fees, fast withdrawals. Our provably fair systems and audited RNG protect every bet. One wallet across casino and sportsbook keeps things simple, and our mobile-ready site lets you play anywhere. New players can claim welcome bonuses and ongoing cashback. Need help? 24/7 support has you covered. Simple, secure, and built for real-money crypto gaming The ultimate crypto gaming destination, trusted by millions worldwide. We bring bold entertainment, cutting-edge experiences, and a thriving community together for non-stop thrills. Play, win, and stay untamed. Your use of and access to BC.GAME signifies that you fully understand and agree to be legally bound by the contents of our Terms of Service and Responsible Gaming Policy Crypto trading is not gambling by definition, therefore it is not covered by our gaming license. Our provably fair systems and audited RNG protect every bet. One wallet across casino and sportsbook keeps things simple, and our mobile-ready site lets you play anywhere. New players can claim welcome bonuses and ongoing cashback. Need help? 24/7 support has you covered. Simple, secure, and built for real-money crypto gaming The ultimate crypto gaming destination, trusted by millions worldwide. We bring bold entertainment, cutting-edge experiences, and a thriving community together for non-stop thrills. Play, win, and stay untamed. Your use of and access to BC.GAME signifies that you fully understand and agree to be legally bound by the contents of our Terms of Service and Responsible Gaming Policy Crypto trading is not gambling by definition, therefore it is not covered by our gaming license. We advise all players who are concerned about their gambling behavior to take a break by excluding themselves from their gaming account. Self-exclusion will lock your account for a minimum of 6 months and no promotional material will be sent. Contact our experienced Customer Support team at any time to request this and they will kindly assist you. A 7-day cooling off period is also available. We recommend that you contact all other gambling sites where you have an account and request self-exclusion there also. Players must be of legal gambling age in their jurisdiction (at least 18+) in order to play at BC.GAME. It is their responsibility to be aware of the age restriction where they reside and play, and to confirm their legitimacy when creating an account at BC.GAME. We also advise parents to do the following: Password protect computer, mobile, and/or tablet. Do not leave device unattended when logged into your account. Make sure all account details and credit cards are inaccessible to children. Do not save passwords on your computer, write them down and keep somewhere out of reach. Download filtering software (e.g. Net Nanny) to prevent minors from accessing inappropriate sites.
+Sign In
+Sign Up
+Application
+
+Unlock Fun with Exclusive Features
+
+Casino
+Sports
+Lottery
+Crypto Futures
+Promotions
+VIPClub
+Referral
+Forum
+Provably Fair
+Responsible Gambling
+Blog
+Sport Betting Insights
+Sponsorships
+Live Support
+Indian English
+Crash
+Chop Chop
+Limbo
+Hilo
+Mines
+Twist
+Tower Legend
+Classic Dice
+Keno
+Plinko
+Roulette
+Cave Of Plunder
+Wheel
+Dice
+Fast Crash
+Ganesha Golden Wheel
+Fast Parity
+CoinFlip
+Hash Dice
+TORTURE BLOCK
+Rhino Robbery
+Ring of Fortune
+Blackjack
+WUKONG
+Star Wins
+Stellar Rush
+Double
+Golden Year
+Sea of Olympus 1000
+Roulette Multiplayer
+Gold of Olympus
+Deadliest Sea
+Patti
+Bubble Shooter
+Symbiote
+NeZha
+Candy Fiesta 1000
+Wizard's Academy
+Sicbo
+StarShine Princess
+Jade
+Cursed Clown
+Baccarat
+Keno Multiplayer
+Perya Color Game
+Arcane Portals
+Clash &amp; Cash
+Sugar Fiesta 1000
+Reel Big Catch
+Dragon Quest
+Samurai Clash
+Monster Hunter
+Video Poker
+Savior Sword
+Bingo
+Jack's Crypt
+Fish Prawn Crab
+Bullet Spin
+Magical Mine
+Cyberpunk XXII
+John Wild
+Lucky Ranch
+Beauties
+Cursed Doll
+Run Away! Zombies
+Bear Smash: 15000X Boost
+Piece Of Cash
+Ghost Boo-nanza
+Left 4 Cash
+Baccarat Multiplayer
+Dragon Slayer
+Doggy Miner
+Teenpatti No Limit
+Teenpatti lite
+TeenPatti Bonus
+Jade
+Speedy Andar Bahar
+Teen Patti Joker
+Teen patti 2020
+Bear Blast
+Cowboy
+Teen Patti Multiplayer
+Andar Bahar
+
+We use cookies to provide you with the best possible experience
+
+Accept</pre>
+    </details>
+  </main>
+</body>
+</html>

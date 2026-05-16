@@ -1,0 +1,23 @@
+{
+  "name": "competitor-promo-crawler",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Daily competitor promotion crawler for Brazil betting/iGaming monitoring.",
+  "scripts": {
+    "login": "node src/login.mjs",
+    "crawl": "node src/crawl.mjs",
+    "crawl:public": "node src/crawl-public.mjs",
+    "crawl:today": "node src/crawl.mjs --date=today",
+    "report:html": "node src/generate-html-report.mjs",
+    "report:cn": "node src/generate-cn-visual-report.mjs",
+    "report:browser": "node src/generate-browser-cn-report.mjs",
+    "report:detailed": "node src/generate-browser-detailed-cn-report.mjs",
+    "report:index": "node src/generate-report-index.mjs",
+    "build:pages": "node src/build-pages.mjs",
+    "validate": "node src/validate-config.mjs"
+  },
+  "dependencies": {
+    "playwright": "^1.52.0"
+  }
+}

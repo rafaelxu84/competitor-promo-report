@@ -1,0 +1,280 @@
+{
+  "defaults": {
+    "locale": "en-US",
+    "timezone": "America/Sao_Paulo",
+    "timeoutMs": 45000,
+    "waitAfterLoadMs": 3500,
+    "viewport": {
+      "width": 1440,
+      "height": 1200
+    },
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36",
+    "blockedTextPatterns": [
+      "captcha",
+      "cloudflare",
+      "access denied",
+      "enable javascript",
+      "verify you are human",
+      "checking your browser",
+      "unusual traffic",
+      "forbidden",
+      "403"
+    ],
+    "genericPromoKeywords": [
+      "promo",
+      "promotion",
+      "promotions",
+      "bonus",
+      "bonuses",
+      "cashback",
+      "cash back",
+      "freebet",
+      "free bet",
+      "free spins",
+      "freespins",
+      "drops",
+      "rakeback",
+      "reload",
+      "deposit",
+      "welcome",
+      "vip",
+      "race",
+      "raffle",
+      "tournament",
+      "mission",
+      "quest",
+      "reward",
+      "rewards",
+      "spin",
+      "loyalty",
+      "leaderboard",
+      "wager",
+      "odds"
+    ]
+  },
+  "competitors": [
+    {
+      "brand": "stake",
+      "displayName": "Stake",
+      "market": "GLOBAL",
+      "loginUrl": "https://stake.mba/",
+      "pages": [
+        {
+          "name": "Stake Promotions",
+          "url": "https://stake.mba/promotions",
+          "requiresAuth": false
+        }
+      ],
+      "selectors": {
+        "promoCard": "a[href*='promo'], a[href*='bonus'], article, section, [class*='promo'], [class*='bonus'], [data-testid*='promo']",
+        "expandButtons": [
+          "button:has-text('View')",
+          "button:has-text('More')",
+          "button:has-text('Read')",
+          "button:has-text('Terms')",
+          "button:has-text('Show')"
+        ],
+        "remove": ["nav", "footer", "script", "style"]
+      }
+    },
+    {
+      "brand": "bcgame",
+      "displayName": "BC Game",
+      "market": "GLOBAL",
+      "loginUrl": "https://bc.fun/",
+      "pages": [
+        {
+          "name": "BC Game Promotions",
+          "url": "https://bc.fun/en-IN/promotions/promotion",
+          "requiresAuth": false
+        }
+      ],
+      "selectors": {
+        "promoCard": "a[href*='promotion'], a[href*='bonus'], article, section, [class*='promo'], [class*='bonus'], [class*='reward']",
+        "expandButtons": [
+          "button:has-text('View')",
+          "button:has-text('More')",
+          "button:has-text('Details')",
+          "button:has-text('Terms')"
+        ],
+        "remove": ["nav", "footer", "script", "style"]
+      }
+    },
+    {
+      "brand": "1xbet",
+      "displayName": "1xBet",
+      "market": "GLOBAL",
+      "loginUrl": "https://1xlite-19708.pro/en/",
+      "pages": [
+        {
+          "name": "1xBet Bonus Rules",
+          "url": "https://1xlite-19708.pro/en/bonus/rules",
+          "requiresAuth": false
+        }
+      ],
+      "selectors": {
+        "promoCard": "a[href*='bonus'], a[href*='promo'], article, section, [class*='bonus'], [class*='promo']",
+        "expandButtons": [
+          "button:has-text('Show')",
+          "button:has-text('More')",
+          "button:has-text('Terms')"
+        ],
+        "remove": ["nav", "footer", "script", "style"]
+      }
+    },
+    {
+      "brand": "justcasino",
+      "displayName": "JustCasino",
+      "market": "GLOBAL",
+      "loginUrl": "https://www.justcasino.io/",
+      "pages": [
+        {
+          "name": "JustCasino Promotions",
+          "url": "https://www.justcasino.io/promotions",
+          "requiresAuth": false
+        }
+      ],
+      "selectors": {
+        "promoCard": "a[href*='promotion'], a[href*='bonus'], article, section, [class*='promo'], [class*='bonus']",
+        "expandButtons": [
+          "button:has-text('More')",
+          "button:has-text('Details')",
+          "button:has-text('Terms')"
+        ],
+        "remove": ["nav", "footer", "script", "style"]
+      }
+    },
+    {
+      "brand": "betpanda",
+      "displayName": "Betpanda",
+      "market": "GLOBAL",
+      "loginUrl": "https://betpanda.partners/",
+      "pages": [
+        {
+          "name": "Betpanda Promotions",
+          "url": "https://betpanda.partners/en/promo/promotions",
+          "requiresAuth": false
+        }
+      ],
+      "selectors": {
+        "promoCard": "a[href*='promo'], a[href*='bonus'], article, section, [class*='promo'], [class*='bonus']",
+        "expandButtons": [
+          "button:has-text('More')",
+          "button:has-text('Details')",
+          "button:has-text('Terms')"
+        ],
+        "remove": ["nav", "footer", "script", "style"]
+      }
+    },
+    {
+      "brand": "coincasino",
+      "displayName": "CoinCasino",
+      "market": "GLOBAL",
+      "loginUrl": "https://www.coincasino.com/",
+      "pages": [
+        {
+          "name": "CoinCasino Promotions",
+          "url": "https://www.coincasino.com/en/promotions",
+          "requiresAuth": false
+        }
+      ],
+      "selectors": {
+        "promoCard": "a[href*='promotion'], a[href*='bonus'], article, section, [class*='promo'], [class*='bonus']",
+        "expandButtons": [
+          "button:has-text('More')",
+          "button:has-text('Details')",
+          "button:has-text('Terms')"
+        ],
+        "remove": ["nav", "footer", "script", "style"]
+      }
+    },
+    {
+      "brand": "velobet",
+      "displayName": "Velobet",
+      "market": "GLOBAL",
+      "loginUrl": "https://velobet.com/",
+      "pages": [
+        {
+          "name": "Velobet Promos",
+          "url": "https://velobet.com/en/static/promos",
+          "requiresAuth": false
+        }
+      ],
+      "selectors": {
+        "promoCard": "a[href*='promo'], a[href*='bonus'], article, section, [class*='promo'], [class*='bonus']",
+        "expandButtons": [
+          "button:has-text('More')",
+          "button:has-text('Details')",
+          "button:has-text('Terms')"
+        ],
+        "remove": ["nav", "footer", "script", "style"]
+      }
+    },
+    {
+      "brand": "megapari",
+      "displayName": "Megapari",
+      "market": "GLOBAL",
+      "loginUrl": "https://2278876mp.pro/en/",
+      "pages": [
+        {
+          "name": "Megapari Bonus Rules",
+          "url": "https://2278876mp.pro/en/bonus/rules",
+          "requiresAuth": false
+        }
+      ],
+      "selectors": {
+        "promoCard": "a[href*='bonus'], a[href*='promo'], article, section, [class*='bonus'], [class*='promo']",
+        "expandButtons": [
+          "button:has-text('Show')",
+          "button:has-text('More')",
+          "button:has-text('Terms')"
+        ],
+        "remove": ["nav", "footer", "script", "style"]
+      }
+    },
+    {
+      "brand": "funbet",
+      "displayName": "Funbet",
+      "market": "GLOBAL",
+      "loginUrl": "https://funbet-9873.com/",
+      "pages": [
+        {
+          "name": "Funbet Promotions",
+          "url": "https://funbet-9873.com/gc/promotions",
+          "requiresAuth": false
+        }
+      ],
+      "selectors": {
+        "promoCard": "a[href*='promotion'], a[href*='bonus'], article, section, [class*='promo'], [class*='bonus']",
+        "expandButtons": [
+          "button:has-text('More')",
+          "button:has-text('Details')",
+          "button:has-text('Terms')"
+        ],
+        "remove": ["nav", "footer", "script", "style"]
+      }
+    },
+    {
+      "brand": "campeonbet",
+      "displayName": "Campeonbet",
+      "market": "GLOBAL",
+      "loginUrl": "https://campeonbet.io/",
+      "pages": [
+        {
+          "name": "Campeonbet Promotions",
+          "url": "https://campeonbet.io/promotions",
+          "requiresAuth": false
+        }
+      ],
+      "selectors": {
+        "promoCard": "a[href*='promotion'], a[href*='bonus'], article, section, [class*='promo'], [class*='bonus']",
+        "expandButtons": [
+          "button:has-text('More')",
+          "button:has-text('Details')",
+          "button:has-text('Terms')"
+        ],
+        "remove": ["nav", "footer", "script", "style"]
+      }
+    }
+  ]
+}

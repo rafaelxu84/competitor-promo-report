@@ -1,0 +1,7 @@
+node_modules/
+.auth/
+data/
+reports/
+screenshots/
+snapshots/
+.DS_Store
