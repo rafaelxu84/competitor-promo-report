@@ -40,6 +40,8 @@
     .activity-card.detail-missing { border-left:4px solid #a8b1ac; }
     .activity-head { display:grid; grid-template-columns:36px minmax(0,1fr); gap:10px; align-items:start; margin-bottom:12px; }
     .index { display:inline-grid; place-items:center; width:30px; height:30px; border-radius:999px; background:var(--soft); color:var(--green); font-weight:800; }
+    .detail-shot-link { display:block; margin:8px 0 12px; }
+    .detail-shot { width:100%; max-height:360px; object-fit:cover; object-position:top; border:1px solid var(--line); border-radius:8px; background:#edf0ea; }
     dl { display:grid; gap:8px; margin:0; }
     dl div { display:grid; grid-template-columns:150px minmax(0,1fr); gap:10px; border-top:1px solid var(--line); padding-top:8px; }
     dt { color:var(--muted); font-size:12px; font-weight:800; }
@@ -65,12 +67,13 @@
         <p class="eyebrow">Brand Promotion Page</p>
         <h1>Velobet</h1>
         <p class="sub">来源 Source：<a href="https://velobet.com/en/static/promos">https://velobet.com/en/static/promos</a></p>
-        <p class="sub">本页优先使用活动详情页内容；详情页未开放或未匹配时使用列表页兜底。</p>
+        <p class="sub">本页优先使用活动详情页截图与可见内容，输出要求、Trigger、Reward、Who、When、Summary、核心目的和数据预期。</p>
       </div>
       <div class="meta">
         <b>活动 Activities</b>15<br>
         <b>今日新增 New</b>0<br>
         <b>详情 Details</b>0<br>
+        <b>详情截图 Shots</b>0<br>
         <b>状态 Status</b>浏览器可访问 / Browser accessible
       </div>
     </section>
@@ -88,15 +91,17 @@
         <p>返现 / Cashback · <span class="detail-pill fallback-pill">列表页兜底 / Listing fallback</span></p>
       </div>
     </div>
+
     <dl>
-      <div><dt>奖励 / Reward</dt><dd>30% Cashback; up to 200 FB; $50; 200 FB</dd></div>
-      <div><dt>详情页奖励 / Detail Reward</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
-      <div><dt>参与要求 / Requirements</dt><dd>Bet on the FA Cup Final and get a 30% Cashback on Non-winning Bets. MINIMUM QUALIFICATION: Minimum 1 selection required in; betslip. CASHBACK OFFER: Receive 30% Cashback as a Freebet, up to 200 FB. BET CONDITIONS: • Date of bet: 16 May • Minimum b; Minimum odds (coef): 1.7 • Minimum selections (positions): 1 • Maximum Gift: 200 FB Cashback will be credited automatically onc</dd></div>
-      <div><dt>开始时间 / Start Time</dt><dd>Date of bet: 16 May • Minimum bet: $50 • Minimum odds (coef): 1.7 • Minim</dd></div>
-      <div><dt>结束时间 / End Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
-      <div><dt>详情页关键日期 / Detail Dates</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>要求 / Requirements</dt><dd>Bet on the FA Cup Final and get a 30% Cashback on Non-winning Bets. MINIMUM QUALIFICATION: Minimum 1 selection required in; betslip. CASHBACK OFFER: Receive 30% Cashback as a Freebet, up to 200 FB. BET CONDITIONS: • Date of bet: 16 May • Minimum b; Minimum odds (coef): 1.7 • Minimum selections (positions): 1 • Maximum Gift: 200 FB Cashback will be credited automatically onc</dd></div>
+      <div><dt>触发条件 / Trigger</dt><dd>新用户注册并完成首充触发</dd></div>
+      <div><dt>奖励方式 / Reward</dt><dd>30% Cashback; up to 200 FB; $50; 200 FB</dd></div>
+      <div><dt>目标用户 / Who</dt><dd>新注册/首充用户；Casino/Slots 用户；体育投注用户</dd></div>
+      <div><dt>时间 / When</dt><dd>Date of bet: 16 May • Minimum bet: $50 • Minimum odds (coef): 1.7 • Minim</dd></div>
+      <div><dt>Summary / 总结</dt><dd>The Wembley Safety Net 面向新注册/首充用户；Casino/Slots 用户；体育投注用户，通过“新用户注册并完成首充触发”推动用户完成关键行为；奖励为 30% Cashback; up to 200 FB; $50; 200 FB。主要参与要求：Bet on the FA Cup Final and get a 30% Cashback on Non-winning Bets. MINIMUM QUALIFICATION: Minimum 1 selection required in; betslip. CASHBACK OFFER: Receive 30% Cashback as a Freebet, up to 200 FB. BET CONDITIONS: • Date of bet: 16 May • Minimum b; Minimum odds (coef): 1.7 • Minimum selections (positions): 1 • Maximum Gift: 200 FB Cashback will be credited automatically onc。</dd></div>
+      <div><dt>核心目的 / Objective</dt><dd>拉新与首充转化</dd></div>
+      <div><dt>数据预期 / Expected Data</dt><dd>拉新与首充转化；预期观察：注册到首充转化率、首存金额、首周留存上升；投注额、投注单量、有效投注用户数上升；Casino DAU、游戏启动次数、免费旋转转付费率上升。</dd></div>
       <div><dt>详情页来源 / Detail Source</dt><dd><span class="missing-text">未匹配详情页 / No detail page matched</span></dd></div>
-      <div><dt>备注 / Notes</dt><dd>Casino Sport WELCOME FA CUP FINAL SPECIAL! FA Cup Final | Football Bet on the FA Cup Final and get a 30% Cashback on Non-winning Bets. MINIMUM QUALIFICATION: Minimum 1 selection required in your betslip.</dd></div>
     </dl>
 
   </article>
@@ -108,15 +113,17 @@
         <p>返现 / Cashback · <span class="detail-pill fallback-pill">列表页兜底 / Listing fallback</span></p>
       </div>
     </div>
+
     <dl>
-      <div><dt>奖励 / Reward</dt><dd>40% Cashback; 40%; 40% cashback</dd></div>
-      <div><dt>详情页奖励 / Detail Reward</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
-      <div><dt>参与要求 / Requirements</dt><dd>Cashback! UFC FIGHT NIGHT: ALLEN VS. COSTA SPECIAL! Bet on UFC Fight Night: Allen vs. Costa and get 40% Cashback on your lost be; Bet. PROMOTION RULES • Sport: MMA / UFC • Minimum bet: 50 • Minimum number of selections: 1 • Minimum odds per selection: 1; Cashback: 40% on lost bets • Maximum Free Bet: 200 40% cashback on lost bets will be credited as a FREE BET within 24 hours afte</dd></div>
-      <div><dt>开始时间 / Start Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
-      <div><dt>结束时间 / End Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
-      <div><dt>详情页关键日期 / Detail Dates</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>要求 / Requirements</dt><dd>Cashback! UFC FIGHT NIGHT: ALLEN VS. COSTA SPECIAL! Bet on UFC Fight Night: Allen vs. Costa and get 40% Cashback on your lost be; Bet. PROMOTION RULES • Sport: MMA / UFC • Minimum bet: 50 • Minimum number of selections: 1 • Minimum odds per selection: 1; Cashback: 40% on lost bets • Maximum Free Bet: 200 40% cashback on lost bets will be credited as a FREE BET within 24 hours afte</dd></div>
+      <div><dt>触发条件 / Trigger</dt><dd>用户在指定赛事/玩法下注触发</dd></div>
+      <div><dt>奖励方式 / Reward</dt><dd>40% Cashback; 40%; 40% cashback</dd></div>
+      <div><dt>目标用户 / Who</dt><dd>体育投注用户</dd></div>
+      <div><dt>时间 / When</dt><dd>活动页未明确；以页面实时倒计时或条款为准</dd></div>
+      <div><dt>Summary / 总结</dt><dd>UFC FIGHT NIGHT: ALLEN VS. COSTA SPECIAL! 面向体育投注用户，通过“用户在指定赛事/玩法下注触发”推动用户完成关键行为；奖励为 40% Cashback; 40%; 40% cashback。主要参与要求：Cashback! UFC FIGHT NIGHT: ALLEN VS. COSTA SPECIAL! Bet on UFC Fight Night: Allen vs. Costa and get 40% Cashback on your lost be; Bet. PROMOTION RULES • Sport: MMA / UFC • Minimum bet: 50 • Minimum number of selections: 1 • Minimum odds per selection: 1; Cashback: 40% on lost bets • Maximum Free Bet: 200 40% cashback on lost bets will be credited as a FREE BET within 24 hours afte。</dd></div>
+      <div><dt>核心目的 / Objective</dt><dd>提升留存、降低流失感知并延长生命周期</dd></div>
+      <div><dt>数据预期 / Expected Data</dt><dd>提升留存、降低流失感知并延长生命周期；预期观察：投注额、投注单量、有效投注用户数上升；复玩率、留存率、VIP 活跃和净收入稳定性提升。</dd></div>
       <div><dt>详情页来源 / Detail Source</dt><dd><span class="missing-text">未匹配详情页 / No detail page matched</span></dd></div>
-      <div><dt>备注 / Notes</dt><dd>40% Cashback! Bet on UFC Fight Night: Allen vs. Costa and get 40% Cashback on your lost bets as a Free Bet. PROMOTION RULES • Sport: MMA / UFC • Minimum bet: 50 • Minimum number of selections: 1 • Minimum odds per selection: 1.6 • Cashback: 40% on lost bets</dd></div>
     </dl>
 
   </article>
@@ -128,15 +135,17 @@
         <p>返现 / Cashback · <span class="detail-pill fallback-pill">列表页兜底 / Listing fallback</span></p>
       </div>
     </div>
+
     <dl>
-      <div><dt>奖励 / Reward</dt><dd>30% Cashback; 30%; 30% cashback</dd></div>
-      <div><dt>详情页奖励 / Detail Reward</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
-      <div><dt>参与要求 / Requirements</dt><dd>Cashback! ITALIAN OPEN 2026 SPECIAL! Bet on the Italian Open 2026 and get 30% Cashback on your lost bets as a Free Bet. PROMOTIO; Minimum bet: 50 • Minimum number of selections: 2 • Minimum odds per selection: 1.5 • Cashback: 30% on lost bets • Maximum Free; Bet: 200 30% cashback on lost bets will be credited as a FREE BET within 24 hours after settlement. Velobet’s standard Term</dd></div>
-      <div><dt>开始时间 / Start Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
-      <div><dt>结束时间 / End Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
-      <div><dt>详情页关键日期 / Detail Dates</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>要求 / Requirements</dt><dd>Cashback! ITALIAN OPEN 2026 SPECIAL! Bet on the Italian Open 2026 and get 30% Cashback on your lost bets as a Free Bet. PROMOTIO; Minimum bet: 50 • Minimum number of selections: 2 • Minimum odds per selection: 1.5 • Cashback: 30% on lost bets • Maximum Free; Bet: 200 30% cashback on lost bets will be credited as a FREE BET within 24 hours after settlement. Velobet’s standard Term</dd></div>
+      <div><dt>触发条件 / Trigger</dt><dd>用户在指定赛事/玩法下注触发</dd></div>
+      <div><dt>奖励方式 / Reward</dt><dd>30% Cashback; 30%; 30% cashback</dd></div>
+      <div><dt>目标用户 / Who</dt><dd>体育投注用户</dd></div>
+      <div><dt>时间 / When</dt><dd>活动页未明确；以页面实时倒计时或条款为准</dd></div>
+      <div><dt>Summary / 总结</dt><dd>ITALIAN OPEN 2026 SPECIAL! 面向体育投注用户，通过“用户在指定赛事/玩法下注触发”推动用户完成关键行为；奖励为 30% Cashback; 30%; 30% cashback。主要参与要求：Cashback! ITALIAN OPEN 2026 SPECIAL! Bet on the Italian Open 2026 and get 30% Cashback on your lost bets as a Free Bet. PROMOTIO; Minimum bet: 50 • Minimum number of selections: 2 • Minimum odds per selection: 1.5 • Cashback: 30% on lost bets • Maximum Free; Bet: 200 30% cashback on lost bets will be credited as a FREE BET within 24 hours after settlement. Velobet’s standard Term。</dd></div>
+      <div><dt>核心目的 / Objective</dt><dd>提升留存、降低流失感知并延长生命周期</dd></div>
+      <div><dt>数据预期 / Expected Data</dt><dd>提升留存、降低流失感知并延长生命周期；预期观察：投注额、投注单量、有效投注用户数上升；复玩率、留存率、VIP 活跃和净收入稳定性提升。</dd></div>
       <div><dt>详情页来源 / Detail Source</dt><dd><span class="missing-text">未匹配详情页 / No detail page matched</span></dd></div>
-      <div><dt>备注 / Notes</dt><dd>30 % Cashback! Bet on the Italian Open 2026 and get 30% Cashback on your lost bets as a Free Bet. PROMOTION RULES • Sport: Tennis • Minimum bet: 50 • Minimum number of selections: 2 • Minimum odds per selection: 1.5 • Cashback: 30% on lost bets</dd></div>
     </dl>
 
   </article>
@@ -148,15 +157,17 @@
         <p>返现 / Cashback · <span class="detail-pill fallback-pill">列表页兜底 / Listing fallback</span></p>
       </div>
     </div>
+
     <dl>
-      <div><dt>奖励 / Reward</dt><dd>30%; $20; $199; 15% Cashback; $200</dd></div>
-      <div><dt>详情页奖励 / Detail Reward</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
-      <div><dt>参与要求 / Requirements</dt><dd>Bet! UEFA LEAGUE! Place progressive bets on UEFA Champions League, UEFA Europa League or UEFA Conference League and receive; Cashback Freebet automatically — follow the rules below! MINIMUM QUALIFICATION: A minimum of 3 selections is required in your be; qualify. CASHBACK FREEBET TIERS: • Bet amount $20 – $199: 15% Cashback Freebet • Bet amount $200 – $499: 20% Cashback Freebet</dd></div>
-      <div><dt>开始时间 / Start Time</dt><dd>from Cashback Freebet winnings: 10× the Freebet amount Cashback F</dd></div>
-      <div><dt>结束时间 / End Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
-      <div><dt>详情页关键日期 / Detail Dates</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>要求 / Requirements</dt><dd>Bet! UEFA LEAGUE! Place progressive bets on UEFA Champions League, UEFA Europa League or UEFA Conference League and receive; Cashback Freebet automatically — follow the rules below! MINIMUM QUALIFICATION: A minimum of 3 selections is required in your be; qualify. CASHBACK FREEBET TIERS: • Bet amount $20 – $199: 15% Cashback Freebet • Bet amount $200 – $499: 20% Cashback Freebet</dd></div>
+      <div><dt>触发条件 / Trigger</dt><dd>用户发生符合条件的亏损或投注行为后按周期触发返现</dd></div>
+      <div><dt>奖励方式 / Reward</dt><dd>30%; $20; $199; 15% Cashback; $200</dd></div>
+      <div><dt>目标用户 / Who</dt><dd>返现 用户 / Cashback</dd></div>
+      <div><dt>时间 / When</dt><dd>from Cashback Freebet winnings: 10× the Freebet amount Cashback F</dd></div>
+      <div><dt>Summary / 总结</dt><dd>Up to 30% Free Bet! 面向返现 用户 / Cashback，通过“用户发生符合条件的亏损或投注行为后按周期触发返现”推动用户完成关键行为；奖励为 30%; $20; $199; 15% Cashback; $200。主要参与要求：Bet! UEFA LEAGUE! Place progressive bets on UEFA Champions League, UEFA Europa League or UEFA Conference League and receive; Cashback Freebet automatically — follow the rules below! MINIMUM QUALIFICATION: A minimum of 3 selections is required in your be; qualify. CASHBACK FREEBET TIERS: • Bet amount $20 – $199: 15% Cashback Freebet • Bet amount $200 – $499: 20% Cashback Freebet。</dd></div>
+      <div><dt>核心目的 / Objective</dt><dd>提升留存、降低流失感知并延长生命周期</dd></div>
+      <div><dt>数据预期 / Expected Data</dt><dd>提升留存、降低流失感知并延长生命周期；预期观察：投注额、投注单量、有效投注用户数上升；复玩率、留存率、VIP 活跃和净收入稳定性提升；连续参与天数、排名页访问、任务完成率上升。</dd></div>
       <div><dt>详情页来源 / Detail Source</dt><dd><span class="missing-text">未匹配详情页 / No detail page matched</span></dd></div>
-      <div><dt>备注 / Notes</dt><dd>UEFA LEAGUE! Place progressive bets on UEFA Champions League, UEFA Europa League or UEFA Conference League and receive a Cashback Freebet automatically — follow the rules below! MINIMUM QUALIFICATION: A minimum of 3 selections is required in your betslip to qualify. CASHBACK FREEBET TIERS: • Bet amount $20 – $199: 15% Cashback Freebet • Bet amount $200 – $499: 20% Cashback Freebet • Bet amount $500 and above: 30% Cashback Freebet</dd></div>
     </dl>
 
   </article>
@@ -168,15 +179,17 @@
         <p>返现 / Cashback · <span class="detail-pill fallback-pill">列表页兜底 / Listing fallback</span></p>
       </div>
     </div>
+
     <dl>
-      <div><dt>奖励 / Reward</dt><dd>30% Cashback; up to 200 FB; $50; 200 FB</dd></div>
-      <div><dt>详情页奖励 / Detail Reward</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
-      <div><dt>参与要求 / Requirements</dt><dd>Cashback! IPL CRICKET SPECIAL! Indian Premier League | Cricket Bet on the Indian Premier League and get a 30% Cashback on Lost B; MINIMUM QUALIFICATION: Minimum 2 selections required in your betslip. CASHBACK OFFER: Receive 30% Cashback on Lost Bets, up to; BET CONDITIONS: • Minimum bet: $50 • Minimum odds (coef): 1.5 • Minimum selections (positions): 2 • Maximum Cashback: 200 F</dd></div>
-      <div><dt>开始时间 / Start Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
-      <div><dt>结束时间 / End Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
-      <div><dt>详情页关键日期 / Detail Dates</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>要求 / Requirements</dt><dd>Cashback! IPL CRICKET SPECIAL! Indian Premier League | Cricket Bet on the Indian Premier League and get a 30% Cashback on Lost B; MINIMUM QUALIFICATION: Minimum 2 selections required in your betslip. CASHBACK OFFER: Receive 30% Cashback on Lost Bets, up to; BET CONDITIONS: • Minimum bet: $50 • Minimum odds (coef): 1.5 • Minimum selections (positions): 2 • Maximum Cashback: 200 F</dd></div>
+      <div><dt>触发条件 / Trigger</dt><dd>用户在指定赛事/玩法下注触发</dd></div>
+      <div><dt>奖励方式 / Reward</dt><dd>30% Cashback; up to 200 FB; $50; 200 FB</dd></div>
+      <div><dt>目标用户 / Who</dt><dd>体育投注用户</dd></div>
+      <div><dt>时间 / When</dt><dd>活动页未明确；以页面实时倒计时或条款为准</dd></div>
+      <div><dt>Summary / 总结</dt><dd>IPL CRICKET SPECIAL! 面向体育投注用户，通过“用户在指定赛事/玩法下注触发”推动用户完成关键行为；奖励为 30% Cashback; up to 200 FB; $50; 200 FB。主要参与要求：Cashback! IPL CRICKET SPECIAL! Indian Premier League | Cricket Bet on the Indian Premier League and get a 30% Cashback on Lost B; MINIMUM QUALIFICATION: Minimum 2 selections required in your betslip. CASHBACK OFFER: Receive 30% Cashback on Lost Bets, up to; BET CONDITIONS: • Minimum bet: $50 • Minimum odds (coef): 1.5 • Minimum selections (positions): 2 • Maximum Cashback: 200 F。</dd></div>
+      <div><dt>核心目的 / Objective</dt><dd>提升留存、降低流失感知并延长生命周期</dd></div>
+      <div><dt>数据预期 / Expected Data</dt><dd>提升留存、降低流失感知并延长生命周期；预期观察：投注额、投注单量、有效投注用户数上升；复玩率、留存率、VIP 活跃和净收入稳定性提升；连续参与天数、排名页访问、任务完成率上升。</dd></div>
       <div><dt>详情页来源 / Detail Source</dt><dd><span class="missing-text">未匹配详情页 / No detail page matched</span></dd></div>
-      <div><dt>备注 / Notes</dt><dd>30% Cashback! Indian Premier League | Cricket Bet on the Indian Premier League and get a 30% Cashback on Lost Bets. MINIMUM QUALIFICATION: Minimum 2 selections required in your betslip. CASHBACK OFFER: Receive 30% Cashback on Lost Bets, up to 200 FB. BET CONDITIONS:</dd></div>
     </dl>
 
   </article>
@@ -188,15 +201,17 @@
         <p>返现 / Cashback · <span class="detail-pill fallback-pill">列表页兜底 / Listing fallback</span></p>
       </div>
     </div>
+
     <dl>
-      <div><dt>奖励 / Reward</dt><dd>50% Bonus; 25% Cashback; 25%; 200 Free Spins</dd></div>
-      <div><dt>详情页奖励 / Detail Reward</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
-      <div><dt>参与要求 / Requirements</dt><dd>Bet on your favorite NBA games and enjoy a 25% Cashback on losses plus 25% Free Spins on the legendary Play’n GO slot Book; Minimum bet: 50 • Minimum selections: 3 • Minimum odds per selection: 1.5 • Maximum gift: 200 Free Bet • Maximum gift: 200 Free; Play’n GO – Book of Dead right after you place your qualifying bet. 25% Cashback will be credited as a Free Bet if your bet</dd></div>
-      <div><dt>开始时间 / Start Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
-      <div><dt>结束时间 / End Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
-      <div><dt>详情页关键日期 / Detail Dates</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>要求 / Requirements</dt><dd>Bet on your favorite NBA games and enjoy a 25% Cashback on losses plus 25% Free Spins on the legendary Play’n GO slot Book; Minimum bet: 50 • Minimum selections: 3 • Minimum odds per selection: 1.5 • Maximum gift: 200 Free Bet • Maximum gift: 200 Free; Play’n GO – Book of Dead right after you place your qualifying bet. 25% Cashback will be credited as a Free Bet if your bet</dd></div>
+      <div><dt>触发条件 / Trigger</dt><dd>用户在指定赛事/玩法下注触发</dd></div>
+      <div><dt>奖励方式 / Reward</dt><dd>50% Bonus; 25% Cashback; 25%; 200 Free Spins</dd></div>
+      <div><dt>目标用户 / Who</dt><dd>Casino/Slots 用户；体育投注用户</dd></div>
+      <div><dt>时间 / When</dt><dd>活动页未明确；以页面实时倒计时或条款为准</dd></div>
+      <div><dt>Summary / 总结</dt><dd>NBA SPECIAL! 面向Casino/Slots 用户；体育投注用户，通过“用户在指定赛事/玩法下注触发”推动用户完成关键行为；奖励为 50% Bonus; 25% Cashback; 25%; 200 Free Spins。主要参与要求：Bet on your favorite NBA games and enjoy a 25% Cashback on losses plus 25% Free Spins on the legendary Play’n GO slot Book; Minimum bet: 50 • Minimum selections: 3 • Minimum odds per selection: 1.5 • Maximum gift: 200 Free Bet • Maximum gift: 200 Free; Play’n GO – Book of Dead right after you place your qualifying bet. 25% Cashback will be credited as a Free Bet if your bet。</dd></div>
+      <div><dt>核心目的 / Objective</dt><dd>提升留存、降低流失感知并延长生命周期</dd></div>
+      <div><dt>数据预期 / Expected Data</dt><dd>提升留存、降低流失感知并延长生命周期；预期观察：投注额、投注单量、有效投注用户数上升；Casino DAU、游戏启动次数、免费旋转转付费率上升；复玩率、留存率、VIP 活跃和净收入稳定性提升。</dd></div>
       <div><dt>详情页来源 / Detail Source</dt><dd><span class="missing-text">未匹配详情页 / No detail page matched</span></dd></div>
-      <div><dt>备注 / Notes</dt><dd>50% Bonus! Bet on your favorite NBA games and enjoy a 25% Cashback on losses plus 25% Free Spins on the legendary Play’n GO slot Book of Dead! PROMOTION RULES • Minimum bet: 50 • Minimum selections: 3 • Minimum odds per selection: 1.5 • Maximum gift: 200 Free Bet • Maximum gift: 200 Free Spins</dd></div>
     </dl>
 
   </article>
@@ -208,15 +223,17 @@
         <p>竞赛或抽奖 / Tournament or Raffle · <span class="detail-pill fallback-pill">列表页兜底 / Listing fallback</span></p>
       </div>
     </div>
+
     <dl>
-      <div><dt>奖励 / Reward</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
-      <div><dt>详情页奖励 / Detail Reward</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
-      <div><dt>参与要求 / Requirements</dt><dd>Place bets, earn points, and compete for amazing prizes. The promotion takes place every Friday. HOW TO PARTICIPATE ▼ PARTICI; Minimum odds per bet slip: 1.4 Minimum 1 market selection per bet slip Only won or lost bets are eligible (cashed out bets do n; qualify) POINT SYSTEM Earn 1 point for every 1 EUR bet (bets in other currencies will be converted to EUR for points calculati</dd></div>
-      <div><dt>开始时间 / Start Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
-      <div><dt>结束时间 / End Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
-      <div><dt>详情页关键日期 / Detail Dates</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>要求 / Requirements</dt><dd>Place bets, earn points, and compete for amazing prizes. The promotion takes place every Friday. HOW TO PARTICIPATE ▼ PARTICI; Minimum odds per bet slip: 1.4 Minimum 1 market selection per bet slip Only won or lost bets are eligible (cashed out bets do n; qualify) POINT SYSTEM Earn 1 point for every 1 EUR bet (bets in other currencies will be converted to EUR for points calculati</dd></div>
+      <div><dt>触发条件 / Trigger</dt><dd>点击参与/报名后，完成活动指定行为触发奖励</dd></div>
+      <div><dt>奖励方式 / Reward</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>目标用户 / Who</dt><dd>体育投注用户</dd></div>
+      <div><dt>时间 / When</dt><dd>每周五</dd></div>
+      <div><dt>Summary / 总结</dt><dd>Sports Marathon! 面向体育投注用户，通过“点击参与/报名后，完成活动指定行为触发奖励”推动用户完成关键行为；奖励为 列表页未显示。主要参与要求：Place bets, earn points, and compete for amazing prizes. The promotion takes place every Friday. HOW TO PARTICIPATE ▼ PARTICI; Minimum odds per bet slip: 1.4 Minimum 1 market selection per bet slip Only won or lost bets are eligible (cashed out bets do n; qualify) POINT SYSTEM Earn 1 point for every 1 EUR bet (bets in other currencies will be converted to EUR for points calculati。</dd></div>
+      <div><dt>核心目的 / Objective</dt><dd>提升体育投注投注额和赛事活跃</dd></div>
+      <div><dt>数据预期 / Expected Data</dt><dd>提升体育投注投注额和赛事活跃；预期观察：投注额、投注单量、有效投注用户数上升；连续参与天数、排名页访问、任务完成率上升。</dd></div>
       <div><dt>详情页来源 / Detail Source</dt><dd><span class="missing-text">未匹配详情页 / No detail page matched</span></dd></div>
-      <div><dt>备注 / Notes</dt><dd>WIN PRIZES EVERY FRIDAY! Join the weekly marathon! Place bets, earn points, and compete for amazing prizes. The promotion takes place every Friday. HOW TO PARTICIPATE ▼ PARTICIPATION CRITERIA Minimum odds per bet slip: 1.4 Minimum 1 market selection per bet slip Only won or lost bets are eligible (cashed out bets do not qualify)</dd></div>
     </dl>
 
   </article>
@@ -228,15 +245,17 @@
         <p>免费旋转 / Free Spins · <span class="detail-pill fallback-pill">列表页兜底 / Listing fallback</span></p>
       </div>
     </div>
+
     <dl>
-      <div><dt>奖励 / Reward</dt><dd>$1,000; $800; $600; $500; $400</dd></div>
-      <div><dt>详情页奖励 / Detail Reward</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
-      <div><dt>参与要求 / Requirements</dt><dd>wagering, no free spins, just cash! 📅 Active Period: 1 May – 31 May 2026 weekly prize pool weekly period runs from friday to; play casino, mini games, or slots earn points automatically climb the weekly leaderboard win real cash every friday earning; wagered eligible games: - slots - live casino - mini games 💵 default currency is USD. other currencies will be converted at</dd></div>
-      <div><dt>开始时间 / Start Time</dt><dd>from friday to thursday prizes are credited every friday 1 $1,000</dd></div>
-      <div><dt>结束时间 / End Time</dt><dd>end of the month 1 $5,000 2 $3,000 3 $2,000 4 $1,500 5 $1,000 6</dd></div>
-      <div><dt>详情页关键日期 / Detail Dates</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>要求 / Requirements</dt><dd>wagering, no free spins, just cash! 📅 Active Period: 1 May – 31 May 2026 weekly prize pool weekly period runs from friday to; play casino, mini games, or slots earn points automatically climb the weekly leaderboard win real cash every friday earning; wagered eligible games: - slots - live casino - mini games 💵 default currency is USD. other currencies will be converted at</dd></div>
+      <div><dt>触发条件 / Trigger</dt><dd>用户达到指定投注额或流水触发</dd></div>
+      <div><dt>奖励方式 / Reward</dt><dd>$1,000; $800; $600; $500; $400</dd></div>
+      <div><dt>目标用户 / Who</dt><dd>Casino/Slots 用户</dd></div>
+      <div><dt>时间 / When</dt><dd>end of the month 1 $5,000 2 $3,000 3 $2,000 4 $1,500 5 $1,000 6</dd></div>
+      <div><dt>Summary / 总结</dt><dd>Velo Marathon! 面向Casino/Slots 用户，通过“用户达到指定投注额或流水触发”推动用户完成关键行为；奖励为 $1,000; $800; $600; $500; $400。主要参与要求：wagering, no free spins, just cash! 📅 Active Period: 1 May – 31 May 2026 weekly prize pool weekly period runs from friday to; play casino, mini games, or slots earn points automatically climb the weekly leaderboard win real cash every friday earning; wagered eligible games: - slots - live casino - mini games 💵 default currency is USD. other currencies will be converted at。</dd></div>
+      <div><dt>核心目的 / Objective</dt><dd>引导 Casino/Slots 试玩与日活</dd></div>
+      <div><dt>数据预期 / Expected Data</dt><dd>引导 Casino/Slots 试玩与日活；预期观察：投注额、投注单量、有效投注用户数上升；Casino DAU、游戏启动次数、免费旋转转付费率上升；连续参与天数、排名页访问、任务完成率上升。</dd></div>
       <div><dt>详情页来源 / Detail Source</dt><dd><span class="missing-text">未匹配详情页 / No detail page matched</span></dd></div>
-      <div><dt>备注 / Notes</dt><dd>VELO WEEKLY MARATHON – RACE TO WIN CASH! climb the leaderboard and grab your share of weekly real cash prizes – no wagering, no free spins, just cash! 📅 Active Period: 1 May – 31 May 2026 weekly prize pool weekly period runs from friday to thursday prizes are credited every friday 1 $1,000 2 $800</dd></div>
     </dl>
 
   </article>
@@ -248,15 +267,17 @@
         <p>免费投注 / Free Bet · <span class="detail-pill fallback-pill">列表页兜底 / Listing fallback</span></p>
       </div>
     </div>
+
     <dl>
-      <div><dt>奖励 / Reward</dt><dd>15%</dd></div>
-      <div><dt>详情页奖励 / Detail Reward</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
-      <div><dt>参与要求 / Requirements</dt><dd>bet! 3 BETS = 1 FREEBET! Place three bets and unlock a FREEBET based on your stakes. The more you play, the bigger your rew; Place 3 consecutive bets, and we’ll give you a FREEBET equal to 15% of their total average. • Example: Bets of 30, 50, and 10; BET. FREEBET ELIGIBILITY RULES ▼ Standard Velobet Casino Terms and Conditions apply.</dd></div>
-      <div><dt>开始时间 / Start Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
-      <div><dt>结束时间 / End Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
-      <div><dt>详情页关键日期 / Detail Dates</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>要求 / Requirements</dt><dd>bet! 3 BETS = 1 FREEBET! Place three bets and unlock a FREEBET based on your stakes. The more you play, the bigger your rew; Place 3 consecutive bets, and we’ll give you a FREEBET equal to 15% of their total average. • Example: Bets of 30, 50, and 10; BET. FREEBET ELIGIBILITY RULES ▼ Standard Velobet Casino Terms and Conditions apply.</dd></div>
+      <div><dt>触发条件 / Trigger</dt><dd>完成活动页指定动作后触发</dd></div>
+      <div><dt>奖励方式 / Reward</dt><dd>15%</dd></div>
+      <div><dt>目标用户 / Who</dt><dd>Casino/Slots 用户</dd></div>
+      <div><dt>时间 / When</dt><dd>活动页未明确；以页面实时倒计时或条款为准</dd></div>
+      <div><dt>Summary / 总结</dt><dd>Place three bets and unlock a FREEBET based on your stakes. The more you play, the bigger your reward! 面向Casino/Slots 用户，通过“完成活动页指定动作后触发”推动用户完成关键行为；奖励为 15%。主要参与要求：bet! 3 BETS = 1 FREEBET! Place three bets and unlock a FREEBET based on your stakes. The more you play, the bigger your rew; Place 3 consecutive bets, and we’ll give you a FREEBET equal to 15% of their total average. • Example: Bets of 30, 50, and 10; BET. FREEBET ELIGIBILITY RULES ▼ Standard Velobet Casino Terms and Conditions apply.。</dd></div>
+      <div><dt>核心目的 / Objective</dt><dd>免费投注 / Free Bet的转化与活跃提升</dd></div>
+      <div><dt>数据预期 / Expected Data</dt><dd>免费投注 / Free Bet的转化与活跃提升；预期观察：投注额、投注单量、有效投注用户数上升；Casino DAU、游戏启动次数、免费旋转转付费率上升。</dd></div>
       <div><dt>详情页来源 / Detail Source</dt><dd><span class="missing-text">未匹配详情页 / No detail page matched</span></dd></div>
-      <div><dt>备注 / Notes</dt><dd>3 + 1 Freebet! 3 BETS = 1 FREEBET! HOW IT WORKS • Place 3 consecutive bets, and we’ll give you a FREEBET equal to 15% of their total average. • Example: Bets of 30, 50, and 100 → (30+50+100) × 15% = 27 FREEBET. FREEBET ELIGIBILITY RULES ▼ Standard Velobet Casino Terms and Conditions apply.</dd></div>
     </dl>
 
   </article>
@@ -268,15 +289,17 @@
         <p>返现 / Cashback · <span class="detail-pill fallback-pill">列表页兜底 / Listing fallback</span></p>
       </div>
     </div>
+
     <dl>
-      <div><dt>奖励 / Reward</dt><dd>10%; 10% cashback</dd></div>
-      <div><dt>详情页奖励 / Detail Reward</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
-      <div><dt>参与要求 / Requirements</dt><dd>BET CASHBACK OFFERS! Discover our exciting cashback options and take your gaming experience to the next level. Here's what; CASHBACK OFFERS • 10% No-Wagering VIP Cashback: Receive 10% cashback on all deposits made since your last withdrawal or bonus. •; Bets: For a limited time, access endless spins and bets on top games! CLAIM NOW Standard Velobet Casino Terms and Condition</dd></div>
-      <div><dt>开始时间 / Start Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
-      <div><dt>结束时间 / End Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
-      <div><dt>详情页关键日期 / Detail Dates</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>要求 / Requirements</dt><dd>BET CASHBACK OFFERS! Discover our exciting cashback options and take your gaming experience to the next level. Here's what; CASHBACK OFFERS • 10% No-Wagering VIP Cashback: Receive 10% cashback on all deposits made since your last withdrawal or bonus. •; Bets: For a limited time, access endless spins and bets on top games! CLAIM NOW Standard Velobet Casino Terms and Condition</dd></div>
+      <div><dt>触发条件 / Trigger</dt><dd>用户完成指定充值触发</dd></div>
+      <div><dt>奖励方式 / Reward</dt><dd>10%; 10% cashback</dd></div>
+      <div><dt>目标用户 / Who</dt><dd>VIP 或高价值活跃用户；Casino/Slots 用户</dd></div>
+      <div><dt>时间 / When</dt><dd>活动页未明确；以页面实时倒计时或条款为准</dd></div>
+      <div><dt>Summary / 总结</dt><dd>Loyalty Program 面向VIP 或高价值活跃用户；Casino/Slots 用户，通过“用户完成指定充值触发”推动用户完成关键行为；奖励为 10%; 10% cashback。主要参与要求：BET CASHBACK OFFERS! Discover our exciting cashback options and take your gaming experience to the next level. Here's what; CASHBACK OFFERS • 10% No-Wagering VIP Cashback: Receive 10% cashback on all deposits made since your last withdrawal or bonus. •; Bets: For a limited time, access endless spins and bets on top games! CLAIM NOW Standard Velobet Casino Terms and Condition。</dd></div>
+      <div><dt>核心目的 / Objective</dt><dd>提升充值频次和充值金额</dd></div>
+      <div><dt>数据预期 / Expected Data</dt><dd>提升充值频次和充值金额；预期观察：充值次数、充值金额、Bonus claim rate 上升；投注额、投注单量、有效投注用户数上升；Casino DAU、游戏启动次数、免费旋转转付费率上升。</dd></div>
       <div><dt>详情页来源 / Detail Source</dt><dd><span class="missing-text">未匹配详情页 / No detail page matched</span></dd></div>
-      <div><dt>备注 / Notes</dt><dd>VELOBET CASHBACK OFFERS! Discover our exciting cashback options and take your gaming experience to the next level. Here's what we have for you: OUR CASHBACK OFFERS • 10% No-Wagering VIP Cashback: Receive 10% cashback on all deposits made since your last withdrawal or bonus. • Unlimited Free Spins &amp; Free Bets: For a limited time, access endless spins and bets on top games! CLAIM NOW Standard Velobet Casino Terms and Conditions apply.</dd></div>
     </dl>
 
   </article>
@@ -288,15 +311,17 @@
         <p>免费旋转 / Free Spins · <span class="detail-pill fallback-pill">列表页兜底 / Listing fallback</span></p>
       </div>
     </div>
+
     <dl>
-      <div><dt>奖励 / Reward</dt><dd>10 FREE SPINS</dd></div>
-      <div><dt>详情页奖励 / Detail Reward</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
-      <div><dt>参与要求 / Requirements</dt><dd>bet. HOW IT WORKS Follow Velobet on Discord, X (Twitter), or Telegram to claim your spins. Stay updated on exclusive offers; bet may change or cancel the promotion at any time without prior notice. In case of disputes, Velobet’s decision is final.; bet Casino Terms and Conditions apply.</dd></div>
-      <div><dt>开始时间 / Start Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
-      <div><dt>结束时间 / End Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
-      <div><dt>详情页关键日期 / Detail Dates</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>要求 / Requirements</dt><dd>bet. HOW IT WORKS Follow Velobet on Discord, X (Twitter), or Telegram to claim your spins. Stay updated on exclusive offers; bet may change or cancel the promotion at any time without prior notice. In case of disputes, Velobet’s decision is final.; bet Casino Terms and Conditions apply.</dd></div>
+      <div><dt>触发条件 / Trigger</dt><dd>点击参与/报名后，完成活动指定行为触发奖励</dd></div>
+      <div><dt>奖励方式 / Reward</dt><dd>10 FREE SPINS</dd></div>
+      <div><dt>目标用户 / Who</dt><dd>新注册/首充用户；Casino/Slots 用户；体育投注用户</dd></div>
+      <div><dt>时间 / When</dt><dd>活动页未明确；以页面实时倒计时或条款为准</dd></div>
+      <div><dt>Summary / 总结</dt><dd>Social Media Giveaways 面向新注册/首充用户；Casino/Slots 用户；体育投注用户，通过“点击参与/报名后，完成活动指定行为触发奖励”推动用户完成关键行为；奖励为 10 FREE SPINS。主要参与要求：bet. HOW IT WORKS Follow Velobet on Discord, X (Twitter), or Telegram to claim your spins. Stay updated on exclusive offers; bet may change or cancel the promotion at any time without prior notice. In case of disputes, Velobet’s decision is final.; bet Casino Terms and Conditions apply.。</dd></div>
+      <div><dt>核心目的 / Objective</dt><dd>拉新与首充转化</dd></div>
+      <div><dt>数据预期 / Expected Data</dt><dd>拉新与首充转化；预期观察：注册到首充转化率、首存金额、首周留存上升；投注额、投注单量、有效投注用户数上升；Casino DAU、游戏启动次数、免费旋转转付费率上升。</dd></div>
       <div><dt>详情页来源 / Detail Source</dt><dd><span class="missing-text">未匹配详情页 / No detail page matched</span></dd></div>
-      <div><dt>备注 / Notes</dt><dd>GET 10 FREE SPINS ON SOCIAL MEDIA! Join us on Discord, X (Twitter), or Telegram and receive 10 FREE SPINS as a welcome gift! Follow our channels to get first access to promotions, giveaways, and new ways to win with Velobet. HOW IT WORKS Follow Velobet on Discord, X (Twitter), or Telegram to claim your spins. Stay updated on exclusive offers and limited-time promotions. DISCORD X TELEGRAM</dd></div>
     </dl>
 
   </article>
@@ -308,15 +333,17 @@
         <p>免费旋转 / Free Spins · <span class="detail-pill fallback-pill">列表页兜底 / Listing fallback</span></p>
       </div>
     </div>
+
     <dl>
-      <div><dt>奖励 / Reward</dt><dd>330% BONUS; 300 FREE SPINS; 150% Bonus; 100% Bonus; 30 Free Spins</dd></div>
-      <div><dt>详情页奖励 / Detail Reward</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
-      <div><dt>参与要求 / Requirements</dt><dd>DEPOSIT BONUS Deposits 10€/$ – 500€/$: 150% Bonus Deposits 500€/$ – 1000€/$: 100% Bonus Make your first deposit of at least 10€; DEPOSIT BONUS 100% Casino Bonus up to 500€/$ (min. 20€/$). THIRD DEPOSIT BONUS 80% Casino Bonus up to 500€/$ (min. 20€/$). CLAI; DEPOSIT BONUSES – TERMS AND CONDITIONS ▼ Standard Velobet Casino Terms and Conditions apply.</dd></div>
-      <div><dt>开始时间 / Start Time</dt><dd>start spinning today. Claim your welcome boost in seconds. FIRST D</dd></div>
-      <div><dt>结束时间 / End Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
-      <div><dt>详情页关键日期 / Detail Dates</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>要求 / Requirements</dt><dd>DEPOSIT BONUS Deposits 10€/$ – 500€/$: 150% Bonus Deposits 500€/$ – 1000€/$: 100% Bonus Make your first deposit of at least 10€; DEPOSIT BONUS 100% Casino Bonus up to 500€/$ (min. 20€/$). THIRD DEPOSIT BONUS 80% Casino Bonus up to 500€/$ (min. 20€/$). CLAI; DEPOSIT BONUSES – TERMS AND CONDITIONS ▼ Standard Velobet Casino Terms and Conditions apply.</dd></div>
+      <div><dt>触发条件 / Trigger</dt><dd>新用户注册并完成首充触发</dd></div>
+      <div><dt>奖励方式 / Reward</dt><dd>330% BONUS; 300 FREE SPINS; 150% Bonus; 100% Bonus; 30 Free Spins</dd></div>
+      <div><dt>目标用户 / Who</dt><dd>新注册/首充用户；Casino/Slots 用户</dd></div>
+      <div><dt>时间 / When</dt><dd>start spinning today. Claim your welcome boost in seconds. FIRST D</dd></div>
+      <div><dt>Summary / 总结</dt><dd>Welcome Casino Package 面向新注册/首充用户；Casino/Slots 用户，通过“新用户注册并完成首充触发”推动用户完成关键行为；奖励为 330% BONUS; 300 FREE SPINS; 150% Bonus; 100% Bonus; 30 Free Spins。主要参与要求：DEPOSIT BONUS Deposits 10€/$ – 500€/$: 150% Bonus Deposits 500€/$ – 1000€/$: 100% Bonus Make your first deposit of at least 10€; DEPOSIT BONUS 100% Casino Bonus up to 500€/$ (min. 20€/$). THIRD DEPOSIT BONUS 80% Casino Bonus up to 500€/$ (min. 20€/$). CLAI; DEPOSIT BONUSES – TERMS AND CONDITIONS ▼ Standard Velobet Casino Terms and Conditions apply.。</dd></div>
+      <div><dt>核心目的 / Objective</dt><dd>拉新与首充转化</dd></div>
+      <div><dt>数据预期 / Expected Data</dt><dd>拉新与首充转化；预期观察：注册到首充转化率、首存金额、首周留存上升；充值次数、充值金额、Bonus claim rate 上升；投注额、投注单量、有效投注用户数上升。</dd></div>
       <div><dt>详情页来源 / Detail Source</dt><dd><span class="missing-text">未匹配详情页 / No detail page matched</span></dd></div>
-      <div><dt>备注 / Notes</dt><dd>GET UP TO 330% BONUS + 300 FREE SPINS! Boost your balance and start spinning today. Claim your welcome boost in seconds. FIRST DEPOSIT BONUS Deposits 10€/$ – 500€/$: 150% Bonus Deposits 500€/$ – 1000€/$: 100% Bonus Make your first deposit of at least 10€/$ and instantly get 30 Free Spins. The remaining 270 Free Spins are unlocked over the next 9 days — 30 Free Spins each day when you log in. If you miss a day, the remaining spins are lost.</dd></div>
     </dl>
 
   </article>
@@ -328,15 +355,17 @@
         <p>充值或欢迎奖励 / Deposit or Welcome Bonus · <span class="detail-pill fallback-pill">列表页兜底 / Listing fallback</span></p>
       </div>
     </div>
+
     <dl>
-      <div><dt>奖励 / Reward</dt><dd>160% BONUS</dd></div>
-      <div><dt>详情页奖励 / Detail Reward</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
-      <div><dt>参与要求 / Requirements</dt><dd>Deposit Bonus WELCOME CRYPTO DEPOSIT BONUS! Make your first crypto deposit between 10 €/$ and 1000 €/$ and receive a 160% BONUS; DEPOSIT WITH CRYPTO TERMS AND CONDITIONS ▼ Standard Velobet Casino Terms and Conditions apply.</dd></div>
-      <div><dt>开始时间 / Start Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
-      <div><dt>结束时间 / End Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
-      <div><dt>详情页关键日期 / Detail Dates</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>要求 / Requirements</dt><dd>Deposit Bonus WELCOME CRYPTO DEPOSIT BONUS! Make your first crypto deposit between 10 €/$ and 1000 €/$ and receive a 160% BONUS; DEPOSIT WITH CRYPTO TERMS AND CONDITIONS ▼ Standard Velobet Casino Terms and Conditions apply.</dd></div>
+      <div><dt>触发条件 / Trigger</dt><dd>新用户注册并完成首充触发</dd></div>
+      <div><dt>奖励方式 / Reward</dt><dd>160% BONUS</dd></div>
+      <div><dt>目标用户 / Who</dt><dd>新注册/首充用户；Casino/Slots 用户；加密货币充值用户</dd></div>
+      <div><dt>时间 / When</dt><dd>活动页未明确；以页面实时倒计时或条款为准</dd></div>
+      <div><dt>Summary / 总结</dt><dd>Crypto Deposit Bonus 面向新注册/首充用户；Casino/Slots 用户；加密货币充值用户，通过“新用户注册并完成首充触发”推动用户完成关键行为；奖励为 160% BONUS。主要参与要求：Deposit Bonus WELCOME CRYPTO DEPOSIT BONUS! Make your first crypto deposit between 10 €/$ and 1000 €/$ and receive a 160% BONUS; DEPOSIT WITH CRYPTO TERMS AND CONDITIONS ▼ Standard Velobet Casino Terms and Conditions apply.。</dd></div>
+      <div><dt>核心目的 / Objective</dt><dd>拉新与首充转化</dd></div>
+      <div><dt>数据预期 / Expected Data</dt><dd>拉新与首充转化；预期观察：注册到首充转化率、首存金额、首周留存上升；充值次数、充值金额、Bonus claim rate 上升；投注额、投注单量、有效投注用户数上升。</dd></div>
       <div><dt>详情页来源 / Detail Source</dt><dd><span class="missing-text">未匹配详情页 / No detail page matched</span></dd></div>
-      <div><dt>备注 / Notes</dt><dd>WELCOME CRYPTO DEPOSIT BONUS! Make your first crypto deposit between 10 €/$ and 1000 €/$ and receive a 160% BONUS. DEPOSIT WITH CRYPTO TERMS AND CONDITIONS ▼ Standard Velobet Casino Terms and Conditions apply.</dd></div>
     </dl>
 
   </article>
@@ -348,15 +377,17 @@
         <p>免费投注 / Free Bet · <span class="detail-pill fallback-pill">列表页兜底 / Listing fallback</span></p>
       </div>
     </div>
+
     <dl>
-      <div><dt>奖励 / Reward</dt><dd>150% BONUS; $.</dd></div>
-      <div><dt>详情页奖励 / Detail Reward</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
-      <div><dt>参与要求 / Requirements</dt><dd>deposit and receive a 150% BONUS up to 1000 €/$. Plus, you’ll get 10 FREE BETS when you place your first sports bet with a mini; Minimum deposit: 20 €/$ Applicable only for Sports Betting Wagering requirement: 15× (Deposit + Bonus) on at least 3 events wit; odds ≥ 1.3 10 FREE BETS are credited after your first sports bet of at least 10 €/$ settles Bonus Rules – Know Before You Pl</dd></div>
-      <div><dt>开始时间 / Start Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
-      <div><dt>结束时间 / End Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
-      <div><dt>详情页关键日期 / Detail Dates</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>要求 / Requirements</dt><dd>deposit and receive a 150% BONUS up to 1000 €/$. Plus, you’ll get 10 FREE BETS when you place your first sports bet with a mini; Minimum deposit: 20 €/$ Applicable only for Sports Betting Wagering requirement: 15× (Deposit + Bonus) on at least 3 events wit; odds ≥ 1.3 10 FREE BETS are credited after your first sports bet of at least 10 €/$ settles Bonus Rules – Know Before You Pl</dd></div>
+      <div><dt>触发条件 / Trigger</dt><dd>新用户注册并完成首充触发</dd></div>
+      <div><dt>奖励方式 / Reward</dt><dd>150% BONUS; $.</dd></div>
+      <div><dt>目标用户 / Who</dt><dd>新注册/首充用户；体育投注用户</dd></div>
+      <div><dt>时间 / When</dt><dd>活动页未明确；以页面实时倒计时或条款为准</dd></div>
+      <div><dt>Summary / 总结</dt><dd>Sports Welcome Bonus 面向新注册/首充用户；体育投注用户，通过“新用户注册并完成首充触发”推动用户完成关键行为；奖励为 150% BONUS; $.。主要参与要求：deposit and receive a 150% BONUS up to 1000 €/$. Plus, you’ll get 10 FREE BETS when you place your first sports bet with a mini; Minimum deposit: 20 €/$ Applicable only for Sports Betting Wagering requirement: 15× (Deposit + Bonus) on at least 3 events wit; odds ≥ 1.3 10 FREE BETS are credited after your first sports bet of at least 10 €/$ settles Bonus Rules – Know Before You Pl。</dd></div>
+      <div><dt>核心目的 / Objective</dt><dd>拉新与首充转化</dd></div>
+      <div><dt>数据预期 / Expected Data</dt><dd>拉新与首充转化；预期观察：注册到首充转化率、首存金额、首周留存上升；充值次数、充值金额、Bonus claim rate 上升；投注额、投注单量、有效投注用户数上升。</dd></div>
       <div><dt>详情页来源 / Detail Source</dt><dd><span class="missing-text">未匹配详情页 / No detail page matched</span></dd></div>
-      <div><dt>备注 / Notes</dt><dd>WELCOME SPORT BONUS! Make your first deposit and receive a 150% BONUS up to 1000 €/$. Plus, you’ll get 10 FREE BETS when you place your first sports bet with a minimum stake of 10 €/$. BONUS HIGHLIGHTS Minimum deposit: 20 €/$ Applicable only for Sports Betting Wagering requirement: 15× (Deposit + Bonus) on at least 3 events with odds ≥ 1.3 10 FREE BETS are credited after your first sports bet of at least 10 €/$ settles Bonus Rules – Know Before You Play</dd></div>
     </dl>
 
   </article>
@@ -368,15 +399,17 @@
         <p>VIP 或忠诚度 / VIP or Loyalty · <span class="detail-pill fallback-pill">列表页兜底 / Listing fallback</span></p>
       </div>
     </div>
+
     <dl>
-      <div><dt>奖励 / Reward</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
-      <div><dt>详情页奖励 / Detail Reward</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
-      <div><dt>参与要求 / Requirements</dt><dd>Betting Virtual Sports E-Sports Mini Games Casino Live Casino Accounts, Payouts &amp; Bonuses Marketing Offers Information Comp; bet News Help F.A.Q (Frequently Asked Questions) KYC/AML Policy Refund Policy Dispute Resolution Fairness &amp; RNG Testing Met; bet.Com Live Chat Affiliates@Velobet.Com VIP Attention! It is gambling advertising. Gambling is not suitable for solving fi</dd></div>
-      <div><dt>开始时间 / Start Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
-      <div><dt>结束时间 / End Time</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
-      <div><dt>详情页关键日期 / Detail Dates</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>要求 / Requirements</dt><dd>Betting Virtual Sports E-Sports Mini Games Casino Live Casino Accounts, Payouts &amp; Bonuses Marketing Offers Information Comp; bet News Help F.A.Q (Frequently Asked Questions) KYC/AML Policy Refund Policy Dispute Resolution Fairness &amp; RNG Testing Met; bet.Com Live Chat Affiliates@Velobet.Com VIP Attention! It is gambling advertising. Gambling is not suitable for solving fi</dd></div>
+      <div><dt>触发条件 / Trigger</dt><dd>完成活动页指定动作后触发</dd></div>
+      <div><dt>奖励方式 / Reward</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>目标用户 / Who</dt><dd>新注册/首充用户；VIP 或高价值活跃用户；Casino/Slots 用户</dd></div>
+      <div><dt>时间 / When</dt><dd>活动页未明确；以页面实时倒计时或条款为准</dd></div>
+      <div><dt>Summary / 总结</dt><dd>Our Products 面向新注册/首充用户；VIP 或高价值活跃用户；Casino/Slots 用户，通过“完成活动页指定动作后触发”推动用户完成关键行为；奖励为 列表页未显示。主要参与要求：Betting Virtual Sports E-Sports Mini Games Casino Live Casino Accounts, Payouts &amp; Bonuses Marketing Offers Information Comp; bet News Help F.A.Q (Frequently Asked Questions) KYC/AML Policy Refund Policy Dispute Resolution Fairness &amp; RNG Testing Met; bet.Com Live Chat Affiliates@Velobet.Com VIP Attention! It is gambling advertising. Gambling is not suitable for solving fi。</dd></div>
+      <div><dt>核心目的 / Objective</dt><dd>维护高价值用户并提升复玩</dd></div>
+      <div><dt>数据预期 / Expected Data</dt><dd>维护高价值用户并提升复玩；预期观察：投注额、投注单量、有效投注用户数上升；Casino DAU、游戏启动次数、免费旋转转付费率上升；复玩率、留存率、VIP 活跃和净收入稳定性提升。</dd></div>
       <div><dt>详情页来源 / Detail Source</dt><dd><span class="missing-text">未匹配详情页 / No detail page matched</span></dd></div>
-      <div><dt>备注 / Notes</dt><dd>Sports Betting Virtual Sports E-Sports Mini Games Casino Live Casino Accounts, Payouts &amp; Bonuses Marketing Offers</dd></div>
     </dl>
 
   </article>

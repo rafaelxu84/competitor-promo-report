@@ -170,6 +170,7 @@ async function generateStaticSite(items, rowCount) {
 }
 
 function renderSiteIndex(items, rowCount) {
+  const capturedScreenshots = items.reduce((sum, item) => sum + item.rows.filter((row) => row.detailScreenshot).length, 0);
   return `<!doctype html>
 <html lang="zh-CN">
 <head>
@@ -191,6 +192,7 @@ function renderSiteIndex(items, rowCount) {
         <b>品牌 Brands</b>${items.length}<br>
         <b>活动 Activities</b>${rowCount}<br>
         <b>详情 Details</b>${items.reduce((sum, item) => sum + item.rows.filter((row) => row.detailStatus === "ok").length, 0)}<br>
+        <b>截图 Shots</b>${capturedScreenshots}<br>
         <b>今日新增 New</b>${items.reduce((sum, item) => sum + item.rows.filter((row) => row.isNew).length, 0)}
       </div>
     </section>
@@ -226,6 +228,7 @@ function renderBrandCard(item) {
 
 function renderBrandPage(item) {
   const shot = path.join("..", "..", "browser-screenshots", path.basename(item.screenshot));
+  const detailScreens = item.rows.filter((row) => row.detailScreenshot).length;
   return `<!doctype html>
 <html lang="zh-CN">
 <head>
@@ -242,12 +245,13 @@ function renderBrandPage(item) {
         <p class="eyebrow">Brand Promotion Page</p>
         <h1>${escapeHtml(item.brand)}</h1>
         <p class="sub">来源 Source：<a href="${escapeHtml(item.finalUrl)}">${escapeHtml(item.finalUrl)}</a></p>
-        <p class="sub">本页优先使用活动详情页内容；详情页未开放或未匹配时使用列表页兜底。</p>
+        <p class="sub">本页优先使用活动详情页截图与可见内容，输出要求、Trigger、Reward、Who、When、Summary、核心目的和数据预期。</p>
       </div>
       <div class="meta">
         <b>活动 Activities</b>${item.rows.length}<br>
         <b>今日新增 New</b>${item.rows.filter((row) => row.isNew).length}<br>
         <b>详情 Details</b>${item.rows.filter((row) => row.detailStatus === "ok").length}<br>
+        <b>详情截图 Shots</b>${detailScreens}<br>
         <b>状态 Status</b>浏览器可访问 / Browser accessible
       </div>
     </section>
@@ -272,6 +276,7 @@ function renderBrandPage(item) {
 function renderActivityCard(row, index) {
   const type = inferBilingualType(`${row.title} ${row.reward} ${row.requirement} ${row.note}`);
   const detailClass = row.detailStatus === "ok" ? "detail-ok" : row.detailStatus === "limited" ? "detail-limited" : "detail-missing";
+  const analysis = row.analysis || buildActivityAnalysis(row);
   return `<article class="activity-card ${detailClass}">
     <div class="activity-head">
       <span class="index">${index + 1}</span>
@@ -280,15 +285,17 @@ function renderActivityCard(row, index) {
         <p>${escapeHtml(type)} · ${detailBadge(row)}</p>
       </div>
     </div>
+${row.detailScreenshot ? `<a class="detail-shot-link" href="${escapeHtml(row.detailScreenshot)}"><img class="detail-shot" src="${escapeHtml(row.detailScreenshot)}" alt="${escapeHtml(row.title)} detail screenshot"></a>` : ""}
     <dl>
-      <div><dt>奖励 / Reward</dt><dd>${field(row.reward)}</dd></div>
-      <div><dt>详情页奖励 / Detail Reward</dt><dd>${field(row.detailReward || "")}</dd></div>
-      <div><dt>参与要求 / Requirements</dt><dd>${field(row.detailRequirement || row.requirement)}</dd></div>
-      <div><dt>开始时间 / Start Time</dt><dd>${field(row.start)}</dd></div>
-      <div><dt>结束时间 / End Time</dt><dd>${field(row.end)}</dd></div>
-      <div><dt>详情页关键日期 / Detail Dates</dt><dd>${field(row.detailDates || "")}</dd></div>
+      <div><dt>要求 / Requirements</dt><dd>${field(analysis.requirement)}</dd></div>
+      <div><dt>触发条件 / Trigger</dt><dd>${field(analysis.trigger)}</dd></div>
+      <div><dt>奖励方式 / Reward</dt><dd>${field(analysis.reward)}</dd></div>
+      <div><dt>目标用户 / Who</dt><dd>${field(analysis.who)}</dd></div>
+      <div><dt>时间 / When</dt><dd>${field(analysis.when)}</dd></div>
+      <div><dt>Summary / 总结</dt><dd>${field(analysis.summary)}</dd></div>
+      <div><dt>核心目的 / Objective</dt><dd>${field(analysis.objective)}</dd></div>
+      <div><dt>数据预期 / Expected Data</dt><dd>${field(analysis.dataExpectation)}</dd></div>
       <div><dt>详情页来源 / Detail Source</dt><dd>${row.detailUrl ? `<a href="${escapeHtml(row.detailUrl)}">${escapeHtml(row.detailUrl)}</a>` : '<span class="missing-text">未匹配详情页 / No detail page matched</span>'}</dd></div>
-      <div><dt>备注 / Notes</dt><dd>${escapeHtml(row.note || "列表页可见 / Visible on listing page")}</dd></div>
     </dl>
 ${row.detailExcerpt ? `<details class="detail-excerpt"><summary>详情页原文摘要 / Detail excerpt</summary><pre>${escapeHtml(row.detailExcerpt)}</pre></details>` : ""}
   </article>`;
@@ -358,6 +365,8 @@ function siteStyles() {
     .activity-card.detail-missing { border-left:4px solid #a8b1ac; }
     .activity-head { display:grid; grid-template-columns:36px minmax(0,1fr); gap:10px; align-items:start; margin-bottom:12px; }
     .index { display:inline-grid; place-items:center; width:30px; height:30px; border-radius:999px; background:var(--soft); color:var(--green); font-weight:800; }
+    .detail-shot-link { display:block; margin:8px 0 12px; }
+    .detail-shot { width:100%; max-height:360px; object-fit:cover; object-position:top; border:1px solid var(--line); border-radius:8px; background:#edf0ea; }
     dl { display:grid; gap:8px; margin:0; }
     dl div { display:grid; grid-template-columns:150px minmax(0,1fr); gap:10px; border-top:1px solid var(--line); padding-top:8px; }
     dt { color:var(--muted); font-size:12px; font-weight:800; }
@@ -502,8 +511,8 @@ async function writeActivityIndex(items) {
 
 async function loadPromotionDetails() {
   const files = [
-    path.join(reportDir, "browser-promo-details-live.json"),
-    path.join(reportDir, "browser-promo-details.json")
+    path.join(reportDir, "browser-promo-details.json"),
+    path.join(reportDir, "browser-promo-details-live.json")
   ];
   const byBrand = new Map();
   for (const file of files) {
@@ -519,7 +528,7 @@ async function loadPromotionDetails() {
         if (!detail || detail.status === "error") continue;
         if (looksLikeBrowserError(detail)) continue;
         const existingIndex = details.findIndex((item) => item.url === detail.url);
-        if (existingIndex >= 0) details[existingIndex] = detail;
+        if (existingIndex >= 0) details[existingIndex] = { ...details[existingIndex], ...detail };
         else details.push(detail);
       }
       byBrand.set(result.brand, details);
@@ -551,6 +560,8 @@ function enrichRowsWithDetails(items, detailByBrand) {
       row.detailRequirement = clean(fields.requirement || extractRequirement(`${detail.linkText || ""} ${detail.text || ""}`));
       row.detailDates = clean(Array.isArray(fields.dates) ? fields.dates.slice(0, 5).join("; ") : "");
       row.detailExcerpt = clean(fields.excerpt || detail.text || "").slice(0, 2600);
+      row.detailScreenshot = normalizeScreenshotPath(detail.screenshot);
+      row.analysis = buildActivityAnalysis(row);
       if ((!row.reward || row.reward === "列表页未显示") && row.detailReward) row.reward = row.detailReward;
       if ((!row.requirement || row.requirement === "列表页未显示") && row.detailRequirement) row.requirement = row.detailRequirement;
       if ((!row.end || row.end === "列表页未显示") && row.detailDates) row.end = row.detailDates;
@@ -559,6 +570,132 @@ function enrichRowsWithDetails(items, detailByBrand) {
     }
   }
   return stats;
+}
+
+function buildActivityAnalysis(row) {
+  const source = clean([
+    row.title,
+    row.reward,
+    row.requirement,
+    row.detailReward,
+    row.detailRequirement,
+    row.detailDates,
+    row.detailExcerpt,
+    row.note
+  ].filter(Boolean).join(" "));
+  const type = inferBilingualType(source);
+  const reward = clean(row.detailReward || row.reward || extractReward(source)) || "活动页未明确奖励；需查看详情页截图或条款确认";
+  const requirement = clean(row.detailRequirement || row.requirement || extractRequirement(source)) || inferRequirement(source, type);
+  const trigger = inferTrigger(source, type);
+  const who = inferAudience(source, type);
+  const when = conciseWhen(row, source);
+  const objective = inferObjective(source, type);
+  return {
+    requirement,
+    trigger,
+    reward,
+    who,
+    when,
+    summary: buildSummary(row, trigger, reward, requirement, who),
+    objective,
+    dataExpectation: inferDataExpectation(source, type, objective)
+  };
+}
+
+function inferRequirement(text, type) {
+  const lower = text.toLowerCase();
+  if (lower.includes("deposit") || lower.includes("welcome")) return "完成指定充值或首充后参与，具体最低金额以详情页条款为准";
+  if (lower.includes("wager") || lower.includes("bet")) return "完成指定投注或流水任务后参与，投注品类和最低金额以活动页为准";
+  if (lower.includes("free spin") || lower.includes("fs")) return "按活动指定游戏、每日任务或充值条件领取免费旋转";
+  if (lower.includes("cashback")) return "产生符合条件的亏损、投注额或游戏行为后按比例返还";
+  if (lower.includes("raffle") || lower.includes("tournament") || lower.includes("race")) return "通过投注、游戏排名、抽奖票或积分累计进入排名/抽奖";
+  return `${type}，具体门槛需以详情页截图和条款为准`;
+}
+
+function inferTrigger(text, type) {
+  const lower = text.toLowerCase();
+  if (lower.includes("opt in") || lower.includes("opt-in") || lower.includes("join")) return "点击参与/报名后，完成活动指定行为触发奖励";
+  if (lower.includes("first deposit") || lower.includes("welcome")) return "新用户注册并完成首充触发";
+  if (lower.includes("deposit")) return "用户完成指定充值触发";
+  if (lower.includes("wager")) return "用户达到指定投注额或流水触发";
+  if (lower.includes("place bet") || lower.includes("bet on") || lower.includes("odds")) return "用户在指定赛事/玩法下注触发";
+  if (lower.includes("free spin") || lower.includes("fs")) return "用户进入指定老虎机/游戏或完成每日任务触发";
+  if (lower.includes("cashback")) return "用户发生符合条件的亏损或投注行为后按周期触发返现";
+  if (lower.includes("vote")) return "用户完成投票/外部互动后触发奖励";
+  if (lower.includes("subscribe") || lower.includes("telegram")) return "用户完成订阅、关注或社群动作后触发";
+  if (type.includes("竞赛") || type.includes("Raffle")) return "用户通过投注或游戏行为累计积分/票券/排名触发";
+  return "完成活动页指定动作后触发";
+}
+
+function inferAudience(text, type) {
+  const lower = text.toLowerCase();
+  const audiences = [];
+  if (lower.includes("new") || lower.includes("welcome") || lower.includes("first deposit")) audiences.push("新注册/首充用户");
+  if (lower.includes("vip") || lower.includes("loyalty") || lower.includes("rakeback")) audiences.push("VIP 或高价值活跃用户");
+  if (lower.includes("casino") || lower.includes("slot") || lower.includes("free spin") || lower.includes("fs")) audiences.push("Casino/Slots 用户");
+  if (lower.includes("sport") || lower.includes("football") || lower.includes("nba") || lower.includes("bet on") || lower.includes("odds")) audiences.push("体育投注用户");
+  if (lower.includes("crypto")) audiences.push("加密货币充值用户");
+  if (lower.includes("esport") || lower.includes("dota") || lower.includes("counter-strike")) audiences.push("电竞投注用户");
+  if (lower.includes("poker")) audiences.push("扑克用户");
+  if (!audiences.length) audiences.push(type.replace(" / ", " 用户 / "));
+  return [...new Set(audiences)].slice(0, 3).join("；");
+}
+
+function conciseWhen(row, text) {
+  const candidates = [row.end, row.detailDates, row.start]
+    .filter((value) => value && value !== "列表页未显示")
+    .map((value) => clean(value));
+  if (candidates.length) return candidates[0].split(";").slice(0, 2).join("; ");
+  const lower = text.toLowerCase();
+  if (lower.includes("every monday")) return "每周一";
+  if (lower.includes("every tuesday")) return "每周二";
+  if (lower.includes("every wednesday")) return "每周三";
+  if (lower.includes("every thursday")) return "每周四";
+  if (lower.includes("every friday")) return "每周五";
+  if (lower.includes("every sunday")) return "每周日";
+  if (lower.includes("weekly")) return "每周周期";
+  if (lower.includes("daily") || lower.includes("every day")) return "每日周期";
+  return "活动页未明确；以页面实时倒计时或条款为准";
+}
+
+function buildSummary(row, trigger, reward, requirement, who) {
+  return `${clean(row.title)} 面向${who}，通过“${trigger}”推动用户完成关键行为；奖励为 ${reward}。主要参与要求：${requirement}。`;
+}
+
+function inferObjective(text, type) {
+  const lower = text.toLowerCase();
+  if (lower.includes("welcome") || lower.includes("first deposit") || lower.includes("sign-up")) return "拉新与首充转化";
+  if (lower.includes("deposit") || lower.includes("reload")) return "提升充值频次和充值金额";
+  if (lower.includes("cashback") || lower.includes("rakeback")) return "提升留存、降低流失感知并延长生命周期";
+  if (lower.includes("free spin") || lower.includes("fs")) return "引导 Casino/Slots 试玩与日活";
+  if (lower.includes("tournament") || lower.includes("race") || lower.includes("league") || lower.includes("raffle")) return "提升投注/游戏频次，制造排行榜竞争和连续参与";
+  if (lower.includes("odds") || lower.includes("free bet") || lower.includes("football") || lower.includes("nba")) return "提升体育投注投注额和赛事活跃";
+  if (lower.includes("vip") || lower.includes("loyalty")) return "维护高价值用户并提升复玩";
+  return `${type}的转化与活跃提升`;
+}
+
+function inferDataExpectation(text, type, objective) {
+  const lower = text.toLowerCase();
+  const metrics = [];
+  if (/welcome|first deposit|sign-up/.test(lower)) metrics.push("注册到首充转化率、首存金额、首周留存上升");
+  if (/deposit|reload/.test(lower)) metrics.push("充值次数、充值金额、Bonus claim rate 上升");
+  if (/wager|bet|odds|free bet|sport|football|nba/.test(lower)) metrics.push("投注额、投注单量、有效投注用户数上升");
+  if (/casino|slot|free spin|fs/.test(lower)) metrics.push("Casino DAU、游戏启动次数、免费旋转转付费率上升");
+  if (/cashback|rakeback|vip|loyalty/.test(lower)) metrics.push("复玩率、留存率、VIP 活跃和净收入稳定性提升");
+  if (/tournament|race|raffle|league|prize/.test(lower)) metrics.push("连续参与天数、排名页访问、任务完成率上升");
+  if (!metrics.length) metrics.push("活动点击率、参与率、奖励领取率和后续投注/充值转化提升");
+  return `${objective}；预期观察：${[...new Set(metrics)].slice(0, 3).join("；")}。`;
+}
+
+function normalizeScreenshotPath(value) {
+  if (!value) return "";
+  const normalized = String(value).replace(/\\/g, "/");
+  const marker = `/reports/${date}/`;
+  const index = normalized.indexOf(marker);
+  if (index >= 0) return `../../${normalized.slice(index + marker.length)}`;
+  if (normalized.startsWith(`reports/${date}/`)) return `../../${normalized.slice(`reports/${date}/`.length)}`;
+  if (normalized.startsWith("detail-screenshots/")) return `../../${normalized}`;
+  return normalized;
 }
 
 function bestDetailForRow(row, details, used) {

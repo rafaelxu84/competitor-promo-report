@@ -9,6 +9,7 @@ if (!date) {
 const sourceRoot = path.join("reports", date);
 const sourceSite = path.join(sourceRoot, "site");
 const sourceScreenshots = path.join(sourceRoot, "browser-screenshots");
+const sourceDetailScreenshots = path.join(sourceRoot, "detail-screenshots");
 const publishRoot = "docs";
 const publishReportRoot = path.join(publishRoot, "reports", date);
 
@@ -19,6 +20,9 @@ await fs.rm(path.join(publishRoot, "reports"), { recursive: true, force: true })
 await fs.mkdir(publishReportRoot, { recursive: true });
 await copyDir(sourceSite, path.join(publishReportRoot, "site"));
 await copyDir(sourceScreenshots, path.join(publishReportRoot, "browser-screenshots"));
+if (await dirExists(sourceDetailScreenshots)) {
+  await copyDir(sourceDetailScreenshots, path.join(publishReportRoot, "detail-screenshots"));
+}
 
 await fs.writeFile(
   path.join(publishRoot, "index.html"),
@@ -61,6 +65,11 @@ async function copyDir(from, to) {
 async function assertDir(dir) {
   const stat = await fs.stat(dir).catch(() => null);
   if (!stat?.isDirectory()) throw new Error(`Missing directory: ${dir}`);
+}
+
+async function dirExists(dir) {
+  const stat = await fs.stat(dir).catch(() => null);
+  return Boolean(stat?.isDirectory());
 }
 
 function redirectHtml(target, title) {
