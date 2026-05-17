@@ -18,6 +18,13 @@ const config = await loadConfig();
 const date = !args.date || args.date === "today" ? todayISO(config.defaults.timezone) : String(args.date);
 const brandsFilter = args.brand ? new Set(String(args.brand).split(",").map((item) => item.trim())) : null;
 const headed = args.headed === true || args.headed === "true" || args.headed === "1";
+const browserOnly =
+  args.browserOnly === true ||
+  args.browserOnly === "true" ||
+  args.browserOnly === "1" ||
+  args.requireBrowser === true ||
+  args.requireBrowser === "true" ||
+  args.requireBrowser === "1";
 const maxDetailPagesPerBrand = Number(args.maxDetails || 30);
 
 const reportDir = path.join("reports", date);
@@ -41,6 +48,12 @@ try {
   browser = await chromium.launch(launchOptions);
 } catch (error) {
   browserLaunchError = error;
+}
+
+if (!browser && browserOnly) {
+  throw new Error(
+    `Browser mode is required, but Chromium could not launch: ${browserLaunchError?.message || "unknown error"}`
+  );
 }
 
 const observations = {
@@ -102,6 +115,7 @@ for (const competitor of competitors) {
       url: pageConfig.url,
       finalUrl: visited.finalUrl,
       status: visited.status,
+      captureMode: visited.captureMode,
       error: visited.error || null,
       pageTitle: visited.pageTitle,
       screenshot: finalListingShot,
@@ -148,6 +162,7 @@ for (const competitor of competitors) {
       pageTitle: visited.pageTitle,
       linkText: candidate.linkText,
       status: visited.status === "ok" && (visited.text || "").length < 220 ? "limited" : visited.status,
+      captureMode: visited.captureMode,
       error: visited.error,
       screenshot: path.join(reportDir, "detail-screenshots", brandSlug, path.basename(finalDetailShot)),
       text: truncate(visited.text || "", 6500),
@@ -206,7 +221,9 @@ async function visitAndCapture({ page, competitor, url, screenshotPath, defaults
     output.text = extracted.text;
     if (kind === "listing") output.detailLinks = extracted.detailLinks;
 
-    await page.screenshot({ path: screenshotPath, fullPage: true }).catch(() => {});
+    await page.screenshot({ path: screenshotPath, fullPage: true });
+    output.screenshotPath = screenshotPath;
+    output.captureMode = "browser_full_page_screenshot";
 
     const blockedReason = detectBlocked(output.text, defaults.blockedTextPatterns);
     if (blockedReason) output.status = blockedReason;
@@ -216,7 +233,14 @@ async function visitAndCapture({ page, competitor, url, screenshotPath, defaults
   } catch (error) {
     output.status = "error";
     output.error = error.message;
-    await page.screenshot({ path: screenshotPath, fullPage: true }).catch(() => {});
+    try {
+      await page.screenshot({ path: screenshotPath, fullPage: true });
+      output.screenshotPath = screenshotPath;
+      output.captureMode = "browser_full_page_screenshot";
+    } catch {
+      output.screenshotPath = null;
+      output.captureMode = "browser_screenshot_failed";
+    }
     return output;
   }
 }
@@ -229,7 +253,8 @@ async function captureViaHttp({ competitor, url, screenshotPath, kind, browserLa
     text: "",
     detailLinks: [],
     error: browserLaunchError ? `Browser unavailable: ${browserLaunchError.message}` : "Browser unavailable",
-    screenshotPath: null
+    screenshotPath: null,
+    captureMode: "http_fallback_placeholder"
   };
 
   output.screenshotPath = await writePlaceholderScreenshot(screenshotPath, output.error);
@@ -247,7 +272,7 @@ async function captureViaHttp({ competitor, url, screenshotPath, kind, browserLa
     output.pageTitle = extractTitle(html);
     if (kind === "listing") {
       output.detailLinks = extractLinks(html, output.finalUrl)
-        .filter((link) => isProbablyDetailLink(link.url, output.finalUrl))
+        .filter((link) => isProbablyDetailLink(link.url, output.finalUrl, link.linkText))
         .slice(0, 80);
     }
   } catch (error) {
@@ -339,7 +364,10 @@ async function extractVisible({ page, removeSelectors }) {
 
       const filtered = anchors.filter((link) => {
         const joined = `${link.linkText} ${link.url}`.toLowerCase();
-        return keywords.some((keyword) => joined.includes(keyword.toLowerCase()));
+        const actionLink = /^(read more|more info|learn more|find out more|bonus offer details|details|view details)$/i.test(
+          link.linkText.trim()
+        );
+        return keywords.some((keyword) => joined.includes(keyword.toLowerCase())) || actionLink;
       });
 
       return { text: visibleText, links: filtered };
@@ -349,7 +377,7 @@ async function extractVisible({ page, removeSelectors }) {
 
   const finalText = normalizeText(text || "");
   const finalLinks = (links || [])
-    .filter((link) => isProbablyDetailLink(link.url, page.url()))
+    .filter((link) => isProbablyDetailLink(link.url, page.url(), link.linkText))
     .slice(0, 120);
 
   return { text: finalText, detailLinks: finalLinks };
@@ -360,13 +388,38 @@ function detectBlocked(text, patterns) {
   for (const pattern of patterns || []) {
     if (!pattern) continue;
     if (haystack.includes(String(pattern).toLowerCase())) {
-      if (String(pattern).toLowerCase().includes("javascript")) return "js_required_or_blocked";
+      if (String(pattern).toLowerCase().includes("javascript")) {
+        if (hasMeaningfulPromoContent(haystack)) continue;
+        return "js_required_or_blocked";
+      }
       if (String(pattern).toLowerCase().includes("captcha") || String(pattern).toLowerCase().includes("human")) return "captcha_or_human_check";
       if (String(pattern).toLowerCase().includes("access denied") || String(pattern).toLowerCase().includes("cloudflare")) return "blocked";
       return "needs_review";
     }
   }
   return null;
+}
+
+function hasMeaningfulPromoContent(text) {
+  if (String(text || "").length < 1200) return false;
+  const signals = [
+    "promotions",
+    "read more",
+    "cashback",
+    "rakeback",
+    "free bet",
+    "free spins",
+    "weekly raffle",
+    "welcome",
+    "sign-up offer",
+    "tournament",
+    "bonus"
+  ];
+  let count = 0;
+  for (const signal of signals) {
+    if (text.includes(signal)) count += 1;
+  }
+  return count >= 3;
 }
 
 async function dismissObviousPopups(page) {
@@ -403,18 +456,52 @@ async function expandDetails(page, selectors) {
   }
 }
 
-function isProbablyDetailLink(url, baseUrl) {
+function isProbablyDetailLink(url, baseUrl, linkText = "") {
   try {
     const parsed = new URL(url);
     const base = new URL(baseUrl);
     if (parsed.origin !== base.origin) return false;
+    const normalizedUrl = normalizeComparableUrl(parsed);
+    const normalizedBase = normalizeComparableUrl(base);
+    const text = String(linkText || "").trim().toLowerCase();
+    if (normalizedUrl === normalizedBase && (!text || /^(promotions?|bonus(?:es)?|all promotions?|read more|more info|learn more)$/i.test(text))) {
+      return false;
+    }
     if (parsed.hash && parsed.pathname === base.pathname) return false;
+    if (isNavigationOrGameLink(parsed, text)) return false;
     return /promo|promoc|bonus|bônus|cashback|freebet|free-bet|free_spins|freespins|offer|oferta|torneio|mission|quest|reward/i.test(
-      `${parsed.pathname} ${parsed.search}`
+      `${parsed.pathname} ${parsed.search} ${text}`
     );
   } catch {
     return false;
   }
+}
+
+function isDetailActionText(value) {
+  return /^(read more|more info|learn more|find out more|bonus offer details|details|view details)$/i.test(
+    String(value || "").trim()
+  );
+}
+
+function normalizeComparableUrl(url) {
+  const clone = new URL(url.toString());
+  clone.hash = "";
+  clone.searchParams.sort();
+  return clone.toString().replace(/\/$/, "");
+}
+
+function isNavigationOrGameLink(parsed, text) {
+  const pathAndSearch = `${parsed.pathname} ${parsed.search}`.toLowerCase();
+  const promoPath = /promo|promotion|bonus|offer|cashback|freebet|free-bet|free_spins|freespins|reload|welcome/.test(
+    pathAndSearch
+  );
+  if (/\/templates?\//.test(pathAndSearch)) return true;
+  if (/bt-path=/.test(pathAndSearch)) return true;
+  if (/\/game\//.test(pathAndSearch)) return true;
+  if (!promoPath && /\/(?:casino|sportsbook|sports?|esports?)(?:\/|$)/.test(pathAndSearch) && !isDetailActionText(text)) return true;
+  return /^(my bets|upcoming events|favourites?|soccer|basketball|ice hockey|tennis|fifa|counter-strike|league of legends|dota 2|nba2k|live|lobby|casino|sports?|esports?|download app|language)$/i.test(
+    text
+  );
 }
 
 function dedupeLinks(links) {

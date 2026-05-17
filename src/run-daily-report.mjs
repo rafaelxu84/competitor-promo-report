@@ -14,6 +14,7 @@ if (args.brand) crawlArgs.push(`--brand=${args.brand}`);
 if (args.maxDetails) crawlArgs.push(`--maxDetails=${args.maxDetails}`);
 if (args.channel) crawlArgs.push(`--channel=${args.channel}`);
 if (args.headed) crawlArgs.push("--headed");
+if (args.browserOnly || args.requireBrowser) crawlArgs.push("--browserOnly");
 
 await run("npm", crawlArgs);
 await assertMinimumCoverage(date, minOkPages);

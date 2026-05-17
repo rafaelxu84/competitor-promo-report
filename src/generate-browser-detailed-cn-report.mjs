@@ -106,12 +106,12 @@ const html = `<!doctype html>
     <section class="hero">
       <div>
         <h1>竞品活动明细表：按品牌拆分</h1>
-        <p class="sub">基于 in-app browser 直接访问页面后的可见正文整理。字段包括标题、奖励、参与要求、开始时间、结束时间和备注。页面未显示的信息会明确标注，不做猜测。</p>
+        <p class="sub">基于真实浏览器访问、列表页截图和活动详情页 full-page screenshot 整理。字段包括标题、奖励、参与要求、时间和活动目的；页面未显示的信息会明确标注，不做猜测。</p>
       </div>
       <div class="meta">
         <p><b>日期：</b>${escapeHtml(date)}</p>
         <p><b>生成时间：</b>${escapeHtml(observations.generatedAt)}</p>
-        <p><b>采集方式：</b>直接浏览器访问，不使用批量爬虫状态作为依据</p>
+        <p><b>采集方式：</b>Playwright 浏览器逐页访问 + full-page screenshot，不使用 HTTP 兜底内容作为依据</p>
       </div>
     </section>
 
@@ -182,7 +182,7 @@ function renderSiteIndex(items, rowCount) {
       <div>
         <p class="eyebrow">Daily Promotion Intelligence</p>
         <h1>竞品活动站点</h1>
-        <p class="sub">每个品牌一个入口。进入品牌页后可查看页面截图、活动列表，以及标题、奖励、要求、开始/结束时间等中英文字段。</p>
+        <p class="sub">每个品牌一个入口。进入品牌页后可查看品牌页面截图、每个活动的详情页 full-page screenshot、来源链接和结构化中英文字段。</p>
       </div>
       <div class="meta">
         <b>日期 Date</b>${escapeHtml(date)}<br>
@@ -236,7 +236,7 @@ function renderBrandPage(item) {
         <p class="eyebrow">Brand Promotion Page</p>
         <h1>${escapeHtml(item.brand)}</h1>
         <p class="sub">来源 Source：<a href="${escapeHtml(item.finalUrl)}">${escapeHtml(item.finalUrl)}</a></p>
-        <p class="sub">本页优先使用活动详情页截图与可见内容，输出要求、Trigger、Reward、Who、When、Summary、核心目的和数据预期。</p>
+        <p class="sub">本页优先使用活动详情页 full-page screenshot 与可见正文，输出要求、Trigger、Reward、Who、When、Summary、核心目的和数据预期。</p>
         <p class="sub">${statusLine}</p>
       </div>
       <div class="meta">
@@ -518,8 +518,7 @@ async function loadPromotionDetails() {
     for (const result of payload.results || []) {
       const details = byBrand.get(result.brand) || [];
       for (const detail of result.details || []) {
-        if (!detail || detail.status === "error") continue;
-        if (looksLikeBrowserError(detail)) continue;
+        if (!isUsableDetail(detail)) continue;
         const existingIndex = details.findIndex((item) => item.url === detail.url);
         if (existingIndex >= 0) details[existingIndex] = { ...details[existingIndex], ...detail };
         else details.push(detail);
@@ -559,7 +558,7 @@ function enrichRowsWithDetails(items, detailByBrand) {
       row.detailStatus = detail.status === "ok" ? "ok" : "limited";
       row.detailStatusLabel = detail.status === "ok" ? "详情页已采集 / Detail captured" : "详情页正文有限 / Limited detail";
       row.detailUrl = detail.finalUrl || detail.url;
-      row.detailTitle = clean(fields.title || detail.linkText || "");
+      row.detailTitle = titleFromDetail(detail, fields);
       row.detailReward = clean(fields.reward || extractReward(`${detail.linkText || ""} ${detail.text || ""}`));
       row.detailRequirement = clean(fields.requirement || extractRequirement(`${detail.linkText || ""} ${detail.text || ""}`));
       row.detailDates = clean(Array.isArray(fields.dates) ? fields.dates.slice(0, 5).join("; ") : "");
@@ -579,9 +578,9 @@ function enrichRowsWithDetails(items, detailByBrand) {
 function rowsFromDetails(details) {
   const rows = [];
   for (const detail of details || []) {
-    if (!detail || looksLikeBrowserError(detail)) continue;
+    if (!isUsableDetail(detail)) continue;
     const fields = detail.fields || {};
-    const title = clean(detail.linkText || detail.pageTitle || fields.title || "").slice(0, 140);
+    const title = titleFromDetail(detail, fields).slice(0, 140);
     if (!title) continue;
     const reward = clean(fields.reward || extractReward(`${detail.linkText || ""} ${detail.text || ""}`));
     const requirement = clean(fields.requirement || extractRequirement(`${detail.linkText || ""} ${detail.text || ""}`));
@@ -602,6 +601,49 @@ function rowsFromDetails(details) {
   }
 
   return rows;
+}
+
+function isUsableDetail(detail) {
+  if (!detail || detail.status === "error") return false;
+  if (looksLikeBrowserError(detail)) return false;
+  if (looksLikeNavigationOrGameDetail(detail)) return false;
+  if (isBlockedDetail(detail) && !hasMeaningfulBlockedPromoDetail(detail)) return false;
+  const status = String(detail.status || "needs_review");
+  const text = clean(`${detail.text || ""} ${detail.fields?.excerpt || ""}`);
+  return status === "ok" || status === "limited" || text.length >= 180;
+}
+
+function isBlockedDetail(detail) {
+  const status = String(detail?.status || "").toLowerCase();
+  if (status === "blocked" || status === "captcha_or_human_check" || status === "js_required_or_blocked") return true;
+  if (/^http_(?:401|403|404|429|5\d\d)$/.test(status)) return true;
+  const text = `${detail?.error || ""} ${detail?.text || ""}`.toLowerCase();
+  return /access denied|checking your browser|verify you are human|captcha|cloudflare|enable javascript to run/i.test(text) && text.length < 900;
+}
+
+function looksLikeNavigationOrGameDetail(detail) {
+  const url = `${detail?.url || ""} ${detail?.finalUrl || ""}`.toLowerCase();
+  const linkText = clean(detail?.linkText || "").toLowerCase();
+  const promoPath = /promo|promotion|bonus|offer|cashback|freebet|free-bet|free_spins|freespins|reload|welcome/.test(url);
+  if (/\/templates?\//.test(url)) return true;
+  if (/\/game\//.test(url) || /bt-path=/.test(url)) return true;
+  if (!promoPath && /\/(?:casino|sportsbook|sports?|esports?)(?:\/|$)/.test(url) && !isDetailActionText(linkText)) return true;
+  return /^(my bets|upcoming events|favourites?|soccer|basketball|ice hockey|tennis|fifa|counter-strike|league of legends|dota 2|nba2k|live|lobby|casino|sports?|esports?|download app|language)$/.test(linkText);
+}
+
+function hasMeaningfulBlockedPromoDetail(detail) {
+  const url = `${detail?.url || ""} ${detail?.finalUrl || ""}`.toLowerCase();
+  if (!/\/(?:promo|promotions|bonus|offer)s?(?:\/|$)/.test(url)) return false;
+  if (/\/(?:promo\/promotions|promotions)(?:[?#\s]|$)/.test(url)) return false;
+  const text = clean(`${detail?.text || ""} ${detail?.fields?.excerpt || ""}`);
+  const title = titleFromDetail(detail, detail?.fields || {});
+  return text.length >= 900 || title.length >= 8;
+}
+
+function isDetailActionText(value) {
+  return /^(read more|more info|learn more|find out more|bonus offer details|details|view details)$/i.test(
+    String(value || "").trim()
+  );
 }
 
 function mergeActivityRows(listingRows, detailRows) {
@@ -769,7 +811,7 @@ function bestDetailForRow(row, details, used) {
     const fields = detail.fields || {};
     const candidates = [
       fields.title,
-      detail.linkText,
+      meaningfulLinkText(detail.linkText),
       detail.pageTitle,
       detail.url && detail.url.split("/").pop()
     ].map(normalizeMatch).filter(Boolean);
@@ -808,6 +850,54 @@ function normalizeMatch(value) {
     .split(/\s+/)
     .filter((token) => token && !["the", "and", "with", "your", "for", "from", "our"].includes(token))
     .join("-");
+}
+
+function meaningfulLinkText(value) {
+  const text = clean(value || "");
+  if (isDetailActionText(text)) return "";
+  if (/^(promotions?|bonus(?:es)?|all promotions?|casino|sports?)$/i.test(text)) return "";
+  return text;
+}
+
+function titleFromDetail(detail, fields = {}) {
+  return clean(
+    meaningfulLinkText(detail?.linkText) ||
+      compactFieldTitle(fields.title) ||
+      titleFromUrl(detail?.url || detail?.finalUrl || "") ||
+      meaningfulPageTitle(detail?.pageTitle) ||
+      detail?.pageTitle ||
+      "未命名活动"
+  );
+}
+
+function compactFieldTitle(value) {
+  const text = clean(value || "");
+  if (!text || text.length > 160 || /^<iframe/i.test(text)) return "";
+  if (/enable javascript|googletagmanager|tag-manager/i.test(text)) return "";
+  return text;
+}
+
+function meaningfulPageTitle(value) {
+  const text = clean(value || "");
+  if (/^(betpanda|megapari|campeonbet)$/i.test(text)) return "";
+  return text;
+}
+
+function titleFromUrl(value) {
+  try {
+    const parsed = new URL(value);
+    const parts = parsed.pathname.split("/").filter(Boolean);
+    const last = parts.at(-1) || "";
+    const previous = parts.at(-2) || "";
+    const slugText = last === "rules" && previous ? `${previous}-${last}` : last;
+    if (!slugText || /^(promotions?|promo|bonus(?:es)?)$/i.test(slugText)) return "";
+    return slugText
+      .replace(/\.[a-z0-9]+$/i, "")
+      .replace(/[-_]+/g, " ")
+      .replace(/\b\w/g, (char) => char.toUpperCase());
+  } catch {
+    return "";
+  }
 }
 
 function looksLikeBrowserError(detail) {

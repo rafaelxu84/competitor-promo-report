@@ -12,7 +12,7 @@ on:
       maxDetails:
         description: "Maximum detail pages per brand"
         required: false
-        default: "30"
+        default: "80"
       minOkPages:
         description: "Fail if fewer listing pages open successfully"
         required: false
@@ -31,7 +31,7 @@ jobs:
     timeout-minutes: 90
     env:
       REPORT_DATE: ${{ github.event_name == 'workflow_dispatch' && inputs.date || 'today' }}
-      MAX_DETAILS: ${{ github.event_name == 'workflow_dispatch' && inputs.maxDetails || '30' }}
+      MAX_DETAILS: ${{ github.event_name == 'workflow_dispatch' && inputs.maxDetails || '80' }}
       MIN_OK_PAGES: ${{ github.event_name == 'workflow_dispatch' && inputs.minOkPages || '1' }}
 
     steps:
@@ -51,7 +51,7 @@ jobs:
         run: npx playwright install --with-deps chromium
 
       - name: Generate daily report
-        run: npm run daily -- --date="$REPORT_DATE" --maxDetails="$MAX_DETAILS" --minOkPages="$MIN_OK_PAGES"
+        run: xvfb-run -a npm run daily -- --date="$REPORT_DATE" --maxDetails="$MAX_DETAILS" --minOkPages="$MIN_OK_PAGES" --browserOnly --headed
 
       - name: Upload report artifacts
         uses: actions/upload-artifact@v4
