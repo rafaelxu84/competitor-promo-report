@@ -28,11 +28,6 @@
     .brand-card img, .visual img { width:100%; border:1px solid var(--line); border-radius:8px; background:#edf0ea; object-fit:cover; }
     .brand-card img { aspect-ratio:16/10; }
     .brand-card span { display:inline-flex; margin-top:10px; color:var(--blue); font-weight:700; }
-    .new-summary { background:var(--panel); border:1px solid var(--line); border-radius:8px; padding:16px; margin-bottom:18px; }
-    .new-summary h2 { margin:0 0 10px; font-size:20px; }
-    .new-list { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:10px; }
-    .new-item { border:1px solid var(--line); border-radius:8px; padding:10px; background:#fbfcfa; }
-    .new-item strong { display:block; }
     .new-badge { display:inline-flex; align-items:center; border-radius:999px; background:#fff4df; color:#9a6816; padding:3px 8px; font-size:12px; font-weight:800; margin-left:6px; vertical-align:middle; }
     .topnav { margin-bottom:12px; }
     .topnav a { color:var(--blue); font-weight:700; text-decoration:none; }
@@ -61,7 +56,7 @@
     .raw { background:var(--panel); border:1px solid var(--line); border-radius:8px; padding:14px; margin-top:16px; }
     pre { white-space:pre-wrap; word-break:break-word; background:#111714; color:#eef6f0; padding:12px; border-radius:8px; max-height:320px; overflow:auto; font-size:12px; }
     a { color:var(--blue); }
-    @media (max-width:900px) { .hero, .brand-grid, .brand-card, .activity-list, .new-list { grid-template-columns:1fr; } h1 { font-size:27px; } dl div { grid-template-columns:1fr; } }
+    @media (max-width:900px) { .hero, .brand-grid, .brand-card, .activity-list { grid-template-columns:1fr; } h1 { font-size:27px; } dl div { grid-template-columns:1fr; } }
   </style>
 </head>
 <body>
@@ -77,7 +72,6 @@
       </div>
       <div class="meta">
         <b>活动 Activities</b>30<br>
-        <b>今日新增 New</b>30<br>
         <b>详情 Details</b>30<br>
         <b>详情截图 Shots</b>30<br>
         <b>状态 Status</b>ok

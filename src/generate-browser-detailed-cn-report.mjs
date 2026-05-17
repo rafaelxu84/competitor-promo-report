@@ -34,7 +34,6 @@ for (const item of parsed) {
 const detailStats = enrichRowsWithDetails(parsed, detailData);
 
 const totalRows = parsed.reduce((sum, item) => sum + item.rows.length, 0);
-const newRows = parsed.reduce((sum, item) => sum + item.rows.filter((row) => row.isNew).length, 0);
 
 const html = `<!doctype html>
 <html lang="zh-CN">
@@ -119,14 +118,8 @@ const html = `<!doctype html>
     <section class="kpis">
       ${kpi(String(parsed.length), "品牌")}
       ${kpi(String(totalRows), "活动条目")}
-      ${kpi(String(newRows), "今日新增")}
       ${kpi(String(detailStats.matched), "详情页匹配")}
       ${kpi(String(parsed.filter((item) => item.status === "ok").length), "浏览器可访问")}
-    </section>
-
-    <section class="new-summary">
-      <h2>今日新增活动</h2>
-      ${renderNewSummary(parsed, hasPreviousBaseline)}
     </section>
 
     <h2>品牌导航</h2>
@@ -196,14 +189,8 @@ function renderSiteIndex(items, rowCount) {
         <b>品牌 Brands</b>${items.length}<br>
         <b>活动 Activities</b>${rowCount}<br>
         <b>详情 Details</b>${items.reduce((sum, item) => sum + item.rows.filter((row) => row.detailStatus === "ok").length, 0)}<br>
-        <b>截图 Shots</b>${capturedScreenshots}<br>
-        <b>今日新增 New</b>${items.reduce((sum, item) => sum + item.rows.filter((row) => row.isNew).length, 0)}
+        <b>截图 Shots</b>${capturedScreenshots}
       </div>
-    </section>
-
-    <section class="new-summary site-new">
-      <h2>今日新增活动 / New Today</h2>
-      ${renderNewSummary(items, hasPreviousBaseline)}
     </section>
 
     <section class="brand-grid">
@@ -216,7 +203,6 @@ function renderSiteIndex(items, rowCount) {
 
 function renderBrandCard(item) {
   const shot = path.join("..", "browser-screenshots", path.basename(item.screenshot));
-  const newCount = item.rows.filter((row) => row.isNew).length;
   const detailCount = item.rows.filter((row) => row.detailStatus === "ok").length;
   return `<a class="brand-card" href="brands/${slug(item.brand)}.html">
     <img src="${escapeHtml(shot)}" alt="${escapeHtml(item.brand)} screenshot">
@@ -225,7 +211,6 @@ function renderBrandCard(item) {
       <p>${item.rows.length} 条活动 / ${item.rows.length} activities</p>
       <p>${detailCount} 条详情页已匹配 / ${detailCount} detail pages matched</p>
       <p>${renderStatusLabel(item)}${item.error ? `（${escapeHtml(String(item.error).slice(0, 180))}）` : ""}</p>
-      ${newCount ? `<p><span class="new-badge">今日新增 ${newCount}</span></p>` : ""}
       <span>打开品牌详情 / Open brand page</span>
     </div>
   </a>`;
@@ -256,7 +241,6 @@ function renderBrandPage(item) {
       </div>
       <div class="meta">
         <b>活动 Activities</b>${item.rows.length}<br>
-        <b>今日新增 New</b>${item.rows.filter((row) => row.isNew).length}<br>
         <b>详情 Details</b>${item.rows.filter((row) => row.detailStatus === "ok").length}<br>
         <b>详情截图 Shots</b>${detailScreens}<br>
         <b>状态 Status</b>${escapeHtml(String(item.status || "needs_review"))}
@@ -364,11 +348,6 @@ function siteStyles() {
     .brand-card img, .visual img { width:100%; border:1px solid var(--line); border-radius:8px; background:#edf0ea; object-fit:cover; }
     .brand-card img { aspect-ratio:16/10; }
     .brand-card span { display:inline-flex; margin-top:10px; color:var(--blue); font-weight:700; }
-    .new-summary { background:var(--panel); border:1px solid var(--line); border-radius:8px; padding:16px; margin-bottom:18px; }
-    .new-summary h2 { margin:0 0 10px; font-size:20px; }
-    .new-list { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:10px; }
-    .new-item { border:1px solid var(--line); border-radius:8px; padding:10px; background:#fbfcfa; }
-    .new-item strong { display:block; }
     .new-badge { display:inline-flex; align-items:center; border-radius:999px; background:#fff4df; color:#9a6816; padding:3px 8px; font-size:12px; font-weight:800; margin-left:6px; vertical-align:middle; }
     .topnav { margin-bottom:12px; }
     .topnav a { color:var(--blue); font-weight:700; text-decoration:none; }
@@ -397,7 +376,7 @@ function siteStyles() {
     .raw { background:var(--panel); border:1px solid var(--line); border-radius:8px; padding:14px; margin-top:16px; }
     pre { white-space:pre-wrap; word-break:break-word; background:#111714; color:#eef6f0; padding:12px; border-radius:8px; max-height:320px; overflow:auto; font-size:12px; }
     a { color:var(--blue); }
-    @media (max-width:900px) { .hero, .brand-grid, .brand-card, .activity-list, .new-list { grid-template-columns:1fr; } h1 { font-size:27px; } dl div { grid-template-columns:1fr; } }
+    @media (max-width:900px) { .hero, .brand-grid, .brand-card, .activity-list { grid-template-columns:1fr; } h1 { font-size:27px; } dl div { grid-template-columns:1fr; } }
   </style>`;
 }
 
@@ -415,14 +394,13 @@ function renderStatusLabel(item) {
 
 function renderBrandSection(item) {
   const screenshot = path.relative(reportDir, item.screenshot);
-  const newCount = item.rows.filter((row) => row.isNew).length;
   const statusLabel = `${renderStatusLabel(item)}${item.error ? `（${escapeHtml(String(item.error).slice(0, 220))}）` : ""}`;
   return `<section id="${slug(item.brand)}">
     <h2>${escapeHtml(item.brand)}</h2>
     <div class="brand-head">
       <div>
         <p class="note">来源：<a href="${escapeHtml(item.finalUrl)}">${escapeHtml(item.finalUrl)}</a></p>
-        <p class="note">本页识别到 ${item.rows.length} 条活动；今日新增 ${newCount} 条；状态：${statusLabel}</p>
+        <p class="note">本页识别到 ${item.rows.length} 条在线活动；状态：${statusLabel}</p>
       </div>
       <img class="shot" src="${escapeHtml(screenshot)}" alt="${escapeHtml(item.brand)} 页面截图">
     </div>
@@ -452,20 +430,6 @@ function cell(value) {
 
 function kpi(value, label) {
   return `<div class="kpi"><strong>${escapeHtml(value)}</strong><span>${escapeHtml(label)}</span></div>`;
-}
-
-function renderNewSummary(items, hasBaseline) {
-  if (!hasBaseline) {
-    return `<p class="note">当前报告是新增判断的基线版本。下一次日报会基于这份活动索引标记“今日新增”。</p>`;
-  }
-  const rows = [];
-  for (const item of items) {
-    for (const row of item.rows) {
-      if (row.isNew) rows.push({ brand: item.brand, row });
-    }
-  }
-  if (!rows.length) return `<p class="note">本轮未发现相对上一份历史报告的新增活动。</p>`;
-  return `<div class="new-list">${rows.map(({ brand, row }) => `<div class="new-item"><strong>${escapeHtml(brand)} · ${escapeHtml(row.title)}</strong><span>${escapeHtml(row.reward || "奖励待确认")}</span></div>`).join("\n")}</div>`;
 }
 
 function parseBrand(item) {
