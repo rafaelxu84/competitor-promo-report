@@ -18,12 +18,11 @@ const previousKeys = await loadPreviousActivityKeys(date);
 const hasPreviousBaseline = previousKeys.size > 0;
 const detailData = await loadPromotionDetails();
 const parsed = observations.results.map((item) => {
-  const rows = parseBrand(item);
-  if (rows.length) return { ...item, rows };
-  const detailFallback = rowsFromDetails(detailData.get(item.brand) || [], item.brand);
+  const listingRows = parseBrand(item);
+  const detailRows = rowsFromDetails(detailData.get(item.brand) || []);
   return {
     ...item,
-    rows: detailFallback.length ? detailFallback : rows
+    rows: mergeActivityRows(listingRows, detailRows)
   };
 });
 for (const item of parsed) {
@@ -613,12 +612,12 @@ function enrichRowsWithDetails(items, detailByBrand) {
   return stats;
 }
 
-function rowsFromDetails(details, brand) {
+function rowsFromDetails(details) {
   const rows = [];
   for (const detail of details || []) {
     if (!detail || looksLikeBrowserError(detail)) continue;
     const fields = detail.fields || {};
-    const title = clean(fields.title || detail.pageTitle || detail.linkText || "").slice(0, 140);
+    const title = clean(detail.linkText || detail.pageTitle || fields.title || "").slice(0, 140);
     if (!title) continue;
     const reward = clean(fields.reward || extractReward(`${detail.linkText || ""} ${detail.text || ""}`));
     const requirement = clean(fields.requirement || extractRequirement(`${detail.linkText || ""} ${detail.text || ""}`));
@@ -638,9 +637,36 @@ function rowsFromDetails(details, brand) {
     rows.push(row);
   }
 
-  // Limit per brand to keep pages scannable.
-  const limit = brand === "1xBet" ? 20 : 14;
-  return rows.slice(0, limit);
+  return rows;
+}
+
+function mergeActivityRows(listingRows, detailRows) {
+  const merged = [];
+  const seen = new Set();
+
+  for (const row of detailRows) {
+    const key = rowIdentity(row);
+    if (seen.has(key)) continue;
+    seen.add(key);
+    merged.push(row);
+  }
+
+  for (const row of listingRows) {
+    const key = rowIdentity(row);
+    if (seen.has(key)) continue;
+    seen.add(key);
+    merged.push(row);
+  }
+
+  return merged;
+}
+
+function rowIdentity(row) {
+  const urlKey = normalizeKey(row.detailUrl || row.sourceUrl || "");
+  if (urlKey) return urlKey;
+  const titleKey = normalizeMatch(row.detailTitle || row.title);
+  if (titleKey) return titleKey;
+  return normalizeKey(`${row.title} ${row.reward} ${row.requirement}`);
 }
 
 function buildActivityAnalysis(row) {
