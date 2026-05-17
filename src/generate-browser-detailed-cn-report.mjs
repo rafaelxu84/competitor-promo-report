@@ -10,17 +10,22 @@ const reportDir = path.join("reports", date);
 const inputPath = path.join(reportDir, "browser-observations.json");
 const outputPath = path.join(reportDir, "browser-detailed-cn.html");
 const mirrorPath = path.join(reportDir, "browser-cn-visual.html");
-const currentBrowserPath = path.join("reports", "2026-05-14", "promo-report-bilingual.html");
+const bilingualPath = path.join(reportDir, "promo-report-bilingual.html");
 const latestPath = path.join("reports", "latest-cn-visual.html");
 const observations = JSON.parse(await fs.readFile(inputPath, "utf8"));
 
 const previousKeys = await loadPreviousActivityKeys(date);
 const hasPreviousBaseline = previousKeys.size > 0;
 const detailData = await loadPromotionDetails();
-const parsed = observations.results.map((item) => ({
-  ...item,
-  rows: parseBrand(item)
-}));
+const parsed = observations.results.map((item) => {
+  const rows = parseBrand(item);
+  if (rows.length) return { ...item, rows };
+  const detailFallback = rowsFromDetails(detailData.get(item.brand) || [], item.brand);
+  return {
+    ...item,
+    rows: detailFallback.length ? detailFallback : rows
+  };
+});
 for (const item of parsed) {
   for (const row of item.rows) {
     row.activityKey = activityKey(item.brand, row);
@@ -142,13 +147,13 @@ const html = `<!doctype html>
 
 await fs.writeFile(outputPath, html, "utf8");
 await fs.writeFile(mirrorPath, html, "utf8");
-await fs.writeFile(currentBrowserPath, html, "utf8");
+await fs.writeFile(bilingualPath, html, "utf8");
 await fs.writeFile(latestPath, html, "utf8");
 await writeActivityIndex(parsed);
 await generateStaticSite(parsed, totalRows);
 console.log(outputPath);
 console.log(mirrorPath);
-console.log(currentBrowserPath);
+console.log(bilingualPath);
 console.log(latestPath);
 console.log(path.join(reportDir, "site", "index.html"));
 
@@ -166,7 +171,7 @@ async function generateStaticSite(items, rowCount) {
   }
 
   await fs.writeFile(path.join(siteDir, "index.html"), renderSiteIndex(items, rowCount), "utf8");
-  await fs.writeFile(path.join("reports", "latest-site.html"), redirectHtml(path.join("2026-05-16", "site", "index.html")), "utf8");
+  await fs.writeFile(path.join("reports", "latest-site.html"), redirectHtml(path.join(date, "site", "index.html")), "utf8");
 }
 
 function renderSiteIndex(items, rowCount) {
@@ -220,6 +225,7 @@ function renderBrandCard(item) {
       <h2>${escapeHtml(item.brand)}</h2>
       <p>${item.rows.length} 条活动 / ${item.rows.length} activities</p>
       <p>${detailCount} 条详情页已匹配 / ${detailCount} detail pages matched</p>
+      <p>${renderStatusLabel(item)}${item.error ? `（${escapeHtml(String(item.error).slice(0, 180))}）` : ""}</p>
       ${newCount ? `<p><span class="new-badge">今日新增 ${newCount}</span></p>` : ""}
       <span>打开品牌详情 / Open brand page</span>
     </div>
@@ -229,6 +235,7 @@ function renderBrandCard(item) {
 function renderBrandPage(item) {
   const shot = path.join("..", "..", "browser-screenshots", path.basename(item.screenshot));
   const detailScreens = item.rows.filter((row) => row.detailScreenshot).length;
+  const statusLine = `${renderStatusLabel(item)}${item.error ? `（${escapeHtml(String(item.error).slice(0, 220))}）` : ""}`;
   return `<!doctype html>
 <html lang="zh-CN">
 <head>
@@ -246,13 +253,14 @@ function renderBrandPage(item) {
         <h1>${escapeHtml(item.brand)}</h1>
         <p class="sub">来源 Source：<a href="${escapeHtml(item.finalUrl)}">${escapeHtml(item.finalUrl)}</a></p>
         <p class="sub">本页优先使用活动详情页截图与可见内容，输出要求、Trigger、Reward、Who、When、Summary、核心目的和数据预期。</p>
+        <p class="sub">${statusLine}</p>
       </div>
       <div class="meta">
         <b>活动 Activities</b>${item.rows.length}<br>
         <b>今日新增 New</b>${item.rows.filter((row) => row.isNew).length}<br>
         <b>详情 Details</b>${item.rows.filter((row) => row.detailStatus === "ok").length}<br>
         <b>详情截图 Shots</b>${detailScreens}<br>
-        <b>状态 Status</b>浏览器可访问 / Browser accessible
+        <b>状态 Status</b>${escapeHtml(String(item.status || "needs_review"))}
       </div>
     </section>
 
@@ -261,7 +269,11 @@ function renderBrandPage(item) {
     </section>
 
     <section class="activity-list">
-      ${item.rows.map((row, index) => renderActivityCard(row, index)).join("\n")}
+      ${
+        item.rows.length
+          ? item.rows.map((row, index) => renderActivityCard(row, index)).join("\n")
+          : `<div class="activity-card detail-missing"><h2>未解析到活动 / No activities parsed</h2><p class="sub">列表页可能为 JS 渲染、需要登录或本次抓取失败。请参考截图并标记“列表页兜底 / Listing fallback”或“详情页正文有限 / Limited detail”。</p></div>`
+      }
     </section>
 
     <details class="raw">
@@ -341,6 +353,11 @@ function siteStyles() {
     h2 { margin:0 0 6px; font-size:18px; letter-spacing:0; }
     p { margin:0; }
     .sub, .meta { color:var(--muted); }
+    .status { display:inline-flex; align-items:center; border-radius:999px; padding:3px 8px; font-size:12px; font-weight:800; white-space:nowrap; }
+    .ok { color:var(--green); background:#e5f3ed; }
+    .mid { color:var(--amber); background:#fff4df; }
+    .blue { color:var(--blue); background:#e9f0fb; }
+    .low { color:var(--red); background:#faeeee; }
     .meta { background:#f8faf7; border:1px solid var(--line); border-radius:8px; padding:14px; }
     .meta b { display:inline-block; min-width:92px; color:var(--ink); }
     .brand-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:14px; }
@@ -385,21 +402,34 @@ function siteStyles() {
   </style>`;
 }
 
+function renderStatusLabel(item) {
+  const status = String(item?.status || "needs_review");
+  if (status === "ok") return '<span class="status ok">可访问 / OK</span>';
+  if (status === "limited") return '<span class="status mid">正文有限 / Limited detail</span>';
+  if (status.startsWith("http_")) return `<span class="status low">HTTP ${escapeHtml(status.slice(5))}</span>`;
+  if (status === "blocked" || status === "captcha_or_human_check" || status === "js_required_or_blocked") {
+    return '<span class="status low">受限 / Blocked</span>';
+  }
+  if (status === "error") return '<span class="status low">抓取失败 / Error</span>';
+  return '<span class="status blue">需复核 / Needs review</span>';
+}
+
 function renderBrandSection(item) {
   const screenshot = path.relative(reportDir, item.screenshot);
   const newCount = item.rows.filter((row) => row.isNew).length;
+  const statusLabel = `${renderStatusLabel(item)}${item.error ? `（${escapeHtml(String(item.error).slice(0, 220))}）` : ""}`;
   return `<section id="${slug(item.brand)}">
     <h2>${escapeHtml(item.brand)}</h2>
     <div class="brand-head">
       <div>
         <p class="note">来源：<a href="${escapeHtml(item.finalUrl)}">${escapeHtml(item.finalUrl)}</a></p>
-        <p class="note">本页识别到 ${item.rows.length} 条活动；今日新增 ${newCount} 条；状态：<span class="status ok">浏览器可访问</span></p>
+        <p class="note">本页识别到 ${item.rows.length} 条活动；今日新增 ${newCount} 条；状态：${statusLabel}</p>
       </div>
       <img class="shot" src="${escapeHtml(screenshot)}" alt="${escapeHtml(item.brand)} 页面截图">
     </div>
     <table>
       <thead><tr><th>#</th><th>标题</th><th>奖励</th><th>参与要求</th><th>开始时间</th><th>结束时间</th><th>备注</th></tr></thead>
-      <tbody>${item.rows.map((row, index) => renderRow(row, index)).join("\n")}</tbody>
+      <tbody>${item.rows.length ? item.rows.map((row, index) => renderRow(row, index)).join("\n") : `<tr><td colspan="7"><span class="status missing">列表页未解析到活动；请以截图人工复核</span></td></tr>`}</tbody>
     </table>
   </section>`;
 }
@@ -543,6 +573,17 @@ function enrichRowsWithDetails(items, detailByBrand) {
     const details = detailByBrand.get(item.brand) || [];
     const used = new Set();
     for (const row of item.rows) {
+      if (row.detailUrl || row.detailScreenshot) {
+        row.detailStatus = row.detailStatus || "ok";
+        row.detailStatusLabel =
+          row.detailStatus === "ok" ? "详情页已采集 / Detail captured" : "详情页正文有限 / Limited detail";
+        row.detailUrl = row.detailUrl || row.sourceUrl || "";
+        row.detailScreenshot = row.detailScreenshot ? normalizeScreenshotPath(row.detailScreenshot) : "";
+        row.analysis = buildActivityAnalysis(row);
+        if (row.detailStatus === "ok") stats.matched += 1;
+        else stats.limited += 1;
+        continue;
+      }
       const detail = bestDetailForRow(row, details, used);
       if (!detail) {
         row.detailStatus = "fallback";
@@ -570,6 +611,36 @@ function enrichRowsWithDetails(items, detailByBrand) {
     }
   }
   return stats;
+}
+
+function rowsFromDetails(details, brand) {
+  const rows = [];
+  for (const detail of details || []) {
+    if (!detail || looksLikeBrowserError(detail)) continue;
+    const fields = detail.fields || {};
+    const title = clean(fields.title || detail.pageTitle || detail.linkText || "").slice(0, 140);
+    if (!title) continue;
+    const reward = clean(fields.reward || extractReward(`${detail.linkText || ""} ${detail.text || ""}`));
+    const requirement = clean(fields.requirement || extractRequirement(`${detail.linkText || ""} ${detail.text || ""}`));
+    const dates = clean(Array.isArray(fields.dates) ? fields.dates.slice(0, 4).join("; ") : "");
+    const row = baseRow(title, reward, requirement, "", dates, "详情页兜底 / Detail fallback");
+    row.sourceUrl = detail.finalUrl || detail.url;
+    row.detailUrl = detail.finalUrl || detail.url;
+    row.detailTitle = title;
+    row.detailReward = reward;
+    row.detailRequirement = requirement;
+    row.detailDates = dates;
+    row.detailExcerpt = clean(fields.excerpt || detail.text || "").slice(0, 2600);
+    row.detailScreenshot = normalizeScreenshotPath(detail.screenshot);
+    row.detailStatus = detail.status === "ok" ? "ok" : "limited";
+    row.detailStatusLabel = detail.status === "ok" ? "详情页已采集 / Detail captured" : "详情页正文有限 / Limited detail";
+    row.analysis = buildActivityAnalysis(row);
+    rows.push(row);
+  }
+
+  // Limit per brand to keep pages scannable.
+  const limit = brand === "1xBet" ? 20 : 14;
+  return rows.slice(0, limit);
 }
 
 function buildActivityAnalysis(row) {
