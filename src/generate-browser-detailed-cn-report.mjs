@@ -648,23 +648,30 @@ function isDetailActionText(value) {
 
 function mergeActivityRows(listingRows, detailRows) {
   const merged = [];
-  const seen = new Set();
 
-  for (const row of detailRows) {
-    const key = rowIdentity(row);
-    if (seen.has(key)) continue;
-    seen.add(key);
+  for (const row of listingRows) {
+    if (hasSimilarMergedRow(row, merged)) continue;
     merged.push(row);
   }
 
-  for (const row of listingRows) {
-    const key = rowIdentity(row);
-    if (seen.has(key)) continue;
-    seen.add(key);
+  for (const row of detailRows) {
+    if (hasSimilarMergedRow(row, merged)) continue;
     merged.push(row);
   }
 
   return merged;
+}
+
+function hasSimilarMergedRow(row, merged) {
+  const key = rowIdentity(row);
+  const title = normalizeMatch(row.detailTitle || row.title);
+  for (const existing of merged) {
+    const existingKey = rowIdentity(existing);
+    if (key && existingKey && key === existingKey) return true;
+    const existingTitle = normalizeMatch(existing.detailTitle || existing.title);
+    if (isStrongTitleMatch(title, existingTitle)) return true;
+  }
+  return false;
 }
 
 function rowIdentity(row) {
@@ -818,13 +825,30 @@ function bestDetailForRow(row, details, used) {
     let score = 0;
     for (const candidate of candidates) {
       score = Math.max(score, matchScore(rowKey, candidate));
+      score = Math.max(score, tokenContainmentScore(rowKey, candidate));
     }
     if (score > bestScore) {
       best = detail;
       bestScore = score;
     }
   }
-  return bestScore >= 46 ? best : null;
+  return bestScore >= 40 ? best : null;
+}
+
+function isStrongTitleMatch(a, b) {
+  if (!a || !b) return false;
+  return matchScore(a, b) >= 58;
+}
+
+function tokenContainmentScore(shortText, longText) {
+  const shortTokens = normalizeMatch(shortText).split("-").filter((token) => token.length > 2);
+  const longTokens = new Set(normalizeMatch(longText).split("-").filter((token) => token.length > 2));
+  if (!shortTokens.length || !longTokens.size) return 0;
+  let matched = 0;
+  for (const token of new Set(shortTokens)) {
+    if (longTokens.has(token)) matched += 1;
+  }
+  return Math.round((matched / new Set(shortTokens).size) * 100);
 }
 
 function matchScore(a, b) {
@@ -860,10 +884,15 @@ function meaningfulLinkText(value) {
 }
 
 function titleFromDetail(detail, fields = {}) {
+  const linkText = meaningfulLinkText(detail?.linkText);
+  const urlTitle = titleFromUrl(detail?.url || detail?.finalUrl || "");
+  const shouldPreferUrlTitle = /stake\.mba\/promotions\/promotion\//i.test(`${detail?.url || ""} ${detail?.finalUrl || ""}`) &&
+    /(?:online at stake\.com|\bat stake\b)/i.test(linkText);
   return clean(
-    meaningfulLinkText(detail?.linkText) ||
+    (shouldPreferUrlTitle ? urlTitle : "") ||
+      linkText ||
       compactFieldTitle(fields.title) ||
-      titleFromUrl(detail?.url || detail?.finalUrl || "") ||
+      urlTitle ||
       meaningfulPageTitle(detail?.pageTitle) ||
       detail?.pageTitle ||
       "未命名活动"
@@ -893,6 +922,7 @@ function titleFromUrl(value) {
     if (!slugText || /^(promotions?|promo|bonus(?:es)?)$/i.test(slugText)) return "";
     return slugText
       .replace(/\.[a-z0-9]+$/i, "")
+      .replace(/rafflebash/gi, "raffle-bash")
       .replace(/[-_]+/g, " ")
       .replace(/\b\w/g, (char) => char.toUpperCase());
   } catch {
