@@ -1,0 +1,233 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>BC Game 活动详情</title>
+  <style>
+    :root { --bg:#f5f6f2; --panel:#fff; --ink:#15201b; --muted:#66736d; --line:#d8ddd4; --green:#0d7658; --blue:#245c9e; --amber:#9a6816; --red:#a54040; --soft:#eef4f0; }
+    * { box-sizing:border-box; }
+    body { margin:0; background:var(--bg); color:var(--ink); font-family:Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; line-height:1.45; }
+    .page { max-width:1280px; margin:0 auto; padding:28px 18px 56px; }
+    .hero { background:var(--panel); border:1px solid var(--line); border-radius:8px; padding:24px; display:grid; grid-template-columns:minmax(0,1fr) 280px; gap:18px; align-items:end; margin-bottom:18px; }
+    .brand-hero { margin-bottom:16px; }
+    .eyebrow { margin:0 0 8px; color:var(--green); font-size:12px; font-weight:800; text-transform:uppercase; letter-spacing:.04em; }
+    h1 { margin:0 0 8px; font-size:32px; line-height:1.12; letter-spacing:0; }
+    h2 { margin:0 0 6px; font-size:18px; letter-spacing:0; }
+    p { margin:0; }
+    .sub, .meta { color:var(--muted); }
+    .status { display:inline-flex; align-items:center; border-radius:999px; padding:3px 8px; font-size:12px; font-weight:800; white-space:nowrap; }
+    .ok { color:var(--green); background:#e5f3ed; }
+    .mid { color:var(--amber); background:#fff4df; }
+    .blue { color:var(--blue); background:#e9f0fb; }
+    .low { color:var(--red); background:#faeeee; }
+    .meta { background:#f8faf7; border:1px solid var(--line); border-radius:8px; padding:14px; }
+    .meta b { display:inline-block; min-width:92px; color:var(--ink); }
+    .brand-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:14px; }
+    .brand-card { display:grid; grid-template-columns:220px minmax(0,1fr); gap:14px; padding:14px; color:var(--ink); text-decoration:none; background:var(--panel); border:1px solid var(--line); border-radius:8px; }
+    .brand-card img, .visual img { width:100%; border:1px solid var(--line); border-radius:8px; background:#edf0ea; object-fit:cover; }
+    .brand-card img { aspect-ratio:16/10; }
+    .brand-card span { display:inline-flex; margin-top:10px; color:var(--blue); font-weight:700; }
+    .new-summary { background:var(--panel); border:1px solid var(--line); border-radius:8px; padding:16px; margin-bottom:18px; }
+    .new-summary h2 { margin:0 0 10px; font-size:20px; }
+    .new-list { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:10px; }
+    .new-item { border:1px solid var(--line); border-radius:8px; padding:10px; background:#fbfcfa; }
+    .new-item strong { display:block; }
+    .new-badge { display:inline-flex; align-items:center; border-radius:999px; background:#fff4df; color:#9a6816; padding:3px 8px; font-size:12px; font-weight:800; margin-left:6px; vertical-align:middle; }
+    .topnav { margin-bottom:12px; }
+    .topnav a { color:var(--blue); font-weight:700; text-decoration:none; }
+    .visual { background:var(--panel); border:1px solid var(--line); border-radius:8px; padding:14px; margin-bottom:16px; }
+    .visual img { max-height:520px; object-fit:contain; }
+    .activity-list { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:14px; }
+    .activity-card { background:var(--panel); border:1px solid var(--line); border-radius:8px; padding:16px; }
+    .activity-card.detail-ok { border-left:4px solid var(--green); }
+    .activity-card.detail-limited { border-left:4px solid var(--amber); }
+    .activity-card.detail-missing { border-left:4px solid #a8b1ac; }
+    .activity-head { display:grid; grid-template-columns:36px minmax(0,1fr); gap:10px; align-items:start; margin-bottom:12px; }
+    .index { display:inline-grid; place-items:center; width:30px; height:30px; border-radius:999px; background:var(--soft); color:var(--green); font-weight:800; }
+    .detail-shot-link { display:block; margin:8px 0 12px; }
+    .detail-shot { width:100%; max-height:360px; object-fit:cover; object-position:top; border:1px solid var(--line); border-radius:8px; background:#edf0ea; }
+    dl { display:grid; gap:8px; margin:0; }
+    dl div { display:grid; grid-template-columns:150px minmax(0,1fr); gap:10px; border-top:1px solid var(--line); padding-top:8px; }
+    dt { color:var(--muted); font-size:12px; font-weight:800; }
+    dd { margin:0; font-size:13px; }
+    .missing-text { color:var(--muted); }
+    .detail-pill { display:inline-flex; align-items:center; border-radius:999px; padding:3px 8px; font-size:12px; font-weight:800; }
+    .ok-pill { background:#e5f3ed; color:var(--green); }
+    .limited-pill { background:#fff4df; color:var(--amber); }
+    .fallback-pill { background:#eef0ea; color:var(--muted); }
+    .detail-excerpt { margin-top:12px; border-top:1px solid var(--line); padding-top:10px; }
+    .detail-excerpt summary { cursor:pointer; color:var(--blue); font-weight:800; }
+    .raw { background:var(--panel); border:1px solid var(--line); border-radius:8px; padding:14px; margin-top:16px; }
+    pre { white-space:pre-wrap; word-break:break-word; background:#111714; color:#eef6f0; padding:12px; border-radius:8px; max-height:320px; overflow:auto; font-size:12px; }
+    a { color:var(--blue); }
+    @media (max-width:900px) { .hero, .brand-grid, .brand-card, .activity-list, .new-list { grid-template-columns:1fr; } h1 { font-size:27px; } dl div { grid-template-columns:1fr; } }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <nav class="topnav"><a href="../index.html">返回品牌入口 / Back to brands</a></nav>
+    <section class="hero brand-hero">
+      <div>
+        <p class="eyebrow">Brand Promotion Page</p>
+        <h1>BC Game</h1>
+        <p class="sub">来源 Source：<a href="https://bc.fun/en-IN/login/merge?type=signin">https://bc.fun/en-IN/login/merge?type=signin</a></p>
+        <p class="sub">本页优先使用活动详情页截图与可见内容，输出要求、Trigger、Reward、Who、When、Summary、核心目的和数据预期。</p>
+        <p class="sub"><span class="status low">受限 / Blocked</span></p>
+      </div>
+      <div class="meta">
+        <b>活动 Activities</b>3<br>
+        <b>今日新增 New</b>3<br>
+        <b>详情 Details</b>0<br>
+        <b>详情截图 Shots</b>3<br>
+        <b>状态 Status</b>js_required_or_blocked
+      </div>
+    </section>
+
+    <section class="visual">
+      <img src="../../browser-screenshots/bc-game-bc-game-promotions.png" alt="BC Game screenshot">
+    </section>
+
+    <section class="activity-list">
+      <article class="activity-card detail-limited">
+    <div class="activity-head">
+      <span class="index">1</span>
+      <div>
+        <h2>You need to enable JavaScript to run BC app. <span class="new-badge">今日新增 / New Today</span></h2>
+        <p>综合活动 / General Promotion · <span class="detail-pill limited-pill">详情页正文有限 / Limited detail</span></p>
+      </div>
+    </div>
+<a class="detail-shot-link" href="../../detail-screenshots/bc-game/bc-game-exclusive25bcgame-blackjack-freebet-https-bc-fun-game-bcgame-blackjack-f.png"><img class="detail-shot" src="../../detail-screenshots/bc-game/bc-game-exclusive25bcgame-blackjack-freebet-https-bc-fun-game-bcgame-blackjack-f.png" alt="You need to enable JavaScript to run BC app. detail screenshot"></a>
+    <dl>
+      <div><dt>要求 / Requirements</dt><dd>bet You need to enable JavaScript to run BC app.; play: none; visibility: hidden&quot;; played in BCD, and if you change currency while playing, the game will refresh and restart. Sign in 224 BCGAME Blackjack Fre</dd></div>
+      <div><dt>触发条件 / Trigger</dt><dd>新用户注册并完成首充触发</dd></div>
+      <div><dt>奖励方式 / Reward</dt><dd>$0</dd></div>
+      <div><dt>目标用户 / Who</dt><dd>新注册/首充用户；Casino/Slots 用户；体育投注用户</dd></div>
+      <div><dt>时间 / When</dt><dd>atExclusive50BCGAME Speed Blackjack BronzeExclusive35BCGAME Silver Blackjack 224Power BlackjackExclusiv;  atest bet &amp; RaceAll betsMy betsHigh RollerWager ContestBet IDBetPayoutProfit186540710157217761420.00564</dd></div>
+      <div><dt>Summary / 总结</dt><dd>You need to enable JavaScript to run BC app. 面向新注册/首充用户；Casino/Slots 用户；体育投注用户，通过“新用户注册并完成首充触发”推动用户完成关键行为；奖励为 $0。主要参与要求：bet You need to enable JavaScript to run BC app.; play: none; visibility: hidden&quot;; played in BCD, and if you change currency while playing, the game will refresh and restart. Sign in 224 BCGAME Blackjack Fre。</dd></div>
+      <div><dt>核心目的 / Objective</dt><dd>拉新与首充转化</dd></div>
+      <div><dt>数据预期 / Expected Data</dt><dd>拉新与首充转化；预期观察：注册到首充转化率、首存金额、首周留存上升；充值次数、充值金额、Bonus claim rate 上升；投注额、投注单量、有效投注用户数上升。</dd></div>
+      <div><dt>详情页来源 / Detail Source</dt><dd><a href="https://bc.fun/en-IN/login/merge?type=signin">https://bc.fun/en-IN/login/merge?type=signin</a></dd></div>
+    </dl>
+<details class="detail-excerpt"><summary>详情页原文摘要 / Detail excerpt</summary><pre>You need to enable JavaScript to run BC app. &lt;iframe src=&quot;https://www.googletagmanager.com/ns.html?id=GTM-TR7QDQDP&quot; height=&quot;0&quot; width=&quot;0&quot; style=&quot;display: none; visibility: hidden&quot; &gt; &lt;/iframe&gt; The selected currency will be displayed in BCD, and if you change currency while playing, the game will refresh and restart. Sign in 224 BCGAME Blackjack FreebetByEvolution Gaming# BC Exclusive# Blackjack # BC Exclusive# BlackjackHouse Edge2.70%RTP (Return to Player)97.3%Max Win--Stakes Range$0 to $0High winLucky winReviewStay tuned—something's coming!Recommended GamesAllExclusive56BCGAME Bronze BlackjackExclusive56BCGAME Iron Blackjack73BlackjackExclusive59BC.GAME ONE Blackjack91BlackJack28Supreme 777 Jackpots62Classic Multihand Blackjack78Infinite BlackjackExclusive99BCGAME Speed Blackjack49Korean Speed Baccarat B60Korean Speed Baccarat AExclusive52BC.GAME Speed Baccarat23Rummy48BC.GAME Glod Blackjack 251Mega BacarratExclusive50BCGAME Speed Blackjack BronzeExclusive35BCGAME Silver Blackjack 224Power BlackjackExclusive48BCGAME Silver Blackjack 365BC.GAME $BC BlackjackX 1View AllLatest bet &amp; RaceAll betsMy betsHigh RollerWager ContestBet IDBetPayoutProfit186540710157217761420.005644 USDC0x-20.0056449 USDC186540708370686996420.005644 USDC1.25x+5.0014112 USDC186540706336385607612.003386 USDC0.8333x-2.0005645 USDC186540701039433031712.003386 USDC0x-12.0033869 USDC186540698123035438130.008467 USDC0x-30.0084674 USDC186540696355282913312.003386 USDC1.6666x+8.0022579 USDC186540691930975150220.005644 USDC1.5x+10.002822 USDC186540685186080762812.003386 USDC0x-12.0033869 USDC186540683708804116520.005644 USDC1x0 USDC186540680466498324510.002822 USDC2x+10.002822 USDCShow More Explore 1000+ slots, live dealer tables, crash and original games, plus full sports betting with pre-match and in-play odds. Instant deposits, low fees, fast withdrawals. Our provably fair systems and audited RNG protect every bet. One wallet across casino and sportsbook keeps things simple, and our mobile-ready site lets you play anywhere. New players can claim welcome bonuses and ongoing cashback. Need help? 24/7 support has you covered. Simple, secure, and built f ... [truncated]</pre></details>
+  </article>
+<article class="activity-card detail-limited">
+    <div class="activity-head">
+      <span class="index">2</span>
+      <div>
+        <h2>You need to enable JavaScript to run BC app. <span class="new-badge">今日新增 / New Today</span></h2>
+        <p>综合活动 / General Promotion · <span class="detail-pill limited-pill">详情页正文有限 / Limited detail</span></p>
+      </div>
+    </div>
+<a class="detail-shot-link" href="../../detail-screenshots/bc-game/bc-game-dragon-quest-https-bc-fun-game-dragon-quest-by-croco-gaming.png"><img class="detail-shot" src="../../detail-screenshots/bc-game/bc-game-dragon-quest-https-bc-fun-game-dragon-quest-by-croco-gaming.png" alt="You need to enable JavaScript to run BC app. detail screenshot"></a>
+    <dl>
+      <div><dt>要求 / Requirements</dt><dd>play: none; visibility: hidden&quot;; played in BCD, and if you change currency while playing, the game will refresh and restart. Sign in Free Play 895 Free PlayR; PlayDragon QuestByCroco Gaming# BC Exclusive# Feature buy-in# BC Originals# Dragons# High volatility # BC Exclusive# Feature</dd></div>
+      <div><dt>触发条件 / Trigger</dt><dd>用户完成指定充值触发</dd></div>
+      <div><dt>奖励方式 / Reward</dt><dd>$0.1; $100</dd></div>
+      <div><dt>目标用户 / Who</dt><dd>Casino/Slots 用户；体育投注用户；加密货币充值用户</dd></div>
+      <div><dt>时间 / When</dt><dd>ate--VolatilityHighStakes Range$0.1 to $100The game features an expanding Wild mechanic with multiplier;  ates Pub™Bonus Buy35The Dog House MultiholdExclusive38BC CashExclusive84Candy Fiesta 1000Bonus Buy61San</dd></div>
+      <div><dt>Summary / 总结</dt><dd>You need to enable JavaScript to run BC app. 面向Casino/Slots 用户；体育投注用户；加密货币充值用户，通过“用户完成指定充值触发”推动用户完成关键行为；奖励为 $0.1; $100。主要参与要求：play: none; visibility: hidden&quot;; played in BCD, and if you change currency while playing, the game will refresh and restart. Sign in Free Play 895 Free PlayR; PlayDragon QuestByCroco Gaming# BC Exclusive# Feature buy-in# BC Originals# Dragons# High volatility # BC Exclusive# Feature。</dd></div>
+      <div><dt>核心目的 / Objective</dt><dd>提升充值频次和充值金额</dd></div>
+      <div><dt>数据预期 / Expected Data</dt><dd>提升充值频次和充值金额；预期观察：充值次数、充值金额、Bonus claim rate 上升；投注额、投注单量、有效投注用户数上升；Casino DAU、游戏启动次数、免费旋转转付费率上升。</dd></div>
+      <div><dt>详情页来源 / Detail Source</dt><dd><a href="https://bc.fun/en-IN/login/merge?type=signin">https://bc.fun/en-IN/login/merge?type=signin</a></dd></div>
+    </dl>
+<details class="detail-excerpt"><summary>详情页原文摘要 / Detail excerpt</summary><pre>You need to enable JavaScript to run BC app. &lt;iframe src=&quot;https://www.googletagmanager.com/ns.html?id=GTM-TR7QDQDP&quot; height=&quot;0&quot; width=&quot;0&quot; style=&quot;display: none; visibility: hidden&quot; &gt; &lt;/iframe&gt; The selected currency will be displayed in BCD, and if you change currency while playing, the game will refresh and restart. Sign in Free Play 895 Free PlayReal PlayDragon QuestByCroco Gaming# BC Exclusive# Feature buy-in# BC Originals# Dragons# High volatility # BC Exclusive# Feature buy-in# BC Originals# Dragons# High volatilityHouse Edge3.60%RTP (Return to Player)96.4%Reel design5 x 4Free SpinsYesWin Ways10Max Win10000Hit Rate--VolatilityHighStakes Range$0.1 to $100The game features an expanding Wild mechanic with multipliers, two bonus games where you will battle the dragon, and is set on a 5x4 grid. The slot boasts beautiful graphics and animations, immersing you in the presence of the dragon even from your screen.High winLucky winReviewStay tuned—something's coming!Recommended GamesAllExclusive10Ghost Boo-nanzaExclusive40Lucky RanchBonus Buy70Gorilla MayhemBonus Buy100Fat PandaBonus Buy80Pirates Pub™Bonus Buy35The Dog House MultiholdExclusive38BC CashExclusive84Candy Fiesta 1000Bonus Buy61San Quentin 2: Death RowBonus Buy62DJ PsychoExclusive81StarShine PrincessBonus Buy68Aztec Magic BonanzaBonus Buy57Enchanted: Forest Of FortuneBonus Buy79San Quentin xWays67Dragon's ElementExclusive84BC.GAME Sugar Rush61WUKONGBonus Buy52The Crypt71Congo CashExclusive53Clash &amp; CashView AllLatest bet &amp; RaceAll betsMy betsHigh RollerWager ContestBet IDBetPayoutProfit1865406062738922958UAH 4.990.0999x-UAH 4.501865406060557818062UAH 4.990x-UAH 4.991865406058129113292UAH 4.990x-UAH 4.991865406054310186446UAH 4.990.5999x-UAH 2.001865406044113410509UAH 4.993.9x+UAH 14.491865406040141239756UAH 4.990.4999x-UAH 2.501865406038024179406UAH 4.990x-UAH 4.991865406033930295245UAH 4.990.1999x-UAH 4.001865406017174692046UAH 4.9916x+UAH 75.001865405833747484109UAH 4.990.0999x-UAH 4.50Show More Explore 1000+ slots, live dealer tables, crash and original games, plus full sports betting with pre-match and in-play odds. Instant deposits, low fees, fast withdrawals ... [truncated]</pre></details>
+  </article>
+<article class="activity-card detail-limited">
+    <div class="activity-head">
+      <span class="index">3</span>
+      <div>
+        <h2>You need to enable JavaScript to run BC app. <span class="new-badge">今日新增 / New Today</span></h2>
+        <p>体育投注 / Sports Betting · <span class="detail-pill limited-pill">详情页正文有限 / Limited detail</span></p>
+      </div>
+    </div>
+<a class="detail-shot-link" href="../../detail-screenshots/bc-game/bc-game-teenpatti-bonus-https-bc-fun-game-teenpatti-bonus-by-bc-originals.png"><img class="detail-shot" src="../../detail-screenshots/bc-game/bc-game-teenpatti-bonus-https-bc-fun-game-teenpatti-bonus-by-bc-originals.png" alt="You need to enable JavaScript to run BC app. detail screenshot"></a>
+    <dl>
+      <div><dt>要求 / Requirements</dt><dd>odds and start winning today!High winLucky winReviewStay tuned—something's coming!Rec</dd></div>
+      <div><dt>触发条件 / Trigger</dt><dd>新用户注册并完成首充触发</dd></div>
+      <div><dt>奖励方式 / Reward</dt><dd>$0</dd></div>
+      <div><dt>目标用户 / Who</dt><dd>新注册/首充用户；Casino/Slots 用户；体育投注用户</dd></div>
+      <div><dt>时间 / When</dt><dd>atest bet &amp; RaceAll betsMy betsHigh RollerWager ContestBet IDBetPayoutProfitStay tuned—something's comi;  ate crypto gaming destination, trusted by millions worldwide.</dd></div>
+      <div><dt>Summary / 总结</dt><dd>You need to enable JavaScript to run BC app. 面向新注册/首充用户；Casino/Slots 用户；体育投注用户，通过“新用户注册并完成首充触发”推动用户完成关键行为；奖励为 $0。主要参与要求：odds and start winning today!High winLucky winReviewStay tuned—something's coming!Rec。</dd></div>
+      <div><dt>核心目的 / Objective</dt><dd>拉新与首充转化</dd></div>
+      <div><dt>数据预期 / Expected Data</dt><dd>拉新与首充转化；预期观察：注册到首充转化率、首存金额、首周留存上升；充值次数、充值金额、Bonus claim rate 上升；投注额、投注单量、有效投注用户数上升。</dd></div>
+      <div><dt>详情页来源 / Detail Source</dt><dd><a href="https://bc.fun/en-IN/login/merge?type=signin">https://bc.fun/en-IN/login/merge?type=signin</a></dd></div>
+    </dl>
+<details class="detail-excerpt"><summary>详情页原文摘要 / Detail excerpt</summary><pre>You need to enable JavaScript to run BC app. &lt;iframe src=&quot;https://www.googletagmanager.com/ns.html?id=GTM-TR7QDQDP&quot; height=&quot;0&quot; width=&quot;0&quot; style=&quot;display: none; visibility: hidden&quot; &gt; &lt;/iframe&gt; Welcome to TeenPatti Bonus, please sign in to proceed. Sign in TeenPatti BonusByBC Originals House Edge2.00%RTP (Return to Player)98%Max Win41xStakes Range$0 to $0Discover TeenPatti Bonus at BC.GAME—the premier crypto card game where the bonus is the core. Chase 41x payouts with sleek visuals and Provably Fair blockchain technology. Master the odds and start winning today!High winLucky winReviewStay tuned—something's coming!Recommended GamesAll94Teen Patti Multiplayer83Andar Bahar85Cowboy12Teen Patti Joker34Teen patti 202088Teenpatti No Limit10Teenpatti lite35Speedy Andar Bahar33Poker66Blackjack Lobby64Blackjack58Crash Trenball17Winfinity Lobby84Andar Bahar Lobby84Poker Lobby33NetEnt Casino Hold'em10niu-niu29Jade68Caribbean Stud32Classic BlackjackView AllLatest bet &amp; RaceAll betsMy betsHigh RollerWager ContestBet IDBetPayoutProfitStay tuned—something's coming! Explore 1000+ slots, live dealer tables, crash and original games, plus full sports betting with pre-match and in-play odds. Instant deposits, low fees, fast withdrawals. Our provably fair systems and audited RNG protect every bet. One wallet across casino and sportsbook keeps things simple, and our mobile-ready site lets you play anywhere. New players can claim welcome bonuses and ongoing cashback. Need help? 24/7 support has you covered. Simple, secure, and built for real-money crypto gaming The ultimate crypto gaming destination, trusted by millions worldwide. We bring bold entertainment, cutting-edge experiences, and a thriving community together for non-stop thrills. Play, win, and stay untamed. Your use of and access to BC.GAME signifies that you fully understand and agree to be legally bound by the contents of our Terms of Service and Responsible Gaming Policy Crypto trading is not gambling by definition, therefore it is not covered by our gaming license. Our provably fair systems and audited RNG protect every bet. One wallet across casino and sportsbook ... [truncated]</pre></details>
+  </article>
+    </section>
+
+    <details class="raw">
+      <summary>查看原始页面文字 / Raw visible text</summary>
+      <pre>You need to enable JavaScript to run BC app.
+
+ 
+ 
+ &lt;iframe
+ src=&quot;https://www.googletagmanager.com/ns.html?id=GTM-TR7QDQDP&quot;
+ height=&quot;0&quot;
+ width=&quot;0&quot;
+ style=&quot;display: none; visibility: hidden&quot;
+ &gt;
+ &lt;/iframe&gt;
+ 
+
+ JOIN THE UNTAMEDSign UpOr Register WithGoogleTelegramRecent Big WinsAllBC OriginalsSlotsLive CasinoBCGameTOPCasino748.45K USDTBCGameTOPCasino571.26K USDTBCGameTOPCasino498.31K USDTBCGameTOPCasino468.12K USDTBillioner_man458K USDTBillioner_man415.14K USDTBillioner_man403.91K USDTBillioner_man342.83K USDTBCGameTOPCasino248.47K USDTM2THAKLIVE226.33K USDTderuige103.4 ETHBillioner_man219.14K USDTBillioner_man217.97K USDTtony1100210.1K USDTBCGameTOPCasino207.32K USDTBillioner_man206.42K USDTBCGameTOPCasino200.06K USDTM1ke092200.04K USDTBCGameTOPCasino191.98K USDTM1ke092190.92K USDTBCGameTOPCasino748.45K USDTBCGameTOPCasino571.26K USDTBCGameTOPCasino498.31K USDTBCGameTOPCasino468.12K USDTBillioner_man458K USDTBillioner_man415.14K USDTBillioner_man403.91K USDTBillioner_man342.83K USDTBCGameTOPCasino248.47K USDTM2THAKLIVE226.33K USDTderuige103.4 ETHBillioner_man219.14K USDTBillioner_man217.97K USDTtony1100210.1K USDTBCGameTOPCasino207.32K USDTBillioner_man206.42K USDTBCGameTOPCasino200.06K USDTM1ke092200.04K USDTBCGameTOPCasino191.98K USDTM1ke092190.92K USDTCASINODive into our in-house games, live casino and slotsSPORTSBet on Football, Cricket, NFL, eSports &amp; over 80 sports!POKERPOKERRACINGRACINGLOTTERYLOTTERYUPDOWNUPDOWNBINGOBINGOBC OriginalsAll1677CrashNew78Chop Chop198Limbo118Mines52Twist160Classic Dice182Hilo82Tower Legend112Keno28Cave Of PlunderView AllHot GamesAll20Sweet Rush Bonanza54Gates of Olympus Super ScatterNew86Mental DX8New86San Quentin xWays DX832Crazy Time26Lightning Roulette41Money Pot91Golden Treasure Lightning16Fan TanNew78Chop ChopView AllLive CasinoAll15Baccarat44Blackjack70Baccarat Lobby33Roulette Lobby67Blackjack Lobby11Evolution Game Shows67Ezugi Lobby35DRAGON TIGER60Game Shows Lobby32PokerView AllFishingAll37Fortune King Jackpot61Jackpot Fishing27Ocean King Jackpot83Bombing Fishing51Mega Fishing23Pirate Queen 263Boom Legend43All-star Fishing72Royal Fishing23Fishing LegendView AllTable GamesAll31Blackjack23Rummy59Roulette Multiplayer32First Person Blackjack25Jhandi Munda19Baccarat31BCPoker72First Person American Roulette87Video Poker16Premium BlackjackView AllPachinkoAll31NIGHT BUTTERFLY FLIGHT21CR SHOCKED! QIAN XINGPING WITH TEAMZ28RAIDEN 310SUPER MIRACLE JUGGLER15CR TEKKEN 2 MAGUSIN EDITION19SHO BA32SUPERJACKPOT CONNECTION MODE60ANAZAGODDOHADESU UBAWARETA60BAJIRISUKU KIZUNA260CR HOKUTO NO KEN 6 TENSHO HYAKURETSUView AllBC ExclusiveAllExclusive12BC.GAME XXXtreme Lightning RouletteNew78Chop ChopExclusive34BCGAME RouletteExclusive36Ganesha Golden WheelExclusive28BC.GAME ICE FishingExclusive25BCGAME Blackjack FreebetExclusive37Rhino RobberyExclusive99BCGAME Speed BlackjackExclusive61BC.GAME Japanese Speed BaccaratExclusive52BC.GAME Speed BaccaratView AllSlotsAllNew78Chop Chop30Duck HuntersNew100Fire In The Hole xBomb DX8New343 Cursed Chests: Hold &amp; WinNew36Triple Treasure Cove53Fortune Gems 328Fortune Gems 224Money Coming27Money Coming Expand BetsNew26Fortune Garuda 500View AllHot MatchesAll300% Deposit BonusAll Bingo GamesAll57Jackpot Bingo88iRich Bingo11Super Bingo88Fortune Bingo47Lucky Bingo10Bingo65Calaca Bingo65West Hunter Bingo58Wild Bingo21Bingo CarnavalView AllLatest round &amp; RaceLatest BetHigh RollerWager ContestGamePlayerBet AmountMultiplierProfitTwistHidden0.772820.00x-0.77282PlinkoKhuram 1230.11.20x+0.02Coin Strike: Hold and WinMwnyifuzhvcc₹4.990.00x-₹4.99Pepper CoinsJadnel0.250062.00x+0.25006Heist StakesHidden0.000090.00x-0.00009Stellar RushAstro69090.001150.00x-0.00115Blazing Touch97931651murshedPKR 500.19x-PKR 40Wild West GoldFgnicbevllyb₱49.990.00x-₱49.99Savior SwordNatasyaaIDR 2,4000.30x-IDR 1,680Joker CoinsPwkkrcpfzqac1.000460.00x-1.00046Upcoming Lottery DrawAllSlovakia EKlub Keno 20/80$10,000.00Bet NowNext Draw Starts in00h:00m:52sGreece KENO 20/80$38,000.00Bet NowNext Draw Starts in00h:01m:52sItaly 10e Lotto 20/90$8,500.00Bet NowNext Draw Starts in00h:01m:52sFAST KENO 20/80$6,000.00Bet NowNext Draw Starts in00h:02m:52sKeno Russia 20/80$250.00Bet NowNext Draw Starts in00h:04m:22sRapido Russia 8/20$10,000.00Bet NowNext Draw Starts in00h:09m:22sGosloto Russia 5/36$5,500.00Bet NowNext Draw Starts in00h:16m:52sPoland Keno 20/70$4,000.00Bet NowNext Draw Starts in00h:20m:52sWin For Life Classico 10/20$1,000.00Bet NowNext Draw Starts in00h:46m:52sSpanish Express 20/70$4,000.00Bet NowNext Draw Starts in00h:52m:52sMarruecos Keno 20/80$5,000.00Bet NowNext Draw Starts in01h:49m:52sGosloto Russia 4/20$2,500.00Bet NowNext Draw Starts in02h:46m:52sGosloto Russia 4/20$250.00Bet NowNext Draw Starts in02h:46m:52sGosloto Russia 7/49$35,000.00Bet NowNext Draw Starts in03h:16m:52sBC Lottery Jackpot$1,00,000.00Bet NowNext Draw Starts in03h:41m:52sGosloto Russia 6/45$275.00Bet NowNext Draw Starts in03h:46m:52sLatvia Keno 20/62$260.00Bet NowNext Draw Starts in04h:16m:52sUK 49s 6/49$40,000.00Bet NowNext Draw Starts in06h:35m:52sSet for Life 7/44$120.00Bet NowNext Draw Starts in06h:46m:52s
+ 
+ 
+ 
+ Explore 1000+ slots, live dealer tables, crash and original games, plus
+ full sports betting with pre-match and in-play odds. Instant deposits,
+ low fees, fast withdrawals. Our provably fair systems and audited RNG
+ protect every bet. One wallet across casino and sportsbook keeps things
+ simple, and our mobile-ready site lets you play anywhere. New players
+ can claim welcome bonuses and ongoing cashback. Need help? 24/7 support
+ has you covered. Simple, secure, and built for real-money crypto gaming
+ The ultimate crypto gaming destination, trusted by millions worldwide.
+ We bring bold entertainment, cutting-edge experiences, and a thriving
+ community together for non-stop thrills. Play, win, and stay untamed.
+ Your use of and access to BC.GAME signifies that you fully understand
+ and agree to be legally bound by the contents of our Terms of Service
+ and Responsible Gaming Policy Crypto trading is not gambling by
+ definition, therefore it is not covered by our gaming license. Our
+ provably fair systems and audited RNG protect every bet. One wallet
+ across casino and sportsbook keeps things simple, and our mobile-ready
+ site lets you play anywhere. New players can claim welcome bonuses and
+ ongoing cashback. Need help? 24/7 support has you covered. Simple,
+ secure, and built for real-money crypto gaming The ultimate crypto
+ gaming destination, trusted by millions worldwide. We bring bold
+ entertainment, cutting-edge experiences, and a thriving community
+ together for non-stop thrills. Play, win, and stay untamed. Your use of
+ and access to BC.GAME signifies that you fully understand and agree to
+ be legally bound by the contents of our Terms of Service and Responsible
+ Gaming Policy Crypto trading is not gambling by definition, therefore it
+ is not covered by our gaming license. We advise all players who are
+ concerned about their gambling behavior to take a break by excluding
+ themselves from their gaming account. Self-exclusion will lock your
+ account for a minimum of 6 months and no promotional material will be
+ sent. Contact our experienced Customer Support team at any time to
+ request this and they will kindly assist you. A 7-day cooling off period
+ is also available. We recommend that you contact all other gambling
+ sites where you have an account and request self-exclusion there also.
+ Players must be of legal gambling age in their jurisdiction (at least
+ 18+) in order to play at BC.GAME. It is their responsibility to be aware
+ of the age restriction where they reside and play, and to confirm their
+ legitimacy when creating an account at BC.GAME. We also advise parents
+ to do the following: Password protect computer, mobile, and/or tablet.
+ Do not leave device unattended when logged into your account. Make sure
+ all account details and credit cards are inaccessible to children. Do
+ not save passwords on your computer, write them down and keep somewhere
+ out of reach. Download filtering software (e.g. Net Nanny) to prevent
+ minors from accessing inappropriate sites.
+ 
+ 
+
+ 
+
+ 
+
+Sign InSign UpCrashChop ChopLimboMinesTwistClassic DiceHiloTower LegendKenoCave Of PlunderPlinkoRouletteDiceFast CrashGanesha Golden WheelWheelBlackjackCoinFlipFast ParityHash DiceTORTURE BLOCKRhino RobberyRing of FortuneStar WinsWUKONGPattiBubble ShooterStellar RushDoubleGolden YearSea of Olympus 1000Roulette MultiplayerDeadliest SeaSymbioteGold of OlympusNeZhaCandy Fiesta 1000SicboWizard's AcademyStarShine PrincessJadeKeno MultiplayerCursed ClownBaccaratArcane PortalsPerya Color GameReel Big CatchDragon QuestSamurai ClashVideo PokerSugar Fiesta 1000Clash &amp; CashMagical MineBingoJack's CryptSavior SwordCursed DollFish Prawn CrabCyberpunk XXIIBullet SpinBeautiesJohn WildBear Smash: 15000X BoostBaccarat MultiplayerLucky RanchPiece Of CashGhost Boo-nanzaRun Away! ZombiesDragon SlayerMonster HunterLeft 4 CashDoggy MinerBear BlastTeenpatti No LimitTeenpatti liteTeenPatti BonusJadeTeen patti 2020Teen Patti JokerSpeedy Andar BaharCowboyTeen Patti MultiplayerAndar BaharWe use cookies to provide you with the best possible experienceAcceptSign InSign UpPasswordOne-time CodeWeakForgot your password?Sign InLog in directly withCwalletSign In with passkeyNew to BC.GAME?Create accountSign InPasswordOne-time CodeWeakForgot your password?Sign InLog in directly withCwalletSign In with passkeyNew to BC.GAME?Create account</pre>
+    </details>
+  </main>
+</body>
+</html>

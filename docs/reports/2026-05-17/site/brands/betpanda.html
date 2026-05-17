@@ -1,0 +1,419 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Betpanda 活动详情</title>
+  <style>
+    :root { --bg:#f5f6f2; --panel:#fff; --ink:#15201b; --muted:#66736d; --line:#d8ddd4; --green:#0d7658; --blue:#245c9e; --amber:#9a6816; --red:#a54040; --soft:#eef4f0; }
+    * { box-sizing:border-box; }
+    body { margin:0; background:var(--bg); color:var(--ink); font-family:Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; line-height:1.45; }
+    .page { max-width:1280px; margin:0 auto; padding:28px 18px 56px; }
+    .hero { background:var(--panel); border:1px solid var(--line); border-radius:8px; padding:24px; display:grid; grid-template-columns:minmax(0,1fr) 280px; gap:18px; align-items:end; margin-bottom:18px; }
+    .brand-hero { margin-bottom:16px; }
+    .eyebrow { margin:0 0 8px; color:var(--green); font-size:12px; font-weight:800; text-transform:uppercase; letter-spacing:.04em; }
+    h1 { margin:0 0 8px; font-size:32px; line-height:1.12; letter-spacing:0; }
+    h2 { margin:0 0 6px; font-size:18px; letter-spacing:0; }
+    p { margin:0; }
+    .sub, .meta { color:var(--muted); }
+    .status { display:inline-flex; align-items:center; border-radius:999px; padding:3px 8px; font-size:12px; font-weight:800; white-space:nowrap; }
+    .ok { color:var(--green); background:#e5f3ed; }
+    .mid { color:var(--amber); background:#fff4df; }
+    .blue { color:var(--blue); background:#e9f0fb; }
+    .low { color:var(--red); background:#faeeee; }
+    .meta { background:#f8faf7; border:1px solid var(--line); border-radius:8px; padding:14px; }
+    .meta b { display:inline-block; min-width:92px; color:var(--ink); }
+    .brand-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:14px; }
+    .brand-card { display:grid; grid-template-columns:220px minmax(0,1fr); gap:14px; padding:14px; color:var(--ink); text-decoration:none; background:var(--panel); border:1px solid var(--line); border-radius:8px; }
+    .brand-card img, .visual img { width:100%; border:1px solid var(--line); border-radius:8px; background:#edf0ea; object-fit:cover; }
+    .brand-card img { aspect-ratio:16/10; }
+    .brand-card span { display:inline-flex; margin-top:10px; color:var(--blue); font-weight:700; }
+    .new-summary { background:var(--panel); border:1px solid var(--line); border-radius:8px; padding:16px; margin-bottom:18px; }
+    .new-summary h2 { margin:0 0 10px; font-size:20px; }
+    .new-list { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:10px; }
+    .new-item { border:1px solid var(--line); border-radius:8px; padding:10px; background:#fbfcfa; }
+    .new-item strong { display:block; }
+    .new-badge { display:inline-flex; align-items:center; border-radius:999px; background:#fff4df; color:#9a6816; padding:3px 8px; font-size:12px; font-weight:800; margin-left:6px; vertical-align:middle; }
+    .topnav { margin-bottom:12px; }
+    .topnav a { color:var(--blue); font-weight:700; text-decoration:none; }
+    .visual { background:var(--panel); border:1px solid var(--line); border-radius:8px; padding:14px; margin-bottom:16px; }
+    .visual img { max-height:520px; object-fit:contain; }
+    .activity-list { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:14px; }
+    .activity-card { background:var(--panel); border:1px solid var(--line); border-radius:8px; padding:16px; }
+    .activity-card.detail-ok { border-left:4px solid var(--green); }
+    .activity-card.detail-limited { border-left:4px solid var(--amber); }
+    .activity-card.detail-missing { border-left:4px solid #a8b1ac; }
+    .activity-head { display:grid; grid-template-columns:36px minmax(0,1fr); gap:10px; align-items:start; margin-bottom:12px; }
+    .index { display:inline-grid; place-items:center; width:30px; height:30px; border-radius:999px; background:var(--soft); color:var(--green); font-weight:800; }
+    .detail-shot-link { display:block; margin:8px 0 12px; }
+    .detail-shot { width:100%; max-height:360px; object-fit:cover; object-position:top; border:1px solid var(--line); border-radius:8px; background:#edf0ea; }
+    dl { display:grid; gap:8px; margin:0; }
+    dl div { display:grid; grid-template-columns:150px minmax(0,1fr); gap:10px; border-top:1px solid var(--line); padding-top:8px; }
+    dt { color:var(--muted); font-size:12px; font-weight:800; }
+    dd { margin:0; font-size:13px; }
+    .missing-text { color:var(--muted); }
+    .detail-pill { display:inline-flex; align-items:center; border-radius:999px; padding:3px 8px; font-size:12px; font-weight:800; }
+    .ok-pill { background:#e5f3ed; color:var(--green); }
+    .limited-pill { background:#fff4df; color:var(--amber); }
+    .fallback-pill { background:#eef0ea; color:var(--muted); }
+    .detail-excerpt { margin-top:12px; border-top:1px solid var(--line); padding-top:10px; }
+    .detail-excerpt summary { cursor:pointer; color:var(--blue); font-weight:800; }
+    .raw { background:var(--panel); border:1px solid var(--line); border-radius:8px; padding:14px; margin-top:16px; }
+    pre { white-space:pre-wrap; word-break:break-word; background:#111714; color:#eef6f0; padding:12px; border-radius:8px; max-height:320px; overflow:auto; font-size:12px; }
+    a { color:var(--blue); }
+    @media (max-width:900px) { .hero, .brand-grid, .brand-card, .activity-list, .new-list { grid-template-columns:1fr; } h1 { font-size:27px; } dl div { grid-template-columns:1fr; } }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <nav class="topnav"><a href="../index.html">返回品牌入口 / Back to brands</a></nav>
+    <section class="hero brand-hero">
+      <div>
+        <p class="eyebrow">Brand Promotion Page</p>
+        <h1>Betpanda</h1>
+        <p class="sub">来源 Source：<a href="https://betpanda.partners/en/promo/promotions">https://betpanda.partners/en/promo/promotions</a></p>
+        <p class="sub">本页优先使用活动详情页截图与可见内容，输出要求、Trigger、Reward、Who、When、Summary、核心目的和数据预期。</p>
+        <p class="sub"><span class="status low">受限 / Blocked</span></p>
+      </div>
+      <div class="meta">
+        <b>活动 Activities</b>14<br>
+        <b>今日新增 New</b>14<br>
+        <b>详情 Details</b>0<br>
+        <b>详情截图 Shots</b>14<br>
+        <b>状态 Status</b>js_required_or_blocked
+      </div>
+    </section>
+
+    <section class="visual">
+      <img src="../../browser-screenshots/betpanda-betpanda-promotions.png" alt="Betpanda screenshot">
+    </section>
+
+    <section class="activity-list">
+      <article class="activity-card detail-limited">
+    <div class="activity-head">
+      <span class="index">1</span>
+      <div>
+        <h2>You need to enable JavaScript to run this app. <span class="new-badge">今日新增 / New Today</span></h2>
+        <p>返现 / Cashback · <span class="detail-pill limited-pill">详情页正文有限 / Limited detail</span></p>
+      </div>
+    </div>
+<a class="detail-shot-link" href="../../detail-screenshots/betpanda/betpanda-https-betpanda-partners-en-promo-promotions.png"><img class="detail-shot" src="../../detail-screenshots/betpanda/betpanda-https-betpanda-partners-en-promo-promotions.png" alt="You need to enable JavaScript to run this app. detail screenshot"></a>
+    <dl>
+      <div><dt>要求 / Requirements</dt><dd>Cashback in3DAYS8HRS42MIN47SECCasinochevron_rightLobbyOriginalsJackpotProvably FairTable GamesGrid SlotsBuy FeatureMegawaysHold; BetsLiveUpcoming EventsFavouritesSoccerBasketballIce HockeyTennisFifaEsportschevron_rightLobbyMy BetsLiveUpcoming EventsFav; complete the requirement and get rewarded.Read moreExclusive RakebackClimb to Bamboo Guardian and enjoy daily rakeback on every</dd></div>
+      <div><dt>触发条件 / Trigger</dt><dd>点击参与/报名后，完成活动指定行为触发奖励</dd></div>
+      <div><dt>奖励方式 / Reward</dt><dd>5% extra</dd></div>
+      <div><dt>目标用户 / Who</dt><dd>新注册/首充用户；VIP 或高价值活跃用户；Casino/Slots 用户</dd></div>
+      <div><dt>时间 / When</dt><dd>ate your next winning combo.Lock your ProfitsCash out at the right time bank profits and stay ahead.Rea</dd></div>
+      <div><dt>Summary / 总结</dt><dd>You need to enable JavaScript to run this app. 面向新注册/首充用户；VIP 或高价值活跃用户；Casino/Slots 用户，通过“点击参与/报名后，完成活动指定行为触发奖励”推动用户完成关键行为；奖励为 5% extra。主要参与要求：Cashback in3DAYS8HRS42MIN47SECCasinochevron_rightLobbyOriginalsJackpotProvably FairTable GamesGrid SlotsBuy FeatureMegawaysHold; BetsLiveUpcoming EventsFavouritesSoccerBasketballIce HockeyTennisFifaEsportschevron_rightLobbyMy BetsLiveUpcoming EventsFav; complete the requirement and get rewarded.Read moreExclusive RakebackClimb to Bamboo Guardian and enjoy daily rakeback on every。</dd></div>
+      <div><dt>核心目的 / Objective</dt><dd>拉新与首充转化</dd></div>
+      <div><dt>数据预期 / Expected Data</dt><dd>拉新与首充转化；预期观察：注册到首充转化率、首存金额、首周留存上升；投注额、投注单量、有效投注用户数上升；Casino DAU、游戏启动次数、免费旋转转付费率上升。</dd></div>
+      <div><dt>详情页来源 / Detail Source</dt><dd><a href="https://betpanda.partners/en/promo/promotions">https://betpanda.partners/en/promo/promotions</a></dd></div>
+    </dl>
+<details class="detail-excerpt"><summary>详情页原文摘要 / Detail excerpt</summary><pre>You need to enable JavaScript to run this app. menumenu Weekly Cashback in3DAYS8HRS42MIN47SECCasinochevron_rightLobbyOriginalsJackpotProvably FairTable GamesGrid SlotsBuy FeatureMegawaysHold &amp; WinNew GamesLive Casinochevron_rightLobbyRouletteBlackjackBaccaratGame ShowsDiceVIP TablesSportschevron_rightLobbyMy BetsLiveUpcoming EventsFavouritesSoccerBasketballIce HockeyTennisFifaEsportschevron_rightLobbyMy BetsLiveUpcoming EventsFavouritesCounter-StrikeLeague of LegendsDota 2FifaNBA2KPromotionschevron_rightCasinoSportsAll PromotionsSponsorshipslanguageEnglish (en)Download AppPromotionsSign-Up OfferUp to 1 BTC in our casino bonus complete the requirement and get rewarded.Read moreExclusive RakebackClimb to Bamboo Guardian and enjoy daily rakeback on every spin.Weekly CashbackGet 10% guaranteed cashback on your real money losses between Wednesdays.Read moreLive Casino Cashback BoostPlay live casino with 5% extra cashback, up to 15% back weekly on Evolution live games.Weekly RafflePlay any slots with real money and collect tickets for a chance to win one of 20 weekly €500 prizes.Get Rewarded For Your PlayPlay as you normally do, and we'll reward you every time you achieve a new level.Read moreGet a Weekly Free BetBased on your sports betting from the previous 7 days, we’ll credit you with a free bet every Monday.Read MoreEarn Points On Your Winning BetsJoin our Weekly Sportsbook Tournament and compete for new prizes every week.Read MoreUnlock Bigger WinsWin bigger and boost your profits with up to 40% with our COMBOBOOST feature.Read MoreBuild Your Perfect BetCombine multiple markets from the same event into one bet to create your next winning combo.Lock your ProfitsCash out at the right time bank profits and stay ahead.Read More &lt;img height=&quot;1&quot; width=&quot;1&quot; style=&quot;display:none&quot; src=&quot;https://www.facebook.com/tr?id=991738589185829&amp;amp;ev=PageView&amp;amp;noscript=1&quot;&gt; &lt;img src=&quot;https://pixel.everesttech.net/9281/t?ev_Betpanda_Cryptorino_SiteVisitos_ID5=1&amp;amp;ev_transid=&amp;lt;transid&amp;gt;&quot; width=&quot;1&quot; height=&quot;1&quot;&gt; &lt;img src=&quot;//dmp.adform.net/dmp/profile/?pid=12718&amp;amp;sg=BetPanda_AllVisitors&quot; style=&quot;display:none !important&quot;&gt;</pre></details>
+  </article>
+<article class="activity-card detail-limited">
+    <div class="activity-head">
+      <span class="index">2</span>
+      <div>
+        <h2>You need to enable JavaScript to run this app. <span class="new-badge">今日新增 / New Today</span></h2>
+        <p>返现 / Cashback · <span class="detail-pill limited-pill">详情页正文有限 / Limited detail</span></p>
+      </div>
+    </div>
+<a class="detail-shot-link" href="../../detail-screenshots/betpanda/betpanda-my-bets-https-betpanda-partners-en-promo-sportsbook-bt-path-2fbets.png"><img class="detail-shot" src="../../detail-screenshots/betpanda/betpanda-my-bets-https-betpanda-partners-en-promo-sportsbook-bt-path-2fbets.png" alt="You need to enable JavaScript to run this app. detail screenshot"></a>
+    <dl>
+      <div><dt>要求 / Requirements</dt><dd>Bets You need to enable JavaScript to run this app.; Cashback in3DAYS8HRS42MIN43SECCasinochevron_rightLobbyOriginalsJackpotProvably FairTable GamesGrid SlotsBuy FeatureMegawaysHold; BetsLiveUpcoming EventsFavouritesSoccerBasketballIce HockeyTennisFifaEsportschevron_rightLobbyMy BetsLiveUpcoming EventsFav</dd></div>
+      <div><dt>触发条件 / Trigger</dt><dd>用户发生符合条件的亏损或投注行为后按周期触发返现</dd></div>
+      <div><dt>奖励方式 / Reward</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>目标用户 / Who</dt><dd>新注册/首充用户；VIP 或高价值活跃用户；Casino/Slots 用户</dd></div>
+      <div><dt>时间 / When</dt><dd>每周周期</dd></div>
+      <div><dt>Summary / 总结</dt><dd>You need to enable JavaScript to run this app. 面向新注册/首充用户；VIP 或高价值活跃用户；Casino/Slots 用户，通过“用户发生符合条件的亏损或投注行为后按周期触发返现”推动用户完成关键行为；奖励为 列表页未显示。主要参与要求：Bets You need to enable JavaScript to run this app.; Cashback in3DAYS8HRS42MIN43SECCasinochevron_rightLobbyOriginalsJackpotProvably FairTable GamesGrid SlotsBuy FeatureMegawaysHold; BetsLiveUpcoming EventsFavouritesSoccerBasketballIce HockeyTennisFifaEsportschevron_rightLobbyMy BetsLiveUpcoming EventsFav。</dd></div>
+      <div><dt>核心目的 / Objective</dt><dd>提升留存、降低流失感知并延长生命周期</dd></div>
+      <div><dt>数据预期 / Expected Data</dt><dd>提升留存、降低流失感知并延长生命周期；预期观察：投注额、投注单量、有效投注用户数上升；Casino DAU、游戏启动次数、免费旋转转付费率上升；复玩率、留存率、VIP 活跃和净收入稳定性提升。</dd></div>
+      <div><dt>详情页来源 / Detail Source</dt><dd><a href="https://betpanda.partners/en/404">https://betpanda.partners/en/404</a></dd></div>
+    </dl>
+<details class="detail-excerpt"><summary>详情页原文摘要 / Detail excerpt</summary><pre>You need to enable JavaScript to run this app. menumenu Weekly Cashback in3DAYS8HRS42MIN43SECCasinochevron_rightLobbyOriginalsJackpotProvably FairTable GamesGrid SlotsBuy FeatureMegawaysHold &amp; WinNew GamesLive Casinochevron_rightLobbyRouletteBlackjackBaccaratGame ShowsDiceVIP TablesSportschevron_rightLobbyMy BetsLiveUpcoming EventsFavouritesSoccerBasketballIce HockeyTennisFifaEsportschevron_rightLobbyMy BetsLiveUpcoming EventsFavouritesCounter-StrikeLeague of LegendsDota 2FifaNBA2KPromotionschevron_rightCasinoSportsAll PromotionsSponsorshipslanguageEnglish (en)Download App &lt;img height=&quot;1&quot; width=&quot;1&quot; style=&quot;display:none&quot; src=&quot;https://www.facebook.com/tr?id=991738589185829&amp;amp;ev=PageView&amp;amp;noscript=1&quot;&gt; &lt;img src=&quot;https://pixel.everesttech.net/9281/t?ev_Betpanda_Cryptorino_SiteVisitos_ID5=1&amp;amp;ev_transid=&amp;lt;transid&amp;gt;&quot; width=&quot;1&quot; height=&quot;1&quot;&gt; &lt;img src=&quot;//dmp.adform.net/dmp/profile/?pid=12718&amp;amp;sg=BetPanda_AllVisitors&quot; style=&quot;display:none !important&quot;&gt;</pre></details>
+  </article>
+<article class="activity-card detail-limited">
+    <div class="activity-head">
+      <span class="index">3</span>
+      <div>
+        <h2>You need to enable JavaScript to run this app. <span class="new-badge">今日新增 / New Today</span></h2>
+        <p>返现 / Cashback · <span class="detail-pill limited-pill">详情页正文有限 / Limited detail</span></p>
+      </div>
+    </div>
+<a class="detail-shot-link" href="../../detail-screenshots/betpanda/betpanda-upcoming-events-https-betpanda-partners-en-promo-sportsbook-bt-path-2fe.png"><img class="detail-shot" src="../../detail-screenshots/betpanda/betpanda-upcoming-events-https-betpanda-partners-en-promo-sportsbook-bt-path-2fe.png" alt="You need to enable JavaScript to run this app. detail screenshot"></a>
+    <dl>
+      <div><dt>要求 / Requirements</dt><dd>Cashback in3DAYS8HRS42MIN38SECCasinochevron_rightLobbyOriginalsJackpotProvably FairTable GamesGrid SlotsBuy FeatureMegawaysHold; BetsLiveUpcoming EventsFavouritesSoccerBasketballIce HockeyTennisFifaEsportschevron_rightLobbyMy BetsLiveUpcoming EventsFav; play:none&quot; src=&quot;https://www.facebook.com/tr?id=991738589185829&amp;amp;ev=PageView&amp;amp;noscript=1&quot;&gt;</dd></div>
+      <div><dt>触发条件 / Trigger</dt><dd>用户发生符合条件的亏损或投注行为后按周期触发返现</dd></div>
+      <div><dt>奖励方式 / Reward</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>目标用户 / Who</dt><dd>新注册/首充用户；VIP 或高价值活跃用户；Casino/Slots 用户</dd></div>
+      <div><dt>时间 / When</dt><dd>每周周期</dd></div>
+      <div><dt>Summary / 总结</dt><dd>You need to enable JavaScript to run this app. 面向新注册/首充用户；VIP 或高价值活跃用户；Casino/Slots 用户，通过“用户发生符合条件的亏损或投注行为后按周期触发返现”推动用户完成关键行为；奖励为 列表页未显示。主要参与要求：Cashback in3DAYS8HRS42MIN38SECCasinochevron_rightLobbyOriginalsJackpotProvably FairTable GamesGrid SlotsBuy FeatureMegawaysHold; BetsLiveUpcoming EventsFavouritesSoccerBasketballIce HockeyTennisFifaEsportschevron_rightLobbyMy BetsLiveUpcoming EventsFav; play:none&quot; src=&quot;https://www.facebook.com/tr?id=991738589185829&amp;amp;ev=PageView&amp;amp;noscript=1&quot;&gt;。</dd></div>
+      <div><dt>核心目的 / Objective</dt><dd>提升留存、降低流失感知并延长生命周期</dd></div>
+      <div><dt>数据预期 / Expected Data</dt><dd>提升留存、降低流失感知并延长生命周期；预期观察：投注额、投注单量、有效投注用户数上升；Casino DAU、游戏启动次数、免费旋转转付费率上升；复玩率、留存率、VIP 活跃和净收入稳定性提升。</dd></div>
+      <div><dt>详情页来源 / Detail Source</dt><dd><a href="https://betpanda.partners/en/404">https://betpanda.partners/en/404</a></dd></div>
+    </dl>
+<details class="detail-excerpt"><summary>详情页原文摘要 / Detail excerpt</summary><pre>You need to enable JavaScript to run this app. menumenu Weekly Cashback in3DAYS8HRS42MIN38SECCasinochevron_rightLobbyOriginalsJackpotProvably FairTable GamesGrid SlotsBuy FeatureMegawaysHold &amp; WinNew GamesLive Casinochevron_rightLobbyRouletteBlackjackBaccaratGame ShowsDiceVIP TablesSportschevron_rightLobbyMy BetsLiveUpcoming EventsFavouritesSoccerBasketballIce HockeyTennisFifaEsportschevron_rightLobbyMy BetsLiveUpcoming EventsFavouritesCounter-StrikeLeague of LegendsDota 2FifaNBA2KPromotionschevron_rightCasinoSportsAll PromotionsSponsorshipslanguageEnglish (en)Download App &lt;img height=&quot;1&quot; width=&quot;1&quot; style=&quot;display:none&quot; src=&quot;https://www.facebook.com/tr?id=991738589185829&amp;amp;ev=PageView&amp;amp;noscript=1&quot;&gt; &lt;img src=&quot;https://pixel.everesttech.net/9281/t?ev_Betpanda_Cryptorino_SiteVisitos_ID5=1&amp;amp;ev_transid=&amp;lt;transid&amp;gt;&quot; width=&quot;1&quot; height=&quot;1&quot;&gt; &lt;img src=&quot;//dmp.adform.net/dmp/profile/?pid=12718&amp;amp;sg=BetPanda_AllVisitors&quot; style=&quot;display:none !important&quot;&gt;</pre></details>
+  </article>
+<article class="activity-card detail-limited">
+    <div class="activity-head">
+      <span class="index">4</span>
+      <div>
+        <h2>You need to enable JavaScript to run this app. <span class="new-badge">今日新增 / New Today</span></h2>
+        <p>返现 / Cashback · <span class="detail-pill limited-pill">详情页正文有限 / Limited detail</span></p>
+      </div>
+    </div>
+<a class="detail-shot-link" href="../../detail-screenshots/betpanda/betpanda-favourites-https-betpanda-partners-en-promo-sportsbook-bt-path-2ffavori.png"><img class="detail-shot" src="../../detail-screenshots/betpanda/betpanda-favourites-https-betpanda-partners-en-promo-sportsbook-bt-path-2ffavori.png" alt="You need to enable JavaScript to run this app. detail screenshot"></a>
+    <dl>
+      <div><dt>要求 / Requirements</dt><dd>Cashback in3DAYS8HRS42MIN32SECCasinochevron_rightLobbyOriginalsJackpotProvably FairTable GamesGrid SlotsBuy FeatureMegawaysHold; BetsLiveUpcoming EventsFavouritesSoccerBasketballIce HockeyTennisFifaEsportschevron_rightLobbyMy BetsLiveUpcoming EventsFav; play:none&quot; src=&quot;https://www.facebook.com/tr?id=991738589185829&amp;amp;ev=PageView&amp;amp;noscript=1&quot;&gt;</dd></div>
+      <div><dt>触发条件 / Trigger</dt><dd>用户发生符合条件的亏损或投注行为后按周期触发返现</dd></div>
+      <div><dt>奖励方式 / Reward</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>目标用户 / Who</dt><dd>新注册/首充用户；VIP 或高价值活跃用户；Casino/Slots 用户</dd></div>
+      <div><dt>时间 / When</dt><dd>每周周期</dd></div>
+      <div><dt>Summary / 总结</dt><dd>You need to enable JavaScript to run this app. 面向新注册/首充用户；VIP 或高价值活跃用户；Casino/Slots 用户，通过“用户发生符合条件的亏损或投注行为后按周期触发返现”推动用户完成关键行为；奖励为 列表页未显示。主要参与要求：Cashback in3DAYS8HRS42MIN32SECCasinochevron_rightLobbyOriginalsJackpotProvably FairTable GamesGrid SlotsBuy FeatureMegawaysHold; BetsLiveUpcoming EventsFavouritesSoccerBasketballIce HockeyTennisFifaEsportschevron_rightLobbyMy BetsLiveUpcoming EventsFav; play:none&quot; src=&quot;https://www.facebook.com/tr?id=991738589185829&amp;amp;ev=PageView&amp;amp;noscript=1&quot;&gt;。</dd></div>
+      <div><dt>核心目的 / Objective</dt><dd>提升留存、降低流失感知并延长生命周期</dd></div>
+      <div><dt>数据预期 / Expected Data</dt><dd>提升留存、降低流失感知并延长生命周期；预期观察：投注额、投注单量、有效投注用户数上升；Casino DAU、游戏启动次数、免费旋转转付费率上升；复玩率、留存率、VIP 活跃和净收入稳定性提升。</dd></div>
+      <div><dt>详情页来源 / Detail Source</dt><dd><a href="https://betpanda.partners/en/404">https://betpanda.partners/en/404</a></dd></div>
+    </dl>
+<details class="detail-excerpt"><summary>详情页原文摘要 / Detail excerpt</summary><pre>You need to enable JavaScript to run this app. menumenu Weekly Cashback in3DAYS8HRS42MIN32SECCasinochevron_rightLobbyOriginalsJackpotProvably FairTable GamesGrid SlotsBuy FeatureMegawaysHold &amp; WinNew GamesLive Casinochevron_rightLobbyRouletteBlackjackBaccaratGame ShowsDiceVIP TablesSportschevron_rightLobbyMy BetsLiveUpcoming EventsFavouritesSoccerBasketballIce HockeyTennisFifaEsportschevron_rightLobbyMy BetsLiveUpcoming EventsFavouritesCounter-StrikeLeague of LegendsDota 2FifaNBA2KPromotionschevron_rightCasinoSportsAll PromotionsSponsorshipslanguageEnglish (en)Download App &lt;img height=&quot;1&quot; width=&quot;1&quot; style=&quot;display:none&quot; src=&quot;https://www.facebook.com/tr?id=991738589185829&amp;amp;ev=PageView&amp;amp;noscript=1&quot;&gt; &lt;img src=&quot;https://pixel.everesttech.net/9281/t?ev_Betpanda_Cryptorino_SiteVisitos_ID5=1&amp;amp;ev_transid=&amp;lt;transid&amp;gt;&quot; width=&quot;1&quot; height=&quot;1&quot;&gt; &lt;img src=&quot;//dmp.adform.net/dmp/profile/?pid=12718&amp;amp;sg=BetPanda_AllVisitors&quot; style=&quot;display:none !important&quot;&gt;</pre></details>
+  </article>
+<article class="activity-card detail-limited">
+    <div class="activity-head">
+      <span class="index">5</span>
+      <div>
+        <h2>You need to enable JavaScript to run this app. <span class="new-badge">今日新增 / New Today</span></h2>
+        <p>综合活动 / General Promotion · <span class="detail-pill limited-pill">详情页正文有限 / Limited detail</span></p>
+      </div>
+    </div>
+<a class="detail-shot-link" href="../../detail-screenshots/betpanda/betpanda-soccer-https-betpanda-partners-en-promo-sportsbook-bt-path-2fsoccer-1.png"><img class="detail-shot" src="../../detail-screenshots/betpanda/betpanda-soccer-https-betpanda-partners-en-promo-sportsbook-bt-path-2fsoccer-1.png" alt="You need to enable JavaScript to run this app. detail screenshot"></a>
+    <dl>
+      <div><dt>要求 / Requirements</dt><dd>BetsLiveUpcoming EventsFavouritesSoccerBasketballIce HockeyTennisFifaEsportschevron_rightLobbyMy BetsLiveUpcoming EventsFav; play:none&quot; src=&quot;https://www.facebook.com/tr?id=991738589185829&amp;amp;ev=PageView&amp;amp;noscript=1&quot;&gt;; Betpanda_Cryptorino_SiteVisitos_ID5=1&amp;amp;ev_transid=&amp;lt;transid&amp;gt;&quot; width=&quot;1&quot; height=&quot;1&quot;&gt;</dd></div>
+      <div><dt>触发条件 / Trigger</dt><dd>用户通过投注或游戏行为累计积分/票券/排名触发</dd></div>
+      <div><dt>奖励方式 / Reward</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>目标用户 / Who</dt><dd>新注册/首充用户；VIP 或高价值活跃用户；Casino/Slots 用户</dd></div>
+      <div><dt>时间 / When</dt><dd>活动页未明确；以页面实时倒计时或条款为准</dd></div>
+      <div><dt>Summary / 总结</dt><dd>You need to enable JavaScript to run this app. 面向新注册/首充用户；VIP 或高价值活跃用户；Casino/Slots 用户，通过“用户通过投注或游戏行为累计积分/票券/排名触发”推动用户完成关键行为；奖励为 列表页未显示。主要参与要求：BetsLiveUpcoming EventsFavouritesSoccerBasketballIce HockeyTennisFifaEsportschevron_rightLobbyMy BetsLiveUpcoming EventsFav; play:none&quot; src=&quot;https://www.facebook.com/tr?id=991738589185829&amp;amp;ev=PageView&amp;amp;noscript=1&quot;&gt;; Betpanda_Cryptorino_SiteVisitos_ID5=1&amp;amp;ev_transid=&amp;lt;transid&amp;gt;&quot; width=&quot;1&quot; height=&quot;1&quot;&gt;。</dd></div>
+      <div><dt>核心目的 / Objective</dt><dd>提升投注/游戏频次，制造排行榜竞争和连续参与</dd></div>
+      <div><dt>数据预期 / Expected Data</dt><dd>提升投注/游戏频次，制造排行榜竞争和连续参与；预期观察：投注额、投注单量、有效投注用户数上升；Casino DAU、游戏启动次数、免费旋转转付费率上升；复玩率、留存率、VIP 活跃和净收入稳定性提升。</dd></div>
+      <div><dt>详情页来源 / Detail Source</dt><dd><a href="https://betpanda.partners/en/404">https://betpanda.partners/en/404</a></dd></div>
+    </dl>
+<details class="detail-excerpt"><summary>详情页原文摘要 / Detail excerpt</summary><pre>You need to enable JavaScript to run this app. menumenu Casinochevron_rightLobbyOriginalsJackpotProvably FairTable GamesGrid SlotsBuy FeatureMegawaysHold &amp; WinNew GamesLive Casinochevron_rightLobbyRouletteBlackjackBaccaratGame ShowsDiceVIP TablesSportschevron_rightLobbyMy BetsLiveUpcoming EventsFavouritesSoccerBasketballIce HockeyTennisFifaEsportschevron_rightLobbyMy BetsLiveUpcoming EventsFavouritesCounter-StrikeLeague of LegendsDota 2FifaNBA2KPromotionschevron_rightCasinoSportsAll PromotionsSponsorshipslanguageEnglish (en)Download App &lt;img height=&quot;1&quot; width=&quot;1&quot; style=&quot;display:none&quot; src=&quot;https://www.facebook.com/tr?id=991738589185829&amp;amp;ev=PageView&amp;amp;noscript=1&quot;&gt; &lt;img src=&quot;https://pixel.everesttech.net/9281/t?ev_Betpanda_Cryptorino_SiteVisitos_ID5=1&amp;amp;ev_transid=&amp;lt;transid&amp;gt;&quot; width=&quot;1&quot; height=&quot;1&quot;&gt; &lt;img src=&quot;//dmp.adform.net/dmp/profile/?pid=12718&amp;amp;sg=BetPanda_AllVisitors&quot; style=&quot;display:none !important&quot;&gt;</pre></details>
+  </article>
+<article class="activity-card detail-limited">
+    <div class="activity-head">
+      <span class="index">6</span>
+      <div>
+        <h2>You need to enable JavaScript to run this app. <span class="new-badge">今日新增 / New Today</span></h2>
+        <p>返现 / Cashback · <span class="detail-pill limited-pill">详情页正文有限 / Limited detail</span></p>
+      </div>
+    </div>
+<a class="detail-shot-link" href="../../detail-screenshots/betpanda/betpanda-basketball-https-betpanda-partners-en-promo-sportsbook-bt-path-2fbasket.png"><img class="detail-shot" src="../../detail-screenshots/betpanda/betpanda-basketball-https-betpanda-partners-en-promo-sportsbook-bt-path-2fbasket.png" alt="You need to enable JavaScript to run this app. detail screenshot"></a>
+    <dl>
+      <div><dt>要求 / Requirements</dt><dd>Cashback in3DAYS8HRS42MIN23SECCasinochevron_rightLobbyOriginalsJackpotProvably FairTable GamesGrid SlotsBuy FeatureMegawaysHold; BetsLiveUpcoming EventsFavouritesSoccerBasketballIce HockeyTennisFifaEsportschevron_rightLobbyMy BetsLiveUpcoming EventsFav; play:none&quot; src=&quot;https://www.facebook.com/tr?id=991738589185829&amp;amp;ev=PageView&amp;amp;noscript=1&quot;&gt;</dd></div>
+      <div><dt>触发条件 / Trigger</dt><dd>用户发生符合条件的亏损或投注行为后按周期触发返现</dd></div>
+      <div><dt>奖励方式 / Reward</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>目标用户 / Who</dt><dd>新注册/首充用户；VIP 或高价值活跃用户；Casino/Slots 用户</dd></div>
+      <div><dt>时间 / When</dt><dd>每周周期</dd></div>
+      <div><dt>Summary / 总结</dt><dd>You need to enable JavaScript to run this app. 面向新注册/首充用户；VIP 或高价值活跃用户；Casino/Slots 用户，通过“用户发生符合条件的亏损或投注行为后按周期触发返现”推动用户完成关键行为；奖励为 列表页未显示。主要参与要求：Cashback in3DAYS8HRS42MIN23SECCasinochevron_rightLobbyOriginalsJackpotProvably FairTable GamesGrid SlotsBuy FeatureMegawaysHold; BetsLiveUpcoming EventsFavouritesSoccerBasketballIce HockeyTennisFifaEsportschevron_rightLobbyMy BetsLiveUpcoming EventsFav; play:none&quot; src=&quot;https://www.facebook.com/tr?id=991738589185829&amp;amp;ev=PageView&amp;amp;noscript=1&quot;&gt;。</dd></div>
+      <div><dt>核心目的 / Objective</dt><dd>提升留存、降低流失感知并延长生命周期</dd></div>
+      <div><dt>数据预期 / Expected Data</dt><dd>提升留存、降低流失感知并延长生命周期；预期观察：投注额、投注单量、有效投注用户数上升；Casino DAU、游戏启动次数、免费旋转转付费率上升；复玩率、留存率、VIP 活跃和净收入稳定性提升。</dd></div>
+      <div><dt>详情页来源 / Detail Source</dt><dd><a href="https://betpanda.partners/en/404">https://betpanda.partners/en/404</a></dd></div>
+    </dl>
+<details class="detail-excerpt"><summary>详情页原文摘要 / Detail excerpt</summary><pre>You need to enable JavaScript to run this app. menumenu Weekly Cashback in3DAYS8HRS42MIN23SECCasinochevron_rightLobbyOriginalsJackpotProvably FairTable GamesGrid SlotsBuy FeatureMegawaysHold &amp; WinNew GamesLive Casinochevron_rightLobbyRouletteBlackjackBaccaratGame ShowsDiceVIP TablesSportschevron_rightLobbyMy BetsLiveUpcoming EventsFavouritesSoccerBasketballIce HockeyTennisFifaEsportschevron_rightLobbyMy BetsLiveUpcoming EventsFavouritesCounter-StrikeLeague of LegendsDota 2FifaNBA2KPromotionschevron_rightCasinoSportsAll PromotionsSponsorshipslanguageEnglish (en)Download App &lt;img height=&quot;1&quot; width=&quot;1&quot; style=&quot;display:none&quot; src=&quot;https://www.facebook.com/tr?id=991738589185829&amp;amp;ev=PageView&amp;amp;noscript=1&quot;&gt; &lt;img src=&quot;https://pixel.everesttech.net/9281/t?ev_Betpanda_Cryptorino_SiteVisitos_ID5=1&amp;amp;ev_transid=&amp;lt;transid&amp;gt;&quot; width=&quot;1&quot; height=&quot;1&quot;&gt; &lt;img src=&quot;//dmp.adform.net/dmp/profile/?pid=12718&amp;amp;sg=BetPanda_AllVisitors&quot; style=&quot;display:none !important&quot;&gt;</pre></details>
+  </article>
+<article class="activity-card detail-limited">
+    <div class="activity-head">
+      <span class="index">7</span>
+      <div>
+        <h2>You need to enable JavaScript to run this app. <span class="new-badge">今日新增 / New Today</span></h2>
+        <p>返现 / Cashback · <span class="detail-pill limited-pill">详情页正文有限 / Limited detail</span></p>
+      </div>
+    </div>
+<a class="detail-shot-link" href="../../detail-screenshots/betpanda/betpanda-ice-hockey-https-betpanda-partners-en-promo-sportsbook-bt-path-2fice-ho.png"><img class="detail-shot" src="../../detail-screenshots/betpanda/betpanda-ice-hockey-https-betpanda-partners-en-promo-sportsbook-bt-path-2fice-ho.png" alt="You need to enable JavaScript to run this app. detail screenshot"></a>
+    <dl>
+      <div><dt>要求 / Requirements</dt><dd>Cashback in3DAYS8HRS42MIN17SECCasinochevron_rightLobbyOriginalsJackpotProvably FairTable GamesGrid SlotsBuy FeatureMegawaysHold; BetsLiveUpcoming EventsFavouritesSoccerBasketballIce HockeyTennisFifaEsportschevron_rightLobbyMy BetsLiveUpcoming EventsFav; play:none&quot; src=&quot;https://www.facebook.com/tr?id=991738589185829&amp;amp;ev=PageView&amp;amp;noscript=1&quot;&gt;</dd></div>
+      <div><dt>触发条件 / Trigger</dt><dd>用户发生符合条件的亏损或投注行为后按周期触发返现</dd></div>
+      <div><dt>奖励方式 / Reward</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>目标用户 / Who</dt><dd>新注册/首充用户；VIP 或高价值活跃用户；Casino/Slots 用户</dd></div>
+      <div><dt>时间 / When</dt><dd>每周周期</dd></div>
+      <div><dt>Summary / 总结</dt><dd>You need to enable JavaScript to run this app. 面向新注册/首充用户；VIP 或高价值活跃用户；Casino/Slots 用户，通过“用户发生符合条件的亏损或投注行为后按周期触发返现”推动用户完成关键行为；奖励为 列表页未显示。主要参与要求：Cashback in3DAYS8HRS42MIN17SECCasinochevron_rightLobbyOriginalsJackpotProvably FairTable GamesGrid SlotsBuy FeatureMegawaysHold; BetsLiveUpcoming EventsFavouritesSoccerBasketballIce HockeyTennisFifaEsportschevron_rightLobbyMy BetsLiveUpcoming EventsFav; play:none&quot; src=&quot;https://www.facebook.com/tr?id=991738589185829&amp;amp;ev=PageView&amp;amp;noscript=1&quot;&gt;。</dd></div>
+      <div><dt>核心目的 / Objective</dt><dd>提升留存、降低流失感知并延长生命周期</dd></div>
+      <div><dt>数据预期 / Expected Data</dt><dd>提升留存、降低流失感知并延长生命周期；预期观察：投注额、投注单量、有效投注用户数上升；Casino DAU、游戏启动次数、免费旋转转付费率上升；复玩率、留存率、VIP 活跃和净收入稳定性提升。</dd></div>
+      <div><dt>详情页来源 / Detail Source</dt><dd><a href="https://betpanda.partners/en/404">https://betpanda.partners/en/404</a></dd></div>
+    </dl>
+<details class="detail-excerpt"><summary>详情页原文摘要 / Detail excerpt</summary><pre>You need to enable JavaScript to run this app. menumenu Weekly Cashback in3DAYS8HRS42MIN17SECCasinochevron_rightLobbyOriginalsJackpotProvably FairTable GamesGrid SlotsBuy FeatureMegawaysHold &amp; WinNew GamesLive Casinochevron_rightLobbyRouletteBlackjackBaccaratGame ShowsDiceVIP TablesSportschevron_rightLobbyMy BetsLiveUpcoming EventsFavouritesSoccerBasketballIce HockeyTennisFifaEsportschevron_rightLobbyMy BetsLiveUpcoming EventsFavouritesCounter-StrikeLeague of LegendsDota 2FifaNBA2KPromotionschevron_rightCasinoSportsAll PromotionsSponsorshipslanguageEnglish (en)Download App &lt;img height=&quot;1&quot; width=&quot;1&quot; style=&quot;display:none&quot; src=&quot;https://www.facebook.com/tr?id=991738589185829&amp;amp;ev=PageView&amp;amp;noscript=1&quot;&gt; &lt;img src=&quot;https://pixel.everesttech.net/9281/t?ev_Betpanda_Cryptorino_SiteVisitos_ID5=1&amp;amp;ev_transid=&amp;lt;transid&amp;gt;&quot; width=&quot;1&quot; height=&quot;1&quot;&gt; &lt;img src=&quot;//dmp.adform.net/dmp/profile/?pid=12718&amp;amp;sg=BetPanda_AllVisitors&quot; style=&quot;display:none !important&quot;&gt;</pre></details>
+  </article>
+<article class="activity-card detail-limited">
+    <div class="activity-head">
+      <span class="index">8</span>
+      <div>
+        <h2>You need to enable JavaScript to run this app. <span class="new-badge">今日新增 / New Today</span></h2>
+        <p>返现 / Cashback · <span class="detail-pill limited-pill">详情页正文有限 / Limited detail</span></p>
+      </div>
+    </div>
+<a class="detail-shot-link" href="../../detail-screenshots/betpanda/betpanda-tennis-https-betpanda-partners-en-promo-sportsbook-bt-path-2ftennis-5.png"><img class="detail-shot" src="../../detail-screenshots/betpanda/betpanda-tennis-https-betpanda-partners-en-promo-sportsbook-bt-path-2ftennis-5.png" alt="You need to enable JavaScript to run this app. detail screenshot"></a>
+    <dl>
+      <div><dt>要求 / Requirements</dt><dd>Cashback in3DAYS8HRS42MIN12SECCasinochevron_rightLobbyOriginalsJackpotProvably FairTable GamesGrid SlotsBuy FeatureMegawaysHold; BetsLiveUpcoming EventsFavouritesSoccerBasketballIce HockeyTennisFifaEsportschevron_rightLobbyMy BetsLiveUpcoming EventsFav; play:none&quot; src=&quot;https://www.facebook.com/tr?id=991738589185829&amp;amp;ev=PageView&amp;amp;noscript=1&quot;&gt;</dd></div>
+      <div><dt>触发条件 / Trigger</dt><dd>用户发生符合条件的亏损或投注行为后按周期触发返现</dd></div>
+      <div><dt>奖励方式 / Reward</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>目标用户 / Who</dt><dd>新注册/首充用户；VIP 或高价值活跃用户；Casino/Slots 用户</dd></div>
+      <div><dt>时间 / When</dt><dd>每周周期</dd></div>
+      <div><dt>Summary / 总结</dt><dd>You need to enable JavaScript to run this app. 面向新注册/首充用户；VIP 或高价值活跃用户；Casino/Slots 用户，通过“用户发生符合条件的亏损或投注行为后按周期触发返现”推动用户完成关键行为；奖励为 列表页未显示。主要参与要求：Cashback in3DAYS8HRS42MIN12SECCasinochevron_rightLobbyOriginalsJackpotProvably FairTable GamesGrid SlotsBuy FeatureMegawaysHold; BetsLiveUpcoming EventsFavouritesSoccerBasketballIce HockeyTennisFifaEsportschevron_rightLobbyMy BetsLiveUpcoming EventsFav; play:none&quot; src=&quot;https://www.facebook.com/tr?id=991738589185829&amp;amp;ev=PageView&amp;amp;noscript=1&quot;&gt;。</dd></div>
+      <div><dt>核心目的 / Objective</dt><dd>提升留存、降低流失感知并延长生命周期</dd></div>
+      <div><dt>数据预期 / Expected Data</dt><dd>提升留存、降低流失感知并延长生命周期；预期观察：投注额、投注单量、有效投注用户数上升；Casino DAU、游戏启动次数、免费旋转转付费率上升；复玩率、留存率、VIP 活跃和净收入稳定性提升。</dd></div>
+      <div><dt>详情页来源 / Detail Source</dt><dd><a href="https://betpanda.partners/en/404">https://betpanda.partners/en/404</a></dd></div>
+    </dl>
+<details class="detail-excerpt"><summary>详情页原文摘要 / Detail excerpt</summary><pre>You need to enable JavaScript to run this app. menumenu Weekly Cashback in3DAYS8HRS42MIN12SECCasinochevron_rightLobbyOriginalsJackpotProvably FairTable GamesGrid SlotsBuy FeatureMegawaysHold &amp; WinNew GamesLive Casinochevron_rightLobbyRouletteBlackjackBaccaratGame ShowsDiceVIP TablesSportschevron_rightLobbyMy BetsLiveUpcoming EventsFavouritesSoccerBasketballIce HockeyTennisFifaEsportschevron_rightLobbyMy BetsLiveUpcoming EventsFavouritesCounter-StrikeLeague of LegendsDota 2FifaNBA2KPromotionschevron_rightCasinoSportsAll PromotionsSponsorshipslanguageEnglish (en)Download App &lt;img height=&quot;1&quot; width=&quot;1&quot; style=&quot;display:none&quot; src=&quot;https://www.facebook.com/tr?id=991738589185829&amp;amp;ev=PageView&amp;amp;noscript=1&quot;&gt; &lt;img src=&quot;https://pixel.everesttech.net/9281/t?ev_Betpanda_Cryptorino_SiteVisitos_ID5=1&amp;amp;ev_transid=&amp;lt;transid&amp;gt;&quot; width=&quot;1&quot; height=&quot;1&quot;&gt; &lt;img src=&quot;//dmp.adform.net/dmp/profile/?pid=12718&amp;amp;sg=BetPanda_AllVisitors&quot; style=&quot;display:none !important&quot;&gt;</pre></details>
+  </article>
+<article class="activity-card detail-limited">
+    <div class="activity-head">
+      <span class="index">9</span>
+      <div>
+        <h2>You need to enable JavaScript to run this app. <span class="new-badge">今日新增 / New Today</span></h2>
+        <p>返现 / Cashback · <span class="detail-pill limited-pill">详情页正文有限 / Limited detail</span></p>
+      </div>
+    </div>
+<a class="detail-shot-link" href="../../detail-screenshots/betpanda/betpanda-fifa-https-betpanda-partners-en-promo-sportsbook-bt-path-2ffifa-300.png"><img class="detail-shot" src="../../detail-screenshots/betpanda/betpanda-fifa-https-betpanda-partners-en-promo-sportsbook-bt-path-2ffifa-300.png" alt="You need to enable JavaScript to run this app. detail screenshot"></a>
+    <dl>
+      <div><dt>要求 / Requirements</dt><dd>Cashback in3DAYS8HRS42MIN8SECCasinochevron_rightLobbyOriginalsJackpotProvably FairTable GamesGrid SlotsBuy FeatureMegawaysHold &amp;; BetsLiveUpcoming EventsFavouritesSoccerBasketballIce HockeyTennisFifaEsportschevron_rightLobbyMy BetsLiveUpcoming EventsFav; play:none&quot; src=&quot;https://www.facebook.com/tr?id=991738589185829&amp;amp;ev=PageView&amp;amp;noscript=1&quot;&gt;</dd></div>
+      <div><dt>触发条件 / Trigger</dt><dd>用户发生符合条件的亏损或投注行为后按周期触发返现</dd></div>
+      <div><dt>奖励方式 / Reward</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>目标用户 / Who</dt><dd>新注册/首充用户；VIP 或高价值活跃用户；Casino/Slots 用户</dd></div>
+      <div><dt>时间 / When</dt><dd>每周周期</dd></div>
+      <div><dt>Summary / 总结</dt><dd>You need to enable JavaScript to run this app. 面向新注册/首充用户；VIP 或高价值活跃用户；Casino/Slots 用户，通过“用户发生符合条件的亏损或投注行为后按周期触发返现”推动用户完成关键行为；奖励为 列表页未显示。主要参与要求：Cashback in3DAYS8HRS42MIN8SECCasinochevron_rightLobbyOriginalsJackpotProvably FairTable GamesGrid SlotsBuy FeatureMegawaysHold &amp;; BetsLiveUpcoming EventsFavouritesSoccerBasketballIce HockeyTennisFifaEsportschevron_rightLobbyMy BetsLiveUpcoming EventsFav; play:none&quot; src=&quot;https://www.facebook.com/tr?id=991738589185829&amp;amp;ev=PageView&amp;amp;noscript=1&quot;&gt;。</dd></div>
+      <div><dt>核心目的 / Objective</dt><dd>提升留存、降低流失感知并延长生命周期</dd></div>
+      <div><dt>数据预期 / Expected Data</dt><dd>提升留存、降低流失感知并延长生命周期；预期观察：投注额、投注单量、有效投注用户数上升；Casino DAU、游戏启动次数、免费旋转转付费率上升；复玩率、留存率、VIP 活跃和净收入稳定性提升。</dd></div>
+      <div><dt>详情页来源 / Detail Source</dt><dd><a href="https://betpanda.partners/en/404">https://betpanda.partners/en/404</a></dd></div>
+    </dl>
+<details class="detail-excerpt"><summary>详情页原文摘要 / Detail excerpt</summary><pre>You need to enable JavaScript to run this app. menumenu Weekly Cashback in3DAYS8HRS42MIN8SECCasinochevron_rightLobbyOriginalsJackpotProvably FairTable GamesGrid SlotsBuy FeatureMegawaysHold &amp; WinNew GamesLive Casinochevron_rightLobbyRouletteBlackjackBaccaratGame ShowsDiceVIP TablesSportschevron_rightLobbyMy BetsLiveUpcoming EventsFavouritesSoccerBasketballIce HockeyTennisFifaEsportschevron_rightLobbyMy BetsLiveUpcoming EventsFavouritesCounter-StrikeLeague of LegendsDota 2FifaNBA2KPromotionschevron_rightCasinoSportsAll PromotionsSponsorshipslanguageEnglish (en)Download App &lt;img height=&quot;1&quot; width=&quot;1&quot; style=&quot;display:none&quot; src=&quot;https://www.facebook.com/tr?id=991738589185829&amp;amp;ev=PageView&amp;amp;noscript=1&quot;&gt; &lt;img src=&quot;https://pixel.everesttech.net/9281/t?ev_Betpanda_Cryptorino_SiteVisitos_ID5=1&amp;amp;ev_transid=&amp;lt;transid&amp;gt;&quot; width=&quot;1&quot; height=&quot;1&quot;&gt; &lt;img src=&quot;//dmp.adform.net/dmp/profile/?pid=12718&amp;amp;sg=BetPanda_AllVisitors&quot; style=&quot;display:none !important&quot;&gt;</pre></details>
+  </article>
+<article class="activity-card detail-limited">
+    <div class="activity-head">
+      <span class="index">10</span>
+      <div>
+        <h2>You need to enable JavaScript to run this app. <span class="new-badge">今日新增 / New Today</span></h2>
+        <p>返现 / Cashback · <span class="detail-pill limited-pill">详情页正文有限 / Limited detail</span></p>
+      </div>
+    </div>
+<a class="detail-shot-link" href="../../detail-screenshots/betpanda/betpanda-lobby-https-betpanda-partners-en-promo-sportsbook-bt-path-2fe-sport-2f3.png"><img class="detail-shot" src="../../detail-screenshots/betpanda/betpanda-lobby-https-betpanda-partners-en-promo-sportsbook-bt-path-2fe-sport-2f3.png" alt="You need to enable JavaScript to run this app. detail screenshot"></a>
+    <dl>
+      <div><dt>要求 / Requirements</dt><dd>Cashback in3DAYS8HRS42MIN3SECCasinochevron_rightLobbyOriginalsJackpotProvably FairTable GamesGrid SlotsBuy FeatureMegawaysHold &amp;; BetsLiveUpcoming EventsFavouritesSoccerBasketballIce HockeyTennisFifaEsportschevron_rightLobbyMy BetsLiveUpcoming EventsFav; play:none&quot; src=&quot;https://www.facebook.com/tr?id=991738589185829&amp;amp;ev=PageView&amp;amp;noscript=1&quot;&gt;</dd></div>
+      <div><dt>触发条件 / Trigger</dt><dd>用户发生符合条件的亏损或投注行为后按周期触发返现</dd></div>
+      <div><dt>奖励方式 / Reward</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>目标用户 / Who</dt><dd>新注册/首充用户；VIP 或高价值活跃用户；Casino/Slots 用户</dd></div>
+      <div><dt>时间 / When</dt><dd>每周周期</dd></div>
+      <div><dt>Summary / 总结</dt><dd>You need to enable JavaScript to run this app. 面向新注册/首充用户；VIP 或高价值活跃用户；Casino/Slots 用户，通过“用户发生符合条件的亏损或投注行为后按周期触发返现”推动用户完成关键行为；奖励为 列表页未显示。主要参与要求：Cashback in3DAYS8HRS42MIN3SECCasinochevron_rightLobbyOriginalsJackpotProvably FairTable GamesGrid SlotsBuy FeatureMegawaysHold &amp;; BetsLiveUpcoming EventsFavouritesSoccerBasketballIce HockeyTennisFifaEsportschevron_rightLobbyMy BetsLiveUpcoming EventsFav; play:none&quot; src=&quot;https://www.facebook.com/tr?id=991738589185829&amp;amp;ev=PageView&amp;amp;noscript=1&quot;&gt;。</dd></div>
+      <div><dt>核心目的 / Objective</dt><dd>提升留存、降低流失感知并延长生命周期</dd></div>
+      <div><dt>数据预期 / Expected Data</dt><dd>提升留存、降低流失感知并延长生命周期；预期观察：投注额、投注单量、有效投注用户数上升；Casino DAU、游戏启动次数、免费旋转转付费率上升；复玩率、留存率、VIP 活跃和净收入稳定性提升。</dd></div>
+      <div><dt>详情页来源 / Detail Source</dt><dd><a href="https://betpanda.partners/en/404">https://betpanda.partners/en/404</a></dd></div>
+    </dl>
+<details class="detail-excerpt"><summary>详情页原文摘要 / Detail excerpt</summary><pre>You need to enable JavaScript to run this app. menumenu Weekly Cashback in3DAYS8HRS42MIN3SECCasinochevron_rightLobbyOriginalsJackpotProvably FairTable GamesGrid SlotsBuy FeatureMegawaysHold &amp; WinNew GamesLive Casinochevron_rightLobbyRouletteBlackjackBaccaratGame ShowsDiceVIP TablesSportschevron_rightLobbyMy BetsLiveUpcoming EventsFavouritesSoccerBasketballIce HockeyTennisFifaEsportschevron_rightLobbyMy BetsLiveUpcoming EventsFavouritesCounter-StrikeLeague of LegendsDota 2FifaNBA2KPromotionschevron_rightCasinoSportsAll PromotionsSponsorshipslanguageEnglish (en)Download App &lt;img height=&quot;1&quot; width=&quot;1&quot; style=&quot;display:none&quot; src=&quot;https://www.facebook.com/tr?id=991738589185829&amp;amp;ev=PageView&amp;amp;noscript=1&quot;&gt; &lt;img src=&quot;https://pixel.everesttech.net/9281/t?ev_Betpanda_Cryptorino_SiteVisitos_ID5=1&amp;amp;ev_transid=&amp;lt;transid&amp;gt;&quot; width=&quot;1&quot; height=&quot;1&quot;&gt; &lt;img src=&quot;//dmp.adform.net/dmp/profile/?pid=12718&amp;amp;sg=BetPanda_AllVisitors&quot; style=&quot;display:none !important&quot;&gt;</pre></details>
+  </article>
+<article class="activity-card detail-limited">
+    <div class="activity-head">
+      <span class="index">11</span>
+      <div>
+        <h2>You need to enable JavaScript to run this app. <span class="new-badge">今日新增 / New Today</span></h2>
+        <p>返现 / Cashback · <span class="detail-pill limited-pill">详情页正文有限 / Limited detail</span></p>
+      </div>
+    </div>
+<a class="detail-shot-link" href="../../detail-screenshots/betpanda/betpanda-live-https-betpanda-partners-en-promo-sportsbook-bt-path-2flive.png"><img class="detail-shot" src="../../detail-screenshots/betpanda/betpanda-live-https-betpanda-partners-en-promo-sportsbook-bt-path-2flive.png" alt="You need to enable JavaScript to run this app. detail screenshot"></a>
+    <dl>
+      <div><dt>要求 / Requirements</dt><dd>Cashback in3DAYS8HRS41MIN58SECCasinochevron_rightLobbyOriginalsJackpotProvably FairTable GamesGrid SlotsBuy FeatureMegawaysHold; BetsLiveUpcoming EventsFavouritesSoccerBasketballIce HockeyTennisFifaEsportschevron_rightLobbyMy BetsLiveUpcoming EventsFav; play:none&quot; src=&quot;https://www.facebook.com/tr?id=991738589185829&amp;amp;ev=PageView&amp;amp;noscript=1&quot;&gt;</dd></div>
+      <div><dt>触发条件 / Trigger</dt><dd>用户发生符合条件的亏损或投注行为后按周期触发返现</dd></div>
+      <div><dt>奖励方式 / Reward</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>目标用户 / Who</dt><dd>新注册/首充用户；VIP 或高价值活跃用户；Casino/Slots 用户</dd></div>
+      <div><dt>时间 / When</dt><dd>每周周期</dd></div>
+      <div><dt>Summary / 总结</dt><dd>You need to enable JavaScript to run this app. 面向新注册/首充用户；VIP 或高价值活跃用户；Casino/Slots 用户，通过“用户发生符合条件的亏损或投注行为后按周期触发返现”推动用户完成关键行为；奖励为 列表页未显示。主要参与要求：Cashback in3DAYS8HRS41MIN58SECCasinochevron_rightLobbyOriginalsJackpotProvably FairTable GamesGrid SlotsBuy FeatureMegawaysHold; BetsLiveUpcoming EventsFavouritesSoccerBasketballIce HockeyTennisFifaEsportschevron_rightLobbyMy BetsLiveUpcoming EventsFav; play:none&quot; src=&quot;https://www.facebook.com/tr?id=991738589185829&amp;amp;ev=PageView&amp;amp;noscript=1&quot;&gt;。</dd></div>
+      <div><dt>核心目的 / Objective</dt><dd>提升留存、降低流失感知并延长生命周期</dd></div>
+      <div><dt>数据预期 / Expected Data</dt><dd>提升留存、降低流失感知并延长生命周期；预期观察：投注额、投注单量、有效投注用户数上升；Casino DAU、游戏启动次数、免费旋转转付费率上升；复玩率、留存率、VIP 活跃和净收入稳定性提升。</dd></div>
+      <div><dt>详情页来源 / Detail Source</dt><dd><a href="https://betpanda.partners/en/404">https://betpanda.partners/en/404</a></dd></div>
+    </dl>
+<details class="detail-excerpt"><summary>详情页原文摘要 / Detail excerpt</summary><pre>You need to enable JavaScript to run this app. menumenu Weekly Cashback in3DAYS8HRS41MIN58SECCasinochevron_rightLobbyOriginalsJackpotProvably FairTable GamesGrid SlotsBuy FeatureMegawaysHold &amp; WinNew GamesLive Casinochevron_rightLobbyRouletteBlackjackBaccaratGame ShowsDiceVIP TablesSportschevron_rightLobbyMy BetsLiveUpcoming EventsFavouritesSoccerBasketballIce HockeyTennisFifaEsportschevron_rightLobbyMy BetsLiveUpcoming EventsFavouritesCounter-StrikeLeague of LegendsDota 2FifaNBA2KPromotionschevron_rightCasinoSportsAll PromotionsSponsorshipslanguageEnglish (en)Download App &lt;img height=&quot;1&quot; width=&quot;1&quot; style=&quot;display:none&quot; src=&quot;https://www.facebook.com/tr?id=991738589185829&amp;amp;ev=PageView&amp;amp;noscript=1&quot;&gt; &lt;img src=&quot;https://pixel.everesttech.net/9281/t?ev_Betpanda_Cryptorino_SiteVisitos_ID5=1&amp;amp;ev_transid=&amp;lt;transid&amp;gt;&quot; width=&quot;1&quot; height=&quot;1&quot;&gt; &lt;img src=&quot;//dmp.adform.net/dmp/profile/?pid=12718&amp;amp;sg=BetPanda_AllVisitors&quot; style=&quot;display:none !important&quot;&gt;</pre></details>
+  </article>
+<article class="activity-card detail-limited">
+    <div class="activity-head">
+      <span class="index">12</span>
+      <div>
+        <h2>You need to enable JavaScript to run this app. <span class="new-badge">今日新增 / New Today</span></h2>
+        <p>返现 / Cashback · <span class="detail-pill limited-pill">详情页正文有限 / Limited detail</span></p>
+      </div>
+    </div>
+<a class="detail-shot-link" href="../../detail-screenshots/betpanda/betpanda-counter-strike-https-betpanda-partners-en-promo-sportsbook-bt-path-2fco.png"><img class="detail-shot" src="../../detail-screenshots/betpanda/betpanda-counter-strike-https-betpanda-partners-en-promo-sportsbook-bt-path-2fco.png" alt="You need to enable JavaScript to run this app. detail screenshot"></a>
+    <dl>
+      <div><dt>要求 / Requirements</dt><dd>Cashback in3DAYS8HRS41MIN53SECCasinochevron_rightLobbyOriginalsJackpotProvably FairTable GamesGrid SlotsBuy FeatureMegawaysHold; BetsLiveUpcoming EventsFavouritesSoccerBasketballIce HockeyTennisFifaEsportschevron_rightLobbyMy BetsLiveUpcoming EventsFav; play:none&quot; src=&quot;https://www.facebook.com/tr?id=991738589185829&amp;amp;ev=PageView&amp;amp;noscript=1&quot;&gt;</dd></div>
+      <div><dt>触发条件 / Trigger</dt><dd>用户发生符合条件的亏损或投注行为后按周期触发返现</dd></div>
+      <div><dt>奖励方式 / Reward</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>目标用户 / Who</dt><dd>新注册/首充用户；VIP 或高价值活跃用户；Casino/Slots 用户</dd></div>
+      <div><dt>时间 / When</dt><dd>每周周期</dd></div>
+      <div><dt>Summary / 总结</dt><dd>You need to enable JavaScript to run this app. 面向新注册/首充用户；VIP 或高价值活跃用户；Casino/Slots 用户，通过“用户发生符合条件的亏损或投注行为后按周期触发返现”推动用户完成关键行为；奖励为 列表页未显示。主要参与要求：Cashback in3DAYS8HRS41MIN53SECCasinochevron_rightLobbyOriginalsJackpotProvably FairTable GamesGrid SlotsBuy FeatureMegawaysHold; BetsLiveUpcoming EventsFavouritesSoccerBasketballIce HockeyTennisFifaEsportschevron_rightLobbyMy BetsLiveUpcoming EventsFav; play:none&quot; src=&quot;https://www.facebook.com/tr?id=991738589185829&amp;amp;ev=PageView&amp;amp;noscript=1&quot;&gt;。</dd></div>
+      <div><dt>核心目的 / Objective</dt><dd>提升留存、降低流失感知并延长生命周期</dd></div>
+      <div><dt>数据预期 / Expected Data</dt><dd>提升留存、降低流失感知并延长生命周期；预期观察：投注额、投注单量、有效投注用户数上升；Casino DAU、游戏启动次数、免费旋转转付费率上升；复玩率、留存率、VIP 活跃和净收入稳定性提升。</dd></div>
+      <div><dt>详情页来源 / Detail Source</dt><dd><a href="https://betpanda.partners/en/404">https://betpanda.partners/en/404</a></dd></div>
+    </dl>
+<details class="detail-excerpt"><summary>详情页原文摘要 / Detail excerpt</summary><pre>You need to enable JavaScript to run this app. menumenu Weekly Cashback in3DAYS8HRS41MIN53SECCasinochevron_rightLobbyOriginalsJackpotProvably FairTable GamesGrid SlotsBuy FeatureMegawaysHold &amp; WinNew GamesLive Casinochevron_rightLobbyRouletteBlackjackBaccaratGame ShowsDiceVIP TablesSportschevron_rightLobbyMy BetsLiveUpcoming EventsFavouritesSoccerBasketballIce HockeyTennisFifaEsportschevron_rightLobbyMy BetsLiveUpcoming EventsFavouritesCounter-StrikeLeague of LegendsDota 2FifaNBA2KPromotionschevron_rightCasinoSportsAll PromotionsSponsorshipslanguageEnglish (en)Download App &lt;img height=&quot;1&quot; width=&quot;1&quot; style=&quot;display:none&quot; src=&quot;https://www.facebook.com/tr?id=991738589185829&amp;amp;ev=PageView&amp;amp;noscript=1&quot;&gt; &lt;img src=&quot;https://pixel.everesttech.net/9281/t?ev_Betpanda_Cryptorino_SiteVisitos_ID5=1&amp;amp;ev_transid=&amp;lt;transid&amp;gt;&quot; width=&quot;1&quot; height=&quot;1&quot;&gt; &lt;img src=&quot;//dmp.adform.net/dmp/profile/?pid=12718&amp;amp;sg=BetPanda_AllVisitors&quot; style=&quot;display:none !important&quot;&gt;</pre></details>
+  </article>
+<article class="activity-card detail-limited">
+    <div class="activity-head">
+      <span class="index">13</span>
+      <div>
+        <h2>You need to enable JavaScript to run this app. <span class="new-badge">今日新增 / New Today</span></h2>
+        <p>返现 / Cashback · <span class="detail-pill limited-pill">详情页正文有限 / Limited detail</span></p>
+      </div>
+    </div>
+<a class="detail-shot-link" href="../../detail-screenshots/betpanda/betpanda-league-of-legends-https-betpanda-partners-en-promo-sportsbook-bt-path-2.png"><img class="detail-shot" src="../../detail-screenshots/betpanda/betpanda-league-of-legends-https-betpanda-partners-en-promo-sportsbook-bt-path-2.png" alt="You need to enable JavaScript to run this app. detail screenshot"></a>
+    <dl>
+      <div><dt>要求 / Requirements</dt><dd>Cashback in3DAYS8HRS41MIN47SECCasinochevron_rightLobbyOriginalsJackpotProvably FairTable GamesGrid SlotsBuy FeatureMegawaysHold; BetsLiveUpcoming EventsFavouritesSoccerBasketballIce HockeyTennisFifaEsportschevron_rightLobbyMy BetsLiveUpcoming EventsFav; play:none&quot; src=&quot;https://www.facebook.com/tr?id=991738589185829&amp;amp;ev=PageView&amp;amp;noscript=1&quot;&gt;</dd></div>
+      <div><dt>触发条件 / Trigger</dt><dd>用户发生符合条件的亏损或投注行为后按周期触发返现</dd></div>
+      <div><dt>奖励方式 / Reward</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>目标用户 / Who</dt><dd>新注册/首充用户；VIP 或高价值活跃用户；Casino/Slots 用户</dd></div>
+      <div><dt>时间 / When</dt><dd>每周周期</dd></div>
+      <div><dt>Summary / 总结</dt><dd>You need to enable JavaScript to run this app. 面向新注册/首充用户；VIP 或高价值活跃用户；Casino/Slots 用户，通过“用户发生符合条件的亏损或投注行为后按周期触发返现”推动用户完成关键行为；奖励为 列表页未显示。主要参与要求：Cashback in3DAYS8HRS41MIN47SECCasinochevron_rightLobbyOriginalsJackpotProvably FairTable GamesGrid SlotsBuy FeatureMegawaysHold; BetsLiveUpcoming EventsFavouritesSoccerBasketballIce HockeyTennisFifaEsportschevron_rightLobbyMy BetsLiveUpcoming EventsFav; play:none&quot; src=&quot;https://www.facebook.com/tr?id=991738589185829&amp;amp;ev=PageView&amp;amp;noscript=1&quot;&gt;。</dd></div>
+      <div><dt>核心目的 / Objective</dt><dd>提升留存、降低流失感知并延长生命周期</dd></div>
+      <div><dt>数据预期 / Expected Data</dt><dd>提升留存、降低流失感知并延长生命周期；预期观察：投注额、投注单量、有效投注用户数上升；Casino DAU、游戏启动次数、免费旋转转付费率上升；复玩率、留存率、VIP 活跃和净收入稳定性提升。</dd></div>
+      <div><dt>详情页来源 / Detail Source</dt><dd><a href="https://betpanda.partners/en/404">https://betpanda.partners/en/404</a></dd></div>
+    </dl>
+<details class="detail-excerpt"><summary>详情页原文摘要 / Detail excerpt</summary><pre>You need to enable JavaScript to run this app. menumenu Weekly Cashback in3DAYS8HRS41MIN47SECCasinochevron_rightLobbyOriginalsJackpotProvably FairTable GamesGrid SlotsBuy FeatureMegawaysHold &amp; WinNew GamesLive Casinochevron_rightLobbyRouletteBlackjackBaccaratGame ShowsDiceVIP TablesSportschevron_rightLobbyMy BetsLiveUpcoming EventsFavouritesSoccerBasketballIce HockeyTennisFifaEsportschevron_rightLobbyMy BetsLiveUpcoming EventsFavouritesCounter-StrikeLeague of LegendsDota 2FifaNBA2KPromotionschevron_rightCasinoSportsAll PromotionsSponsorshipslanguageEnglish (en)Download App &lt;img height=&quot;1&quot; width=&quot;1&quot; style=&quot;display:none&quot; src=&quot;https://www.facebook.com/tr?id=991738589185829&amp;amp;ev=PageView&amp;amp;noscript=1&quot;&gt; &lt;img src=&quot;https://pixel.everesttech.net/9281/t?ev_Betpanda_Cryptorino_SiteVisitos_ID5=1&amp;amp;ev_transid=&amp;lt;transid&amp;gt;&quot; width=&quot;1&quot; height=&quot;1&quot;&gt; &lt;img src=&quot;//dmp.adform.net/dmp/profile/?pid=12718&amp;amp;sg=BetPanda_AllVisitors&quot; style=&quot;display:none !important&quot;&gt;</pre></details>
+  </article>
+<article class="activity-card detail-limited">
+    <div class="activity-head">
+      <span class="index">14</span>
+      <div>
+        <h2>You need to enable JavaScript to run this app. <span class="new-badge">今日新增 / New Today</span></h2>
+        <p>返现 / Cashback · <span class="detail-pill limited-pill">详情页正文有限 / Limited detail</span></p>
+      </div>
+    </div>
+<a class="detail-shot-link" href="../../detail-screenshots/betpanda/betpanda-dota-2-https-betpanda-partners-en-promo-sportsbook-bt-path-2fdota-2-111.png"><img class="detail-shot" src="../../detail-screenshots/betpanda/betpanda-dota-2-https-betpanda-partners-en-promo-sportsbook-bt-path-2fdota-2-111.png" alt="You need to enable JavaScript to run this app. detail screenshot"></a>
+    <dl>
+      <div><dt>要求 / Requirements</dt><dd>Cashback in3DAYS8HRS41MIN42SECCasinochevron_rightLobbyOriginalsJackpotProvably FairTable GamesGrid SlotsBuy FeatureMegawaysHold; BetsLiveUpcoming EventsFavouritesSoccerBasketballIce HockeyTennisFifaEsportschevron_rightLobbyMy BetsLiveUpcoming EventsFav; play:none&quot; src=&quot;https://www.facebook.com/tr?id=991738589185829&amp;amp;ev=PageView&amp;amp;noscript=1&quot;&gt;</dd></div>
+      <div><dt>触发条件 / Trigger</dt><dd>用户发生符合条件的亏损或投注行为后按周期触发返现</dd></div>
+      <div><dt>奖励方式 / Reward</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>目标用户 / Who</dt><dd>新注册/首充用户；VIP 或高价值活跃用户；Casino/Slots 用户</dd></div>
+      <div><dt>时间 / When</dt><dd>每周周期</dd></div>
+      <div><dt>Summary / 总结</dt><dd>You need to enable JavaScript to run this app. 面向新注册/首充用户；VIP 或高价值活跃用户；Casino/Slots 用户，通过“用户发生符合条件的亏损或投注行为后按周期触发返现”推动用户完成关键行为；奖励为 列表页未显示。主要参与要求：Cashback in3DAYS8HRS41MIN42SECCasinochevron_rightLobbyOriginalsJackpotProvably FairTable GamesGrid SlotsBuy FeatureMegawaysHold; BetsLiveUpcoming EventsFavouritesSoccerBasketballIce HockeyTennisFifaEsportschevron_rightLobbyMy BetsLiveUpcoming EventsFav; play:none&quot; src=&quot;https://www.facebook.com/tr?id=991738589185829&amp;amp;ev=PageView&amp;amp;noscript=1&quot;&gt;。</dd></div>
+      <div><dt>核心目的 / Objective</dt><dd>提升留存、降低流失感知并延长生命周期</dd></div>
+      <div><dt>数据预期 / Expected Data</dt><dd>提升留存、降低流失感知并延长生命周期；预期观察：投注额、投注单量、有效投注用户数上升；Casino DAU、游戏启动次数、免费旋转转付费率上升；复玩率、留存率、VIP 活跃和净收入稳定性提升。</dd></div>
+      <div><dt>详情页来源 / Detail Source</dt><dd><a href="https://betpanda.partners/en/404">https://betpanda.partners/en/404</a></dd></div>
+    </dl>
+<details class="detail-excerpt"><summary>详情页原文摘要 / Detail excerpt</summary><pre>You need to enable JavaScript to run this app. menumenu Weekly Cashback in3DAYS8HRS41MIN42SECCasinochevron_rightLobbyOriginalsJackpotProvably FairTable GamesGrid SlotsBuy FeatureMegawaysHold &amp; WinNew GamesLive Casinochevron_rightLobbyRouletteBlackjackBaccaratGame ShowsDiceVIP TablesSportschevron_rightLobbyMy BetsLiveUpcoming EventsFavouritesSoccerBasketballIce HockeyTennisFifaEsportschevron_rightLobbyMy BetsLiveUpcoming EventsFavouritesCounter-StrikeLeague of LegendsDota 2FifaNBA2KPromotionschevron_rightCasinoSportsAll PromotionsSponsorshipslanguageEnglish (en)Download App &lt;img height=&quot;1&quot; width=&quot;1&quot; style=&quot;display:none&quot; src=&quot;https://www.facebook.com/tr?id=991738589185829&amp;amp;ev=PageView&amp;amp;noscript=1&quot;&gt; &lt;img src=&quot;https://pixel.everesttech.net/9281/t?ev_Betpanda_Cryptorino_SiteVisitos_ID5=1&amp;amp;ev_transid=&amp;lt;transid&amp;gt;&quot; width=&quot;1&quot; height=&quot;1&quot;&gt; &lt;img src=&quot;//dmp.adform.net/dmp/profile/?pid=12718&amp;amp;sg=BetPanda_AllVisitors&quot; style=&quot;display:none !important&quot;&gt;</pre></details>
+  </article>
+    </section>
+
+    <details class="raw">
+      <summary>查看原始页面文字 / Raw visible text</summary>
+      <pre>You need to enable JavaScript to run this app.
+ 
+ 
+ 
+ menumenu Weekly Cashback in3DAYS8HRS42MIN54SECCasinochevron_rightLobbyOriginalsJackpotProvably FairTable GamesGrid SlotsBuy FeatureMegawaysHold &amp; WinNew GamesLive Casinochevron_rightLobbyRouletteBlackjackBaccaratGame ShowsDiceVIP TablesSportschevron_rightLobbyMy BetsLiveUpcoming EventsFavouritesSoccerBasketballIce HockeyTennisFifaEsportschevron_rightLobbyMy BetsLiveUpcoming EventsFavouritesCounter-StrikeLeague of LegendsDota 2FifaNBA2KPromotionschevron_rightCasinoSportsAll PromotionsSponsorshipslanguageEnglish (en)Download AppPromotionsSign-Up OfferUp to 1 BTC in our casino bonus complete the requirement and get rewarded.Read moreExclusive RakebackClimb to Bamboo Guardian and enjoy daily rakeback on every spin.Weekly CashbackGet 10% guaranteed cashback on your real money losses between Wednesdays.Read moreLive Casino Cashback BoostPlay live casino with 5% extra cashback, up to 15% back weekly on Evolution live games.Weekly RafflePlay any slots with real money and collect tickets for a chance to win one of 20 weekly €500 prizes.Get Rewarded For Your PlayPlay as you normally do, and we'll reward you every time you achieve a new level.Read moreGet a Weekly Free BetBased on your sports betting from the previous 7 days, we’ll credit you with a free bet every Monday.Read MoreEarn Points On Your Winning BetsJoin our Weekly Sportsbook Tournament and compete for new prizes every week.Read MoreUnlock Bigger WinsWin bigger and boost your profits with up to 40% with our COMBOBOOST feature.Read MoreBuild Your Perfect BetCombine multiple markets from the same event into one bet to create your next winning combo.Lock your ProfitsCash out at the right time bank profits and stay ahead.Read More
+ 
+
+&lt;img height=&quot;1&quot; width=&quot;1&quot; style=&quot;display:none&quot; src=&quot;https://www.facebook.com/tr?id=991738589185829&amp;amp;ev=PageView&amp;amp;noscript=1&quot;&gt;
+
+&lt;img src=&quot;https://pixel.everesttech.net/9281/t?ev_Betpanda_Cryptorino_SiteVisitos_ID5=1&amp;amp;ev_transid=&amp;lt;transid&amp;gt;&quot; width=&quot;1&quot; height=&quot;1&quot;&gt;
+
+ &lt;img src=&quot;//dmp.adform.net/dmp/profile/?pid=12718&amp;amp;sg=BetPanda_AllVisitors&quot; style=&quot;display:none !important&quot;&gt;</pre>
+    </details>
+  </main>
+</body>
+</html>

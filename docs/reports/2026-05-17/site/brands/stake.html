@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Stake 活动详情</title>
+  <style>
+    :root { --bg:#f5f6f2; --panel:#fff; --ink:#15201b; --muted:#66736d; --line:#d8ddd4; --green:#0d7658; --blue:#245c9e; --amber:#9a6816; --red:#a54040; --soft:#eef4f0; }
+    * { box-sizing:border-box; }
+    body { margin:0; background:var(--bg); color:var(--ink); font-family:Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; line-height:1.45; }
+    .page { max-width:1280px; margin:0 auto; padding:28px 18px 56px; }
+    .hero { background:var(--panel); border:1px solid var(--line); border-radius:8px; padding:24px; display:grid; grid-template-columns:minmax(0,1fr) 280px; gap:18px; align-items:end; margin-bottom:18px; }
+    .brand-hero { margin-bottom:16px; }
+    .eyebrow { margin:0 0 8px; color:var(--green); font-size:12px; font-weight:800; text-transform:uppercase; letter-spacing:.04em; }
+    h1 { margin:0 0 8px; font-size:32px; line-height:1.12; letter-spacing:0; }
+    h2 { margin:0 0 6px; font-size:18px; letter-spacing:0; }
+    p { margin:0; }
+    .sub, .meta { color:var(--muted); }
+    .status { display:inline-flex; align-items:center; border-radius:999px; padding:3px 8px; font-size:12px; font-weight:800; white-space:nowrap; }
+    .ok { color:var(--green); background:#e5f3ed; }
+    .mid { color:var(--amber); background:#fff4df; }
+    .blue { color:var(--blue); background:#e9f0fb; }
+    .low { color:var(--red); background:#faeeee; }
+    .meta { background:#f8faf7; border:1px solid var(--line); border-radius:8px; padding:14px; }
+    .meta b { display:inline-block; min-width:92px; color:var(--ink); }
+    .brand-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:14px; }
+    .brand-card { display:grid; grid-template-columns:220px minmax(0,1fr); gap:14px; padding:14px; color:var(--ink); text-decoration:none; background:var(--panel); border:1px solid var(--line); border-radius:8px; }
+    .brand-card img, .visual img { width:100%; border:1px solid var(--line); border-radius:8px; background:#edf0ea; object-fit:cover; }
+    .brand-card img { aspect-ratio:16/10; }
+    .brand-card span { display:inline-flex; margin-top:10px; color:var(--blue); font-weight:700; }
+    .new-summary { background:var(--panel); border:1px solid var(--line); border-radius:8px; padding:16px; margin-bottom:18px; }
+    .new-summary h2 { margin:0 0 10px; font-size:20px; }
+    .new-list { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:10px; }
+    .new-item { border:1px solid var(--line); border-radius:8px; padding:10px; background:#fbfcfa; }
+    .new-item strong { display:block; }
+    .new-badge { display:inline-flex; align-items:center; border-radius:999px; background:#fff4df; color:#9a6816; padding:3px 8px; font-size:12px; font-weight:800; margin-left:6px; vertical-align:middle; }
+    .topnav { margin-bottom:12px; }
+    .topnav a { color:var(--blue); font-weight:700; text-decoration:none; }
+    .visual { background:var(--panel); border:1px solid var(--line); border-radius:8px; padding:14px; margin-bottom:16px; }
+    .visual img { max-height:520px; object-fit:contain; }
+    .activity-list { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:14px; }
+    .activity-card { background:var(--panel); border:1px solid var(--line); border-radius:8px; padding:16px; }
+    .activity-card.detail-ok { border-left:4px solid var(--green); }
+    .activity-card.detail-limited { border-left:4px solid var(--amber); }
+    .activity-card.detail-missing { border-left:4px solid #a8b1ac; }
+    .activity-head { display:grid; grid-template-columns:36px minmax(0,1fr); gap:10px; align-items:start; margin-bottom:12px; }
+    .index { display:inline-grid; place-items:center; width:30px; height:30px; border-radius:999px; background:var(--soft); color:var(--green); font-weight:800; }
+    .detail-shot-link { display:block; margin:8px 0 12px; }
+    .detail-shot { width:100%; max-height:360px; object-fit:cover; object-position:top; border:1px solid var(--line); border-radius:8px; background:#edf0ea; }
+    dl { display:grid; gap:8px; margin:0; }
+    dl div { display:grid; grid-template-columns:150px minmax(0,1fr); gap:10px; border-top:1px solid var(--line); padding-top:8px; }
+    dt { color:var(--muted); font-size:12px; font-weight:800; }
+    dd { margin:0; font-size:13px; }
+    .missing-text { color:var(--muted); }
+    .detail-pill { display:inline-flex; align-items:center; border-radius:999px; padding:3px 8px; font-size:12px; font-weight:800; }
+    .ok-pill { background:#e5f3ed; color:var(--green); }
+    .limited-pill { background:#fff4df; color:var(--amber); }
+    .fallback-pill { background:#eef0ea; color:var(--muted); }
+    .detail-excerpt { margin-top:12px; border-top:1px solid var(--line); padding-top:10px; }
+    .detail-excerpt summary { cursor:pointer; color:var(--blue); font-weight:800; }
+    .raw { background:var(--panel); border:1px solid var(--line); border-radius:8px; padding:14px; margin-top:16px; }
+    pre { white-space:pre-wrap; word-break:break-word; background:#111714; color:#eef6f0; padding:12px; border-radius:8px; max-height:320px; overflow:auto; font-size:12px; }
+    a { color:var(--blue); }
+    @media (max-width:900px) { .hero, .brand-grid, .brand-card, .activity-list, .new-list { grid-template-columns:1fr; } h1 { font-size:27px; } dl div { grid-template-columns:1fr; } }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <nav class="topnav"><a href="../index.html">返回品牌入口 / Back to brands</a></nav>
+    <section class="hero brand-hero">
+      <div>
+        <p class="eyebrow">Brand Promotion Page</p>
+        <h1>Stake</h1>
+        <p class="sub">来源 Source：<a href="https://stake.mba/promotions">https://stake.mba/promotions</a></p>
+        <p class="sub">本页优先使用活动详情页截图与可见内容，输出要求、Trigger、Reward、Who、When、Summary、核心目的和数据预期。</p>
+        <p class="sub"><span class="status low">HTTP 403</span></p>
+      </div>
+      <div class="meta">
+        <b>活动 Activities</b>0<br>
+        <b>今日新增 New</b>0<br>
+        <b>详情 Details</b>0<br>
+        <b>详情截图 Shots</b>0<br>
+        <b>状态 Status</b>http_403
+      </div>
+    </section>
+
+    <section class="visual">
+      <img src="../../browser-screenshots/stake-stake-promotions.png" alt="Stake screenshot">
+    </section>
+
+    <section class="activity-list">
+      <div class="activity-card detail-missing"><h2>未解析到活动 / No activities parsed</h2><p class="sub">列表页可能为 JS 渲染、需要登录或本次抓取失败。请参考截图并标记“列表页兜底 / Listing fallback”或“详情页正文有限 / Limited detail”。</p></div>
+    </section>
+
+    <details class="raw">
+      <summary>查看原始页面文字 / Raw visible text</summary>
+      <pre>stake.mbaPerforming security verificationThis website uses a security service to protect against malicious bots. This page is displayed while the website verifies you are not a bot.Verification successful. Waiting for stake.mba to respond&lt;div class=&quot;h2&quot;&gt;&lt;span id=&quot;challenge-error-text&quot;&gt;Enable JavaScript and cookies to continue&lt;/span&gt;&lt;/div&gt;Ray ID: 9fcfc983ec569cebPerformance and Security by CloudflarePrivacy</pre>
+    </details>
+  </main>
+</body>
+</html>

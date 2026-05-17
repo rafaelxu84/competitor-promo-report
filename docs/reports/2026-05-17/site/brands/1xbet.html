@@ -1,0 +1,540 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>1xBet 活动详情</title>
+  <style>
+    :root { --bg:#f5f6f2; --panel:#fff; --ink:#15201b; --muted:#66736d; --line:#d8ddd4; --green:#0d7658; --blue:#245c9e; --amber:#9a6816; --red:#a54040; --soft:#eef4f0; }
+    * { box-sizing:border-box; }
+    body { margin:0; background:var(--bg); color:var(--ink); font-family:Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; line-height:1.45; }
+    .page { max-width:1280px; margin:0 auto; padding:28px 18px 56px; }
+    .hero { background:var(--panel); border:1px solid var(--line); border-radius:8px; padding:24px; display:grid; grid-template-columns:minmax(0,1fr) 280px; gap:18px; align-items:end; margin-bottom:18px; }
+    .brand-hero { margin-bottom:16px; }
+    .eyebrow { margin:0 0 8px; color:var(--green); font-size:12px; font-weight:800; text-transform:uppercase; letter-spacing:.04em; }
+    h1 { margin:0 0 8px; font-size:32px; line-height:1.12; letter-spacing:0; }
+    h2 { margin:0 0 6px; font-size:18px; letter-spacing:0; }
+    p { margin:0; }
+    .sub, .meta { color:var(--muted); }
+    .status { display:inline-flex; align-items:center; border-radius:999px; padding:3px 8px; font-size:12px; font-weight:800; white-space:nowrap; }
+    .ok { color:var(--green); background:#e5f3ed; }
+    .mid { color:var(--amber); background:#fff4df; }
+    .blue { color:var(--blue); background:#e9f0fb; }
+    .low { color:var(--red); background:#faeeee; }
+    .meta { background:#f8faf7; border:1px solid var(--line); border-radius:8px; padding:14px; }
+    .meta b { display:inline-block; min-width:92px; color:var(--ink); }
+    .brand-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:14px; }
+    .brand-card { display:grid; grid-template-columns:220px minmax(0,1fr); gap:14px; padding:14px; color:var(--ink); text-decoration:none; background:var(--panel); border:1px solid var(--line); border-radius:8px; }
+    .brand-card img, .visual img { width:100%; border:1px solid var(--line); border-radius:8px; background:#edf0ea; object-fit:cover; }
+    .brand-card img { aspect-ratio:16/10; }
+    .brand-card span { display:inline-flex; margin-top:10px; color:var(--blue); font-weight:700; }
+    .new-summary { background:var(--panel); border:1px solid var(--line); border-radius:8px; padding:16px; margin-bottom:18px; }
+    .new-summary h2 { margin:0 0 10px; font-size:20px; }
+    .new-list { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:10px; }
+    .new-item { border:1px solid var(--line); border-radius:8px; padding:10px; background:#fbfcfa; }
+    .new-item strong { display:block; }
+    .new-badge { display:inline-flex; align-items:center; border-radius:999px; background:#fff4df; color:#9a6816; padding:3px 8px; font-size:12px; font-weight:800; margin-left:6px; vertical-align:middle; }
+    .topnav { margin-bottom:12px; }
+    .topnav a { color:var(--blue); font-weight:700; text-decoration:none; }
+    .visual { background:var(--panel); border:1px solid var(--line); border-radius:8px; padding:14px; margin-bottom:16px; }
+    .visual img { max-height:520px; object-fit:contain; }
+    .activity-list { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:14px; }
+    .activity-card { background:var(--panel); border:1px solid var(--line); border-radius:8px; padding:16px; }
+    .activity-card.detail-ok { border-left:4px solid var(--green); }
+    .activity-card.detail-limited { border-left:4px solid var(--amber); }
+    .activity-card.detail-missing { border-left:4px solid #a8b1ac; }
+    .activity-head { display:grid; grid-template-columns:36px minmax(0,1fr); gap:10px; align-items:start; margin-bottom:12px; }
+    .index { display:inline-grid; place-items:center; width:30px; height:30px; border-radius:999px; background:var(--soft); color:var(--green); font-weight:800; }
+    .detail-shot-link { display:block; margin:8px 0 12px; }
+    .detail-shot { width:100%; max-height:360px; object-fit:cover; object-position:top; border:1px solid var(--line); border-radius:8px; background:#edf0ea; }
+    dl { display:grid; gap:8px; margin:0; }
+    dl div { display:grid; grid-template-columns:150px minmax(0,1fr); gap:10px; border-top:1px solid var(--line); padding-top:8px; }
+    dt { color:var(--muted); font-size:12px; font-weight:800; }
+    dd { margin:0; font-size:13px; }
+    .missing-text { color:var(--muted); }
+    .detail-pill { display:inline-flex; align-items:center; border-radius:999px; padding:3px 8px; font-size:12px; font-weight:800; }
+    .ok-pill { background:#e5f3ed; color:var(--green); }
+    .limited-pill { background:#fff4df; color:var(--amber); }
+    .fallback-pill { background:#eef0ea; color:var(--muted); }
+    .detail-excerpt { margin-top:12px; border-top:1px solid var(--line); padding-top:10px; }
+    .detail-excerpt summary { cursor:pointer; color:var(--blue); font-weight:800; }
+    .raw { background:var(--panel); border:1px solid var(--line); border-radius:8px; padding:14px; margin-top:16px; }
+    pre { white-space:pre-wrap; word-break:break-word; background:#111714; color:#eef6f0; padding:12px; border-radius:8px; max-height:320px; overflow:auto; font-size:12px; }
+    a { color:var(--blue); }
+    @media (max-width:900px) { .hero, .brand-grid, .brand-card, .activity-list, .new-list { grid-template-columns:1fr; } h1 { font-size:27px; } dl div { grid-template-columns:1fr; } }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <nav class="topnav"><a href="../index.html">返回品牌入口 / Back to brands</a></nav>
+    <section class="hero brand-hero">
+      <div>
+        <p class="eyebrow">Brand Promotion Page</p>
+        <h1>1xBet</h1>
+        <p class="sub">来源 Source：<a href="https://1xlite-19708.pro/en/bonus/rules">https://1xlite-19708.pro/en/bonus/rules</a></p>
+        <p class="sub">本页优先使用活动详情页截图与可见内容，输出要求、Trigger、Reward、Who、When、Summary、核心目的和数据预期。</p>
+        <p class="sub"><span class="status ok">可访问 / OK</span></p>
+      </div>
+      <div class="meta">
+        <b>活动 Activities</b>20<br>
+        <b>今日新增 New</b>20<br>
+        <b>详情 Details</b>20<br>
+        <b>详情截图 Shots</b>20<br>
+        <b>状态 Status</b>ok
+      </div>
+    </section>
+
+    <section class="visual">
+      <img src="../../browser-screenshots/1xbet-1xbet-bonus-rules.png" alt="1xBet screenshot">
+    </section>
+
+    <section class="activity-list">
+      <article class="activity-card detail-ok">
+    <div class="activity-head">
+      <span class="index">1</span>
+      <div>
+        <h2>1RegistrationLog inen / 12:13TOP-EVENTSUCLEuropa LeagueEPLIndian LeagueSerie ALaLigaUECLSportsBet on Your National TeamBet on Big Tournament <span class="new-badge">今日新增 / New Today</span></h2>
+        <p>返现 / Cashback · <span class="detail-pill ok-pill">详情页已采集 / Detail captured</span></p>
+      </div>
+    </div>
+<a class="detail-shot-link" href="../../detail-screenshots/1xbet/1xbet-promo-https-1xlite-19708-pro-en-bonus-rules.png"><img class="detail-shot" src="../../detail-screenshots/1xbet/1xbet-promo-https-1xlite-19708-pro-en-bonus-rules.png" alt="1RegistrationLog inen / 12:13TOP-EVENTSUCLEuropa LeagueEPLIndian LeagueSerie ALaLigaUECLSportsBet on Your National TeamBet on Big Tournament detail screenshot"></a>
+    <dl>
+      <div><dt>要求 / Requirements</dt><dd>Bet on Your National TeamBet on Big TournamentsLong-term betsLiveMulti-LIVEBet on Your National TeamMarble-LiveFast bet1xGa; bets, and superprizes are waiting for you!Bonus offer detailsLeague of winsPlace bets on English Premier League matches to; bets and take part in the prize draw!Bonus offer detailsNBA Win ShotThe season of big matches is your season of big wins!Bo</dd></div>
+      <div><dt>触发条件 / Trigger</dt><dd>用户在指定赛事/玩法下注触发</dd></div>
+      <div><dt>奖励方式 / Reward</dt><dd>20% cashback; 30% cashback; 100% bonus; 10% cashback</dd></div>
+      <div><dt>目标用户 / Who</dt><dd>Casino/Slots 用户；体育投注用户；加密货币充值用户</dd></div>
+      <div><dt>时间 / When</dt><dd>ate together - have a slots bonus on us! T&amp;Cs apply. 18+. Рlease gamble responsibly.Bonus offer details;  ate together - have a slots bonus on us! T&amp;Cs apply. 18+. Рlease gamble responsibly.Find out moreSport</dd></div>
+      <div><dt>Summary / 总结</dt><dd>1RegistrationLog inen / 12:13TOP-EVENTSUCLEuropa LeagueEPLIndian LeagueSerie ALaLigaUECLSportsBet on Your National TeamBet on Big Tournament 面向Casino/Slots 用户；体育投注用户；加密货币充值用户，通过“用户在指定赛事/玩法下注触发”推动用户完成关键行为；奖励为 20% cashback; 30% cashback; 100% bonus; 10% cashback。主要参与要求：Bet on Your National TeamBet on Big TournamentsLong-term betsLiveMulti-LIVEBet on Your National TeamMarble-LiveFast bet1xGa; bets, and superprizes are waiting for you!Bonus offer detailsLeague of winsPlace bets on English Premier League matches to; bets and take part in the prize draw!Bonus offer detailsNBA Win ShotThe season of big matches is your season of big wins!Bo。</dd></div>
+      <div><dt>核心目的 / Objective</dt><dd>提升留存、降低流失感知并延长生命周期</dd></div>
+      <div><dt>数据预期 / Expected Data</dt><dd>提升留存、降低流失感知并延长生命周期；预期观察：投注额、投注单量、有效投注用户数上升；Casino DAU、游戏启动次数、免费旋转转付费率上升；复玩率、留存率、VIP 活跃和净收入稳定性提升。</dd></div>
+      <div><dt>详情页来源 / Detail Source</dt><dd><a href="https://1xlite-19708.pro/en/bonus/rules">https://1xlite-19708.pro/en/bonus/rules</a></dd></div>
+    </dl>
+<details class="detail-excerpt"><summary>详情页原文摘要 / Detail excerpt</summary><pre>1RegistrationLog inen / 12:13TOP-EVENTSUCLEuropa LeagueEPLIndian LeagueSerie ALaLigaUECLSportsBet on Your National TeamBet on Big TournamentsLong-term betsLiveMulti-LIVEBet on Your National TeamMarble-LiveFast bet1xGamesCrashCrystalBurning HotScratch CardWestern slotUnder and Over 7SolitaireVampire Curse21Crash PointApple Of FortuneSpin and WinMidgard ZombiesMayan TombGems OdysseyShow allCasinoLive CasinoEsportsShow allPROMOMoreBingoTotoResultsStatisticsPokerTV GamesVirtual sportsOther gamesHunting and FishingScratch CardsLottoPlinkoInfinite Prize LeagueDaily prizes, weekly free bets, and superprizes are waiting for you!Bonus offer detailsLeague of winsPlace bets on English Premier League matches to get free bets and take part in the prize draw!Bonus offer detailsNBA Win ShotThe season of big matches is your season of big wins!Bonus offer detailsBarca 1xFamilyMés que un club: bet and win with the Blaugrana!Bonus offer detailsPSG: Champion’s ContractSign a contract with PSG and discover the way to exclusive prizes!Bonus offer detailsNo Risk BetGet a free bet if your bet loses!Bonus offer detailsGoalless FootballGet a 100% bet refund in the event of a goalless draw!Bonus offer detailsGrand Slam TournamentsBet on Grand Slam tournaments and win awesome prizes!Bonus offer detailsApp&amp;BonusPlace bets using the mobile app and get a fantastic bonus!Bonus offer detailsLucky DayWin 500 promo points every day!Bonus offer details1XPICK'EM IEM Cologne MajorMake a prediction and get a guaranteed bonus!Bonus offer detailsEsports EraChoose an event and place a risk-free bet!Bonus offer detailsChickPointHelp the chicken on its way and win superprizes!Bonus offer detailsSport Single100% up to 588 MYR – just 3 bets to the bonus!Bonus offer detailsHappy MondayGet cashback every Monday!Bonus offer detailsEsports Cashback BoomPlace bets on esports and get up to 20% cashback weekly!Bonus offer detailsOlé, La Liga!Bet on red-hot matches and get free bets!Bonus offer details1xTennis ChallengeGet cashback up to 18% for bets on the best tennis tournaments!Bonus offer detailsCrypto FreebetTop up your account with crypto and get 30% cashback!Bonus offer detailsPromoVisit ... [truncated]</pre></details>
+  </article>
+<article class="activity-card detail-ok">
+    <div class="activity-head">
+      <span class="index">2</span>
+      <div>
+        <h2>1RegistrationLog inen / 12:14TOP-EVENTSUCLEuropa LeagueEPLIndian LeagueSerie ALaLigaUECLSportsBet on Your National TeamBet on Big Tournament <span class="new-badge">今日新增 / New Today</span></h2>
+        <p>免费投注 / Free Bet · <span class="detail-pill ok-pill">详情页已采集 / Detail captured</span></p>
+      </div>
+    </div>
+<a class="detail-shot-link" href="../../detail-screenshots/1xbet/1xbet-infinite-prize-leaguedaily-prizes-weekly-free-bets-and-superprizes-are-wai.png"><img class="detail-shot" src="../../detail-screenshots/1xbet/1xbet-infinite-prize-leaguedaily-prizes-weekly-free-bets-and-superprizes-are-wai.png" alt="1RegistrationLog inen / 12:14TOP-EVENTSUCLEuropa LeagueEPLIndian LeagueSerie ALaLigaUECLSportsBet on Your National TeamBet on Big Tournament detail screenshot"></a>
+    <dl>
+      <div><dt>要求 / Requirements</dt><dd>odds of 1.50 or higher and accumulator bets containing 2 or more selections, with eac; odds of 1.40 or higher. At least one selection must be placed on the Indian Premier L; odds of 1.50 or higher. The promo code for a free bet is valid for 24 hours from the; odds of 1.00 are not eligible for this promotion.Draw date:The superprize draw will b</dd></div>
+      <div><dt>触发条件 / Trigger</dt><dd>点击参与/报名后，完成活动指定行为触发奖励</dd></div>
+      <div><dt>奖励方式 / Reward</dt><dd>12 MYR; up to 20 MYR; 20 MYR; 40 MYR; 79 MYR</dd></div>
+      <div><dt>目标用户 / Who</dt><dd>Casino/Slots 用户；体育投注用户；电竞投注用户</dd></div>
+      <div><dt>时间 / When</dt><dd>ated 5 promotional tickets. You can only start collecting the next 5 tickets to press the ball once you;  ated), email address, and country of residence.You must opt in to participating in bonus offers in My A</dd></div>
+      <div><dt>Summary / 总结</dt><dd>1RegistrationLog inen / 12:14TOP-EVENTSUCLEuropa LeagueEPLIndian LeagueSerie ALaLigaUECLSportsBet on Your National TeamBet on Big Tournament 面向Casino/Slots 用户；体育投注用户；电竞投注用户，通过“点击参与/报名后，完成活动指定行为触发奖励”推动用户完成关键行为；奖励为 12 MYR; up to 20 MYR; 20 MYR; 40 MYR; 79 MYR。主要参与要求：odds of 1.50 or higher and accumulator bets containing 2 or more selections, with eac; odds of 1.40 or higher. At least one selection must be placed on the Indian Premier L; odds of 1.50 or higher. The promo code for a free bet is valid for 24 hours from the; odds of 1.00 are not eligible for this promotion.Draw date:The superprize draw will b。</dd></div>
+      <div><dt>核心目的 / Objective</dt><dd>提升投注/游戏频次，制造排行榜竞争和连续参与</dd></div>
+      <div><dt>数据预期 / Expected Data</dt><dd>提升投注/游戏频次，制造排行榜竞争和连续参与；预期观察：投注额、投注单量、有效投注用户数上升；Casino DAU、游戏启动次数、免费旋转转付费率上升；连续参与天数、排名页访问、任务完成率上升。</dd></div>
+      <div><dt>详情页来源 / Detail Source</dt><dd><a href="https://1xlite-19708.pro/en/promotions/infinite-prize-league">https://1xlite-19708.pro/en/promotions/infinite-prize-league</a></dd></div>
+    </dl>
+<details class="detail-excerpt"><summary>详情页原文摘要 / Detail excerpt</summary><pre>1RegistrationLog inen / 12:14TOP-EVENTSUCLEuropa LeagueEPLIndian LeagueSerie ALaLigaUECLSportsBet on Your National TeamBet on Big TournamentsLong-term betsLiveMulti-LIVEBet on Your National TeamMarble-LiveFast bet1xGamesCrashCrystalBurning HotScratch CardWestern slotUnder and Over 7SolitaireVampire Curse21Crash PointApple Of FortuneSpin and WinMidgard ZombiesMayan TombGems OdysseyShow allCasinoLive CasinoEsportsShow allPROMOMoreBingoTotoResultsStatisticsPokerTV GamesVirtual sportsOther gamesHunting and FishingScratch CardsLottoPlinkoMain pageSpecial Offers and BonusesInfinite prize leagueDaily prizes, weekly free bets, and superprizes are waiting for you!Take partTerms and Conditionsopen the ballHow to take partPlace bets of at least 12 MYR on Indian Premier League 2026 matches and get promotional ticketsEvery day, upon collecting 5 promotional tickets, press on the ball and receive guaranteed bonusesAchieve a series of winning bets every week and get guaranteed free bets of up to 20 MYR!Place bets of at least 12 MYR on Indian Premier League 2026 matches and get promotional ticketsHow do I get a guaranteed bonus when pressing on the ball?The promotion page features a cricket ball with guaranteed bonuses inside. To receive your bonus, you need to collect 5 promotional tickets and press the ball. You can press the ball once per day, from 00:00 (UTC+3) to 23:59 (UTC+3), once you have accumulated 5 promotional tickets. You can only start collecting the next 5 tickets to press the ball once you have used your previous chance.Take partWhen you press on the ball, you can receive one of the following bonuses:1, 3, 5 USD free bet50, 100, 200 , 300, 500 bonus points5, 10, 20 promotional ticketsHow do I get a guaranteed free bet for a series of winning bets? Achieve a series of winning bets every week and get a free bet:3 winning bets in a rowFree BetwinBets3Key5 winning bets in a rowFree BetwinBets5Key*A series of winning bets includes bets placed on Indian Premier League 2026 matches settled as a win. If a bet loses, the series is reset and you can start again.What are the prizes?At the end of the promotion, winners will be selected at random from amo ... [truncated]</pre></details>
+  </article>
+<article class="activity-card detail-ok">
+    <div class="activity-head">
+      <span class="index">3</span>
+      <div>
+        <h2>1RegistrationLog inen / 12:14TOP-EVENTSUCLEuropa LeagueEPLIndian LeagueSerie ALaLigaUECLSportsBet on Your National TeamBet on Big Tournament <span class="new-badge">今日新增 / New Today</span></h2>
+        <p>免费投注 / Free Bet · <span class="detail-pill ok-pill">详情页已采集 / Detail captured</span></p>
+      </div>
+    </div>
+<a class="detail-shot-link" href="../../detail-screenshots/1xbet/1xbet-league-of-winsplace-bets-on-english-premier-league-matches-to-get-free-bet.png"><img class="detail-shot" src="../../detail-screenshots/1xbet/1xbet-league-of-winsplace-bets-on-english-premier-league-matches-to-get-free-bet.png" alt="1RegistrationLog inen / 12:14TOP-EVENTSUCLEuropa LeagueEPLIndian LeagueSerie ALaLigaUECLSportsBet on Your National TeamBet on Big Tournament detail screenshot"></a>
+    <dl>
+      <div><dt>要求 / Requirements</dt><dd>Place bets on English Premier League matches to get free bets and take part in the prize draw!Bonus offer details 1Registrati; Bet on Your National TeamBet on Big TournamentsLong-term betsLiveMulti-LIVEBet on Your National TeamMarble-LiveFast bet1xGa</dd></div>
+      <div><dt>触发条件 / Trigger</dt><dd>用户在指定赛事/玩法下注触发</dd></div>
+      <div><dt>奖励方式 / Reward</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>目标用户 / Who</dt><dd>Casino/Slots 用户；体育投注用户；电竞投注用户</dd></div>
+      <div><dt>时间 / When</dt><dd>活动页未明确；以页面实时倒计时或条款为准</dd></div>
+      <div><dt>Summary / 总结</dt><dd>1RegistrationLog inen / 12:14TOP-EVENTSUCLEuropa LeagueEPLIndian LeagueSerie ALaLigaUECLSportsBet on Your National TeamBet on Big Tournament 面向Casino/Slots 用户；体育投注用户；电竞投注用户，通过“用户在指定赛事/玩法下注触发”推动用户完成关键行为；奖励为 列表页未显示。主要参与要求：Place bets on English Premier League matches to get free bets and take part in the prize draw!Bonus offer details 1Registrati; Bet on Your National TeamBet on Big TournamentsLong-term betsLiveMulti-LIVEBet on Your National TeamMarble-LiveFast bet1xGa。</dd></div>
+      <div><dt>核心目的 / Objective</dt><dd>提升投注/游戏频次，制造排行榜竞争和连续参与</dd></div>
+      <div><dt>数据预期 / Expected Data</dt><dd>提升投注/游戏频次，制造排行榜竞争和连续参与；预期观察：投注额、投注单量、有效投注用户数上升；Casino DAU、游戏启动次数、免费旋转转付费率上升；连续参与天数、排名页访问、任务完成率上升。</dd></div>
+      <div><dt>详情页来源 / Detail Source</dt><dd><a href="https://1xlite-19708.pro/en/promotions/league-of-wins">https://1xlite-19708.pro/en/promotions/league-of-wins</a></dd></div>
+    </dl>
+<details class="detail-excerpt"><summary>详情页原文摘要 / Detail excerpt</summary><pre>1RegistrationLog inen / 12:14TOP-EVENTSUCLEuropa LeagueEPLIndian LeagueSerie ALaLigaUECLSportsBet on Your National TeamBet on Big TournamentsLong-term betsLiveMulti-LIVEBet on Your National TeamMarble-LiveFast bet1xGamesCrashCrystalBurning HotScratch CardWestern slotUnder and Over 7SolitaireVampire Curse21Crash PointApple Of FortuneSpin and WinMidgard ZombiesMayan TombGems OdysseyShow allCasinoLive CasinoEsportsShow allPROMOMoreBingoTotoResultsStatisticsPokerTV GamesVirtual sportsOther gamesHunting and FishingScratch CardsLottoPlinkoCustomer Support</pre></details>
+  </article>
+<article class="activity-card detail-ok">
+    <div class="activity-head">
+      <span class="index">4</span>
+      <div>
+        <h2>1RegistrationLog inen / 12:14TOP-EVENTSUCLEuropa LeagueEPLIndian LeagueSerie ALaLigaUECLSportsBet on Your National TeamBet on Big Tournament <span class="new-badge">今日新增 / New Today</span></h2>
+        <p>竞赛或抽奖 / Tournament or Raffle · <span class="detail-pill ok-pill">详情页已采集 / Detail captured</span></p>
+      </div>
+    </div>
+<a class="detail-shot-link" href="../../detail-screenshots/1xbet/1xbet-nba-win-shotthe-season-of-big-matches-is-your-season-of-big-wins-bonus-off.png"><img class="detail-shot" src="../../detail-screenshots/1xbet/1xbet-nba-win-shotthe-season-of-big-matches-is-your-season-of-big-wins-bonus-off.png" alt="1RegistrationLog inen / 12:14TOP-EVENTSUCLEuropa LeagueEPLIndian LeagueSerie ALaLigaUECLSportsBet on Your National TeamBet on Big Tournament detail screenshot"></a>
+    <dl>
+      <div><dt>要求 / Requirements</dt><dd>Bet on Your National TeamBet on Big TournamentsLong-term betsLiveMulti-LIVEBet on Your National TeamMarble-LiveFast bet1xGa</dd></div>
+      <div><dt>触发条件 / Trigger</dt><dd>用户在指定赛事/玩法下注触发</dd></div>
+      <div><dt>奖励方式 / Reward</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>目标用户 / Who</dt><dd>Casino/Slots 用户；体育投注用户；电竞投注用户</dd></div>
+      <div><dt>时间 / When</dt><dd>活动页未明确；以页面实时倒计时或条款为准</dd></div>
+      <div><dt>Summary / 总结</dt><dd>1RegistrationLog inen / 12:14TOP-EVENTSUCLEuropa LeagueEPLIndian LeagueSerie ALaLigaUECLSportsBet on Your National TeamBet on Big Tournament 面向Casino/Slots 用户；体育投注用户；电竞投注用户，通过“用户在指定赛事/玩法下注触发”推动用户完成关键行为；奖励为 列表页未显示。主要参与要求：Bet on Your National TeamBet on Big TournamentsLong-term betsLiveMulti-LIVEBet on Your National TeamMarble-LiveFast bet1xGa。</dd></div>
+      <div><dt>核心目的 / Objective</dt><dd>提升投注/游戏频次，制造排行榜竞争和连续参与</dd></div>
+      <div><dt>数据预期 / Expected Data</dt><dd>提升投注/游戏频次，制造排行榜竞争和连续参与；预期观察：投注额、投注单量、有效投注用户数上升；Casino DAU、游戏启动次数、免费旋转转付费率上升；连续参与天数、排名页访问、任务完成率上升。</dd></div>
+      <div><dt>详情页来源 / Detail Source</dt><dd><a href="https://1xlite-19708.pro/en/promotions/nba-win-shot">https://1xlite-19708.pro/en/promotions/nba-win-shot</a></dd></div>
+    </dl>
+<details class="detail-excerpt"><summary>详情页原文摘要 / Detail excerpt</summary><pre>1RegistrationLog inen / 12:14TOP-EVENTSUCLEuropa LeagueEPLIndian LeagueSerie ALaLigaUECLSportsBet on Your National TeamBet on Big TournamentsLong-term betsLiveMulti-LIVEBet on Your National TeamMarble-LiveFast bet1xGamesCrashCrystalBurning HotScratch CardWestern slotUnder and Over 7SolitaireVampire Curse21Crash PointApple Of FortuneSpin and WinMidgard ZombiesMayan TombGems OdysseyShow allCasinoLive CasinoEsportsShow allPROMOMoreBingoTotoResultsStatisticsPokerTV GamesVirtual sportsOther gamesHunting and FishingScratch CardsLottoPlinkoCustomer Support</pre></details>
+  </article>
+<article class="activity-card detail-ok">
+    <div class="activity-head">
+      <span class="index">5</span>
+      <div>
+        <h2>1RegistrationLog inen / 12:14TOP-EVENTSUCLEuropa LeagueEPLIndian LeagueSerie ALaLigaUECLSportsBet on Your National TeamBet on Big Tournament <span class="new-badge">今日新增 / New Today</span></h2>
+        <p>竞赛或抽奖 / Tournament or Raffle · <span class="detail-pill ok-pill">详情页已采集 / Detail captured</span></p>
+      </div>
+    </div>
+<a class="detail-shot-link" href="../../detail-screenshots/1xbet/1xbet-barca-1xfamilymes-que-un-club-bet-and-win-with-the-blaugrana-bonus-offer-d.png"><img class="detail-shot" src="../../detail-screenshots/1xbet/1xbet-barca-1xfamilymes-que-un-club-bet-and-win-with-the-blaugrana-bonus-offer-d.png" alt="1RegistrationLog inen / 12:14TOP-EVENTSUCLEuropa LeagueEPLIndian LeagueSerie ALaLigaUECLSportsBet on Your National TeamBet on Big Tournament detail screenshot"></a>
+    <dl>
+      <div><dt>要求 / Requirements</dt><dd>bet and win with the Blaugrana!Bonus offer details 1RegistrationLog inen / 12:14TOP-EVENTSUCLEuropa LeagueEPLIndian LeagueS; Bet on Your National TeamBet on Big TournamentsLong-term betsLiveMulti-LIVEBet on Your National TeamMarble-LiveFast bet1xGa</dd></div>
+      <div><dt>触发条件 / Trigger</dt><dd>用户在指定赛事/玩法下注触发</dd></div>
+      <div><dt>奖励方式 / Reward</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>目标用户 / Who</dt><dd>Casino/Slots 用户；体育投注用户；电竞投注用户</dd></div>
+      <div><dt>时间 / When</dt><dd>活动页未明确；以页面实时倒计时或条款为准</dd></div>
+      <div><dt>Summary / 总结</dt><dd>1RegistrationLog inen / 12:14TOP-EVENTSUCLEuropa LeagueEPLIndian LeagueSerie ALaLigaUECLSportsBet on Your National TeamBet on Big Tournament 面向Casino/Slots 用户；体育投注用户；电竞投注用户，通过“用户在指定赛事/玩法下注触发”推动用户完成关键行为；奖励为 列表页未显示。主要参与要求：bet and win with the Blaugrana!Bonus offer details 1RegistrationLog inen / 12:14TOP-EVENTSUCLEuropa LeagueEPLIndian LeagueS; Bet on Your National TeamBet on Big TournamentsLong-term betsLiveMulti-LIVEBet on Your National TeamMarble-LiveFast bet1xGa。</dd></div>
+      <div><dt>核心目的 / Objective</dt><dd>提升投注/游戏频次，制造排行榜竞争和连续参与</dd></div>
+      <div><dt>数据预期 / Expected Data</dt><dd>提升投注/游戏频次，制造排行榜竞争和连续参与；预期观察：投注额、投注单量、有效投注用户数上升；Casino DAU、游戏启动次数、免费旋转转付费率上升；连续参与天数、排名页访问、任务完成率上升。</dd></div>
+      <div><dt>详情页来源 / Detail Source</dt><dd><a href="https://1xlite-19708.pro/en/promotions/barca-1x-family">https://1xlite-19708.pro/en/promotions/barca-1x-family</a></dd></div>
+    </dl>
+<details class="detail-excerpt"><summary>详情页原文摘要 / Detail excerpt</summary><pre>1RegistrationLog inen / 12:14TOP-EVENTSUCLEuropa LeagueEPLIndian LeagueSerie ALaLigaUECLSportsBet on Your National TeamBet on Big TournamentsLong-term betsLiveMulti-LIVEBet on Your National TeamMarble-LiveFast bet1xGamesCrashCrystalBurning HotScratch CardWestern slotUnder and Over 7SolitaireVampire Curse21Crash PointApple Of FortuneSpin and WinMidgard ZombiesMayan TombGems OdysseyShow allCasinoLive CasinoEsportsShow allPROMOMoreBingoTotoResultsStatisticsPokerTV GamesVirtual sportsOther gamesHunting and FishingScratch CardsLottoPlinkoCustomer Support</pre></details>
+  </article>
+<article class="activity-card detail-ok">
+    <div class="activity-head">
+      <span class="index">6</span>
+      <div>
+        <h2>1RegistrationLog inen / 12:14TOP-EVENTSUCLEuropa LeagueEPLIndian LeagueSerie ALaLigaUECLSportsBet on Your National TeamBet on Big Tournament <span class="new-badge">今日新增 / New Today</span></h2>
+        <p>竞赛或抽奖 / Tournament or Raffle · <span class="detail-pill ok-pill">详情页已采集 / Detail captured</span></p>
+      </div>
+    </div>
+<a class="detail-shot-link" href="../../detail-screenshots/1xbet/1xbet-psg-champion-s-contractsign-a-contract-with-psg-and-discover-the-way-to-ex.png"><img class="detail-shot" src="../../detail-screenshots/1xbet/1xbet-psg-champion-s-contractsign-a-contract-with-psg-and-discover-the-way-to-ex.png" alt="1RegistrationLog inen / 12:14TOP-EVENTSUCLEuropa LeagueEPLIndian LeagueSerie ALaLigaUECLSportsBet on Your National TeamBet on Big Tournament detail screenshot"></a>
+    <dl>
+      <div><dt>要求 / Requirements</dt><dd>Bet on Your National TeamBet on Big TournamentsLong-term betsLiveMulti-LIVEBet on Your National TeamMarble-LiveFast bet1xGa</dd></div>
+      <div><dt>触发条件 / Trigger</dt><dd>用户在指定赛事/玩法下注触发</dd></div>
+      <div><dt>奖励方式 / Reward</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>目标用户 / Who</dt><dd>Casino/Slots 用户；体育投注用户；电竞投注用户</dd></div>
+      <div><dt>时间 / When</dt><dd>活动页未明确；以页面实时倒计时或条款为准</dd></div>
+      <div><dt>Summary / 总结</dt><dd>1RegistrationLog inen / 12:14TOP-EVENTSUCLEuropa LeagueEPLIndian LeagueSerie ALaLigaUECLSportsBet on Your National TeamBet on Big Tournament 面向Casino/Slots 用户；体育投注用户；电竞投注用户，通过“用户在指定赛事/玩法下注触发”推动用户完成关键行为；奖励为 列表页未显示。主要参与要求：Bet on Your National TeamBet on Big TournamentsLong-term betsLiveMulti-LIVEBet on Your National TeamMarble-LiveFast bet1xGa。</dd></div>
+      <div><dt>核心目的 / Objective</dt><dd>提升投注/游戏频次，制造排行榜竞争和连续参与</dd></div>
+      <div><dt>数据预期 / Expected Data</dt><dd>提升投注/游戏频次，制造排行榜竞争和连续参与；预期观察：投注额、投注单量、有效投注用户数上升；Casino DAU、游戏启动次数、免费旋转转付费率上升；连续参与天数、排名页访问、任务完成率上升。</dd></div>
+      <div><dt>详情页来源 / Detail Source</dt><dd><a href="https://1xlite-19708.pro/en/promotions/psg-champions-contract">https://1xlite-19708.pro/en/promotions/psg-champions-contract</a></dd></div>
+    </dl>
+<details class="detail-excerpt"><summary>详情页原文摘要 / Detail excerpt</summary><pre>1RegistrationLog inen / 12:14TOP-EVENTSUCLEuropa LeagueEPLIndian LeagueSerie ALaLigaUECLSportsBet on Your National TeamBet on Big TournamentsLong-term betsLiveMulti-LIVEBet on Your National TeamMarble-LiveFast bet1xGamesCrashCrystalBurning HotScratch CardWestern slotUnder and Over 7SolitaireVampire Curse21Crash PointApple Of FortuneSpin and WinMidgard ZombiesMayan TombGems OdysseyShow allCasinoLive CasinoEsportsShow allPROMOMoreBingoTotoResultsStatisticsPokerTV GamesVirtual sportsOther gamesHunting and FishingScratch CardsLottoPlinkoCustomer Support</pre></details>
+  </article>
+<article class="activity-card detail-ok">
+    <div class="activity-head">
+      <span class="index">7</span>
+      <div>
+        <h2>1RegistrationLog inen / 12:14TOP-EVENTSUCLEuropa LeagueEPLIndian LeagueSerie ALaLigaUECLSportsBet on Your National TeamBet on Big Tournament <span class="new-badge">今日新增 / New Today</span></h2>
+        <p>免费投注 / Free Bet · <span class="detail-pill ok-pill">详情页已采集 / Detail captured</span></p>
+      </div>
+    </div>
+<a class="detail-shot-link" href="../../detail-screenshots/1xbet/1xbet-no-risk-betget-a-free-bet-if-your-bet-loses-bonus-offer-details-https-1xli.png"><img class="detail-shot" src="../../detail-screenshots/1xbet/1xbet-no-risk-betget-a-free-bet-if-your-bet-loses-bonus-offer-details-https-1xli.png" alt="1RegistrationLog inen / 12:14TOP-EVENTSUCLEuropa LeagueEPLIndian LeagueSerie ALaLigaUECLSportsBet on Your National TeamBet on Big Tournament detail screenshot"></a>
+    <dl>
+      <div><dt>要求 / Requirements</dt><dd>BetGet a free bet if your bet loses!Bonus offer details 1RegistrationLog inen / 12:14TOP-EVENTSUCLEuropa LeagueEPLIndian Le; Bet on Your National TeamBet on Big TournamentsLong-term betsLiveMulti-LIVEBet on Your National TeamMarble-LiveFast bet1xGa; BetRisk-FreeBetGet a free bet if you lose!Place a betTerms and ConditionsLog in on the 1xBet websitePlace bets on eventsGet</dd></div>
+      <div><dt>触发条件 / Trigger</dt><dd>用户在指定赛事/玩法下注触发</dd></div>
+      <div><dt>奖励方式 / Reward</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>目标用户 / Who</dt><dd>Casino/Slots 用户；体育投注用户；电竞投注用户</dd></div>
+      <div><dt>时间 / When</dt><dd>活动页未明确；以页面实时倒计时或条款为准</dd></div>
+      <div><dt>Summary / 总结</dt><dd>1RegistrationLog inen / 12:14TOP-EVENTSUCLEuropa LeagueEPLIndian LeagueSerie ALaLigaUECLSportsBet on Your National TeamBet on Big Tournament 面向Casino/Slots 用户；体育投注用户；电竞投注用户，通过“用户在指定赛事/玩法下注触发”推动用户完成关键行为；奖励为 列表页未显示。主要参与要求：BetGet a free bet if your bet loses!Bonus offer details 1RegistrationLog inen / 12:14TOP-EVENTSUCLEuropa LeagueEPLIndian Le; Bet on Your National TeamBet on Big TournamentsLong-term betsLiveMulti-LIVEBet on Your National TeamMarble-LiveFast bet1xGa; BetRisk-FreeBetGet a free bet if you lose!Place a betTerms and ConditionsLog in on the 1xBet websitePlace bets on eventsGet。</dd></div>
+      <div><dt>核心目的 / Objective</dt><dd>提升投注/游戏频次，制造排行榜竞争和连续参与</dd></div>
+      <div><dt>数据预期 / Expected Data</dt><dd>提升投注/游戏频次，制造排行榜竞争和连续参与；预期观察：投注额、投注单量、有效投注用户数上升；Casino DAU、游戏启动次数、免费旋转转付费率上升；连续参与天数、排名页访问、任务完成率上升。</dd></div>
+      <div><dt>详情页来源 / Detail Source</dt><dd><a href="https://1xlite-19708.pro/en/promotions/no-risk-bet">https://1xlite-19708.pro/en/promotions/no-risk-bet</a></dd></div>
+    </dl>
+<details class="detail-excerpt"><summary>详情页原文摘要 / Detail excerpt</summary><pre>1RegistrationLog inen / 12:14TOP-EVENTSUCLEuropa LeagueEPLIndian LeagueSerie ALaLigaUECLSportsBet on Your National TeamBet on Big TournamentsLong-term betsLiveMulti-LIVEBet on Your National TeamMarble-LiveFast bet1xGamesCrashCrystalBurning HotScratch CardWestern slotUnder and Over 7SolitaireVampire Curse21Crash PointApple Of FortuneSpin and WinMidgard ZombiesMayan TombGems OdysseyShow allCasinoLive CasinoEsportsShow allPROMOMoreBingoTotoResultsStatisticsPokerTV GamesVirtual sportsOther gamesHunting and FishingScratch CardsLottoPlinkoMain pageSpecial Offers and BonusesNo Risk BetRisk-FreeBetGet a free bet if you lose!Place a betTerms and ConditionsLog in on the 1xBet websitePlace bets on eventsGet a refund if your bet loses!Log in on the 1xBet websiteUpcoming eventsUEFA Europa LeagueFreiburg vs Aston Villa20 May 202603days14hours45minutes33secondsPlace a betMaximum refund amount: 150 USD. Bets placed starting from 14:00 12.05.2026 (UTC +3) are eligibleUEFA Conference LeagueCrystal Palace vs Rayo Vallecano27 May 202610days14hours45minutes33secondsPlace a betMaximum refund amount: 100 USD. Bets placed starting from 14:00 12.05.2026 (UTC +3) are eligibleUEFA Champions LeagueParis Saint-Germain vs Arsenal30 May 202613days11hours45minutes33secondsPlace a betMaximum refund amount: 150 USD. Bets placed starting from 17:00 07.05.2026 (UTC +3) are eligibleTerms and Conditions:Сделайте одиночную ставку на точный счет по Линии/Live на матчи, которые представлены на странице акции.Учитывается только первая ставка на матчи с момента начала акции (на один матч засчитывается одна ставка). Если сделанная ставка на точный счет проиграет — вы получите фрибет, равный сумме проигранной ставки, но не более чем максимальная сумма фрибета. Если ваша первая ставка на это событие выиграет (или вид ставки будет отличным от одиночной на точный счет), фрибет в таком случае не зачисляется.В акции учитываются только ставки на основное время матчей.Только зарегистрированные участники могут принимать участие в акции. Обязательны для заполнения поля: фамилия, имя, номер мобильного телефона (активация обязательна), электронный адрес (email), страна проживания.Для участия в акц ... [truncated]</pre></details>
+  </article>
+<article class="activity-card detail-ok">
+    <div class="activity-head">
+      <span class="index">8</span>
+      <div>
+        <h2>1RegistrationLog inen / 12:14TOP-EVENTSUCLEuropa LeagueEPLIndian LeagueSerie ALaLigaUECLSportsBet on Your National TeamBet on Big Tournament <span class="new-badge">今日新增 / New Today</span></h2>
+        <p>竞赛或抽奖 / Tournament or Raffle · <span class="detail-pill ok-pill">详情页已采集 / Detail captured</span></p>
+      </div>
+    </div>
+<a class="detail-shot-link" href="../../detail-screenshots/1xbet/1xbet-goalless-footballget-a-100-bet-refund-in-the-event-of-a-goalless-draw-bonu.png"><img class="detail-shot" src="../../detail-screenshots/1xbet/1xbet-goalless-footballget-a-100-bet-refund-in-the-event-of-a-goalless-draw-bonu.png" alt="1RegistrationLog inen / 12:14TOP-EVENTSUCLEuropa LeagueEPLIndian LeagueSerie ALaLigaUECLSportsBet on Your National TeamBet on Big Tournament detail screenshot"></a>
+    <dl>
+      <div><dt>要求 / Requirements</dt><dd>bet refund in the event of a goalless draw!Bonus offer details 1RegistrationLog inen / 12:14TOP-EVENTSUCLEuropa LeagueEPLIn; Bet on Your National TeamBet on Big TournamentsLong-term betsLiveMulti-LIVEBet on Your National TeamMarble-LiveFast bet1xGa</dd></div>
+      <div><dt>触发条件 / Trigger</dt><dd>用户在指定赛事/玩法下注触发</dd></div>
+      <div><dt>奖励方式 / Reward</dt><dd>100%</dd></div>
+      <div><dt>目标用户 / Who</dt><dd>Casino/Slots 用户；体育投注用户；电竞投注用户</dd></div>
+      <div><dt>时间 / When</dt><dd>活动页未明确；以页面实时倒计时或条款为准</dd></div>
+      <div><dt>Summary / 总结</dt><dd>1RegistrationLog inen / 12:14TOP-EVENTSUCLEuropa LeagueEPLIndian LeagueSerie ALaLigaUECLSportsBet on Your National TeamBet on Big Tournament 面向Casino/Slots 用户；体育投注用户；电竞投注用户，通过“用户在指定赛事/玩法下注触发”推动用户完成关键行为；奖励为 100%。主要参与要求：bet refund in the event of a goalless draw!Bonus offer details 1RegistrationLog inen / 12:14TOP-EVENTSUCLEuropa LeagueEPLIn; Bet on Your National TeamBet on Big TournamentsLong-term betsLiveMulti-LIVEBet on Your National TeamMarble-LiveFast bet1xGa。</dd></div>
+      <div><dt>核心目的 / Objective</dt><dd>提升投注/游戏频次，制造排行榜竞争和连续参与</dd></div>
+      <div><dt>数据预期 / Expected Data</dt><dd>提升投注/游戏频次，制造排行榜竞争和连续参与；预期观察：投注额、投注单量、有效投注用户数上升；Casino DAU、游戏启动次数、免费旋转转付费率上升；连续参与天数、排名页访问、任务完成率上升。</dd></div>
+      <div><dt>详情页来源 / Detail Source</dt><dd><a href="https://1xlite-19708.pro/en/promotions/goalless-football">https://1xlite-19708.pro/en/promotions/goalless-football</a></dd></div>
+    </dl>
+<details class="detail-excerpt"><summary>详情页原文摘要 / Detail excerpt</summary><pre>1RegistrationLog inen / 12:14TOP-EVENTSUCLEuropa LeagueEPLIndian LeagueSerie ALaLigaUECLSportsBet on Your National TeamBet on Big TournamentsLong-term betsLiveMulti-LIVEBet on Your National TeamMarble-LiveFast bet1xGamesCrashCrystalBurning HotScratch CardWestern slotUnder and Over 7SolitaireVampire Curse21Crash PointApple Of FortuneSpin and WinMidgard ZombiesMayan TombGems OdysseyShow allCasinoLive CasinoEsportsShow allPROMOMoreBingoTotoResultsStatisticsPokerTV GamesVirtual sportsOther gamesHunting and FishingScratch CardsLottoPlinkoCustomer Support</pre></details>
+  </article>
+<article class="activity-card detail-ok">
+    <div class="activity-head">
+      <span class="index">9</span>
+      <div>
+        <h2>1RegistrationLog inen / 12:14TOP-EVENTSUCLEuropa LeagueEPLIndian LeagueSerie ALaLigaUECLSportsBet on Your National TeamBet on Big Tournament <span class="new-badge">今日新增 / New Today</span></h2>
+        <p>竞赛或抽奖 / Tournament or Raffle · <span class="detail-pill ok-pill">详情页已采集 / Detail captured</span></p>
+      </div>
+    </div>
+<a class="detail-shot-link" href="../../detail-screenshots/1xbet/1xbet-grand-slam-tournamentsbet-on-grand-slam-tournaments-and-win-awesome-prizes.png"><img class="detail-shot" src="../../detail-screenshots/1xbet/1xbet-grand-slam-tournamentsbet-on-grand-slam-tournaments-and-win-awesome-prizes.png" alt="1RegistrationLog inen / 12:14TOP-EVENTSUCLEuropa LeagueEPLIndian LeagueSerie ALaLigaUECLSportsBet on Your National TeamBet on Big Tournament detail screenshot"></a>
+    <dl>
+      <div><dt>要求 / Requirements</dt><dd>Bet on Grand Slam tournaments and win awesome prizes!Bonus offer details 1RegistrationLog inen / 12:14TOP-EVENTSUCLEuropa L; Bet on Your National TeamBet on Big TournamentsLong-term betsLiveMulti-LIVEBet on Your National TeamMarble-LiveFast bet1xGa; Place bets of at least 2 USD on matches in the 2026 Grand Slam tournaments (Australian Open, Roland Garros, Wimbledon, and th</dd></div>
+      <div><dt>触发条件 / Trigger</dt><dd>用户在指定赛事/玩法下注触发</dd></div>
+      <div><dt>奖励方式 / Reward</dt><dd>10%; 20%; 30%; 40%; 50%</dd></div>
+      <div><dt>目标用户 / Who</dt><dd>Casino/Slots 用户；体育投注用户；电竞投注用户</dd></div>
+      <div><dt>时间 / When</dt><dd>ate.Results of the drawBonus points10 winnersBonus points20 winnersBonus points30 winnersBonus points40</dd></div>
+      <div><dt>Summary / 总结</dt><dd>1RegistrationLog inen / 12:14TOP-EVENTSUCLEuropa LeagueEPLIndian LeagueSerie ALaLigaUECLSportsBet on Your National TeamBet on Big Tournament 面向Casino/Slots 用户；体育投注用户；电竞投注用户，通过“用户在指定赛事/玩法下注触发”推动用户完成关键行为；奖励为 10%; 20%; 30%; 40%; 50%。主要参与要求：Bet on Grand Slam tournaments and win awesome prizes!Bonus offer details 1RegistrationLog inen / 12:14TOP-EVENTSUCLEuropa L; Bet on Your National TeamBet on Big TournamentsLong-term betsLiveMulti-LIVEBet on Your National TeamMarble-LiveFast bet1xGa; Place bets of at least 2 USD on matches in the 2026 Grand Slam tournaments (Australian Open, Roland Garros, Wimbledon, and th。</dd></div>
+      <div><dt>核心目的 / Objective</dt><dd>提升投注/游戏频次，制造排行榜竞争和连续参与</dd></div>
+      <div><dt>数据预期 / Expected Data</dt><dd>提升投注/游戏频次，制造排行榜竞争和连续参与；预期观察：投注额、投注单量、有效投注用户数上升；Casino DAU、游戏启动次数、免费旋转转付费率上升；连续参与天数、排名页访问、任务完成率上升。</dd></div>
+      <div><dt>详情页来源 / Detail Source</dt><dd><a href="https://1xlite-19708.pro/en/promotions/grand-slam-tournaments-2026">https://1xlite-19708.pro/en/promotions/grand-slam-tournaments-2026</a></dd></div>
+    </dl>
+<details class="detail-excerpt"><summary>详情页原文摘要 / Detail excerpt</summary><pre>1RegistrationLog inen / 12:14TOP-EVENTSUCLEuropa LeagueEPLIndian LeagueSerie ALaLigaUECLSportsBet on Your National TeamBet on Big TournamentsLong-term betsLiveMulti-LIVEBet on Your National TeamMarble-LiveFast bet1xGamesCrashCrystalBurning HotScratch CardWestern slotUnder and Over 7SolitaireVampire Curse21Crash PointApple Of FortuneSpin and WinMidgard ZombiesMayan TombGems OdysseyShow allCasinoLive CasinoEsportsShow allPROMOMoreBingoTotoResultsStatisticsPokerTV GamesVirtual sportsOther gamesHunting and FishingScratch CardsLottoPlinkoMain pageSpecial Offers and BonusesGrand Slam TournamentsThe Parisian ChallengeGrand Slam TournamentsTake partTerms and ConditionsHow to take partPlace bets of at least 2 USD on matches in the 2026 Grand Slam tournaments (Australian Open, Roland Garros, Wimbledon, and the US Open)Earn promotional tickets for each bet on the featured tournaments to take part in superprize draws on the offer page!Get guaranteed bonuses in the form of free bets for your bets!How do I get a guaranteed bonus? For bets on the Australian Open, Roland Garros, Wimbledon, and the US Open, participants will receive a guaranteed bonus upon completion of each tournament.The bonus amount depends on the number of eligible bets you place on the tournament:2-5 bets10% of the average stake6-8 bets20% of the average stake9-11 bets30% of the average stake12-14 bets40% of the average stake15 or more bets50% of the average stakeThe maximum free bet amount is 300 USDIf the free bet amount is less than 0.5 USD, it will not be credited.Your bets counter123456789101112131415110%234520%67830%9101140%12131450%15+What are the prizes?At the end of each tournament, winners will be selected at random from among all the promotional tickets issued for the corresponding tournament to receive the following prizes:Roland Garros18.05.2026 — 07.06.2026Prize money5000 USD3 winnerssmartphoneApple iPhone 17 Pro Max5 winnerssmartphoneSamsung Galaxy Flip710 winnersSmart WatchApple Watch Ultra 210 winnersheadphonesSamsung Galaxy Buds3 Pro20 winnersFree bets100 USD10 winners50 USD30 winners20 USD50 winners10 USD70 winners5 USD100 winners*cash prizes and free bets will be cred ... [truncated]</pre></details>
+  </article>
+<article class="activity-card detail-ok">
+    <div class="activity-head">
+      <span class="index">10</span>
+      <div>
+        <h2>1RegistrationLog inen / 12:14TOP-EVENTSUCLEuropa LeagueEPLIndian LeagueSerie ALaLigaUECLSportsBet on Your National TeamBet on Big Tournament <span class="new-badge">今日新增 / New Today</span></h2>
+        <p>返现 / Cashback · <span class="detail-pill ok-pill">详情页已采集 / Detail captured</span></p>
+      </div>
+    </div>
+<a class="detail-shot-link" href="../../detail-screenshots/1xbet/1xbet-app-bonusplace-bets-using-the-mobile-app-and-get-a-fantastic-bonus-bonus-o.png"><img class="detail-shot" src="../../detail-screenshots/1xbet/1xbet-app-bonusplace-bets-using-the-mobile-app-and-get-a-fantastic-bonus-bonus-o.png" alt="1RegistrationLog inen / 12:14TOP-EVENTSUCLEuropa LeagueEPLIndian LeagueSerie ALaLigaUECLSportsBet on Your National TeamBet on Big Tournament detail screenshot"></a>
+    <dl>
+      <div><dt>要求 / Requirements</dt><dd>odds of 1.50 or higher on any sports events and to accumulator bets comprising 2 or m; odds of 1.40 or higher.The minimum stake is 5 MYR.The maximum bonus is 460 MYR.If the; odds of 1.00 are not included in this offer.To wager the bonus, switch to your bonus; odds of 1.40 or higher. The start and settlement dates of all selections must be no l</dd></div>
+      <div><dt>触发条件 / Trigger</dt><dd>点击参与/报名后，完成活动指定行为触发奖励</dd></div>
+      <div><dt>奖励方式 / Reward</dt><dd>20% cashback; 30% cashback; 100% bonus; 10% cashback</dd></div>
+      <div><dt>目标用户 / Who</dt><dd>Casino/Slots 用户；体育投注用户；电竞投注用户</dd></div>
+      <div><dt>时间 / When</dt><dd>ated), email address, and country of residence.You must opt in to participating in bonus offers in My A;  ates of all selections must be no later than the validity period of this offer.The bonus is deemed to h</dd></div>
+      <div><dt>Summary / 总结</dt><dd>1RegistrationLog inen / 12:14TOP-EVENTSUCLEuropa LeagueEPLIndian LeagueSerie ALaLigaUECLSportsBet on Your National TeamBet on Big Tournament 面向Casino/Slots 用户；体育投注用户；电竞投注用户，通过“点击参与/报名后，完成活动指定行为触发奖励”推动用户完成关键行为；奖励为 20% cashback; 30% cashback; 100% bonus; 10% cashback。主要参与要求：odds of 1.50 or higher on any sports events and to accumulator bets comprising 2 or m; odds of 1.40 or higher.The minimum stake is 5 MYR.The maximum bonus is 460 MYR.If the; odds of 1.00 are not included in this offer.To wager the bonus, switch to your bonus; odds of 1.40 or higher. The start and settlement dates of all selections must be no l。</dd></div>
+      <div><dt>核心目的 / Objective</dt><dd>提升留存、降低流失感知并延长生命周期</dd></div>
+      <div><dt>数据预期 / Expected Data</dt><dd>提升留存、降低流失感知并延长生命周期；预期观察：投注额、投注单量、有效投注用户数上升；Casino DAU、游戏启动次数、免费旋转转付费率上升；复玩率、留存率、VIP 活跃和净收入稳定性提升。</dd></div>
+      <div><dt>详情页来源 / Detail Source</dt><dd><a href="https://1xlite-19708.pro/en/bonus/rules/app-bonus">https://1xlite-19708.pro/en/bonus/rules/app-bonus</a></dd></div>
+    </dl>
+<details class="detail-excerpt"><summary>详情页原文摘要 / Detail excerpt</summary><pre>1RegistrationLog inen / 12:14TOP-EVENTSUCLEuropa LeagueEPLIndian LeagueSerie ALaLigaUECLSportsBet on Your National TeamBet on Big TournamentsLong-term betsLiveMulti-LIVEBet on Your National TeamMarble-LiveFast bet1xGamesCrashCrystalBurning HotScratch CardWestern slotUnder and Over 7SolitaireVampire Curse21Crash PointApple Of FortuneSpin and WinMidgard ZombiesMayan TombGems OdysseyShow allCasinoLive CasinoEsportsShow allPROMOMoreBingoTotoResultsStatisticsPokerTV GamesVirtual sportsOther gamesHunting and FishingScratch CardsLottoPlinkoPromoApp&amp;BonusApp&amp;BonusPlace bets using the mobile app and get a fantastic bonus!RegistrationHow it works:Register or log in to 1xBet.Press the &quot;Take part&quot; button on the 1xBet bonus offer pagePlace bets of at least 5 MYR on any sports events using the 1xBet app (iOS or Android).Get weekly cashback credited to your bonus account worth up to 25% of the average stake of your bets placed using the 1xBet app.If you've placed:3-5 bets - 10% of the average stake6-9 bets - 15% of the average stake10 or more bets - 25% of the average stakeBonus details:This bonus offer will continue indefinitely.Only registered customers can take part in this promotion and the following profile fields must be filled in: full name, mobile phone number (must be activated), email address, and country of residence.You must opt in to participating in bonus offers in My Account (Account Settings — Participation in bonus offers).To take part in this bonus offer, you need to press the “Take part” button on the offer page.Place eligible bets between Monday (00:00 +3 UTC) and Sunday (23:59 +3 UTC) to get a cashback bonus based on the average stake of your bets placed using the 1xBet app (iOS or Android).Cashback will be automatically credited to your bonus account every Tuesday based on the results of the preceding week.This bonus offer only applies to eligible bets placed using the 1xBet app (iOS/Android).This bonus offer applies to single bets at odds of 1.50 or higher on any sports events and to accumulator bets comprising 2 or more selections, each selection at odds of 1.40 or higher.The minimum stake is 5 MYR.The maximum bonus is 460 MYR.If the ... [truncated]</pre></details>
+  </article>
+<article class="activity-card detail-ok">
+    <div class="activity-head">
+      <span class="index">11</span>
+      <div>
+        <h2>1RegistrationLog inen / 12:14TOP-EVENTSUCLEuropa LeagueEPLIndian LeagueSerie ALaLigaUECLSportsBet on Your National TeamBet on Big Tournament <span class="new-badge">今日新增 / New Today</span></h2>
+        <p>竞赛或抽奖 / Tournament or Raffle · <span class="detail-pill ok-pill">详情页已采集 / Detail captured</span></p>
+      </div>
+    </div>
+<a class="detail-shot-link" href="../../detail-screenshots/1xbet/1xbet-lucky-daywin-500-promo-points-every-day-bonus-offer-details-https-1xlite-1.png"><img class="detail-shot" src="../../detail-screenshots/1xbet/1xbet-lucky-daywin-500-promo-points-every-day-bonus-offer-details-https-1xlite-1.png" alt="1RegistrationLog inen / 12:14TOP-EVENTSUCLEuropa LeagueEPLIndian LeagueSerie ALaLigaUECLSportsBet on Your National TeamBet on Big Tournament detail screenshot"></a>
+    <dl>
+      <div><dt>要求 / Requirements</dt><dd>Bet on Your National TeamBet on Big TournamentsLong-term betsLiveMulti-LIVEBet on Your National TeamMarble-LiveFast bet1xGa</dd></div>
+      <div><dt>触发条件 / Trigger</dt><dd>用户在指定赛事/玩法下注触发</dd></div>
+      <div><dt>奖励方式 / Reward</dt><dd>500 promo points</dd></div>
+      <div><dt>目标用户 / Who</dt><dd>Casino/Slots 用户；体育投注用户；电竞投注用户</dd></div>
+      <div><dt>时间 / When</dt><dd>活动页未明确；以页面实时倒计时或条款为准</dd></div>
+      <div><dt>Summary / 总结</dt><dd>1RegistrationLog inen / 12:14TOP-EVENTSUCLEuropa LeagueEPLIndian LeagueSerie ALaLigaUECLSportsBet on Your National TeamBet on Big Tournament 面向Casino/Slots 用户；体育投注用户；电竞投注用户，通过“用户在指定赛事/玩法下注触发”推动用户完成关键行为；奖励为 500 promo points。主要参与要求：Bet on Your National TeamBet on Big TournamentsLong-term betsLiveMulti-LIVEBet on Your National TeamMarble-LiveFast bet1xGa。</dd></div>
+      <div><dt>核心目的 / Objective</dt><dd>提升投注/游戏频次，制造排行榜竞争和连续参与</dd></div>
+      <div><dt>数据预期 / Expected Data</dt><dd>提升投注/游戏频次，制造排行榜竞争和连续参与；预期观察：投注额、投注单量、有效投注用户数上升；Casino DAU、游戏启动次数、免费旋转转付费率上升；连续参与天数、排名页访问、任务完成率上升。</dd></div>
+      <div><dt>详情页来源 / Detail Source</dt><dd><a href="https://1xlite-19708.pro/en/promotions/luckyday">https://1xlite-19708.pro/en/promotions/luckyday</a></dd></div>
+    </dl>
+<details class="detail-excerpt"><summary>详情页原文摘要 / Detail excerpt</summary><pre>1RegistrationLog inen / 12:14TOP-EVENTSUCLEuropa LeagueEPLIndian LeagueSerie ALaLigaUECLSportsBet on Your National TeamBet on Big TournamentsLong-term betsLiveMulti-LIVEBet on Your National TeamMarble-LiveFast bet1xGamesCrashCrystalBurning HotScratch CardWestern slotUnder and Over 7SolitaireVampire Curse21Crash PointApple Of FortuneSpin and WinMidgard ZombiesMayan TombGems OdysseyShow allCasinoLive CasinoEsportsShow allPROMOMoreBingoTotoResultsStatisticsPokerTV GamesVirtual sportsOther gamesHunting and FishingScratch CardsLottoPlinkoCustomer Support</pre></details>
+  </article>
+<article class="activity-card detail-ok">
+    <div class="activity-head">
+      <span class="index">12</span>
+      <div>
+        <h2>1RegistrationLog inen / 12:14TOP-EVENTSUCLEuropa LeagueEPLIndian LeagueSerie ALaLigaUECLSportsBet on Your National TeamBet on Big Tournament <span class="new-badge">今日新增 / New Today</span></h2>
+        <p>免费投注 / Free Bet · <span class="detail-pill ok-pill">详情页已采集 / Detail captured</span></p>
+      </div>
+    </div>
+<a class="detail-shot-link" href="../../detail-screenshots/1xbet/1xbet-1xpick-em-iem-cologne-majormake-a-prediction-and-get-a-guaranteed-bonus-bo.png"><img class="detail-shot" src="../../detail-screenshots/1xbet/1xbet-1xpick-em-iem-cologne-majormake-a-prediction-and-get-a-guaranteed-bonus-bo.png" alt="1RegistrationLog inen / 12:14TOP-EVENTSUCLEuropa LeagueEPLIndian LeagueSerie ALaLigaUECLSportsBet on Your National TeamBet on Big Tournament detail screenshot"></a>
+    <dl>
+      <div><dt>要求 / Requirements</dt><dd>odds of 1.6 or higher and accumulator bets containing 2 or more selections, with each; odds of 1.4 or higher.The bonus percentage depends on the number of bets that comply; odds of 1.5 or higher on any esports events or an accumulator bet containing 2 or mor; odds of 1.4 or higher. At least one selection must be placed on an esports event.Only; odds of 1.5 or higher. The free bet promo code is valid for 7 days from the moment it; odds of 1.6 or higher and accumulator bets containing 2 or more selections, each sele; odds of 1.4 or higher. All selections in each accumulator must be placed on the IEM C; odds of 1.5 or higher. The free bet must be used within 72 hours after you receive it</dd></div>
+      <div><dt>触发条件 / Trigger</dt><dd>点击参与/报名后，完成活动指定行为触发奖励</dd></div>
+      <div><dt>奖励方式 / Reward</dt><dd>19.8 MYR; 10%; 20%; 50%; 100%</dd></div>
+      <div><dt>目标用户 / Who</dt><dd>新注册/首充用户；Casino/Slots 用户；体育投注用户</dd></div>
+      <div><dt>时间 / When</dt><dd>ate, you will not be able to edit your prediction or make a new one.Free bet amounts for correct answer;  ated), email address, city and country of residence.You must opt in to participating in bonus offers in</dd></div>
+      <div><dt>Summary / 总结</dt><dd>1RegistrationLog inen / 12:14TOP-EVENTSUCLEuropa LeagueEPLIndian LeagueSerie ALaLigaUECLSportsBet on Your National TeamBet on Big Tournament 面向新注册/首充用户；Casino/Slots 用户；体育投注用户，通过“点击参与/报名后，完成活动指定行为触发奖励”推动用户完成关键行为；奖励为 19.8 MYR; 10%; 20%; 50%; 100%。主要参与要求：odds of 1.6 or higher and accumulator bets containing 2 or more selections, with each; odds of 1.4 or higher.The bonus percentage depends on the number of bets that comply; odds of 1.5 or higher on any esports events or an accumulator bet containing 2 or mor; odds of 1.4 or higher. At least one selection must be placed on an esports event.Only; odds of 1.5 or higher. The free bet promo code is valid for 7 days from the moment it; odds of 1.6 or higher and accumulator bets containing 2 or more selections, each sele; odds of 1.4 or higher. All selections in each accumulator must be placed on the IEM C; odds of 1.5 or higher. The free bet must be used within 72 hours after you receive it。</dd></div>
+      <div><dt>核心目的 / Objective</dt><dd>提升投注/游戏频次，制造排行榜竞争和连续参与</dd></div>
+      <div><dt>数据预期 / Expected Data</dt><dd>提升投注/游戏频次，制造排行榜竞争和连续参与；预期观察：投注额、投注单量、有效投注用户数上升；Casino DAU、游戏启动次数、免费旋转转付费率上升；连续参与天数、排名页访问、任务完成率上升。</dd></div>
+      <div><dt>详情页来源 / Detail Source</dt><dd><a href="https://1xlite-19708.pro/en/promotions/cologne-major">https://1xlite-19708.pro/en/promotions/cologne-major</a></dd></div>
+    </dl>
+<details class="detail-excerpt"><summary>详情页原文摘要 / Detail excerpt</summary><pre>1RegistrationLog inen / 12:14TOP-EVENTSUCLEuropa LeagueEPLIndian LeagueSerie ALaLigaUECLSportsBet on Your National TeamBet on Big TournamentsLong-term betsLiveMulti-LIVEBet on Your National TeamMarble-LiveFast bet1xGamesCrashCrystalBurning HotScratch CardWestern slotUnder and Over 7SolitaireVampire Curse21Crash PointApple Of FortuneSpin and WinMidgard ZombiesMayan TombGems OdysseyShow allCasinoLive CasinoEsportsShow allPROMOMoreBingoTotoResultsStatisticsPokerTV GamesVirtual sportsOther gamesHunting and FishingScratch CardsLottoPlinkoMain pageSpecial Offers and Bonuses1xpick’em IEM Cologne MajorTake partTerms and ConditionsMake predictions for IEM Cologne MajorBet on the tournamentGet a free bet based on the number of bets you placePredictionsBetsStage ends in15days16hours44minutes02secondsPosition the teams and save your prediction1B8BetBoom TeamBIGHEROICGamerLegionMIBRM80SINNERSNRGSharksGaimin GladiatorsTYLOOTeam LiquidLynn VisionTHUNDER dOWNUNDERFlyQuestFUTTeam SpiritAstralisG29zpaiNLegacyMonteVitalityNatus VincereTeam FalconsThe MongolZFURIAMOUZPARIVISIONAurora Gaming2B8BetBoom TeamBIGHEROICGamerLegionMIBRM80SINNERSNRGSharksGaimin GladiatorsTYLOOTeam LiquidLynn VisionTHUNDER dOWNUNDERFlyQuestFUTTeam SpiritAstralisG29zpaiNLegacyMonteVitalityNatus VincereTeam FalconsThe MongolZFURIAMOUZPARIVISIONAurora Gaming3 - 45 - 89 - 1112 - 1415 - 16Take partTake partFree bet amounts for correct answers:Of the bet that confirmed your prediction1 to 3 positions predicted correctlyOf the bet that confirmed your prediction4 to 10 positions predicted correctlyOf the bet that confirmed your prediction11 to 15 positions predicted correctlyOf the bet that confirmed your predictionAll positions predicted correctlyThe maximum free bet amount is 100 USDFree bets for correct predictions will be credited on 30/06/26Take partCustomer SupportTerms and ConditionsHow to take partRegister or log in on the 1xBet website or the app.Press the &quot;Take part&quot; button on the offer page.Make a prediction for the IEM Cologne Major esports tournament: position the teams according to the places you expect them to take at the end of the IEM Cologne Major.Depending on the number of pla ... [truncated]</pre></details>
+  </article>
+<article class="activity-card detail-ok">
+    <div class="activity-head">
+      <span class="index">13</span>
+      <div>
+        <h2>1RegistrationLog inen / 12:15TOP-EVENTSUCLEuropa LeagueEPLIndian LeagueSerie ALaLigaUECLSportsBet on Your National TeamBet on Big Tournament <span class="new-badge">今日新增 / New Today</span></h2>
+        <p>免费投注 / Free Bet · <span class="detail-pill ok-pill">详情页已采集 / Detail captured</span></p>
+      </div>
+    </div>
+<a class="detail-shot-link" href="../../detail-screenshots/1xbet/1xbet-esports-erachoose-an-event-and-place-a-risk-free-bet-bonus-offer-details-h.png"><img class="detail-shot" src="../../detail-screenshots/1xbet/1xbet-esports-erachoose-an-event-and-place-a-risk-free-bet-bonus-offer-details-h.png" alt="1RegistrationLog inen / 12:15TOP-EVENTSUCLEuropa LeagueEPLIndian LeagueSerie ALaLigaUECLSportsBet on Your National TeamBet on Big Tournament detail screenshot"></a>
+    <dl>
+      <div><dt>要求 / Requirements</dt><dd>place a risk-free bet!Bonus offer details 1RegistrationLog inen / 12:15TOP-EVENTSUCLEuropa LeagueEPLIndian LeagueSerie ALaLig; Bet on Your National TeamBet on Big TournamentsLong-term betsLiveMulti-LIVEBet on Your National TeamMarble-LiveFast bet1xGa; bet!Take partTerms and ConditionsLog in or register on the 1xBet websitePlace bets on the Correct Score of esports eventsGe</dd></div>
+      <div><dt>触发条件 / Trigger</dt><dd>点击参与/报名后，完成活动指定行为触发奖励</dd></div>
+      <div><dt>奖励方式 / Reward</dt><dd>40 MYR</dd></div>
+      <div><dt>目标用户 / Who</dt><dd>Casino/Slots 用户；体育投注用户；电竞投注用户</dd></div>
+      <div><dt>时间 / When</dt><dd>ated in the customer's local currency at the exchange rate at the time the bet was settled.The free bet;  ated), email address, country of residence.To take part in this bonus offer, you must opt in to partici</dd></div>
+      <div><dt>Summary / 总结</dt><dd>1RegistrationLog inen / 12:15TOP-EVENTSUCLEuropa LeagueEPLIndian LeagueSerie ALaLigaUECLSportsBet on Your National TeamBet on Big Tournament 面向Casino/Slots 用户；体育投注用户；电竞投注用户，通过“点击参与/报名后，完成活动指定行为触发奖励”推动用户完成关键行为；奖励为 40 MYR。主要参与要求：place a risk-free bet!Bonus offer details 1RegistrationLog inen / 12:15TOP-EVENTSUCLEuropa LeagueEPLIndian LeagueSerie ALaLig; Bet on Your National TeamBet on Big TournamentsLong-term betsLiveMulti-LIVEBet on Your National TeamMarble-LiveFast bet1xGa; bet!Take partTerms and ConditionsLog in or register on the 1xBet websitePlace bets on the Correct Score of esports eventsGe。</dd></div>
+      <div><dt>核心目的 / Objective</dt><dd>提升投注/游戏频次，制造排行榜竞争和连续参与</dd></div>
+      <div><dt>数据预期 / Expected Data</dt><dd>提升投注/游戏频次，制造排行榜竞争和连续参与；预期观察：投注额、投注单量、有效投注用户数上升；Casino DAU、游戏启动次数、免费旋转转付费率上升；连续参与天数、排名页访问、任务完成率上升。</dd></div>
+      <div><dt>详情页来源 / Detail Source</dt><dd><a href="https://1xlite-19708.pro/en/promotions/esportsera">https://1xlite-19708.pro/en/promotions/esportsera</a></dd></div>
+    </dl>
+<details class="detail-excerpt"><summary>详情页原文摘要 / Detail excerpt</summary><pre>1RegistrationLog inen / 12:15TOP-EVENTSUCLEuropa LeagueEPLIndian LeagueSerie ALaLigaUECLSportsBet on Your National TeamBet on Big TournamentsLong-term betsLiveMulti-LIVEBet on Your National TeamMarble-LiveFast bet1xGamesCrashCrystalBurning HotScratch CardWestern slotUnder and Over 7SolitaireVampire Curse21Crash PointApple Of FortuneSpin and WinMidgard ZombiesMayan TombGems OdysseyShow allCasinoLive CasinoEsportsShow allPROMOMoreBingoTotoResultsStatisticsPokerTV GamesVirtual sportsOther gamesHunting and FishingScratch CardsLottoPlinkoMain pageSpecial Offers and BonusesEsports EraEsports EraWin no matter how you bet!Take partTerms and ConditionsLog in or register on the 1xBet websitePlace bets on the Correct Score of esports eventsGet a refund if your bet losesChoose an event and place a risk-free bet!The maximum free bet amount is 40 MYR.No upcoming eventsHow to get a free bet?Register or log in on the 1xBet website or the app.Read the terms of the promotion and press the &quot;Take part&quot; button on the offer page.Place single Correct Score bets on matches featured on the cards on the promo page.If your bet loses, you'll get a bonus in the form of a free bet equal to your lost stake, up to a maximum of 40 MYR.If your bet wins (or if it is not a single Correct Score bet), the bonus will not be credited.The bonus is credited as a free bet in My Account within 24 hours of bet settlement.The refund amount is calculated in the customer's local currency at the exchange rate at the time the bet was settled.The free bet is valid for 48 hours from the moment it is credited.Only the first bet on each event qualifies for the offer.This offer does not apply to void bets.To take part in this bonus offer, you must opt in to participating in bonus offers for sports betting in My Account (Account Settings — Participation in bonus offers).Only bets placed using real money will be included in this offer. This offer does not apply to Advancebets, bets placed using bonus funds (including promo codes) or refunded bets.This offer only includes bets placed on regular time of matches listed on the offer page.Losing bets are eligible for this Promotion.The number of bonus h ... [truncated]</pre></details>
+  </article>
+<article class="activity-card detail-ok">
+    <div class="activity-head">
+      <span class="index">14</span>
+      <div>
+        <h2>1RegistrationLog inen / 12:15TOP-EVENTSUCLEuropa LeagueEPLIndian LeagueSerie ALaLigaUECLSportsBet on Your National TeamBet on Big Tournament <span class="new-badge">今日新增 / New Today</span></h2>
+        <p>免费投注 / Free Bet · <span class="detail-pill ok-pill">详情页已采集 / Detail captured</span></p>
+      </div>
+    </div>
+<a class="detail-shot-link" href="../../detail-screenshots/1xbet/1xbet-chickpointhelp-the-chicken-on-its-way-and-win-superprizes-bonus-offer-deta.png"><img class="detail-shot" src="../../detail-screenshots/1xbet/1xbet-chickpointhelp-the-chicken-on-its-way-and-win-superprizes-bonus-offer-deta.png" alt="1RegistrationLog inen / 12:15TOP-EVENTSUCLEuropa LeagueEPLIndian LeagueSerie ALaLigaUECLSportsBet on Your National TeamBet on Big Tournament detail screenshot"></a>
+    <dl>
+      <div><dt>要求 / Requirements</dt><dd>odds of 1.5 or higher, and accumulator bets with 2 or more selections, each selection; odds of 1.4 or higher. At least one selection in the accumulator must be on an esport; odds of 1.5 or higher on the events of the tournaments included in the promotion, and; odds for each selection are 1.4 or higher. At least one selection in the accumulator; odds of 1.5 or higher. The free bet promo code is valid for 72 hours from the moment</dd></div>
+      <div><dt>触发条件 / Trigger</dt><dd>用户在指定赛事/玩法下注触发</dd></div>
+      <div><dt>奖励方式 / Reward</dt><dd>10%; 20%; 30%; 40%; 50%</dd></div>
+      <div><dt>目标用户 / Who</dt><dd>Casino/Slots 用户；体育投注用户；电竞投注用户</dd></div>
+      <div><dt>时间 / When</dt><dd>ate - 24.02.2026 16:00 (+3 UTC):Superprizes:HYPERPC LUMEN 5 PLUS gaming PC (1 winner).ASUS ROG Strix (1;  ate - 17.03.2026 16:00 (+3 UTC):Superprizes:HYPERPC PLAY X gaming PC (1 winner).MSI Stealth 14 Studio (</dd></div>
+      <div><dt>Summary / 总结</dt><dd>1RegistrationLog inen / 12:15TOP-EVENTSUCLEuropa LeagueEPLIndian LeagueSerie ALaLigaUECLSportsBet on Your National TeamBet on Big Tournament 面向Casino/Slots 用户；体育投注用户；电竞投注用户，通过“用户在指定赛事/玩法下注触发”推动用户完成关键行为；奖励为 10%; 20%; 30%; 40%; 50%。主要参与要求：odds of 1.5 or higher, and accumulator bets with 2 or more selections, each selection; odds of 1.4 or higher. At least one selection in the accumulator must be on an esport; odds of 1.5 or higher on the events of the tournaments included in the promotion, and; odds for each selection are 1.4 or higher. At least one selection in the accumulator; odds of 1.5 or higher. The free bet promo code is valid for 72 hours from the moment。</dd></div>
+      <div><dt>核心目的 / Objective</dt><dd>提升投注/游戏频次，制造排行榜竞争和连续参与</dd></div>
+      <div><dt>数据预期 / Expected Data</dt><dd>提升投注/游戏频次，制造排行榜竞争和连续参与；预期观察：投注额、投注单量、有效投注用户数上升；Casino DAU、游戏启动次数、免费旋转转付费率上升；连续参与天数、排名页访问、任务完成率上升。</dd></div>
+      <div><dt>详情页来源 / Detail Source</dt><dd><a href="https://1xlite-19708.pro/en/promotions/chick-point">https://1xlite-19708.pro/en/promotions/chick-point</a></dd></div>
+    </dl>
+<details class="detail-excerpt"><summary>详情页原文摘要 / Detail excerpt</summary><pre>1RegistrationLog inen / 12:15TOP-EVENTSUCLEuropa LeagueEPLIndian LeagueSerie ALaLigaUECLSportsBet on Your National TeamBet on Big TournamentsLong-term betsLiveMulti-LIVEBet on Your National TeamMarble-LiveFast bet1xGamesCrashCrystalBurning HotScratch CardWestern slotUnder and Over 7SolitaireVampire Curse21Crash PointApple Of FortuneSpin and WinMidgard ZombiesMayan TombGems OdysseyShow allCasinoLive CasinoEsportsShow allPROMOMoreBingoTotoResultsStatisticsPokerTV GamesVirtual sportsOther gamesHunting and FishingScratch CardsLottoPlinkoMain pageSpecial Offers and BonusesChick PointChick PointPGL Astana 2026Take partTerms and ConditionsHow to take partPlace bets and earn ticketsMove the chicken along the routeWin superprizes from 1xBet!Place bets and earn ticketsHow do I get a guaranteed bonus for completing stages on the map?Stages can only be completed during the relevant tournament. A map can be completed once per tournament. You will get a bonus based on the stage you reached on the map during the relevant tournament period. The bonus percentage depends on the number of bets you placed on the tournament:Stage 1 | 3 Bets10%of the average stakeStage 2 | 5 Bets20%of the average stakeStage 3 | 7 Bets30%of the average stakeStage 4 | 9 Bets40%of the average stakeStage 5 | 11 Bets50%of the average stakeStage 6 | 13 Bets60%of the average stakeStage 7 | 15 Bets70%of the average stakeStage 8 | 17 Bets80%of the average stakeStage 9 | 19 Bets90%of the average stakeStage 10 | 21 Bet100%of the average stakeWhat are the prizes?At the end of each esports tournament participating in the Promotion, winning tickets will be selected from the tickets received for bets on that tournament. Winning ticket holders will receive the following prizes:PGL Cluj-Napoca 2026ESL Pro League Season 23BLAST Open Rotterdam 2026PGL Bucharest 2026Intel Extreme Masters Rio 2026BLAST Rivals Spring 2026PGL Astana 2026CS Asia Championships 2026Intel Extreme Masters Cologne Major 2026Esports World Cup 2026BLAST Open Fall 2026StarLadder StarSeries Fall 2026ESL Pro League Season 24PGL Masters Bucharest 2026Intel Extreme Masters China 2026BLAST Rivals Fall 2026Esports Nation CupPGL Major ... [truncated]</pre></details>
+  </article>
+<article class="activity-card detail-ok">
+    <div class="activity-head">
+      <span class="index">15</span>
+      <div>
+        <h2>1RegistrationLog inen / 12:15TOP-EVENTSUCLEuropa LeagueEPLIndian LeagueSerie ALaLigaUECLSportsBet on Your National TeamBet on Big Tournament <span class="new-badge">今日新增 / New Today</span></h2>
+        <p>返现 / Cashback · <span class="detail-pill ok-pill">详情页已采集 / Detail captured</span></p>
+      </div>
+    </div>
+<a class="detail-shot-link" href="../../detail-screenshots/1xbet/1xbet-sport-single100-up-to-588-myr-just-3-bets-to-the-bonus-bonus-offer-details.png"><img class="detail-shot" src="../../detail-screenshots/1xbet/1xbet-sport-single100-up-to-588-myr-just-3-bets-to-the-bonus-bonus-offer-details.png" alt="1RegistrationLog inen / 12:15TOP-EVENTSUCLEuropa LeagueEPLIndian LeagueSerie ALaLigaUECLSportsBet on Your National TeamBet on Big Tournament detail screenshot"></a>
+    <dl>
+      <div><dt>要求 / Requirements</dt><dd>odds of 2.00 or higher.After receiving the bonus, you must place a bet worth the enti; odds of 2.5. The bet wins and 1,479 MYR is credited to the bonus account.You place a; odds of 3.00 using your bonus account. The bet wins, and 4,410 MYR is credited to you; odds of 2. The bet wins and the bonus is considered wiped out. The participant receiv; odds of 2.00 or higher will count towards the wagering requirement.Once the bonus has</dd></div>
+      <div><dt>触发条件 / Trigger</dt><dd>点击参与/报名后，完成活动指定行为触发奖励</dd></div>
+      <div><dt>奖励方式 / Reward</dt><dd>20% cashback; 30% cashback; 100% bonus; 10% cashback</dd></div>
+      <div><dt>目标用户 / Who</dt><dd>新注册/首充用户；Casino/Slots 用户；体育投注用户</dd></div>
+      <div><dt>时间 / When</dt><dd>ated your phone number.To wager the bonus, you must place three consecutive winning bets, each worth th;  ategies that 1xBet at its sole discretion deems to be abusive, 1xBet reserves the right to revoke the e</dd></div>
+      <div><dt>Summary / 总结</dt><dd>1RegistrationLog inen / 12:15TOP-EVENTSUCLEuropa LeagueEPLIndian LeagueSerie ALaLigaUECLSportsBet on Your National TeamBet on Big Tournament 面向新注册/首充用户；Casino/Slots 用户；体育投注用户，通过“点击参与/报名后，完成活动指定行为触发奖励”推动用户完成关键行为；奖励为 20% cashback; 30% cashback; 100% bonus; 10% cashback。主要参与要求：odds of 2.00 or higher.After receiving the bonus, you must place a bet worth the enti; odds of 2.5. The bet wins and 1,479 MYR is credited to the bonus account.You place a; odds of 3.00 using your bonus account. The bet wins, and 4,410 MYR is credited to you; odds of 2. The bet wins and the bonus is considered wiped out. The participant receiv; odds of 2.00 or higher will count towards the wagering requirement.Once the bonus has。</dd></div>
+      <div><dt>核心目的 / Objective</dt><dd>拉新与首充转化</dd></div>
+      <div><dt>数据预期 / Expected Data</dt><dd>拉新与首充转化；预期观察：注册到首充转化率、首存金额、首周留存上升；充值次数、充值金额、Bonus claim rate 上升；投注额、投注单量、有效投注用户数上升。</dd></div>
+      <div><dt>详情页来源 / Detail Source</dt><dd><a href="https://1xlite-19708.pro/en/bonus/rules/sport-single">https://1xlite-19708.pro/en/bonus/rules/sport-single</a></dd></div>
+    </dl>
+<details class="detail-excerpt"><summary>详情页原文摘要 / Detail excerpt</summary><pre>1RegistrationLog inen / 12:15TOP-EVENTSUCLEuropa LeagueEPLIndian LeagueSerie ALaLigaUECLSportsBet on Your National TeamBet on Big TournamentsLong-term betsLiveMulti-LIVEBet on Your National TeamMarble-LiveFast bet1xGamesCrashCrystalBurning HotScratch CardWestern slotUnder and Over 7SolitaireVampire Curse21Crash PointApple Of FortuneSpin and WinMidgard ZombiesMayan TombGems OdysseyShow allCasinoLive CasinoEsportsShow allPROMOMoreBingoTotoResultsStatisticsPokerTV GamesVirtual sportsOther gamesHunting and FishingScratch CardsLottoPlinkoPromoSport SingleSport Single100% up to 588 MYR – just 3 bets to the bonus!Make a depositHow to get your bonusRegister on the 1xBet website or app.Fill in all the fields with your personal data in My Account and opt in to participation in sports bonus offers.Top up your balance from 10 MYR.Get a bonus 100% to 588 MYR to your bonus account.Make three winning bets in a row using the bonus and 100% of the deposit amount will be credited to your main account.How to wager the bonusTo wager the bonus, you must place three winning single bets by using the entire amount of the bonus you receive on each bet. Each bet must be placed as one single bet at odds of 2.00 or higher.After receiving the bonus, you must place a bet worth the entire bonus amount. If you win, the stake and winnings will be credited to your bonus account. After the second win, bet the amount you receive again in full. The bonus is deemed to have been wagered after the third bet you place using your bonus account wins.In case of winning, the amount of the initially received bonus is credited to the main account - 100% from the first deposit, but not more than 588 MYR.If at least one of the three bets loses, the bonus will be deemed to have been lost.Example:The participant tops up the balance at 588 MYR, and this amount is credited to his bonus account. Then he/she makes the first bet from the bonus account in the amount of 588 MYR and odds of 2.5. The bet wins and 1,479 MYR is credited to the bonus account.You place a second bet of 1,479 MYR at odds of 3.00 using your bonus account. The bet wins, and 4,410 MYR is credited to your bonus account.Then the ... [truncated]</pre></details>
+  </article>
+<article class="activity-card detail-ok">
+    <div class="activity-head">
+      <span class="index">16</span>
+      <div>
+        <h2>1RegistrationLog inen / 12:15TOP-EVENTSUCLEuropa LeagueEPLIndian LeagueSerie ALaLigaUECLSportsBet on Your National TeamBet on Big Tournament <span class="new-badge">今日新增 / New Today</span></h2>
+        <p>返现 / Cashback · <span class="detail-pill ok-pill">详情页已采集 / Detail captured</span></p>
+      </div>
+    </div>
+<a class="detail-shot-link" href="../../detail-screenshots/1xbet/1xbet-happy-mondayget-cashback-every-monday-bonus-offer-details-https-1xlite-197.png"><img class="detail-shot" src="../../detail-screenshots/1xbet/1xbet-happy-mondayget-cashback-every-monday-bonus-offer-details-https-1xlite-197.png" alt="1RegistrationLog inen / 12:15TOP-EVENTSUCLEuropa LeagueEPLIndian LeagueSerie ALaLigaUECLSportsBet on Your National TeamBet on Big Tournament detail screenshot"></a>
+    <dl>
+      <div><dt>要求 / Requirements</dt><dd>odds of 1.60 or higher.The promo code is valid for 48 hours after it is credited. If</dd></div>
+      <div><dt>触发条件 / Trigger</dt><dd>点击参与/报名后，完成活动指定行为触发奖励</dd></div>
+      <div><dt>奖励方式 / Reward</dt><dd>20% cashback; 30% cashback; 100% bonus; 10% cashback</dd></div>
+      <div><dt>目标用户 / Who</dt><dd>Casino/Slots 用户；体育投注用户；电竞投注用户</dd></div>
+      <div><dt>时间 / When</dt><dd>ated), email address and country of residence.To take part in this bonus offer, you must opt in to taki;  ategies that 1xBet at its sole discretion deems to be abusive, 1xBet reserves the right to revoke the e</dd></div>
+      <div><dt>Summary / 总结</dt><dd>1RegistrationLog inen / 12:15TOP-EVENTSUCLEuropa LeagueEPLIndian LeagueSerie ALaLigaUECLSportsBet on Your National TeamBet on Big Tournament 面向Casino/Slots 用户；体育投注用户；电竞投注用户，通过“点击参与/报名后，完成活动指定行为触发奖励”推动用户完成关键行为；奖励为 20% cashback; 30% cashback; 100% bonus; 10% cashback。主要参与要求：odds of 1.60 or higher.The promo code is valid for 48 hours after it is credited. If。</dd></div>
+      <div><dt>核心目的 / Objective</dt><dd>提升充值频次和充值金额</dd></div>
+      <div><dt>数据预期 / Expected Data</dt><dd>提升充值频次和充值金额；预期观察：充值次数、充值金额、Bonus claim rate 上升；投注额、投注单量、有效投注用户数上升；Casino DAU、游戏启动次数、免费旋转转付费率上升。</dd></div>
+      <div><dt>详情页来源 / Detail Source</dt><dd><a href="https://1xlite-19708.pro/en/bonus/rules/happy-monday">https://1xlite-19708.pro/en/bonus/rules/happy-monday</a></dd></div>
+    </dl>
+<details class="detail-excerpt"><summary>详情页原文摘要 / Detail excerpt</summary><pre>1RegistrationLog inen / 12:15TOP-EVENTSUCLEuropa LeagueEPLIndian LeagueSerie ALaLigaUECLSportsBet on Your National TeamBet on Big TournamentsLong-term betsLiveMulti-LIVEBet on Your National TeamMarble-LiveFast bet1xGamesCrashCrystalBurning HotScratch CardWestern slotUnder and Over 7SolitaireVampire Curse21Crash PointApple Of FortuneSpin and WinMidgard ZombiesMayan TombGems OdysseyShow allCasinoLive CasinoEsportsShow allPROMOMoreBingoTotoResultsStatisticsPokerTV GamesVirtual sportsOther gamesHunting and FishingScratch CardsLottoPlinkoPromoHappy MondayHappy MondayGet cashback every Monday!Take partHow to take partRegister or log in on the 1xBet website or the app.Click the &quot;Take part&quot; button on the offer page.Deposit at least 4 MYR in a week from 14/05/26 (16:00 +8 UTC) to 17/08/26 (04:59 +8 UTC).Get a bonus of up to 48 MYR as a promo code every Monday.The Happy Monday promo code amount depends on the total amount you deposited from Monday (00:00 +3 UTC) to Sunday (23:59 +3 UTC) during the previous week of the bonus offer:40 MYR to 118.45 MYR4 MYR119 MYR to 236.93 MYR20 MYR237 MYR to 394.91 MYR32 MYR395 MYR or more48 MYRThe maximum bonus amount is 48 MYR.Terms and Conditions:This bonus offer is available from 14/05/26 (16:00 +8 UTC) to 17/08/26 (04:59 +8 UTC).Only registered customers can take part in this promotion. The following fields must be filled in: full name, mobile phone number (must be activated), email address and country of residence.To take part in this bonus offer, you must opt in to taking part in sports bonus offers in your account settings in My Account (Account Settings - Bonuses).To take part in this promotion, you need to press the “Take part” button on the offer page.Place eligible deposits between Monday (00:00 +3 UTC) and Sunday (23:59 +3 UTC) to receive a guaranteed promo code bonus.You can only receive one promo code bonus per week.Cashback for the week is credited on Monday between (00:00 +3 UTC) and (23:59 +3 UTC).The minimum deposit amount is 4 MYR.Deposit a total of between 40 MYR and 118.45 MYR during a week of the bonus offer to get a 4 MYR bonus, between 119 MYR and 236.93 MYR to get a 20 MYR bonus, between 237 M ... [truncated]</pre></details>
+  </article>
+<article class="activity-card detail-ok">
+    <div class="activity-head">
+      <span class="index">17</span>
+      <div>
+        <h2>1RegistrationLog inen / 12:15TOP-EVENTSUCLEuropa LeagueEPLIndian LeagueSerie ALaLigaUECLSportsBet on Your National TeamBet on Big Tournament <span class="new-badge">今日新增 / New Today</span></h2>
+        <p>返现 / Cashback · <span class="detail-pill ok-pill">详情页已采集 / Detail captured</span></p>
+      </div>
+    </div>
+<a class="detail-shot-link" href="../../detail-screenshots/1xbet/1xbet-esports-cashback-boomplace-bets-on-esports-and-get-up-to-20-cashback-weekl.png"><img class="detail-shot" src="../../detail-screenshots/1xbet/1xbet-esports-cashback-boomplace-bets-on-esports-and-get-up-to-20-cashback-weekl.png" alt="1RegistrationLog inen / 12:15TOP-EVENTSUCLEuropa LeagueEPLIndian LeagueSerie ALaLigaUECLSportsBet on Your National TeamBet on Big Tournament detail screenshot"></a>
+    <dl>
+      <div><dt>要求 / Requirements</dt><dd>odds of 1.50 or higher on esports events, as well as accumulator bets consisting of 2; odds of 1.40 or higher. At least one selection in the accumulator must be on an espor; odds of 1.50 or higher placed on esports events and accumulator bets containing 2 or; odds of 1.40 or higher, with at least one selection placed on an esports event.Place; odds of 1.40 or higher. The bonus is deemed to have been wagered only once all bets c</dd></div>
+      <div><dt>触发条件 / Trigger</dt><dd>点击参与/报名后，完成活动指定行为触发奖励</dd></div>
+      <div><dt>奖励方式 / Reward</dt><dd>20% cashback; 30% cashback; 100% bonus; 10% cashback</dd></div>
+      <div><dt>目标用户 / Who</dt><dd>Casino/Slots 用户；体育投注用户；电竞投注用户</dd></div>
+      <div><dt>时间 / When</dt><dd>ated:If you place bets with a total stake of 3,950 MYR over the course of the first week of the bonus o;  ated), email address, and country of residence.You must opt in to participating in bonus offers in My A</dd></div>
+      <div><dt>Summary / 总结</dt><dd>1RegistrationLog inen / 12:15TOP-EVENTSUCLEuropa LeagueEPLIndian LeagueSerie ALaLigaUECLSportsBet on Your National TeamBet on Big Tournament 面向Casino/Slots 用户；体育投注用户；电竞投注用户，通过“点击参与/报名后，完成活动指定行为触发奖励”推动用户完成关键行为；奖励为 20% cashback; 30% cashback; 100% bonus; 10% cashback。主要参与要求：odds of 1.50 or higher on esports events, as well as accumulator bets consisting of 2; odds of 1.40 or higher. At least one selection in the accumulator must be on an espor; odds of 1.50 or higher placed on esports events and accumulator bets containing 2 or; odds of 1.40 or higher, with at least one selection placed on an esports event.Place; odds of 1.40 or higher. The bonus is deemed to have been wagered only once all bets c。</dd></div>
+      <div><dt>核心目的 / Objective</dt><dd>提升留存、降低流失感知并延长生命周期</dd></div>
+      <div><dt>数据预期 / Expected Data</dt><dd>提升留存、降低流失感知并延长生命周期；预期观察：投注额、投注单量、有效投注用户数上升；Casino DAU、游戏启动次数、免费旋转转付费率上升；复玩率、留存率、VIP 活跃和净收入稳定性提升。</dd></div>
+      <div><dt>详情页来源 / Detail Source</dt><dd><a href="https://1xlite-19708.pro/en/bonus/rules/esports-cashback-boom">https://1xlite-19708.pro/en/bonus/rules/esports-cashback-boom</a></dd></div>
+    </dl>
+<details class="detail-excerpt"><summary>详情页原文摘要 / Detail excerpt</summary><pre>1RegistrationLog inen / 12:15TOP-EVENTSUCLEuropa LeagueEPLIndian LeagueSerie ALaLigaUECLSportsBet on Your National TeamBet on Big TournamentsLong-term betsLiveMulti-LIVEBet on Your National TeamMarble-LiveFast bet1xGamesCrashCrystalBurning HotScratch CardWestern slotUnder and Over 7SolitaireVampire Curse21Crash PointApple Of FortuneSpin and WinMidgard ZombiesMayan TombGems OdysseyShow allCasinoLive CasinoEsportsShow allPROMOMoreBingoTotoResultsStatisticsPokerTV GamesVirtual sportsOther gamesHunting and FishingScratch CardsLottoPlinkoPromoEsports Cashback BoomEsports Cashback BoomPlace bets on esports and get up to 20% cashback weekly!Take partHow to take part in this bonus offerRegister or log in on the 1xBet website or the app.Click the &quot;Take part&quot; button on the offer page.Place bets of at least 20 MYR on any esports events. The bonus offer includes single bets at odds of 1.50 or higher on esports events, as well as accumulator bets consisting of 2 or more selections, where each selection is at odds of 1.40 or higher. At least one selection in the accumulator must be on an esports match.Level up every week and get cashback based on the total stake of bets you've placed using your bonus account. The higher your level, the more cashback you'll get!HOW TO REACH DIFFERENT LEVELSYour level depends on the total stake of eligible bets you place on esports events over the course of each week during the bonus offer validity period. When you reach a level, you will get cashback from the total stake of eligible bets placed during the relevant week.At the end of each week during the promotional period, the level you reach is saved, and cashback will be credited according the level you previously reached for following weeks.If your total stake over the course of the week is:between 99 MYR and 1,974.7 MYR, you'll be at level 1, and your cashback will be worth 5% of your total stake.between 1,975 MYR and 3,949.4 MYR, you'll be at level 2, and your cashback will be worth 10% of your total stake.between 3,950 MYR and 9,869.7 MYR, you'll be at level 3, and your cashback will be worth 15% of your total stake.9,874 MYR or higher, you'll be at level 4, and your ... [truncated]</pre></details>
+  </article>
+<article class="activity-card detail-ok">
+    <div class="activity-head">
+      <span class="index">18</span>
+      <div>
+        <h2>1RegistrationLog inen / 12:15TOP-EVENTSUCLEuropa LeagueEPLIndian LeagueSerie ALaLigaUECLSportsBet on Your National TeamBet on Big Tournament <span class="new-badge">今日新增 / New Today</span></h2>
+        <p>返现 / Cashback · <span class="detail-pill ok-pill">详情页已采集 / Detail captured</span></p>
+      </div>
+    </div>
+<a class="detail-shot-link" href="../../detail-screenshots/1xbet/1xbet-ole-la-liga-bet-on-red-hot-matches-and-get-free-bets-bonus-offer-details-h.png"><img class="detail-shot" src="../../detail-screenshots/1xbet/1xbet-ole-la-liga-bet-on-red-hot-matches-and-get-free-bets-bonus-offer-details-h.png" alt="1RegistrationLog inen / 12:15TOP-EVENTSUCLEuropa LeagueEPLIndian LeagueSerie ALaLigaUECLSportsBet on Your National TeamBet on Big Tournament detail screenshot"></a>
+    <dl>
+      <div><dt>要求 / Requirements</dt><dd>odds of 1.50 or higher on LaLiga matches and accumulator bets including 2 or more sel; odds of 1.40 or higher, with all selections placed on LaLiga matches.Get a free bet e; odds of 1.50 or higher placed on LaLiga matches, as well as accumulator bets includin; odds of 1.40 or higher, with all selections placed on LaLiga matches.The minimum stak; odds of 1.50 or higher.The free bet is valid for 7 days from the moment it is credite</dd></div>
+      <div><dt>触发条件 / Trigger</dt><dd>点击参与/报名后，完成活动指定行为触发奖励</dd></div>
+      <div><dt>奖励方式 / Reward</dt><dd>20% cashback; 30% cashback; 100% bonus; 10% cashback</dd></div>
+      <div><dt>目标用户 / Who</dt><dd>Casino/Slots 用户；体育投注用户；电竞投注用户</dd></div>
+      <div><dt>时间 / When</dt><dd>ater the free bet amount!Terms and Conditions:This bonus offer is valid from 26.08.2025 (12:00 +3 UTC);  ated), email address and country of residence.You must opt in to participating in bonus offers in My Ac</dd></div>
+      <div><dt>Summary / 总结</dt><dd>1RegistrationLog inen / 12:15TOP-EVENTSUCLEuropa LeagueEPLIndian LeagueSerie ALaLigaUECLSportsBet on Your National TeamBet on Big Tournament 面向Casino/Slots 用户；体育投注用户；电竞投注用户，通过“点击参与/报名后，完成活动指定行为触发奖励”推动用户完成关键行为；奖励为 20% cashback; 30% cashback; 100% bonus; 10% cashback。主要参与要求：odds of 1.50 or higher on LaLiga matches and accumulator bets including 2 or more sel; odds of 1.40 or higher, with all selections placed on LaLiga matches.Get a free bet e; odds of 1.50 or higher placed on LaLiga matches, as well as accumulator bets includin; odds of 1.40 or higher, with all selections placed on LaLiga matches.The minimum stak; odds of 1.50 or higher.The free bet is valid for 7 days from the moment it is credite。</dd></div>
+      <div><dt>核心目的 / Objective</dt><dd>提升留存、降低流失感知并延长生命周期</dd></div>
+      <div><dt>数据预期 / Expected Data</dt><dd>提升留存、降低流失感知并延长生命周期；预期观察：投注额、投注单量、有效投注用户数上升；Casino DAU、游戏启动次数、免费旋转转付费率上升；复玩率、留存率、VIP 活跃和净收入稳定性提升。</dd></div>
+      <div><dt>详情页来源 / Detail Source</dt><dd><a href="https://1xlite-19708.pro/en/bonus/rules/la-liga">https://1xlite-19708.pro/en/bonus/rules/la-liga</a></dd></div>
+    </dl>
+<details class="detail-excerpt"><summary>详情页原文摘要 / Detail excerpt</summary><pre>1RegistrationLog inen / 12:15TOP-EVENTSUCLEuropa LeagueEPLIndian LeagueSerie ALaLigaUECLSportsBet on Your National TeamBet on Big TournamentsLong-term betsLiveMulti-LIVEBet on Your National TeamMarble-LiveFast bet1xGamesCrashCrystalBurning HotScratch CardWestern slotUnder and Over 7SolitaireVampire Curse21Crash PointApple Of FortuneSpin and WinMidgard ZombiesMayan TombGems OdysseyShow allCasinoLive CasinoEsportsShow allPROMOMoreBingoTotoResultsStatisticsPokerTV GamesVirtual sportsOther gamesHunting and FishingScratch CardsLottoPlinkoTerms and conditionsHow to take part:Register or log in on the 1xBet website or the app.Click the &quot;Take part&quot; button on the offer page.Place bets of at least 10 MYR on LaLiga football tournament events from 26.08.2025 to 24.05.2026. This offer includes single bets at odds of 1.50 or higher on LaLiga matches and accumulator bets including 2 or more selections, each selection at odds of 1.40 or higher, with all selections placed on LaLiga matches.Get a free bet every week!What determines the free bet amount?The free bet amount depends on the total stake of the eligible bets you place during each week within the promotional period:The free bet amount depends on your total stake amount:Total stake of or more — 5% of the total stakeTotal stake of or more — 7% of the total stakeTotal stake of or more — 10% of the total stakeThe maximum free bet amount is .The larger your total stake, the greater the free bet amount!Terms and Conditions:This bonus offer is valid from 26.08.2025 (12:00 +3 UTC) to 24.05.2026 (23:59 +3 UTC).Only registered customers can take part in this promotion. The following fields must be filled in: surname, first name, mobile phone number (must be activated), email address and country of residence.You must opt in to participating in bonus offers in My Account (Account Settings — Participation in bonus offers).To take part in this bonus offer, you must click the “Take part” button on the offer page.This bonus offer includes single bets at odds of 1.50 or higher placed on LaLiga matches, as well as accumulator bets including 2 or more selections, each selection at odds of 1.40 or higher, with all select ... [truncated]</pre></details>
+  </article>
+<article class="activity-card detail-ok">
+    <div class="activity-head">
+      <span class="index">19</span>
+      <div>
+        <h2>1RegistrationLog inen / 12:15TOP-EVENTSUCLEuropa LeagueEPLIndian LeagueSerie ALaLigaUECLSportsBet on Your National TeamBet on Big Tournament <span class="new-badge">今日新增 / New Today</span></h2>
+        <p>返现 / Cashback · <span class="detail-pill ok-pill">详情页已采集 / Detail captured</span></p>
+      </div>
+    </div>
+<a class="detail-shot-link" href="../../detail-screenshots/1xbet/1xbet-1xtennis-challengeget-cashback-up-to-18-for-bets-on-the-best-tennis-tourna.png"><img class="detail-shot" src="../../detail-screenshots/1xbet/1xbet-1xtennis-challengeget-cashback-up-to-18-for-bets-on-the-best-tennis-tourna.png" alt="1RegistrationLog inen / 12:15TOP-EVENTSUCLEuropa LeagueEPLIndian LeagueSerie ALaLigaUECLSportsBet on Your National TeamBet on Big Tournament detail screenshot"></a>
+    <dl>
+      <div><dt>要求 / Requirements</dt><dd>odds of 1.5 and higher on matches of tennis tournaments ATP, WTA, Davis Cup, Billie J; odds of each event - from 1.4. At least one event in the express bet must be on match; odds of 1.50 or higher.The free bet is valid for 7 days from the moment it is credite</dd></div>
+      <div><dt>触发条件 / Trigger</dt><dd>点击参与/报名后，完成活动指定行为触发奖励</dd></div>
+      <div><dt>奖励方式 / Reward</dt><dd>20% cashback; 30% cashback; 100% bonus; 10% cashback</dd></div>
+      <div><dt>目标用户 / Who</dt><dd>Casino/Slots 用户；体育投注用户；电竞投注用户</dd></div>
+      <div><dt>时间 / When</dt><dd>ated?The bonus size depends on the number of eligible bets you placed during the week:10-15 bets - 8% o;  ated), email address, and country of residence.You must opt in to participating in bonus offers in My A</dd></div>
+      <div><dt>Summary / 总结</dt><dd>1RegistrationLog inen / 12:15TOP-EVENTSUCLEuropa LeagueEPLIndian LeagueSerie ALaLigaUECLSportsBet on Your National TeamBet on Big Tournament 面向Casino/Slots 用户；体育投注用户；电竞投注用户，通过“点击参与/报名后，完成活动指定行为触发奖励”推动用户完成关键行为；奖励为 20% cashback; 30% cashback; 100% bonus; 10% cashback。主要参与要求：odds of 1.5 and higher on matches of tennis tournaments ATP, WTA, Davis Cup, Billie J; odds of each event - from 1.4. At least one event in the express bet must be on match; odds of 1.50 or higher.The free bet is valid for 7 days from the moment it is credite。</dd></div>
+      <div><dt>核心目的 / Objective</dt><dd>提升留存、降低流失感知并延长生命周期</dd></div>
+      <div><dt>数据预期 / Expected Data</dt><dd>提升留存、降低流失感知并延长生命周期；预期观察：投注额、投注单量、有效投注用户数上升；Casino DAU、游戏启动次数、免费旋转转付费率上升；复玩率、留存率、VIP 活跃和净收入稳定性提升。</dd></div>
+      <div><dt>详情页来源 / Detail Source</dt><dd><a href="https://1xlite-19708.pro/en/bonus/rules/1xtennis-challenge">https://1xlite-19708.pro/en/bonus/rules/1xtennis-challenge</a></dd></div>
+    </dl>
+<details class="detail-excerpt"><summary>详情页原文摘要 / Detail excerpt</summary><pre>1RegistrationLog inen / 12:15TOP-EVENTSUCLEuropa LeagueEPLIndian LeagueSerie ALaLigaUECLSportsBet on Your National TeamBet on Big TournamentsLong-term betsLiveMulti-LIVEBet on Your National TeamMarble-LiveFast bet1xGamesCrashCrystalBurning HotScratch CardWestern slotUnder and Over 7SolitaireVampire Curse21Crash PointApple Of FortuneSpin and WinMidgard ZombiesMayan TombGems OdysseyShow allCasinoLive CasinoEsportsShow allPROMOMoreBingoTotoResultsStatisticsPokerTV GamesVirtual sportsOther gamesHunting and FishingScratch CardsLottoPlinkoPromo1xTennis Challenge1xTennis ChallengeGet cashback up to 18% for bets on the best tennis tournaments!Take partHow to take partRegister or log in on the 1xBet website or the app.Click the &quot;Take part&quot; button on the offer page.Place bets from 12 MYR on tennis tournament matches ATP, WTA, Davis Cup, Billie Jean King Cup, United Cup, Laver Cup, Challenger, ITF, UTR.Get a free bet bonus of up to 18% every week!How is the free bet amount calculated?The bonus size depends on the number of eligible bets you placed during the week:10-15 bets - 8% of the total stake16-25 bets - 10% of the total stake26 or more - 18% of the total stakeThe bigger your total stake, the larger the bonus you'll get!Terms and Conditions:The bonus offer is available from 28.01.2026 (11:00+3 UTC) to 30.11.2026 (23:59 +3 UTC).Only registered customers can take part in this bonus offer. The following profile fields must be filled in: full name, mobile phone number (must be activated), email address, and country of residence.You must opt in to participating in bonus offers in My Account (Account Settings — Participation in bonus offers).To take part in this promotion, you need to press the “Take part” button on the offer page.The bonus offer takes into account single bets with odds of 1.5 and higher on matches of tennis tournaments ATP, WTA, Davis Cup, Billie Jean King Cup, United Cup, Laver Cup, Challenger, ITF, UTR, as well as express bets consisting of 2 or more events. The odds of each event - from 1.4. At least one event in the express bet must be on matches of tennis tournaments ATP, WTA, Davis Cup, Billie Jean King Cup, United Cup, Laver Cup, ... [truncated]</pre></details>
+  </article>
+<article class="activity-card detail-ok">
+    <div class="activity-head">
+      <span class="index">20</span>
+      <div>
+        <h2>1RegistrationLog inen / 12:15TOP-EVENTSUCLEuropa LeagueEPLIndian LeagueSerie ALaLigaUECLSportsBet on Your National TeamBet on Big Tournament <span class="new-badge">今日新增 / New Today</span></h2>
+        <p>返现 / Cashback · <span class="detail-pill ok-pill">详情页已采集 / Detail captured</span></p>
+      </div>
+    </div>
+<a class="detail-shot-link" href="../../detail-screenshots/1xbet/1xbet-crypto-freebettop-up-your-account-with-crypto-and-get-30-cashback-bonus-of.png"><img class="detail-shot" src="../../detail-screenshots/1xbet/1xbet-crypto-freebettop-up-your-account-with-crypto-and-get-30-cashback-bonus-of.png" alt="1RegistrationLog inen / 12:15TOP-EVENTSUCLEuropa LeagueEPLIndian LeagueSerie ALaLigaUECLSportsBet on Your National TeamBet on Big Tournament detail screenshot"></a>
+    <dl>
+      <div><dt>要求 / Requirements</dt><dd>odds of at least 1.6.Terms and Conditions:This bonus offer runs from 27/04/26 (05:00</dd></div>
+      <div><dt>触发条件 / Trigger</dt><dd>点击参与/报名后，完成活动指定行为触发奖励</dd></div>
+      <div><dt>奖励方式 / Reward</dt><dd>30% cashback; 20% cashback; 100% bonus; 10% cashback</dd></div>
+      <div><dt>目标用户 / Who</dt><dd>新注册/首充用户；Casino/Slots 用户；体育投注用户</dd></div>
+      <div><dt>时间 / When</dt><dd>ated), email address, country of residence.To take part in this bonus offer, you must opt in to taking;  ated as 30% of your average deposit amount, i.e. of the total amount of all deposits you made during th</dd></div>
+      <div><dt>Summary / 总结</dt><dd>1RegistrationLog inen / 12:15TOP-EVENTSUCLEuropa LeagueEPLIndian LeagueSerie ALaLigaUECLSportsBet on Your National TeamBet on Big Tournament 面向新注册/首充用户；Casino/Slots 用户；体育投注用户，通过“点击参与/报名后，完成活动指定行为触发奖励”推动用户完成关键行为；奖励为 30% cashback; 20% cashback; 100% bonus; 10% cashback。主要参与要求：odds of at least 1.6.Terms and Conditions:This bonus offer runs from 27/04/26 (05:00。</dd></div>
+      <div><dt>核心目的 / Objective</dt><dd>提升充值频次和充值金额</dd></div>
+      <div><dt>数据预期 / Expected Data</dt><dd>提升充值频次和充值金额；预期观察：充值次数、充值金额、Bonus claim rate 上升；投注额、投注单量、有效投注用户数上升；Casino DAU、游戏启动次数、免费旋转转付费率上升。</dd></div>
+      <div><dt>详情页来源 / Detail Source</dt><dd><a href="https://1xlite-19708.pro/en/bonus/rules/crypto-freebet">https://1xlite-19708.pro/en/bonus/rules/crypto-freebet</a></dd></div>
+    </dl>
+<details class="detail-excerpt"><summary>详情页原文摘要 / Detail excerpt</summary><pre>1RegistrationLog inen / 12:15TOP-EVENTSUCLEuropa LeagueEPLIndian LeagueSerie ALaLigaUECLSportsBet on Your National TeamBet on Big TournamentsLong-term betsLiveMulti-LIVEBet on Your National TeamMarble-LiveFast bet1xGamesCrashCrystalBurning HotScratch CardWestern slotUnder and Over 7SolitaireVampire Curse21Crash PointApple Of FortuneSpin and WinMidgard ZombiesMayan TombGems OdysseyShow allCasinoLive CasinoEsportsShow allPROMOMoreBingoTotoResultsStatisticsPokerTV GamesVirtual sportsOther gamesHunting and FishingScratch CardsLottoPlinkoPromoCrypto FreebetCrypto FreebetTop up your account with crypto and get 30% cashback!Take partHow do I get cashback?Register or log in on the 1xBet website or the app.Top up your account using any cryptocurrency (the minimum required deposit is 20 MYR).Get cashback worth 30% of the average amount of your deposits as a promo code.How to redeem a promo code:Wager the promo code amount in pre-match or live accumulator bets with 4 or more selections, each selection at odds of at least 1.6.Terms and Conditions:This bonus offer runs from 27/04/26 (05:00 +8 UTC) and will continue indefinitely.Only registered customers may take part. The following fields must be filled in: full name, mobile phone number (must be activated), email address, country of residence.To take part in this bonus offer, you must opt in to taking part in sports bonus offers in your account settings in My Account (Account Settings - Bonuses).To take part in this promotion, you need to press the “Take part” button on the offer page.Cashback in the form of a promo code is credited 1 time on Monday based on the results of the previous week.The cashback amount is calculated as 30% of your average deposit amount, i.e. of the total amount of all deposits you made during the week divided by the number of deposits made.The minimum deposit is 20 MYR.The maximum cashback amount is 1,185 MYR.The minimum cashback amount is 1.98 MYR.To get cashback, you must make at least 5 deposits during the week from Monday (00:00 UTC+3) to Sunday (23:59 UTC+3). At least 3 deposits must be made on different days.The promo code is valid for 24 hours from the moment it is awarde ... [truncated]</pre></details>
+  </article>
+    </section>
+
+    <details class="raw">
+      <summary>查看原始页面文字 / Raw visible text</summary>
+      <pre>1RegistrationLog inen / 12:13TOP-EVENTSUCLEuropa LeagueEPLIndian LeagueSerie ALaLigaUECLSportsBet on Your National TeamBet on Big TournamentsLong-term betsLiveMulti-LIVEBet on Your National TeamMarble-LiveFast bet1xGamesCrashCrystalBurning HotScratch CardWestern slotUnder and Over 7SolitaireVampire Curse21Crash PointApple Of FortuneSpin and WinMidgard ZombiesMayan TombGems OdysseyShow allCasinoLive CasinoEsportsShow allPROMOMoreBingoTotoResultsStatisticsPokerTV GamesVirtual sportsOther gamesHunting and FishingScratch CardsLottoPlinkoInfinite Prize LeagueDaily prizes, weekly free bets, and superprizes are waiting for you!Bonus offer detailsLeague of winsPlace bets on English Premier League matches to get free bets and take part in the prize draw!Bonus offer detailsNBA Win ShotThe season of big matches is your season of big wins!Bonus offer detailsBarca 1xFamilyMés que un club: bet and win with the Blaugrana!Bonus offer detailsPSG: Champion’s ContractSign a contract with PSG and discover the way to exclusive prizes!Bonus offer detailsNo Risk BetGet a free bet if your bet loses!Bonus offer detailsGoalless FootballGet a 100% bet refund in the event of a goalless draw!Bonus offer detailsGrand Slam TournamentsBet on Grand Slam tournaments and win awesome prizes!Bonus offer detailsApp&amp;BonusPlace bets using the mobile app and get a fantastic bonus!Bonus offer detailsLucky DayWin 500 promo points every day!Bonus offer details1XPICK'EM IEM Cologne MajorMake a prediction and get a guaranteed bonus!Bonus offer detailsEsports EraChoose an event and place a risk-free bet!Bonus offer detailsChickPointHelp the chicken on its way and win superprizes!Bonus offer detailsSport Single100% up to 588 MYR – just 3 bets to the bonus!Bonus offer detailsHappy MondayGet cashback every Monday!Bonus offer detailsEsports Cashback BoomPlace bets on esports and get up to 20% cashback weekly!Bonus offer detailsOlé, La Liga!Bet on red-hot matches and get free bets!Bonus offer details1xTennis ChallengeGet cashback up to 18% for bets on the best tennis tournaments!Bonus offer detailsCrypto FreebetTop up your account with crypto and get 30% cashback!Bonus offer detailsPromoVisit our store and buy a bet without spending any money. Enjoy the game and receive bonuses for active play!Bonus offer details100% first deposit bonusRegister with 1xBet and get a fantastic 100% bonus for your first deposit!Bonus offer detailsWelcome package up to 7688 MYR + 150 FSMake deposits and get bonuses!Bonus offer detailsLOYALTY PAYS OFFGET UP TO 100 FS AND A 50% TENTH DEPOSIT BONUS FOR SLOTSBonus offer detailsCasino VIP CashbackThank you for choosing us! As a token of our gratitude, we're offering you the chance to join our new loyalty program and get VIP cashbackBonus offer detailsDaily Games TournamentWin amazing prizes just by playing your favorite GamesBonus offer detailsYour birthday with 1xBet!Is it your birthday? We would like to wish you a Happy Birthday and offer you a personal bonus!Bonus offer detailsAdvancebetWe offer a fantastic bonus, Advancebet, which is available to customers who have unsettled bets in their accounts.Bonus offer detailsBonus for a series of losing betsWe offer support to our players during difficult times by giving them a bonus for a series of losing bets!Bonus offer detailsTOTOMake a free TOTO prediction then place any bet on a sporting event to receive bonuses!Bonus offer detailsLUCKY FRIDAYGet up to 300€ on Friday!Bonus offer detailsTVBET JackpotDon’t miss your chance to hit the jackpot!Bonus offer detailsAVIATOR THURSDAYMake a deposit every Thursday and get up to 50 free bets in Aviator!Bonus offer detailsThe big gameDon't miss your chance! Make a deposit between 00:01 and 23:59 (GMT+0) every Sunday and get up to 200 FSBonus offer detailsWeekend BoosterMake a deposit every Friday and get a bonus credited to your main account!Bonus offer detailsJacky's betJacky Bett here. I've cooked up something special for you: 50 FS! But only if you follow me on Instagram and DM me the code word &quot;FREE&quot;!Bonus offer detailsDEAL OF THE DAYMake a deposit every Tuesday and we'll add 50% on top!Bonus offer detailsWILD SPIN HUNTGet up to 750 FS from Pragmatic Play for deposits on Saturdays!Bonus offer details100 FREE SPINS FOR A SUBSCRIPTION!Subscribe to our Telegram channel and get a giftBonus offer detailsBorn to WinLet's celebrate together - have a slots bonus on us! T&amp;Cs apply. 18+. Рlease gamble responsibly.Bonus offer detailsBeat 1xBetGet a bonus of up to 1387 MYR for all 1xGamesBonus offer detailsBECOME A LEGENDNew look, same thrills! Bet on FIFA / EA FC in the promo and bag prizes!Bonus offer detailsCricket Free BetA guaranteed free bet for your losing betBonus offer details200% WinningsPLAY 1xGames — GET X2 YOUR WINNINGS!Bonus offer details10% cashbackGet cashback worth 10% of your deposit as a promo code!Bonus offer detailsInvite friends!Join the 1xBet referral program and earn extra income by inviting friends!Bonus offer details10% cashback bonusGet 10% of your deposit as cashback in the form of a promo code.Bonus offer detailsx2 Wednesday promotionGet up to 1500 MYR this Wednesday! The bonus is only available to Lucky Friday participants.Bonus offer detailsAccumulator Of The DayChoose your bet from a number of accumulators we offer on the most exciting sporting events of the day!Bonus offer detailsRaceTake part in the Race: Place bets on Sports and Live events and receive free promotional codes. Start the race right now and don’t stop!Bonus offer detailsHyper BonusWin and get a guaranteed bonus of up to 250%!Bonus offer detailsStar leagueBet on Champions League stars and win 70,000 USD!Bonus offer detailsIn Pursuit of the ScudettoSupport your favorite Serie A club, multiply your points, and collect Scudettos from all the divisions!Bonus offer detailsGo RoshWin superprizes by betting on Dota 2Bonus offer details30% CASHBACK BONUSGet 30% cashback credited to your bonus account!Bonus offer detailsBonuses1 /54Promo Code StoreEnjoy the games and receive bonuses for regular play!SelectBonus GamesGet bonuses and valuable prizesSelectPromo1 /2All Bonuses1st Deposit BonusCashbackPromotionsOther Deposit BonusesSports1xGamesCasinoEsports bonusesFind out moreInfinite Prize LeagueDaily prizes, weekly free bets, and superprizes are waiting for you!Find out moreStar leagueBet on Champions League stars and win 70,000 USD!BESTFind out moreNBA Win ShotThe season of big matches is your season of big wins!22/06/26 (21:00 +8 UTC)Find out moreHappy MondayGet cashback every Monday!Find out moreCrypto FreebetTop up your account with crypto and get 30% cashback!Find out morePSG: Champion’s ContractSign a contract with PSG and discover the way to exclusive prizes!Find out moreBarca 1xFamilyMés que un club: bet and win with the Blaugrana!Find out moreIn Pursuit of the ScudettoSupport your favorite Serie A club, multiply your points, and collect Scudettos from all the divisions!NEWBESTFind out more1xTennis ChallengeGet cashback up to 18% for bets on the best tennis tournaments!NEWBESTFind out moreOlé, La Liga!Bet on red-hot matches and get free bets!460 MYRFind out moreGrand Slam TournamentsBet on Grand Slam tournaments and win awesome prizes!Find out moreLeague of winsPlace bets on English Premier League matches to get free bets and take part in the prize draw!Find out morePromo Code Store at 1xBetVisit our store and buy a bet without spending any money. Enjoy the game and receive bonuses for active play!UnlimitedFind out moreWelcome package up to 7688 MYR + 150 FSMake deposits and get bonuses!Find out moreLOYALTY PAYS OFFGET UP TO 100 FS AND A 50% TENTH DEPOSIT BONUS FOR SLOTSFind out moreCasino VIP CashbackThank you for choosing us! As a token of our gratitude, we're offering you the chance to join our new loyalty program and get VIP cashbackFind out moreEvery day brings valuable prizes!Win amazing prizes just by playing your favorite GamesUnlimitedFind out moreYour birthday with 1xBet!Is it your birthday? We would like to wish you a Happy Birthday and offer you a personal bonus!UnlimitedFind out moreAdvancebetWe offer a fantastic bonus, Advancebet, which is available to customers who have unsettled bets in their accounts.UnlimitedFind out moreBonus for a series of losing betsWe offer support to our players during difficult times by giving them a bonus for a series of losing bets!UnlimitedFind out moreA new special offer from our company – TOTOMake a free TOTO prediction then place any bet on a sporting event to receive bonuses!UnlimitedFind out moreLucky DayWin 500 promo points every day!UnlimitedFind out moreBeat 1xBetGet a bonus of up to 1387 MYR for all 1xGamesUnlimitedFind out moreGoalless FootballGet a 100% bet refund in the event of a goalless draw!UnlimitedFind out moreBECOME A LEGENDNew look, same thrills! Bet on FIFA / EA FC in the promo and bag prizes!UnlimitedFind out more1XPICK'EM IEM Cologne MajorMake a prediction and get a guaranteed bonus!Find out moreChickPointHelp the chicken on its way and win superprizes!Find out moreEsports EraChoose an event and place a risk-free bet!Unlimited40 MYRFind out moreEsports Cashback BoomPlace bets on esports and get up to 20% cashback weekly!Find out moreCricket Free BetA guaranteed free bet for your losing betUnlimited119 MYRFind out more10% cashbackGet cashback worth 10% of your deposit as a promo code!67 16:46:11Find out moreInvite friends!Join the 1xBet referral program and earn extra income by inviting friends!Find out moreThe big gameDon't miss your chance! Make a deposit between 00:01 and 23:59 (GMT+0) every Sunday and get up to 200 FSFind out moreDEAL OF THE DAYMake a deposit every Tuesday and we'll add 50% on top!Find out moreWeekend BoosterMake a deposit every Friday and get a bonus credited to your main account!Find out more10% cashback bonusGet 10% of your deposit as cashback in the form of a promo code.72 16:46:11Find out morex2 Wednesday promotionGet up to 1500 MYR this Wednesday! The bonus is only av</pre>
+    </details>
+  </main>
+</body>
+</html>

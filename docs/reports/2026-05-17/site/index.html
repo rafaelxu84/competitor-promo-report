@@ -1,0 +1,268 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>竞品活动站点 2026-05-17</title>
+  <style>
+    :root { --bg:#f5f6f2; --panel:#fff; --ink:#15201b; --muted:#66736d; --line:#d8ddd4; --green:#0d7658; --blue:#245c9e; --amber:#9a6816; --red:#a54040; --soft:#eef4f0; }
+    * { box-sizing:border-box; }
+    body { margin:0; background:var(--bg); color:var(--ink); font-family:Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; line-height:1.45; }
+    .page { max-width:1280px; margin:0 auto; padding:28px 18px 56px; }
+    .hero { background:var(--panel); border:1px solid var(--line); border-radius:8px; padding:24px; display:grid; grid-template-columns:minmax(0,1fr) 280px; gap:18px; align-items:end; margin-bottom:18px; }
+    .brand-hero { margin-bottom:16px; }
+    .eyebrow { margin:0 0 8px; color:var(--green); font-size:12px; font-weight:800; text-transform:uppercase; letter-spacing:.04em; }
+    h1 { margin:0 0 8px; font-size:32px; line-height:1.12; letter-spacing:0; }
+    h2 { margin:0 0 6px; font-size:18px; letter-spacing:0; }
+    p { margin:0; }
+    .sub, .meta { color:var(--muted); }
+    .status { display:inline-flex; align-items:center; border-radius:999px; padding:3px 8px; font-size:12px; font-weight:800; white-space:nowrap; }
+    .ok { color:var(--green); background:#e5f3ed; }
+    .mid { color:var(--amber); background:#fff4df; }
+    .blue { color:var(--blue); background:#e9f0fb; }
+    .low { color:var(--red); background:#faeeee; }
+    .meta { background:#f8faf7; border:1px solid var(--line); border-radius:8px; padding:14px; }
+    .meta b { display:inline-block; min-width:92px; color:var(--ink); }
+    .brand-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:14px; }
+    .brand-card { display:grid; grid-template-columns:220px minmax(0,1fr); gap:14px; padding:14px; color:var(--ink); text-decoration:none; background:var(--panel); border:1px solid var(--line); border-radius:8px; }
+    .brand-card img, .visual img { width:100%; border:1px solid var(--line); border-radius:8px; background:#edf0ea; object-fit:cover; }
+    .brand-card img { aspect-ratio:16/10; }
+    .brand-card span { display:inline-flex; margin-top:10px; color:var(--blue); font-weight:700; }
+    .new-summary { background:var(--panel); border:1px solid var(--line); border-radius:8px; padding:16px; margin-bottom:18px; }
+    .new-summary h2 { margin:0 0 10px; font-size:20px; }
+    .new-list { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:10px; }
+    .new-item { border:1px solid var(--line); border-radius:8px; padding:10px; background:#fbfcfa; }
+    .new-item strong { display:block; }
+    .new-badge { display:inline-flex; align-items:center; border-radius:999px; background:#fff4df; color:#9a6816; padding:3px 8px; font-size:12px; font-weight:800; margin-left:6px; vertical-align:middle; }
+    .topnav { margin-bottom:12px; }
+    .topnav a { color:var(--blue); font-weight:700; text-decoration:none; }
+    .visual { background:var(--panel); border:1px solid var(--line); border-radius:8px; padding:14px; margin-bottom:16px; }
+    .visual img { max-height:520px; object-fit:contain; }
+    .activity-list { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:14px; }
+    .activity-card { background:var(--panel); border:1px solid var(--line); border-radius:8px; padding:16px; }
+    .activity-card.detail-ok { border-left:4px solid var(--green); }
+    .activity-card.detail-limited { border-left:4px solid var(--amber); }
+    .activity-card.detail-missing { border-left:4px solid #a8b1ac; }
+    .activity-head { display:grid; grid-template-columns:36px minmax(0,1fr); gap:10px; align-items:start; margin-bottom:12px; }
+    .index { display:inline-grid; place-items:center; width:30px; height:30px; border-radius:999px; background:var(--soft); color:var(--green); font-weight:800; }
+    .detail-shot-link { display:block; margin:8px 0 12px; }
+    .detail-shot { width:100%; max-height:360px; object-fit:cover; object-position:top; border:1px solid var(--line); border-radius:8px; background:#edf0ea; }
+    dl { display:grid; gap:8px; margin:0; }
+    dl div { display:grid; grid-template-columns:150px minmax(0,1fr); gap:10px; border-top:1px solid var(--line); padding-top:8px; }
+    dt { color:var(--muted); font-size:12px; font-weight:800; }
+    dd { margin:0; font-size:13px; }
+    .missing-text { color:var(--muted); }
+    .detail-pill { display:inline-flex; align-items:center; border-radius:999px; padding:3px 8px; font-size:12px; font-weight:800; }
+    .ok-pill { background:#e5f3ed; color:var(--green); }
+    .limited-pill { background:#fff4df; color:var(--amber); }
+    .fallback-pill { background:#eef0ea; color:var(--muted); }
+    .detail-excerpt { margin-top:12px; border-top:1px solid var(--line); padding-top:10px; }
+    .detail-excerpt summary { cursor:pointer; color:var(--blue); font-weight:800; }
+    .raw { background:var(--panel); border:1px solid var(--line); border-radius:8px; padding:14px; margin-top:16px; }
+    pre { white-space:pre-wrap; word-break:break-word; background:#111714; color:#eef6f0; padding:12px; border-radius:8px; max-height:320px; overflow:auto; font-size:12px; }
+    a { color:var(--blue); }
+    @media (max-width:900px) { .hero, .brand-grid, .brand-card, .activity-list, .new-list { grid-template-columns:1fr; } h1 { font-size:27px; } dl div { grid-template-columns:1fr; } }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <section class="hero">
+      <div>
+        <p class="eyebrow">Daily Promotion Intelligence</p>
+        <h1>竞品活动站点</h1>
+        <p class="sub">每个品牌一个入口。进入品牌页后可查看页面截图、活动列表，以及标题、奖励、要求、开始/结束时间等中英文字段。</p>
+      </div>
+      <div class="meta">
+        <b>日期 Date</b>2026-05-17<br>
+        <b>品牌 Brands</b>10<br>
+        <b>活动 Activities</b>76<br>
+        <b>详情 Details</b>47<br>
+        <b>截图 Shots</b>64<br>
+        <b>今日新增 New</b>65
+      </div>
+    </section>
+
+    <section class="new-summary site-new">
+      <h2>今日新增活动 / New Today</h2>
+      <div class="new-list"><div class="new-item"><strong>BC Game · You need to enable JavaScript to run BC app.</strong><span>$0</span></div>
+<div class="new-item"><strong>BC Game · You need to enable JavaScript to run BC app.</strong><span>$0.1; $100</span></div>
+<div class="new-item"><strong>BC Game · You need to enable JavaScript to run BC app.</strong><span>$0</span></div>
+<div class="new-item"><strong>1xBet · 1RegistrationLog inen / 12:13TOP-EVENTSUCLEuropa LeagueEPLIndian LeagueSerie ALaLigaUECLSportsBet on Your National TeamBet on Big Tournament</strong><span>20% cashback; 30% cashback; 100% bonus; 10% cashback</span></div>
+<div class="new-item"><strong>1xBet · 1RegistrationLog inen / 12:14TOP-EVENTSUCLEuropa LeagueEPLIndian LeagueSerie ALaLigaUECLSportsBet on Your National TeamBet on Big Tournament</strong><span>12 MYR; up to 20 MYR; 20 MYR; 40 MYR; 79 MYR</span></div>
+<div class="new-item"><strong>1xBet · 1RegistrationLog inen / 12:14TOP-EVENTSUCLEuropa LeagueEPLIndian LeagueSerie ALaLigaUECLSportsBet on Your National TeamBet on Big Tournament</strong><span>列表页未显示</span></div>
+<div class="new-item"><strong>1xBet · 1RegistrationLog inen / 12:14TOP-EVENTSUCLEuropa LeagueEPLIndian LeagueSerie ALaLigaUECLSportsBet on Your National TeamBet on Big Tournament</strong><span>列表页未显示</span></div>
+<div class="new-item"><strong>1xBet · 1RegistrationLog inen / 12:14TOP-EVENTSUCLEuropa LeagueEPLIndian LeagueSerie ALaLigaUECLSportsBet on Your National TeamBet on Big Tournament</strong><span>列表页未显示</span></div>
+<div class="new-item"><strong>1xBet · 1RegistrationLog inen / 12:14TOP-EVENTSUCLEuropa LeagueEPLIndian LeagueSerie ALaLigaUECLSportsBet on Your National TeamBet on Big Tournament</strong><span>列表页未显示</span></div>
+<div class="new-item"><strong>1xBet · 1RegistrationLog inen / 12:14TOP-EVENTSUCLEuropa LeagueEPLIndian LeagueSerie ALaLigaUECLSportsBet on Your National TeamBet on Big Tournament</strong><span>列表页未显示</span></div>
+<div class="new-item"><strong>1xBet · 1RegistrationLog inen / 12:14TOP-EVENTSUCLEuropa LeagueEPLIndian LeagueSerie ALaLigaUECLSportsBet on Your National TeamBet on Big Tournament</strong><span>100%</span></div>
+<div class="new-item"><strong>1xBet · 1RegistrationLog inen / 12:14TOP-EVENTSUCLEuropa LeagueEPLIndian LeagueSerie ALaLigaUECLSportsBet on Your National TeamBet on Big Tournament</strong><span>10%; 20%; 30%; 40%; 50%</span></div>
+<div class="new-item"><strong>1xBet · 1RegistrationLog inen / 12:14TOP-EVENTSUCLEuropa LeagueEPLIndian LeagueSerie ALaLigaUECLSportsBet on Your National TeamBet on Big Tournament</strong><span>20% cashback; 30% cashback; 100% bonus; 10% cashback</span></div>
+<div class="new-item"><strong>1xBet · 1RegistrationLog inen / 12:14TOP-EVENTSUCLEuropa LeagueEPLIndian LeagueSerie ALaLigaUECLSportsBet on Your National TeamBet on Big Tournament</strong><span>500 promo points</span></div>
+<div class="new-item"><strong>1xBet · 1RegistrationLog inen / 12:14TOP-EVENTSUCLEuropa LeagueEPLIndian LeagueSerie ALaLigaUECLSportsBet on Your National TeamBet on Big Tournament</strong><span>19.8 MYR; 10%; 20%; 50%; 100%</span></div>
+<div class="new-item"><strong>1xBet · 1RegistrationLog inen / 12:15TOP-EVENTSUCLEuropa LeagueEPLIndian LeagueSerie ALaLigaUECLSportsBet on Your National TeamBet on Big Tournament</strong><span>40 MYR</span></div>
+<div class="new-item"><strong>1xBet · 1RegistrationLog inen / 12:15TOP-EVENTSUCLEuropa LeagueEPLIndian LeagueSerie ALaLigaUECLSportsBet on Your National TeamBet on Big Tournament</strong><span>10%; 20%; 30%; 40%; 50%</span></div>
+<div class="new-item"><strong>1xBet · 1RegistrationLog inen / 12:15TOP-EVENTSUCLEuropa LeagueEPLIndian LeagueSerie ALaLigaUECLSportsBet on Your National TeamBet on Big Tournament</strong><span>20% cashback; 30% cashback; 100% bonus; 10% cashback</span></div>
+<div class="new-item"><strong>1xBet · 1RegistrationLog inen / 12:15TOP-EVENTSUCLEuropa LeagueEPLIndian LeagueSerie ALaLigaUECLSportsBet on Your National TeamBet on Big Tournament</strong><span>20% cashback; 30% cashback; 100% bonus; 10% cashback</span></div>
+<div class="new-item"><strong>1xBet · 1RegistrationLog inen / 12:15TOP-EVENTSUCLEuropa LeagueEPLIndian LeagueSerie ALaLigaUECLSportsBet on Your National TeamBet on Big Tournament</strong><span>20% cashback; 30% cashback; 100% bonus; 10% cashback</span></div>
+<div class="new-item"><strong>1xBet · 1RegistrationLog inen / 12:15TOP-EVENTSUCLEuropa LeagueEPLIndian LeagueSerie ALaLigaUECLSportsBet on Your National TeamBet on Big Tournament</strong><span>20% cashback; 30% cashback; 100% bonus; 10% cashback</span></div>
+<div class="new-item"><strong>1xBet · 1RegistrationLog inen / 12:15TOP-EVENTSUCLEuropa LeagueEPLIndian LeagueSerie ALaLigaUECLSportsBet on Your National TeamBet on Big Tournament</strong><span>20% cashback; 30% cashback; 100% bonus; 10% cashback</span></div>
+<div class="new-item"><strong>1xBet · 1RegistrationLog inen / 12:15TOP-EVENTSUCLEuropa LeagueEPLIndian LeagueSerie ALaLigaUECLSportsBet on Your National TeamBet on Big Tournament</strong><span>30% cashback; 20% cashback; 100% bonus; 10% cashback</span></div>
+<div class="new-item"><strong>JustCasino · &lt;iframe src=&quot;https://www.googletagmanager.com/ns.html?id=GTM-TQSLNXJ&amp;gtm_auth=&amp;gtm_preview=&amp;gtm_cookies_win=x&quot;</strong><span>5% Cashback; 20% Cashback; $500; $50,000; $1,000; $100; $20,000; $70,000</span></div>
+<div class="new-item"><strong>Betpanda · You need to enable JavaScript to run this app.</strong><span>5% extra</span></div>
+<div class="new-item"><strong>Betpanda · You need to enable JavaScript to run this app.</strong><span>列表页未显示</span></div>
+<div class="new-item"><strong>Betpanda · You need to enable JavaScript to run this app.</strong><span>列表页未显示</span></div>
+<div class="new-item"><strong>Betpanda · You need to enable JavaScript to run this app.</strong><span>列表页未显示</span></div>
+<div class="new-item"><strong>Betpanda · You need to enable JavaScript to run this app.</strong><span>列表页未显示</span></div>
+<div class="new-item"><strong>Betpanda · You need to enable JavaScript to run this app.</strong><span>列表页未显示</span></div>
+<div class="new-item"><strong>Betpanda · You need to enable JavaScript to run this app.</strong><span>列表页未显示</span></div>
+<div class="new-item"><strong>Betpanda · You need to enable JavaScript to run this app.</strong><span>列表页未显示</span></div>
+<div class="new-item"><strong>Betpanda · You need to enable JavaScript to run this app.</strong><span>列表页未显示</span></div>
+<div class="new-item"><strong>Betpanda · You need to enable JavaScript to run this app.</strong><span>列表页未显示</span></div>
+<div class="new-item"><strong>Betpanda · You need to enable JavaScript to run this app.</strong><span>列表页未显示</span></div>
+<div class="new-item"><strong>Betpanda · You need to enable JavaScript to run this app.</strong><span>列表页未显示</span></div>
+<div class="new-item"><strong>Betpanda · You need to enable JavaScript to run this app.</strong><span>列表页未显示</span></div>
+<div class="new-item"><strong>Betpanda · You need to enable JavaScript to run this app.</strong><span>列表页未显示</span></div>
+<div class="new-item"><strong>CoinCasino · Play NowRead MorePragmatic Drops &amp; Wins: €25,000,000 Prize PoolSpin for Daily Tournaments &amp; Weekly Wins</strong><span>40% Extra; $30,000; $10; $250.; $20; $0.20,; $100; $1</span></div>
+<div class="new-item"><strong>CoinCasino · Jump into the action in three simple steps:</strong><span>200% bonus; $30,000; $30,000,; $10; $99.99; $0.20; $100; $249.99</span></div>
+<div class="new-item"><strong>CoinCasino · And that’s just the beginning.</strong><span>$30,000</span></div>
+<div class="new-item"><strong>CoinCasino · Place an ACCA bet with at least 3 selections.</strong><span>40% Extra</span></div>
+<div class="new-item"><strong>CoinCasino · Our offers go live on 1 June, giving you ten days to get set up before the first match. Here's what's waiting for you:World Cup Odds Boosts</strong><span>$100; $20; $10; $25; $30</span></div>
+<div class="new-item"><strong>CoinCasino · How to play:</strong><span>€12; €12,000,000; €1,; €10</span></div>
+<div class="new-item"><strong>CoinCasino · How to participate:</strong><span>€25,000,000; €0.15; €1; €0.20</span></div>
+<div class="new-item"><strong>CoinCasino · The Tournaments</strong><span>€2,500,000; €151,000; €1,812,000; €0.10; up to €350</span></div>
+<div class="new-item"><strong>CoinCasino · How it works:</strong><span>€1; €1,000,000; €1,000,000.; €20,000; €0.30</span></div>
+<div class="new-item"><strong>CoinCasino · Here’s how to join the fun:</strong><span>€10,000,000; €4,750,000; €3,250,000; €300,000; €30,000.</span></div>
+<div class="new-item"><strong>Velobet · Austria</strong><span>330% bonus; 300 free spins; 40% Cashback; 40%; 40% cashback</span></div>
+<div class="new-item"><strong>Velobet · Crypto Deposit Bonus</strong><span>160% BONUS; 160% bonus; $.</span></div>
+<div class="new-item"><strong>Megapari · 1RegistrationLog in12:21enCricketLiveSportsBonusesLive CasinoCasinoMegaGamesCrashCrystal21Scratch CardApple Of FortuneBurning HotWestern slo</strong><span>up to 597 MYR; 69 MYR; 5%; 3.45 MYR; 7%</span></div>
+<div class="new-item"><strong>Funbet · 1. Single bets with odds of at least 2.00 settled as win / lose;</strong><span>100% bonus; $100; $100.</span></div>
+<div class="new-item"><strong>Funbet · 1. You need to finish any active casino bonus before you use the free spins</strong><span>100% bonus; $500; $202</span></div>
+<div class="new-item"><strong>Funbet · 1. Single bets with odds of at least 2.00 settled as win / lose;</strong><span>50% bonus; $600; $600.</span></div>
+<div class="new-item"><strong>Funbet · 3. The minimum deposit to receive the 55 Free Spins from this promotion is 20 USD</strong><span>$20</span></div>
+<div class="new-item"><strong>Funbet · 1. You need to finish any active casino bonus before you use the free spins.</strong><span>50% bonus; $750; $20; $50.</span></div>
+<div class="new-item"><strong>Funbet · 2. The promotion runs weekly from Monday 00:00 to Sunday 23:59 UTC.</strong><span>25% cashback; $200; $200,</span></div>
+<div class="new-item"><strong>Funbet · 2. This feature may be terminated at any time at the administration's discretion.</strong><span>$50,000</span></div>
+<div class="new-item"><strong>Funbet · 2. This promotion is valid from 15.09.2024 00:00 UTC +0 and may be terminated at any time at the administration's discretion.</strong><span>$50</span></div>
+<div class="new-item"><strong>Funbet · 2. This feature may be terminated at any time at the administration's discretion.</strong><span>$100,000</span></div>
+<div class="new-item"><strong>Funbet · 3.1 The minimum Cashback Bonus is 20 USD.</strong><span>$500</span></div>
+<div class="new-item"><strong>Campeonbet · ​Welcome Casino PackageStart with 350% up to €2000 &amp; 1000 FS</strong><span>25% Cashback</span></div>
+<div class="new-item"><strong>Campeonbet · ​Welcome Casino PackageStart with 350% up to €2000 &amp; 1000 FS</strong><span>25% Cashback</span></div>
+<div class="new-item"><strong>Campeonbet · ​Campeonbet is shortlistedOne vote brings €20 Free Bet &amp; 150 FS!</strong><span>€20; 150 FS; 100%; up to €100; €25</span></div>
+<div class="new-item"><strong>Campeonbet · Last updated 13/2/2026 Introduction</strong><span>199% Bonus</span></div></div>
+    </section>
+
+    <section class="brand-grid">
+      <a class="brand-card" href="brands/stake.html">
+    <img src="../browser-screenshots/stake-stake-promotions.png" alt="Stake screenshot">
+    <div>
+      <h2>Stake</h2>
+      <p>0 条活动 / 0 activities</p>
+      <p>0 条详情页已匹配 / 0 detail pages matched</p>
+      <p><span class="status low">HTTP 403</span></p>
+      
+      <span>打开品牌详情 / Open brand page</span>
+    </div>
+  </a>
+<a class="brand-card" href="brands/bc-game.html">
+    <img src="../browser-screenshots/bc-game-bc-game-promotions.png" alt="BC Game screenshot">
+    <div>
+      <h2>BC Game</h2>
+      <p>3 条活动 / 3 activities</p>
+      <p>0 条详情页已匹配 / 0 detail pages matched</p>
+      <p><span class="status low">受限 / Blocked</span></p>
+      <p><span class="new-badge">今日新增 3</span></p>
+      <span>打开品牌详情 / Open brand page</span>
+    </div>
+  </a>
+<a class="brand-card" href="brands/1xbet.html">
+    <img src="../browser-screenshots/1xbet-1xbet-bonus-rules.png" alt="1xBet screenshot">
+    <div>
+      <h2>1xBet</h2>
+      <p>20 条活动 / 20 activities</p>
+      <p>20 条详情页已匹配 / 20 detail pages matched</p>
+      <p><span class="status ok">可访问 / OK</span></p>
+      <p><span class="new-badge">今日新增 20</span></p>
+      <span>打开品牌详情 / Open brand page</span>
+    </div>
+  </a>
+<a class="brand-card" href="brands/justcasino.html">
+    <img src="../browser-screenshots/justcasino-justcasino-promotions.png" alt="JustCasino screenshot">
+    <div>
+      <h2>JustCasino</h2>
+      <p>1 条活动 / 1 activities</p>
+      <p>1 条详情页已匹配 / 1 detail pages matched</p>
+      <p><span class="status ok">可访问 / OK</span></p>
+      <p><span class="new-badge">今日新增 1</span></p>
+      <span>打开品牌详情 / Open brand page</span>
+    </div>
+  </a>
+<a class="brand-card" href="brands/betpanda.html">
+    <img src="../browser-screenshots/betpanda-betpanda-promotions.png" alt="Betpanda screenshot">
+    <div>
+      <h2>Betpanda</h2>
+      <p>14 条活动 / 14 activities</p>
+      <p>0 条详情页已匹配 / 0 detail pages matched</p>
+      <p><span class="status low">受限 / Blocked</span></p>
+      <p><span class="new-badge">今日新增 14</span></p>
+      <span>打开品牌详情 / Open brand page</span>
+    </div>
+  </a>
+<a class="brand-card" href="brands/coincasino.html">
+    <img src="../browser-screenshots/coincasino-coincasino-promotions.png" alt="CoinCasino screenshot">
+    <div>
+      <h2>CoinCasino</h2>
+      <p>10 条活动 / 10 activities</p>
+      <p>10 条详情页已匹配 / 10 detail pages matched</p>
+      <p><span class="status ok">可访问 / OK</span></p>
+      <p><span class="new-badge">今日新增 10</span></p>
+      <span>打开品牌详情 / Open brand page</span>
+    </div>
+  </a>
+<a class="brand-card" href="brands/velobet.html">
+    <img src="../browser-screenshots/velobet-velobet-promos.png" alt="Velobet screenshot">
+    <div>
+      <h2>Velobet</h2>
+      <p>13 条活动 / 13 activities</p>
+      <p>1 条详情页已匹配 / 1 detail pages matched</p>
+      <p><span class="status ok">可访问 / OK</span></p>
+      <p><span class="new-badge">今日新增 2</span></p>
+      <span>打开品牌详情 / Open brand page</span>
+    </div>
+  </a>
+<a class="brand-card" href="brands/megapari.html">
+    <img src="../browser-screenshots/megapari-megapari-bonus-rules.png" alt="Megapari screenshot">
+    <div>
+      <h2>Megapari</h2>
+      <p>1 条活动 / 1 activities</p>
+      <p>1 条详情页已匹配 / 1 detail pages matched</p>
+      <p><span class="status ok">可访问 / OK</span></p>
+      <p><span class="new-badge">今日新增 1</span></p>
+      <span>打开品牌详情 / Open brand page</span>
+    </div>
+  </a>
+<a class="brand-card" href="brands/funbet.html">
+    <img src="../browser-screenshots/funbet-funbet-promotions.png" alt="Funbet screenshot">
+    <div>
+      <h2>Funbet</h2>
+      <p>10 条活动 / 10 activities</p>
+      <p>10 条详情页已匹配 / 10 detail pages matched</p>
+      <p><span class="status ok">可访问 / OK</span></p>
+      <p><span class="new-badge">今日新增 10</span></p>
+      <span>打开品牌详情 / Open brand page</span>
+    </div>
+  </a>
+<a class="brand-card" href="brands/campeonbet.html">
+    <img src="../browser-screenshots/campeonbet-campeonbet-promotions.png" alt="Campeonbet screenshot">
+    <div>
+      <h2>Campeonbet</h2>
+      <p>4 条活动 / 4 activities</p>
+      <p>4 条详情页已匹配 / 4 detail pages matched</p>
+      <p><span class="status ok">可访问 / OK</span></p>
+      <p><span class="new-badge">今日新增 4</span></p>
+      <span>打开品牌详情 / Open brand page</span>
+    </div>
+  </a>
+    </section>
+  </main>
+</body>
+</html>
