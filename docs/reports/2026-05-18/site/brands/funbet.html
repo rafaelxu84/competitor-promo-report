@@ -1,0 +1,490 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Funbet 活动详情</title>
+  <style>
+    :root { --bg:#f5f6f2; --panel:#fff; --ink:#15201b; --muted:#66736d; --line:#d8ddd4; --green:#0d7658; --blue:#245c9e; --amber:#9a6816; --red:#a54040; --soft:#eef4f0; }
+    * { box-sizing:border-box; }
+    body { margin:0; background:var(--bg); color:var(--ink); font-family:Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; line-height:1.45; }
+    .page { max-width:1280px; margin:0 auto; padding:28px 18px 56px; }
+    .hero { background:var(--panel); border:1px solid var(--line); border-radius:8px; padding:24px; display:grid; grid-template-columns:minmax(0,1fr) 280px; gap:18px; align-items:end; margin-bottom:18px; }
+    .brand-hero { margin-bottom:16px; }
+    .eyebrow { margin:0 0 8px; color:var(--green); font-size:12px; font-weight:800; text-transform:uppercase; letter-spacing:.04em; }
+    h1 { margin:0 0 8px; font-size:32px; line-height:1.12; letter-spacing:0; }
+    h2 { margin:0 0 6px; font-size:18px; letter-spacing:0; }
+    p { margin:0; }
+    .sub, .meta { color:var(--muted); }
+    .status { display:inline-flex; align-items:center; border-radius:999px; padding:3px 8px; font-size:12px; font-weight:800; white-space:nowrap; }
+    .ok { color:var(--green); background:#e5f3ed; }
+    .mid { color:var(--amber); background:#fff4df; }
+    .blue { color:var(--blue); background:#e9f0fb; }
+    .low { color:var(--red); background:#faeeee; }
+    .meta { background:#f8faf7; border:1px solid var(--line); border-radius:8px; padding:14px; }
+    .meta b { display:inline-block; min-width:92px; color:var(--ink); }
+    .brand-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:14px; }
+    .brand-card { display:grid; grid-template-columns:220px minmax(0,1fr); gap:14px; padding:14px; color:var(--ink); text-decoration:none; background:var(--panel); border:1px solid var(--line); border-radius:8px; }
+    .brand-card img, .visual img { width:100%; border:1px solid var(--line); border-radius:8px; background:#edf0ea; object-fit:cover; }
+    .brand-card img { aspect-ratio:16/10; }
+    .brand-card span { display:inline-flex; margin-top:10px; color:var(--blue); font-weight:700; }
+    .new-badge { display:inline-flex; align-items:center; border-radius:999px; background:#fff4df; color:#9a6816; padding:3px 8px; font-size:12px; font-weight:800; margin-left:6px; vertical-align:middle; }
+    .topnav { margin-bottom:12px; }
+    .topnav a { color:var(--blue); font-weight:700; text-decoration:none; }
+    .visual { background:var(--panel); border:1px solid var(--line); border-radius:8px; padding:14px; margin-bottom:16px; }
+    .visual img { max-height:520px; object-fit:contain; }
+    .activity-list { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:14px; }
+    .activity-card { background:var(--panel); border:1px solid var(--line); border-radius:8px; padding:16px; }
+    .activity-card.detail-ok { border-left:4px solid var(--green); }
+    .activity-card.detail-limited { border-left:4px solid var(--amber); }
+    .activity-card.detail-missing { border-left:4px solid #a8b1ac; }
+    .activity-head { display:grid; grid-template-columns:36px minmax(0,1fr); gap:10px; align-items:start; margin-bottom:12px; }
+    .index { display:inline-grid; place-items:center; width:30px; height:30px; border-radius:999px; background:var(--soft); color:var(--green); font-weight:800; }
+    .detail-shot-link { display:block; margin:8px 0 12px; }
+    .detail-shot { width:100%; max-height:360px; object-fit:cover; object-position:top; border:1px solid var(--line); border-radius:8px; background:#edf0ea; }
+    dl { display:grid; gap:8px; margin:0; }
+    dl div { display:grid; grid-template-columns:150px minmax(0,1fr); gap:10px; border-top:1px solid var(--line); padding-top:8px; }
+    dt { color:var(--muted); font-size:12px; font-weight:800; }
+    dd { margin:0; font-size:13px; }
+    .missing-text { color:var(--muted); }
+    .detail-pill { display:inline-flex; align-items:center; border-radius:999px; padding:3px 8px; font-size:12px; font-weight:800; }
+    .ok-pill { background:#e5f3ed; color:var(--green); }
+    .limited-pill { background:#fff4df; color:var(--amber); }
+    .fallback-pill { background:#eef0ea; color:var(--muted); }
+    .detail-excerpt { margin-top:12px; border-top:1px solid var(--line); padding-top:10px; }
+    .detail-excerpt summary { cursor:pointer; color:var(--blue); font-weight:800; }
+    .raw { background:var(--panel); border:1px solid var(--line); border-radius:8px; padding:14px; margin-top:16px; }
+    pre { white-space:pre-wrap; word-break:break-word; background:#111714; color:#eef6f0; padding:12px; border-radius:8px; max-height:320px; overflow:auto; font-size:12px; }
+    a { color:var(--blue); }
+    @media (max-width:900px) { .hero, .brand-grid, .brand-card, .activity-list { grid-template-columns:1fr; } h1 { font-size:27px; } dl div { grid-template-columns:1fr; } }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <nav class="topnav"><a href="../index.html">返回品牌入口 / Back to brands</a></nav>
+    <section class="hero brand-hero">
+      <div>
+        <p class="eyebrow">Brand Promotion Page</p>
+        <h1>Funbet</h1>
+        <p class="sub">来源 Source：<a href="https://funbet1.com/gc/promotions">https://funbet1.com/gc/promotions</a></p>
+        <p class="sub">本页优先使用活动详情页 full-page screenshot 与可见正文，输出要求、Trigger、Reward、Who、When、Summary、核心目的和数据预期。</p>
+        <p class="sub"><span class="status ok">可访问 / OK</span></p>
+      </div>
+      <div class="meta">
+        <b>活动 Activities</b>10<br>
+        <b>详情 Details</b>10<br>
+        <b>详情截图 Shots</b>10<br>
+        <b>状态 Status</b>ok
+      </div>
+    </section>
+
+    <section class="visual">
+      <img src="../../browser-screenshots/funbet-funbet-promotions.png" alt="Funbet screenshot">
+    </section>
+
+    <section class="activity-list">
+      <article class="activity-card detail-ok">
+    <div class="activity-head">
+      <span class="index">1</span>
+      <div>
+        <h2>Sport First Deposit Bonus 100% up to $100 Get bonus </h2>
+        <p>充值或欢迎奖励 / Deposit or Welcome Bonus · <span class="detail-pill ok-pill">详情页已采集 / Detail captured</span></p>
+      </div>
+    </div>
+<a class="detail-shot-link" href="../../detail-screenshots/funbet/funbet-sport-first-deposit-bonus-100-up-to-100-get-bonus-https-funbet1-com-gc-pr.png"><img class="detail-shot" src="../../detail-screenshots/funbet/funbet-sport-first-deposit-bonus-100-up-to-100-get-bonus-https-funbet1-com-gc-pr.png" alt="Sport First Deposit Bonus 100% up to $100 Get bonus detail screenshot"></a>
+    <dl>
+      <div><dt>要求 / Requirements</dt><dd>min. odds of 1.503Get the RewardGet the 100% bonus and our warm welcomeWhen Available; odds of 1.503Get the RewardGet the 100% bonus and our warm welcomeWhen AvailableThis; odds of at least 2.00 settled as win / lose;; odds of at least 1.50 per each selection settled as win / lose.Bonus Terms and Condit; odds no less than 1,50. All bets must be settled.3.2. Bonus will be automatically act; odds of at least 2.0; or (2) settled multi-bets with odds of at least 1.5 per selecti</dd></div>
+      <div><dt>触发条件 / Trigger</dt><dd>点击参与/报名后，完成活动指定行为触发奖励</dd></div>
+      <div><dt>奖励方式 / Reward</dt><dd>100% bonus; $100; $100.</dd></div>
+      <div><dt>目标用户 / Who</dt><dd>新注册/首充用户；体育投注用户</dd></div>
+      <div><dt>时间 / When</dt><dd>ategories, Providers Log in Register English Help Centre Back to all promotions Sport First Deposit Bon;  ated into the player’s account after completed rollover requirements for qualifying deposit. The client</dd></div>
+      <div><dt>Summary / 总结</dt><dd>Sport First Deposit Bonus 100% up to $100 Get bonus 面向新注册/首充用户；体育投注用户，通过“点击参与/报名后，完成活动指定行为触发奖励”推动用户完成关键行为；奖励为 100% bonus; $100; $100.。主要参与要求：min. odds of 1.503Get the RewardGet the 100% bonus and our warm welcomeWhen Available; odds of 1.503Get the RewardGet the 100% bonus and our warm welcomeWhen AvailableThis; odds of at least 2.00 settled as win / lose;; odds of at least 1.50 per each selection settled as win / lose.Bonus Terms and Condit; odds no less than 1,50. All bets must be settled.3.2. Bonus will be automatically act; odds of at least 2.0; or (2) settled multi-bets with odds of at least 1.5 per selecti。</dd></div>
+      <div><dt>核心目的 / Objective</dt><dd>拉新与首充转化</dd></div>
+      <div><dt>数据预期 / Expected Data</dt><dd>拉新与首充转化；预期观察：注册到首充转化率、首存金额、首周留存上升；充值次数、充值金额、Bonus claim rate 上升；投注额、投注单量、有效投注用户数上升。</dd></div>
+      <div><dt>详情页来源 / Detail Source</dt><dd><a href="https://funbet1.com/gc/promotions/sport/fdb-100">https://funbet1.com/gc/promotions/sport/fdb-100</a></dd></div>
+    </dl>
+<details class="detail-excerpt"><summary>详情页原文摘要 / Detail excerpt</summary><pre>Games, Categories, Providers Log in Register English Help Centre Back to all promotions Sport First Deposit Bonus 100% up to $100 Join now How to receive this bonus?1Make your first depositTop up your balance with the minimum amount qualifying for this promotion2Have your bets settledComplete the rollover requirements 1x the initial deposit with min. odds of 1.503Get the RewardGet the 100% bonus and our warm welcomeWhen AvailableThis offer is available for newly registered customers who made their first qualifying deposit.Offer RulesThe Bonus is 100% of player's first deposit amount up to $100.How to ReleaseTo complete the rollover requirements and get bonus funds released to real balance, you should wager the amount (bonus+deposit) x6 (six) times by placing: 1. Single bets with odds of at least 2.00 settled as win / lose; 2. Multi-bets with odds of at least 1.50 per each selection settled as win / lose.Bonus Terms and Conditions1. This offer is only available to new customers, who have registered and made their first real-money deposit on our Website.2. The Bonus is 100% of a player’s first deposit up to 100 USD.3. The minimum qualifying deposit amount for this promotion is 20 USD.3.1. In order to qualify for the bonus, the player must play through the full amount of the first deposit at least once with odds no less than 1,50. All bets must be settled.3.2. Bonus will be automatically activated into the player’s account after completed rollover requirements for qualifying deposit. The client has the right/option to cancel it from “My Bonus” tab.4. Customers who have previously made a real-money deposit into their account, are not eligible to receive this promotion.4.1. Deposits via Skrill or Neteller shall not be considered qualifying deposits for this promotion.4.2. A withdrawal request before receiving the Bonus or any active withdrawal request will void any bonus eligibility.5. Wagering requirements: Customers from Germany, Norway, Finland, Switzerland and Austria must roll over their qualifying deposit and bonus amount over five (5) times and customers from other countries must roll over their qualifying deposit and bonus amount over si ... [truncated]</pre></details>
+  </article>
+<article class="activity-card detail-ok">
+    <div class="activity-head">
+      <span class="index">2</span>
+      <div>
+        <h2>Casino Welcome Bonus 100% up to $500 + 200 FS Get bonus </h2>
+        <p>免费旋转 / Free Spins · <span class="detail-pill ok-pill">详情页已采集 / Detail captured</span></p>
+      </div>
+    </div>
+<a class="detail-shot-link" href="../../detail-screenshots/funbet/funbet-casino-welcome-bonus-100-up-to-500-200-fs-get-bonus-https-funbet1-com-gc-.png"><img class="detail-shot" src="../../detail-screenshots/funbet/funbet-casino-welcome-bonus-100-up-to-500-200-fs-get-bonus-https-funbet1-com-gc-.png" alt="Casino Welcome Bonus 100% up to $500 + 200 FS Get bonus detail screenshot"></a>
+    <dl>
+      <div><dt>要求 / Requirements</dt><dd>depositTop up your balance with a minimum deposit of $202Activate your bonusVisit My Bonus section in your profile and activate; PlayingEnjoy top casino games!When AvailableThis offer is available for newly registered customers who made their first qual; deposit.Offer RulesThe Bonus is equal to 100% of player's first deposit amount up to $500How to ReleaseTo complete the rollover</dd></div>
+      <div><dt>触发条件 / Trigger</dt><dd>点击参与/报名后，完成活动指定行为触发奖励</dd></div>
+      <div><dt>奖励方式 / Reward</dt><dd>100% bonus; $500; $202</dd></div>
+      <div><dt>目标用户 / Who</dt><dd>新注册/首充用户；Casino/Slots 用户</dd></div>
+      <div><dt>时间 / When</dt><dd>ategories, Providers Log in Register English Help Centre Back to all promotions Casino Welcome Bonus 10;  ate your bonusVisit My Bonus section in your profile and activate the promo3Start PlayingEnjoy top casi</dd></div>
+      <div><dt>Summary / 总结</dt><dd>Casino Welcome Bonus 100% up to $500 + 200 FS Get bonus 面向新注册/首充用户；Casino/Slots 用户，通过“点击参与/报名后，完成活动指定行为触发奖励”推动用户完成关键行为；奖励为 100% bonus; $500; $202。主要参与要求：depositTop up your balance with a minimum deposit of $202Activate your bonusVisit My Bonus section in your profile and activate; PlayingEnjoy top casino games!When AvailableThis offer is available for newly registered customers who made their first qual; deposit.Offer RulesThe Bonus is equal to 100% of player's first deposit amount up to $500How to ReleaseTo complete the rollover。</dd></div>
+      <div><dt>核心目的 / Objective</dt><dd>拉新与首充转化</dd></div>
+      <div><dt>数据预期 / Expected Data</dt><dd>拉新与首充转化；预期观察：注册到首充转化率、首存金额、首周留存上升；充值次数、充值金额、Bonus claim rate 上升；投注额、投注单量、有效投注用户数上升。</dd></div>
+      <div><dt>详情页来源 / Detail Source</dt><dd><a href="https://funbet1.com/gc/promotions/casino/welcome-bonus">https://funbet1.com/gc/promotions/casino/welcome-bonus</a></dd></div>
+    </dl>
+<details class="detail-excerpt"><summary>详情页原文摘要 / Detail excerpt</summary><pre>Games, Categories, Providers Log in Register English Help Centre Back to all promotions Casino Welcome Bonus 100% up to $500 + 200 FS Join now How to receive this bonus?1Make your first depositTop up your balance with a minimum deposit of $202Activate your bonusVisit My Bonus section in your profile and activate the promo3Start PlayingEnjoy top casino games!When AvailableThis offer is available for newly registered customers who made their first qualifying deposit.Offer RulesThe Bonus is equal to 100% of player's first deposit amount up to $500How to ReleaseTo complete the rollover requirements and get bonus funds released to real balance, you should wager (bonus+deposit) x35 (thirty-five) times and to release the free spins winnings - 40x (forty) times. 1. You need to finish any active casino bonus before you use the free spins 2. You have 10 days to meet the release requirements for each casino bonusBonus Terms and Conditions1. This offer is only available to new customers, who have registered and made their first real-money deposit on our Website. 2. The maximum bonus amount is 500 USD. 3. The minimum deposit to receive a 100% bonus on your first deposit and 200 free spins is 20 USD. 4. After the qualifying deposit is made, the player receives the option to activate the deposit bonus and the free spins one by one in the Profile section. 4.1 First deposit bonus spins are added as a set of 20 per day for 10 days - amounting to 200 bonus spins in total. The first 20 bonus spins are available to be claimed from the moment the qualifying deposit is made, for the next 24 hours. The following batches of 20 bonus spins can be claimed on each of the next 9 days after the exact hour at which the first deposit is made, within the next 24 hours again (for example: if you make your first deposit at 10:30 a.m. today, the first batch of bonus spins can be claimed from 10:30 a.m today until 10:29 a.m. tomorrow. The 2nd batch can be claimed from 10:30 a.m. tomorrow until 10:29 a.m on the following day and so on). 4.2 Each batch of 20 free spins can be claimed within 24 hours from being available, otherwise they will expire. 5. The bonus will be credited ... [truncated]</pre></details>
+  </article>
+<article class="activity-card detail-ok">
+    <div class="activity-head">
+      <span class="index">3</span>
+      <div>
+        <h2>Sport Weekly Reload Bonus 50% up to $600 Get bonus </h2>
+        <p>充值或欢迎奖励 / Deposit or Welcome Bonus · <span class="detail-pill ok-pill">详情页已采集 / Detail captured</span></p>
+      </div>
+    </div>
+<a class="detail-shot-link" href="../../detail-screenshots/funbet/funbet-sport-weekly-reload-bonus-50-up-to-600-get-bonus-https-funbet1-com-gc-pro.png"><img class="detail-shot" src="../../detail-screenshots/funbet/funbet-sport-weekly-reload-bonus-50-up-to-600-get-bonus-https-funbet1-com-gc-pro.png" alt="Sport Weekly Reload Bonus 50% up to $600 Get bonus detail screenshot"></a>
+    <dl>
+      <div><dt>要求 / Requirements</dt><dd>odds of 1.503Contact usClaim the 50% bonus once bets are settledWhen AvailableYou can; odds of at least 2.00 settled as win / lose;; odds of at least 1.50 per each selection settled as win / lose.Bonus Terms and Condit; odds no less than 1.50. All bets must be settled.; odds of at least 2.00; or (2) settled multi-bets with odds of at least 1.50 per selec</dd></div>
+      <div><dt>触发条件 / Trigger</dt><dd>点击参与/报名后，完成活动指定行为触发奖励</dd></div>
+      <div><dt>奖励方式 / Reward</dt><dd>50% bonus; $600; $600.</dd></div>
+      <div><dt>目标用户 / Who</dt><dd>新注册/首充用户；体育投注用户</dd></div>
+      <div><dt>时间 / When</dt><dd>ategories, Providers Log in Register English Help Centre Back to all promotions Sport Weekly Reload Bon;  ated at any time at the administration’s discretion.</dd></div>
+      <div><dt>Summary / 总结</dt><dd>Sport Weekly Reload Bonus 50% up to $600 Get bonus 面向新注册/首充用户；体育投注用户，通过“点击参与/报名后，完成活动指定行为触发奖励”推动用户完成关键行为；奖励为 50% bonus; $600; $600.。主要参与要求：odds of 1.503Contact usClaim the 50% bonus once bets are settledWhen AvailableYou can; odds of at least 2.00 settled as win / lose;; odds of at least 1.50 per each selection settled as win / lose.Bonus Terms and Condit; odds no less than 1.50. All bets must be settled.; odds of at least 2.00; or (2) settled multi-bets with odds of at least 1.50 per selec。</dd></div>
+      <div><dt>核心目的 / Objective</dt><dd>拉新与首充转化</dd></div>
+      <div><dt>数据预期 / Expected Data</dt><dd>拉新与首充转化；预期观察：注册到首充转化率、首存金额、首周留存上升；充值次数、充值金额、Bonus claim rate 上升；投注额、投注单量、有效投注用户数上升。</dd></div>
+      <div><dt>详情页来源 / Detail Source</dt><dd><a href="https://funbet1.com/gc/promotions/sport/50-weekly-reload-bonus">https://funbet1.com/gc/promotions/sport/50-weekly-reload-bonus</a></dd></div>
+    </dl>
+<details class="detail-excerpt"><summary>详情页原文摘要 / Detail excerpt</summary><pre>Games, Categories, Providers Log in Register English Help Centre Back to all promotions Sport Weekly Reload Bonus 50% up to $600 Join now How to receive this bonus?1Top up your balanceMake a deposit between Monday and Thursday2Place betsComplete rollover requirements 1x of the initial deposit with min odds of 1.503Contact usClaim the 50% bonus once bets are settledWhen AvailableYou can claim this offer once during the promotion period, between Monday and Thursday.Offer RulesYou’ll get 50% of your deposit between Monday and Thursday — up to $600.How to ReleaseTo complete the rollover requirements and get bonus funds released to real balance, you should wager (bonus+deposit) x8 (eight) times by placing: 1. Single bets with odds of at least 2.00 settled as win / lose; 2. Multi-bets with odds of at least 1.50 per each selection settled as win / lose.Bonus Terms and Conditions1. This promotion is available to all registered users on site, which are eligible to receive bonuses. 2. Each player is eligible to claim only one sport Weekly Reload offer. If you have already claimed this Weekly Reload offer, you will not be eligible to claim any other sports Weekly Reload offers available on the website. 3. This promotion can be terminated at any time at the administration’s discretion. 4. The Bonus is 50% of a player’s deposit up to 600 USD. 5. The minimum qualifying deposit amount for this promotion is 20 USD. 6. This bonus is based on your highest deposit from Monday to Thursday and can be claimed once during that period. 7. Players can claim this bonus once, from Monday 00:00 UTC to Thursday 23:59 UTC. 8. In order to qualify for the bonus, the player must play through the full amount of the first deposit at least once with odds no less than 1.50. All bets must be settled. 9. In order to obtain the bonus, please contact us via Live Chat or via e-mail: support@funbet.com. 10. A withdrawal request before receiving the Bonus or any active withdrawal request will void any bonus eligibility. 11. Wagering requirements: Customers must roll over their qualifying deposit amount over eight (8) times on: (1) settled single sports bets with odds of at least 2.00; ... [truncated]</pre></details>
+  </article>
+<article class="activity-card detail-ok">
+    <div class="activity-head">
+      <span class="index">4</span>
+      <div>
+        <h2>Casino Weekly Reload 55 Free Spins Get bonus </h2>
+        <p>免费旋转 / Free Spins · <span class="detail-pill ok-pill">详情页已采集 / Detail captured</span></p>
+      </div>
+    </div>
+<a class="detail-shot-link" href="../../detail-screenshots/funbet/funbet-casino-weekly-reload-55-free-spins-get-bonus-https-funbet1-com-gc-promoti.png"><img class="detail-shot" src="../../detail-screenshots/funbet/funbet-casino-weekly-reload-55-free-spins-get-bonus-https-funbet1-com-gc-promoti.png" alt="Casino Weekly Reload 55 Free Spins Get bonus detail screenshot"></a>
+    <dl>
+      <div><dt>要求 / Requirements</dt><dd>qualify for the bonus.2Make a depositTop up your balance from $20 from Monday till Thursday to receive a bonus3Activate your b; complete the rollover requirements and get the winnings from the free spins winnings released in the Real balance, you need to w; requirements for each casino bonus.Bonus Terms and Conditions1. This promotion is available to all registered users on our Website</dd></div>
+      <div><dt>触发条件 / Trigger</dt><dd>点击参与/报名后，完成活动指定行为触发奖励</dd></div>
+      <div><dt>奖励方式 / Reward</dt><dd>$20</dd></div>
+      <div><dt>目标用户 / Who</dt><dd>新注册/首充用户；Casino/Slots 用户</dd></div>
+      <div><dt>时间 / When</dt><dd>ategories, Providers Log in Register English Help Centre Back to all promotions Casino Weekly Reload 55;  ate your bonusVisit My Bonus section in your profile and activate the Free SpinsWhen AvailableThis offe</dd></div>
+      <div><dt>Summary / 总结</dt><dd>Casino Weekly Reload 55 Free Spins Get bonus 面向新注册/首充用户；Casino/Slots 用户，通过“点击参与/报名后，完成活动指定行为触发奖励”推动用户完成关键行为；奖励为 $20。主要参与要求：qualify for the bonus.2Make a depositTop up your balance from $20 from Monday till Thursday to receive a bonus3Activate your b; complete the rollover requirements and get the winnings from the free spins winnings released in the Real balance, you need to w; requirements for each casino bonus.Bonus Terms and Conditions1. This promotion is available to all registered users on our Website。</dd></div>
+      <div><dt>核心目的 / Objective</dt><dd>拉新与首充转化</dd></div>
+      <div><dt>数据预期 / Expected Data</dt><dd>拉新与首充转化；预期观察：注册到首充转化率、首存金额、首周留存上升；充值次数、充值金额、Bonus claim rate 上升；投注额、投注单量、有效投注用户数上升。</dd></div>
+      <div><dt>详情页来源 / Detail Source</dt><dd><a href="https://funbet1.com/gc/promotions/casino/weekly_reload">https://funbet1.com/gc/promotions/casino/weekly_reload</a></dd></div>
+    </dl>
+<details class="detail-excerpt"><summary>详情页原文摘要 / Detail excerpt</summary><pre>Games, Categories, Providers Log in Register English Help Centre Back to all promotions Casino Weekly Reload 55 Free Spins Join now How to receive this bonus?1Opt inOpt in each week to qualify for the bonus.2Make a depositTop up your balance from $20 from Monday till Thursday to receive a bonus3Activate your bonusVisit My Bonus section in your profile and activate the Free SpinsWhen AvailableThis offer is available Each week from Monday to ThursdayOffer RulesThe Bonus is equal to 55 Free Spins.How to ReleaseTo complete the rollover requirements and get the winnings from the free spins winnings released in the Real balance, you need to wager them 40x (forty) times. You have 10 days to meet the release requirements for each casino bonus.Bonus Terms and Conditions1. This promotion is available to all registered users on our Website who are eligible to receive promotions. 2. This promotion is available only on the first deposit made every week from 00:00 on Monday until 23:59 UTC on Thursday. Weekly Opt In is required to qualify for this offer. 3. The minimum deposit to receive the 55 Free Spins from this promotion is 20 USD 4. The free spins will be credited automatically with the credit of the qualifying deposit. If they are not credited, you will need to contact our Support team via chat or Email. 5. The Free Spins are credited on a popular slot selected by administration and are set to minimum spin value. They cannot be exchanged for another bonus or used on another game. 6. You may claim the Free Spins only before any bets are placed from the qualifying deposit. 7. The Free Spins need to be used within 7 days or would expire 8. The wagering requirements of winnings from free spins are x40. 9. The wagering requirement of any bonus must be completed within 10 days of the bonus activation. Should the wagering not be met in this timeframe, the bonus amount and any potential winnings will be voided. 10. The maximum bet allowed while playing with bonus money is 100 USD until all necessary wagering requirements are met. 11. Different Games contribute differently towards the bonus release. For complete Casino Bonus Terms, please visit section 7 of ... [truncated]</pre></details>
+  </article>
+<article class="activity-card detail-ok">
+    <div class="activity-head">
+      <span class="index">5</span>
+      <div>
+        <h2>Casino Live Cashback 25% up to $200 Get bonus </h2>
+        <p>返现 / Cashback · <span class="detail-pill ok-pill">详情页已采集 / Detail captured</span></p>
+      </div>
+    </div>
+<a class="detail-shot-link" href="../../detail-screenshots/funbet/funbet-casino-live-cashback-25-up-to-200-get-bonus-https-funbet1-com-gc-promotio.png"><img class="detail-shot" src="../../detail-screenshots/funbet/funbet-casino-live-cashback-25-up-to-200-get-bonus-https-funbet1-com-gc-promotio.png" alt="Casino Live Cashback 25% up to $200 Get bonus detail screenshot"></a>
+    <dl>
+      <div><dt>要求 / Requirements</dt><dd>Min. Cashback</dd></div>
+      <div><dt>触发条件 / Trigger</dt><dd>点击参与/报名后，完成活动指定行为触发奖励</dd></div>
+      <div><dt>奖励方式 / Reward</dt><dd>25% cashback; $200; $200,</dd></div>
+      <div><dt>目标用户 / Who</dt><dd>VIP 或高价值活跃用户；Casino/Slots 用户</dd></div>
+      <div><dt>时间 / When</dt><dd>ategories, Providers Log in Register English Help Centre Back to all promotions Casino Live Cashback 25;  ate BonusGet in touch with us on Monday to receive a 25% cashback on your unlucky betsWhen AvailableThi</dd></div>
+      <div><dt>Summary / 总结</dt><dd>Casino Live Cashback 25% up to $200 Get bonus 面向VIP 或高价值活跃用户；Casino/Slots 用户，通过“点击参与/报名后，完成活动指定行为触发奖励”推动用户完成关键行为；奖励为 25% cashback; $200; $200,。主要参与要求：Min. Cashback。</dd></div>
+      <div><dt>核心目的 / Objective</dt><dd>提升留存、降低流失感知并延长生命周期</dd></div>
+      <div><dt>数据预期 / Expected Data</dt><dd>提升留存、降低流失感知并延长生命周期；预期观察：投注额、投注单量、有效投注用户数上升；Casino DAU、游戏启动次数、免费旋转转付费率上升；复玩率、留存率、VIP 活跃和净收入稳定性提升。</dd></div>
+      <div><dt>详情页来源 / Detail Source</dt><dd><a href="https://funbet1.com/gc/promotions/casino/live-cashback-25a">https://funbet1.com/gc/promotions/casino/live-cashback-25a</a></dd></div>
+    </dl>
+<details class="detail-excerpt"><summary>详情页原文摘要 / Detail excerpt</summary><pre>Games, Categories, Providers Log in Register English Help Centre Back to all promotions Casino Live Cashback 25% up to $200 Join now How to receive this bonus?1Opt inTop up your balance during the week2Play in Live CasinoEnjoy your favourite Live casino games3Activate BonusGet in touch with us on Monday to receive a 25% cashback on your unlucky betsWhen AvailableThis offer is available to all players with open bonus program. The qualifying period is from Monday to Sunday, every week.Offer RulesThe Cashback is equal to up to 25% from the lost amount and worth up to $200, based for all VIP Levels.How to ReleaseThe cashback needs to be wagered 1x (one) time before being withdrawable.Bonus Terms and Conditions1. Available to all registered players who are eligible for promotions. To qualify, the player must opt in on the promotion page. 2. The promotion runs weekly from Monday 00:00 to Sunday 23:59 UTC. 3. This promotion applies only to Live Casino games. Other game types do not count. 4. Players on VIP levels 1-5 get a 25% cashback based on their weekly gameplay in Live Casino. The minimum cashback is 1 USD. The maximum cashback is 200 USD. 5. Cashback is calculated from the player’s total real money bets minus real winnings in Live Casino during the week. Bonus funds are not counted. VIP Level Cashback % Max. Cashback Min. Cashback VIP 1 25% 200 USD 1 USD VIP 2 25% 200 USD 1 USD VIP 3 25% 200 USD 1 USD VIP 4 25% 200 USD 1 USD VIP 5 25% 200 USD 1 USD 6. Cashback will be added automatically to the player’s account under the My Bonuses section. It must be activated, then wagered 1 time before withdrawal is permitted. If the bonus is not activated in time, the cashback will be lost. 7. This promotion has no fixed end date. FunBet may change or end it at any time without prior notice. 8. The maximum bet limit in Section 7.19 of the General Terms does not apply to this cashback bonus. This may be updated at any time without prior notice. 9. This promotion follows the general Terms and Conditions of FunBet. Hide &lt;p style=&quot;margin:0;padding:0;border:0;&quot;&gt; &lt;img src=&quot;https://a1.adform.net/Serving/TrackPoint/?pm=2796857&amp;amp;AD ... [truncated]</pre></details>
+  </article>
+<article class="activity-card detail-ok">
+    <div class="activity-head">
+      <span class="index">6</span>
+      <div>
+        <h2>Sport Early Payout $50,000 Get bonus </h2>
+        <p>体育投注 / Sports Betting · <span class="detail-pill ok-pill">详情页已采集 / Detail captured</span></p>
+      </div>
+    </div>
+<a class="detail-shot-link" href="../../detail-screenshots/funbet/funbet-sport-early-payout-50-000-get-bonus-https-funbet1-com-gc-promotions-sport.png"><img class="detail-shot" src="../../detail-screenshots/funbet/funbet-sport-early-payout-50-000-get-bonus-https-funbet1-com-gc-promotions-sport.png" alt="Sport Early Payout $50,000 Get bonus detail screenshot"></a>
+    <dl>
+      <div><dt>要求 / Requirements</dt><dd>Place the bet on a qualifying marketChoose the market which has the feature available2Have two goals supremacy with the team; played on the market description field.Offer RulesThe offer is valid for single, multiple, system and Bet Builder bets place; bets placed on the Draw selection in each game as well as to the &quot;Boosted Odds&quot; match-winner market.How to ReleaseThis is a</dd></div>
+      <div><dt>触发条件 / Trigger</dt><dd>点击参与/报名后，完成活动指定行为触发奖励</dd></div>
+      <div><dt>奖励方式 / Reward</dt><dd>$50,000</dd></div>
+      <div><dt>目标用户 / Who</dt><dd>体育投注用户</dd></div>
+      <div><dt>时间 / When</dt><dd>ategories, Providers Log in Register English Help Centre Back to all promotions Sport Early Payout $50,;  ated at any time at the administration's discretion.</dd></div>
+      <div><dt>Summary / 总结</dt><dd>Sport Early Payout $50,000 Get bonus 面向体育投注用户，通过“点击参与/报名后，完成活动指定行为触发奖励”推动用户完成关键行为；奖励为 $50,000。主要参与要求：Place the bet on a qualifying marketChoose the market which has the feature available2Have two goals supremacy with the team; played on the market description field.Offer RulesThe offer is valid for single, multiple, system and Bet Builder bets place; bets placed on the Draw selection in each game as well as to the &quot;Boosted Odds&quot; match-winner market.How to ReleaseThis is a。</dd></div>
+      <div><dt>核心目的 / Objective</dt><dd>提升体育投注投注额和赛事活跃</dd></div>
+      <div><dt>数据预期 / Expected Data</dt><dd>提升体育投注投注额和赛事活跃；预期观察：投注额、投注单量、有效投注用户数上升。</dd></div>
+      <div><dt>详情页来源 / Detail Source</dt><dd><a href="https://funbet1.com/gc/promotions/sport/2-goals-ahead">https://funbet1.com/gc/promotions/sport/2-goals-ahead</a></dd></div>
+    </dl>
+<details class="detail-excerpt"><summary>详情页原文摘要 / Detail excerpt</summary><pre>Games, Categories, Providers Log in Register English Help Centre Back to all promotions Sport Early Payout $50,000 Join now How to receive this bonus?1Place the bet on a qualifying marketChoose the market which has the feature available2Have two goals supremacy with the team you've backedAny time during the regular time of the match3Win instantly!No need to wait any longerWhen AvailableThis offer can only be used on matches that have the respective &quot;Early Payout (EP)&quot; sign displayed on the market description field.Offer RulesThe offer is valid for single, multiple, system and Bet Builder bets placed at the 1X2 market (Home or Away Win) ONLY before the start of the match and not during the match. The offer does not apply to bets placed on the Draw selection in each game as well as to the &quot;Boosted Odds&quot; match-winner market.How to ReleaseThis is a settlement rule, so if the bet was placed from real balance it will not have wagering requirements.Bonus Terms and Conditions1. This feature is available to all registered users on our website, who are eligible to receive bonuses. 2. This feature may be terminated at any time at the administration's discretion. 3. The offer is valid for single, multiple, system and Bet Builder bets placed at the 1X2 market (Home or Away Win) ONLY before the start of the match and not during the match. The offer does not apply to bets placed on the Draw selection in each game as well as to the &quot;Boosted Odds&quot; match-winner market. Matches that have this feature available will have the respective &quot;Early Payout (EP)&quot; sign displayed on the market description field. 4. Example: Event: Team 1 vs Team 2. Early payout is offered. Bets are placed on the 1x2 market. At some point during the game, Team 1 leads 2-0. This means that the selections of “1” in the 1x2 market should be settled as won for all prelive bets. If the final score is 2-2, then: Prelive Selections of “1” are settled as won &quot;Live Selections of “1” are settled as lost &quot;Selections of “X” are settled as won &quot;Selections of “2” are settled as lost 5. Conditions per sport. If Early Payout is available: Baseball - if your team goes 5 runs ahead; American football - if y ... [truncated]</pre></details>
+  </article>
+<article class="activity-card detail-ok">
+    <div class="activity-head">
+      <span class="index">7</span>
+      <div>
+        <h2>Sport Bet Builder 50% Risk Free $50 Get bonus </h2>
+        <p>体育投注 / Sports Betting · <span class="detail-pill ok-pill">详情页已采集 / Detail captured</span></p>
+      </div>
+    </div>
+<a class="detail-shot-link" href="../../detail-screenshots/funbet/funbet-sport-bet-builder-50-risk-free-50-get-bonus-https-funbet1-com-gc-promotio.png"><img class="detail-shot" src="../../detail-screenshots/funbet/funbet-sport-bet-builder-50-risk-free-50-get-bonus-https-funbet1-com-gc-promotio.png" alt="Sport Bet Builder 50% Risk Free $50 Get bonus detail screenshot"></a>
+    <dl>
+      <div><dt>要求 / Requirements</dt><dd>odds of 1.70 or more. All bets must be settled.; odds 1.50, before requesting withdrawal of funds.</dd></div>
+      <div><dt>触发条件 / Trigger</dt><dd>点击参与/报名后，完成活动指定行为触发奖励</dd></div>
+      <div><dt>奖励方式 / Reward</dt><dd>$50</dd></div>
+      <div><dt>目标用户 / Who</dt><dd>Casino/Slots 用户；体育投注用户</dd></div>
+      <div><dt>时间 / When</dt><dd>ategories, Providers Log in Register English Help Centre Back to all promotions Sport Bet Builder 50% R;  ated at any time at the administration's discretion.</dd></div>
+      <div><dt>Summary / 总结</dt><dd>Sport Bet Builder 50% Risk Free $50 Get bonus 面向Casino/Slots 用户；体育投注用户，通过“点击参与/报名后，完成活动指定行为触发奖励”推动用户完成关键行为；奖励为 $50。主要参与要求：odds of 1.70 or more. All bets must be settled.; odds 1.50, before requesting withdrawal of funds.。</dd></div>
+      <div><dt>核心目的 / Objective</dt><dd>提升体育投注投注额和赛事活跃</dd></div>
+      <div><dt>数据预期 / Expected Data</dt><dd>提升体育投注投注额和赛事活跃；预期观察：投注额、投注单量、有效投注用户数上升；Casino DAU、游戏启动次数、免费旋转转付费率上升。</dd></div>
+      <div><dt>详情页来源 / Detail Source</dt><dd><a href="https://funbet1.com/gc/promotions/sport/bet-builder-50">https://funbet1.com/gc/promotions/sport/bet-builder-50</a></dd></div>
+    </dl>
+<details class="detail-excerpt"><summary>详情页原文摘要 / Detail excerpt</summary><pre>Games, Categories, Providers Log in Register English Help Centre Back to all promotions Sport Bet Builder 50% Risk Free $50 Join now How to receive this bonus?1Place a bet using Bet-Builder.Check out the options available.2Wait till the bet is settled.Get in touch with us once it's done.3Receive your free bet.Great opportunity to have another try.Bonus Terms and Conditions1. This promotion is available to all registered users at Website, who are eligible to receive bonuses. 2. This promotion is valid from 15.09.2024 00:00 UTC +0 and may be terminated at any time at the administration's discretion. 3. In order to participate in this promotion, the player must place a successful Bet Builder in sportsbook section on supported events with total odds of 1.70 or more. All bets must be settled. 4. Minimum amount of a qualifying bet must be at least 20 USD (or currency equivalent). 5. If the first qualifying bet-builder of the day is losing, a player will get a 50% stakeback as Free Bet up to 50 USD. 6. This Promotion can be claimed only once during the calendar week (Monday 00:00 (UTC +0 - Sunday 23:59 (UTC +0)). 7. Only real money bets will count as qualifying for the promo - bets placed with bonus funds, free bet winnings, etc will not be valid. 8. Once the qualifying bet/s is settled, the player needs to contact us via Live Chat or e-mail at support@funbet.com and request a free bet. 9. Any active withdrawal requests before receiving the bonus will void any bonus eligibility. 10. Free bet will be valid only in the Sports section and for Virtual sports as well. It will not be available for other verticals (casino, live casino etc). 11. Free bet should be used within 3 days from the moment of receiving. The player must finish the rollover of the winnings within 30 days from the moment of Free bet activation. 12. Free bet must be used once by staking full amount. Winnings from Free bet will be credited to the player's real balance. The player needs to roll over winnings amount at least 3 times with odds 1.50, before requesting withdrawal of funds. 13. Administration reserves the right to refuse to provide a bonus to the client without giving reasons ... [truncated]</pre></details>
+  </article>
+<article class="activity-card detail-ok">
+    <div class="activity-head">
+      <span class="index">8</span>
+      <div>
+        <h2>Sport Accumulator Boost $100,000 Get bonus </h2>
+        <p>体育投注 / Sports Betting · <span class="detail-pill ok-pill">详情页已采集 / Detail captured</span></p>
+      </div>
+    </div>
+<a class="detail-shot-link" href="../../detail-screenshots/funbet/funbet-sport-accumulator-boost-100-000-get-bonus-https-funbet1-com-gc-promotions.png"><img class="detail-shot" src="../../detail-screenshots/funbet/funbet-sport-accumulator-boost-100-000-get-bonus-https-funbet1-com-gc-promotions.png" alt="Sport Accumulator Boost $100,000 Get bonus detail screenshot"></a>
+    <dl>
+      <div><dt>要求 / Requirements</dt><dd>Min. odds of 1.40 for each match); odds of 1.40.2Predict all outcomes.Bonus is available only in case if bet has won.3Ge; odds for each of those.Offer RulesExtra winnings would be automatically added to the; odds of at least 1.40 or higher.; odds of 1.40 for each match)</dd></div>
+      <div><dt>触发条件 / Trigger</dt><dd>点击参与/报名后，完成活动指定行为触发奖励</dd></div>
+      <div><dt>奖励方式 / Reward</dt><dd>$100,000</dd></div>
+      <div><dt>目标用户 / Who</dt><dd>体育投注用户</dd></div>
+      <div><dt>时间 / When</dt><dd>ategories, Providers Log in Register English Help Centre Back to all promotions Sport Accumulator Boost;  ated at any time at the administration's discretion.</dd></div>
+      <div><dt>Summary / 总结</dt><dd>Sport Accumulator Boost $100,000 Get bonus 面向体育投注用户，通过“点击参与/报名后，完成活动指定行为触发奖励”推动用户完成关键行为；奖励为 $100,000。主要参与要求：Min. odds of 1.40 for each match); odds of 1.40.2Predict all outcomes.Bonus is available only in case if bet has won.3Ge; odds for each of those.Offer RulesExtra winnings would be automatically added to the; odds of at least 1.40 or higher.; odds of 1.40 for each match)。</dd></div>
+      <div><dt>核心目的 / Objective</dt><dd>提升体育投注投注额和赛事活跃</dd></div>
+      <div><dt>数据预期 / Expected Data</dt><dd>提升体育投注投注额和赛事活跃；预期观察：投注额、投注单量、有效投注用户数上升。</dd></div>
+      <div><dt>详情页来源 / Detail Source</dt><dd><a href="https://funbet1.com/gc/promotions/sport/accumulator-boost">https://funbet1.com/gc/promotions/sport/accumulator-boost</a></dd></div>
+    </dl>
+<details class="detail-excerpt"><summary>详情页原文摘要 / Detail excerpt</summary><pre>Games, Categories, Providers Log in Register English Help Centre Back to all promotions Sport Accumulator Boost $100,000 Join now How to receive this bonus?1Place your multibet with 3+ eventsEach selection must be with minimum odds of 1.40.2Predict all outcomes.Bonus is available only in case if bet has won.3Get the RewardGet extra cash from net winnings.When AvailableEvery time you win a multibet with at least 3 selections and 1.40 odds for each of those.Offer RulesExtra winnings would be automatically added to the initial amount after settlement in case the qualifying bet is winning and meets the requirements.How to ReleaseThis is a settlement rule, if the bet was placed from a real balance it will not have wagering requirements.Bonus Terms and Conditions1. This promotion is available to all registered users at Website, who are eligible to receive bonuses. 2. This feature may be terminated at any time at the administration's discretion. 3. In order to participate in this promotion, the player must place a multibet consisting of at least three events. Each selection should be placed on odds of at least 1.40 or higher. 4. The amount of the boost that customer may receive shall depend on the number of qualifying selections: Number of selections (Min. odds of 1.40 for each match) Combo Booster Multiplier 3 3% 4 5% 5 8% 6 10% 7 13% 8 15% 9 20% 10 30% 11 35% 12 40% 13 45% 14 50% 15 55% 16 60% 17 65% 18 70% 19 80% 20 90% 21+ 100% 5. Extra winnings would be automatically added to the initial amount after settlement, where the qualifying bet wins and meets the requirements. 6. Only real money bets will count as qualifying for the promo - bets placed with bonus funds, free bet winnings, etc will not be valid. 7. Any active withdrawal requests before receiving the bonus will void any bonus eligibility. 8. The administration reserves the right not to publish the promotion, depending on the availability of the sports events. 9. The administration has the right to change the terms of the promotion at its own dis ... [truncated]</pre></details>
+  </article>
+<article class="activity-card detail-ok">
+    <div class="activity-head">
+      <span class="index">9</span>
+      <div>
+        <h2>Sport Cashback Bonus 10% up to $500 Get bonus </h2>
+        <p>返现 / Cashback · <span class="detail-pill ok-pill">详情页已采集 / Detail captured</span></p>
+      </div>
+    </div>
+<a class="detail-shot-link" href="../../detail-screenshots/funbet/funbet-sport-cashback-bonus-10-up-to-500-get-bonus-https-funbet1-com-gc-promotio.png"><img class="detail-shot" src="../../detail-screenshots/funbet/funbet-sport-cashback-bonus-10-up-to-500-get-bonus-https-funbet1-com-gc-promotio.png" alt="Sport Cashback Bonus 10% up to $500 Get bonus detail screenshot"></a>
+    <dl>
+      <div><dt>要求 / Requirements</dt><dd>Cashback Bonus 10% up to $500 Get bonus Games, Categories, Providers Log in Register English Help Centre Back to all promotions; Cashback Bonus 10% up to $500 Join now How to receive this bonus?1Opt-InOpt in each week to qualify for the Cashback bonus2Play; Bet on the hottest sporting events3Activate BonusThe Cashback will be automatically credited to your account. Go to the - M</dd></div>
+      <div><dt>触发条件 / Trigger</dt><dd>点击参与/报名后，完成活动指定行为触发奖励</dd></div>
+      <div><dt>奖励方式 / Reward</dt><dd>$500</dd></div>
+      <div><dt>目标用户 / Who</dt><dd>Casino/Slots 用户；体育投注用户；扑克用户</dd></div>
+      <div><dt>时间 / When</dt><dd>ategories, Providers Log in Register English Help Centre Back to all promotions Sport Cashback Bonus 10;  ate BonusThe Cashback will be automatically credited to your account. Go to the - My Bonuses - page eac</dd></div>
+      <div><dt>Summary / 总结</dt><dd>Sport Cashback Bonus 10% up to $500 Get bonus 面向Casino/Slots 用户；体育投注用户；扑克用户，通过“点击参与/报名后，完成活动指定行为触发奖励”推动用户完成关键行为；奖励为 $500。主要参与要求：Cashback Bonus 10% up to $500 Get bonus Games, Categories, Providers Log in Register English Help Centre Back to all promotions; Cashback Bonus 10% up to $500 Join now How to receive this bonus?1Opt-InOpt in each week to qualify for the Cashback bonus2Play; Bet on the hottest sporting events3Activate BonusThe Cashback will be automatically credited to your account. Go to the - M。</dd></div>
+      <div><dt>核心目的 / Objective</dt><dd>提升留存、降低流失感知并延长生命周期</dd></div>
+      <div><dt>数据预期 / Expected Data</dt><dd>提升留存、降低流失感知并延长生命周期；预期观察：投注额、投注单量、有效投注用户数上升；Casino DAU、游戏启动次数、免费旋转转付费率上升；复玩率、留存率、VIP 活跃和净收入稳定性提升。</dd></div>
+      <div><dt>详情页来源 / Detail Source</dt><dd><a href="https://funbet1.com/gc/promotions/sport/sport-cashback-500">https://funbet1.com/gc/promotions/sport/sport-cashback-500</a></dd></div>
+    </dl>
+<details class="detail-excerpt"><summary>详情页原文摘要 / Detail excerpt</summary><pre>Games, Categories, Providers Log in Register English Help Centre Back to all promotions Sport Cashback Bonus 10% up to $500 Join now How to receive this bonus?1Opt-InOpt in each week to qualify for the Cashback bonus2Play nowBet on the hottest sporting events3Activate BonusThe Cashback will be automatically credited to your account. Go to the - My Bonuses - page each Monday to view and Activate CashbacksWhen AvailableThis promotion can be claimed once per week, on Mondays (00:00-23:59 UTC +0).Offer RulesThe Cashback amount that customer may qualify for is equal to 10% of the total amount of the player's losses in the Sports section during the qualifying period (from Monday (00:01 UTC +0) to Sunday (23:59 UTC +0)). The total amount of losses is defined as the total amount of bets minus the total amount of winnings, minus any bonuses' amount credited and withdrawals made during the qualifying period, and minus the current balance at the time of the cashback request (including open bets).How to ReleaseCashback bonus will be credited to the real balance of the game account. By receiving Cashback from this promotion, the player automatically agrees to fulfil the x3 wagering requirements from the amount of the credited bonus. The Cashback Bonus can only be played in the Sports section. Its funds cannot be used to play poker, casino or live casino. In cases of using bonus funds in the Casino or Live Casino section, the bonus amount, as well as any winnings derived from it, will be canceled.Bonus Terms and Conditions1. This promotion is available to all registered users on site, which are eligible to receive bonuses. 2. The promotion's period is from Monday 00:00 to Sunday 23:59 UTC, each week this promotion resets. Weekly Opt-in is required to qualify for this cashback offer. 3. The bonus amount is equal to 10% of the total amount of the player's losses in the Sports section during the qualifying period. The total amount of losses is defined as the total amount of bets minus the total amount of winnings, minus any bonuses' amount credited and withdrawals made during the qualifying period, and minus the current balance at the time of the cashback req ... [truncated]</pre></details>
+  </article>
+<article class="activity-card detail-ok">
+    <div class="activity-head">
+      <span class="index">10</span>
+      <div>
+        <h2>Special Exchange your Coins for $1,000 rewards! SHOP NOW <span class="new-badge">今日新增 / New Today</span></h2>
+        <p>免费旋转 / Free Spins · <span class="detail-pill ok-pill">详情页已采集 / Detail captured</span></p>
+      </div>
+    </div>
+<a class="detail-shot-link" href="../../detail-screenshots/funbet/funbet-special-exchange-your-coins-for-1-000-rewards-shop-now-https-funbet1-com-.png"><img class="detail-shot" src="../../detail-screenshots/funbet/funbet-special-exchange-your-coins-for-1-000-rewards-shop-now-https-funbet1-com-.png" alt="Special Exchange your Coins for $1,000 rewards! SHOP NOW detail screenshot"></a>
+    <dl>
+      <div><dt>要求 / Requirements</dt><dd>BetsBest Sellers See all (7) Le Bandit 5 Free Spins 300 Sport Freebet €5 500 Wanted: Dead or a Wild 10 Free Spins 500 Bonus; bet €20 1700 Bonus Money €30 2200 Free Bets See all (6) €5 500 €10 900 €20 1700 €30 2500 €40 3100 €50 3500 Bonus Money See; Bet: €0.10 RIP City Choose Bet: €0.10 Fruits Collection 10 Lines Choose Bet: €0.50 3 Genie Wishes Choose Bet: €0.50 North G</dd></div>
+      <div><dt>触发条件 / Trigger</dt><dd>用户进入指定老虎机/游戏或完成每日任务触发</dd></div>
+      <div><dt>奖励方式 / Reward</dt><dd>$1,000; 5 Free Spins; €5; 10 Free Spins; €10</dd></div>
+      <div><dt>目标用户 / Who</dt><dd>Casino/Slots 用户；体育投注用户</dd></div>
+      <div><dt>时间 / When</dt><dd>ategories, Providers Log in Register English Help Centre Shop AllBest SellersBonus MoneyFree SpinsFree</dd></div>
+      <div><dt>Summary / 总结</dt><dd>Special Exchange your Coins for $1,000 rewards! SHOP NOW 面向Casino/Slots 用户；体育投注用户，通过“用户进入指定老虎机/游戏或完成每日任务触发”推动用户完成关键行为；奖励为 $1,000; 5 Free Spins; €5; 10 Free Spins; €10。主要参与要求：BetsBest Sellers See all (7) Le Bandit 5 Free Spins 300 Sport Freebet €5 500 Wanted: Dead or a Wild 10 Free Spins 500 Bonus; bet €20 1700 Bonus Money €30 2200 Free Bets See all (6) €5 500 €10 900 €20 1700 €30 2500 €40 3100 €50 3500 Bonus Money See; Bet: €0.10 RIP City Choose Bet: €0.10 Fruits Collection 10 Lines Choose Bet: €0.50 3 Genie Wishes Choose Bet: €0.50 North G。</dd></div>
+      <div><dt>核心目的 / Objective</dt><dd>引导 Casino/Slots 试玩与日活</dd></div>
+      <div><dt>数据预期 / Expected Data</dt><dd>引导 Casino/Slots 试玩与日活；预期观察：投注额、投注单量、有效投注用户数上升；Casino DAU、游戏启动次数、免费旋转转付费率上升。</dd></div>
+      <div><dt>详情页来源 / Detail Source</dt><dd><a href="https://funbet1.com/gc/shop">https://funbet1.com/gc/shop</a></dd></div>
+    </dl>
+<details class="detail-excerpt"><summary>详情页原文摘要 / Detail excerpt</summary><pre>Games, Categories, Providers Log in Register English Help Centre Shop AllBest SellersBonus MoneyFree SpinsFree BetsBest Sellers See all (7) Le Bandit 5 Free Spins 300 Sport Freebet €5 500 Wanted: Dead or a Wild 10 Free Spins 500 Bonus Money €10 900 3 Genie Wishes 20 Free Spins 1500 Sport Freebet €20 1700 Bonus Money €30 2200 Free Bets See all (6) €5 500 €10 900 €20 1700 €30 2500 €40 3100 €50 3500 Bonus Money See all (8) €5 500 €10 900 €20 1500 €30 2200 €50 3200 €100 5500 €200 10000 €300 13000 Free Spins See all (14) Bet: €0.10 RIP City Choose Bet: €0.10 Fruits Collection 10 Lines Choose Bet: €0.50 3 Genie Wishes Choose Bet: €0.50 North Guardians Choose Bet: €0.10 SixSixSix Choose Bet: €0.10 Le Bandit Choose Bet: €0.10 Ze Zeus Choose Bet: €0.10 Fruits On Ice Collection 10 Lines Choose Bet: €0.10 Wings of Horus Choose Bet: €0.20 Wanted: Dead or a Wild Choose Bet: €0.20 Fruits Collection - 20 Lines Choose Bet: €0.20 The Bowery Boys Choose Bet: €0.20 Joker Bombs Choose Bet: €0.20 Patrick's Collection 20 Lines Choose How the shop works1Earn CoinsThere are lots of ways to earn Coins! Click to find out how.2Spend CoinsThere you can spend your coins as you wish! There are bonuses, free spins, free bets!3That’s it!You earn Coins, you spend them as you wish, and you automatically get what you bought! Check out our Help Center for more information. &lt;p style=&quot;margin:0;padding:0;border:0;&quot;&gt; &lt;img src=&quot;https://a1.adform.net/Serving/TrackPoint/?pm=2796857&amp;amp;ADFPageName=Game%20Name&amp;amp;ADFdivider=|&quot; width=&quot;1&quot; height=&quot;1&quot; alt=&quot;&quot;&gt; &lt;/p&gt;</pre></details>
+  </article>
+    </section>
+
+    <details class="raw">
+      <summary>查看原始页面文字 / Raw visible text</summary>
+      <pre>Games, Categories, Providers Log in Register English Help Centre Promotions Sport First Deposit Bonus 100% up to $100 Get bonus Casino Welcome Bonus 100% up to $500 + 200 FS Get bonus Sport Weekly Reload Bonus 50% up to $600 Get bonus Casino Weekly Reload 55 Free Spins Get bonus Casino Weekend Reload Bonus $750 + 75 Free Spins Get bonus Casino Live Cashback 25% up to $200 Get bonus Sport Early Payout $50,000 Get bonus Sport Bet Builder 50% Risk Free $50 Get bonus Sport Accumulator Boost $100,000 Get bonus Sport Cashback Bonus 10% up to $500 Get bonus Special Join our Tournaments – win $5,000,000! PLAY NOW Specials Special Exchange your Coins for $1,000 rewards! SHOP NOW Special Take on Challenges and earn 15,000 Coins! PLAY NOW Special VIP club Get Started Special Complete Collections to claim $5,000! COLLECT NOW Hide 
+ 
+
+ &lt;p style=&quot;margin:0;padding:0;border:0;&quot;&gt;
+ &lt;img src=&quot;https://a1.adform.net/Serving/TrackPoint/?pm=2796857&amp;amp;ADFPageName=Game%20Name&amp;amp;ADFdivider=|&quot; width=&quot;1&quot; height=&quot;1&quot; alt=&quot;&quot;&gt;
+ &lt;/p&gt;
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ English
+ 
+ 
+ 
+ 
+ 
+ 
+ Finnish
+ 
+ 
+ 
+ 
+ 
+ 
+ Hungarian
+ 
+ 
+ 
+ 
+ 
+ 
+ Norwegian
+ 
+ 
+ 
+ 
+ 
+ 
+ Polish
+ 
+ 
+ 
+ 
+ 
+ 
+ Italian
+ 
+ 
+ 
+ 
+ 
+ 
+ Greek
+ 
+ 
+ 
+ 
+ 
+ 
+ Czech
+ 
+ 
+ 
+ 
+ 
+ 
+ Spanish
+ 
+ 
+ 
+ 
+ 
+ 
+ German
+ 
+ 
+ 
+ 
+ 
+ 
+ French
+ 
+ 
+ 
+ 
+ 
+ 
+ Slovak
+ 
+ 
+ 
+ 
+ 
+ 
+ Slovenian
+ 
+ 
+ 
+ 
+ 
+ 
+ Portuguese
+ 
+ 
+ 
+ 
+ 
+ 
+ Arabic
+ 
+ 
+ 
+ 
+ 
+ 
+ Dutch
+ 
+ 
+ 
+ 
+ 
+ 
+ Turkish
+ 
+ 
+ 
+ 
+ 
+ 
+ Croatian
+ 
+ 
+ 
+ 
+ 
+ 
+ يستخدم هذا الموقع ملفات تعريف الارتباط (الكوكيز)
+ 
+ نحن نستخدم ملفات تعريف الارتباط، راجع إشعار ملفات تعريف الارتباط لمزيد من المعلومات.
+
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ عرض التفاصيل
+ إخفاء التفاصيل
+ 
+ 
+ 
+ 
+ 
+ حفظ وإغلاق
+ قبول الكل
+ رفض الكل</pre>
+    </details>
+  </main>
+</body>
+</html>

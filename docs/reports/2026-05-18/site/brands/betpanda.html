@@ -1,0 +1,391 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Betpanda 活动详情</title>
+  <style>
+    :root { --bg:#f5f6f2; --panel:#fff; --ink:#15201b; --muted:#66736d; --line:#d8ddd4; --green:#0d7658; --blue:#245c9e; --amber:#9a6816; --red:#a54040; --soft:#eef4f0; }
+    * { box-sizing:border-box; }
+    body { margin:0; background:var(--bg); color:var(--ink); font-family:Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; line-height:1.45; }
+    .page { max-width:1280px; margin:0 auto; padding:28px 18px 56px; }
+    .hero { background:var(--panel); border:1px solid var(--line); border-radius:8px; padding:24px; display:grid; grid-template-columns:minmax(0,1fr) 280px; gap:18px; align-items:end; margin-bottom:18px; }
+    .brand-hero { margin-bottom:16px; }
+    .eyebrow { margin:0 0 8px; color:var(--green); font-size:12px; font-weight:800; text-transform:uppercase; letter-spacing:.04em; }
+    h1 { margin:0 0 8px; font-size:32px; line-height:1.12; letter-spacing:0; }
+    h2 { margin:0 0 6px; font-size:18px; letter-spacing:0; }
+    p { margin:0; }
+    .sub, .meta { color:var(--muted); }
+    .status { display:inline-flex; align-items:center; border-radius:999px; padding:3px 8px; font-size:12px; font-weight:800; white-space:nowrap; }
+    .ok { color:var(--green); background:#e5f3ed; }
+    .mid { color:var(--amber); background:#fff4df; }
+    .blue { color:var(--blue); background:#e9f0fb; }
+    .low { color:var(--red); background:#faeeee; }
+    .meta { background:#f8faf7; border:1px solid var(--line); border-radius:8px; padding:14px; }
+    .meta b { display:inline-block; min-width:92px; color:var(--ink); }
+    .brand-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:14px; }
+    .brand-card { display:grid; grid-template-columns:220px minmax(0,1fr); gap:14px; padding:14px; color:var(--ink); text-decoration:none; background:var(--panel); border:1px solid var(--line); border-radius:8px; }
+    .brand-card img, .visual img { width:100%; border:1px solid var(--line); border-radius:8px; background:#edf0ea; object-fit:cover; }
+    .brand-card img { aspect-ratio:16/10; }
+    .brand-card span { display:inline-flex; margin-top:10px; color:var(--blue); font-weight:700; }
+    .new-badge { display:inline-flex; align-items:center; border-radius:999px; background:#fff4df; color:#9a6816; padding:3px 8px; font-size:12px; font-weight:800; margin-left:6px; vertical-align:middle; }
+    .topnav { margin-bottom:12px; }
+    .topnav a { color:var(--blue); font-weight:700; text-decoration:none; }
+    .visual { background:var(--panel); border:1px solid var(--line); border-radius:8px; padding:14px; margin-bottom:16px; }
+    .visual img { max-height:520px; object-fit:contain; }
+    .activity-list { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:14px; }
+    .activity-card { background:var(--panel); border:1px solid var(--line); border-radius:8px; padding:16px; }
+    .activity-card.detail-ok { border-left:4px solid var(--green); }
+    .activity-card.detail-limited { border-left:4px solid var(--amber); }
+    .activity-card.detail-missing { border-left:4px solid #a8b1ac; }
+    .activity-head { display:grid; grid-template-columns:36px minmax(0,1fr); gap:10px; align-items:start; margin-bottom:12px; }
+    .index { display:inline-grid; place-items:center; width:30px; height:30px; border-radius:999px; background:var(--soft); color:var(--green); font-weight:800; }
+    .detail-shot-link { display:block; margin:8px 0 12px; }
+    .detail-shot { width:100%; max-height:360px; object-fit:cover; object-position:top; border:1px solid var(--line); border-radius:8px; background:#edf0ea; }
+    dl { display:grid; gap:8px; margin:0; }
+    dl div { display:grid; grid-template-columns:150px minmax(0,1fr); gap:10px; border-top:1px solid var(--line); padding-top:8px; }
+    dt { color:var(--muted); font-size:12px; font-weight:800; }
+    dd { margin:0; font-size:13px; }
+    .missing-text { color:var(--muted); }
+    .detail-pill { display:inline-flex; align-items:center; border-radius:999px; padding:3px 8px; font-size:12px; font-weight:800; }
+    .ok-pill { background:#e5f3ed; color:var(--green); }
+    .limited-pill { background:#fff4df; color:var(--amber); }
+    .fallback-pill { background:#eef0ea; color:var(--muted); }
+    .detail-excerpt { margin-top:12px; border-top:1px solid var(--line); padding-top:10px; }
+    .detail-excerpt summary { cursor:pointer; color:var(--blue); font-weight:800; }
+    .raw { background:var(--panel); border:1px solid var(--line); border-radius:8px; padding:14px; margin-top:16px; }
+    pre { white-space:pre-wrap; word-break:break-word; background:#111714; color:#eef6f0; padding:12px; border-radius:8px; max-height:320px; overflow:auto; font-size:12px; }
+    a { color:var(--blue); }
+    @media (max-width:900px) { .hero, .brand-grid, .brand-card, .activity-list { grid-template-columns:1fr; } h1 { font-size:27px; } dl div { grid-template-columns:1fr; } }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <nav class="topnav"><a href="../index.html">返回品牌入口 / Back to brands</a></nav>
+    <section class="hero brand-hero">
+      <div>
+        <p class="eyebrow">Brand Promotion Page</p>
+        <h1>Betpanda</h1>
+        <p class="sub">来源 Source：<a href="https://betpanda.partners/en/promo/promotions">https://betpanda.partners/en/promo/promotions</a></p>
+        <p class="sub">本页优先使用活动详情页 full-page screenshot 与可见正文，输出要求、Trigger、Reward、Who、When、Summary、核心目的和数据预期。</p>
+        <p class="sub"><span class="status ok">可访问 / OK</span></p>
+      </div>
+      <div class="meta">
+        <b>活动 Activities</b>13<br>
+        <b>详情 Details</b>11<br>
+        <b>详情截图 Shots</b>13<br>
+        <b>状态 Status</b>ok
+      </div>
+    </section>
+
+    <section class="visual">
+      <img src="../../browser-screenshots/betpanda-betpanda-promotions.png" alt="Betpanda screenshot">
+    </section>
+
+    <section class="activity-list">
+      <article class="activity-card detail-ok">
+    <div class="activity-head">
+      <span class="index">1</span>
+      <div>
+        <h2>Casinochevron_right <span class="new-badge">今日新增 / New Today</span></h2>
+        <p>返现 / Cashback · <span class="detail-pill ok-pill">详情页已采集 / Detail captured</span></p>
+      </div>
+    </div>
+<a class="detail-shot-link" href="../../detail-screenshots/betpanda/betpanda-casinochevron-right-https-betpanda-partners-en-promo-promotions.png"><img class="detail-shot" src="../../detail-screenshots/betpanda/betpanda-casinochevron-right-https-betpanda-partners-en-promo-promotions.png" alt="Casinochevron_right detail screenshot"></a>
+    <dl>
+      <div><dt>要求 / Requirements</dt><dd>Cashback in2DAYS9HRS42MIN33SECCasinochevron_rightLobbyOriginalsJackpotProvably FairTable GamesGrid SlotsBuy FeatureMegawaysHold; BetsLiveUpcoming EventsFavouritesSoccerBasketballIce HockeyTennisFifaEsportschevron_rightLobbyMy BetsLiveUpcoming EventsFav; complete the requirement and get rewarded.Read moreExclusive RakebackClimb to Bamboo Guardian and enjoy daily rakeback on every</dd></div>
+      <div><dt>触发条件 / Trigger</dt><dd>点击参与/报名后，完成活动指定行为触发奖励</dd></div>
+      <div><dt>奖励方式 / Reward</dt><dd>5% extra</dd></div>
+      <div><dt>目标用户 / Who</dt><dd>新注册/首充用户；VIP 或高价值活跃用户；Casino/Slots 用户</dd></div>
+      <div><dt>时间 / When</dt><dd>ate your next winning combo.Lock your ProfitsCash out at the right time bank profits and stay ahead.Rea</dd></div>
+      <div><dt>Summary / 总结</dt><dd>Casinochevron_right 面向新注册/首充用户；VIP 或高价值活跃用户；Casino/Slots 用户，通过“点击参与/报名后，完成活动指定行为触发奖励”推动用户完成关键行为；奖励为 5% extra。主要参与要求：Cashback in2DAYS9HRS42MIN33SECCasinochevron_rightLobbyOriginalsJackpotProvably FairTable GamesGrid SlotsBuy FeatureMegawaysHold; BetsLiveUpcoming EventsFavouritesSoccerBasketballIce HockeyTennisFifaEsportschevron_rightLobbyMy BetsLiveUpcoming EventsFav; complete the requirement and get rewarded.Read moreExclusive RakebackClimb to Bamboo Guardian and enjoy daily rakeback on every。</dd></div>
+      <div><dt>核心目的 / Objective</dt><dd>拉新与首充转化</dd></div>
+      <div><dt>数据预期 / Expected Data</dt><dd>拉新与首充转化；预期观察：注册到首充转化率、首存金额、首周留存上升；投注额、投注单量、有效投注用户数上升；Casino DAU、游戏启动次数、免费旋转转付费率上升。</dd></div>
+      <div><dt>详情页来源 / Detail Source</dt><dd><a href="https://betpanda.partners/en/promo/promotions">https://betpanda.partners/en/promo/promotions</a></dd></div>
+    </dl>
+<details class="detail-excerpt"><summary>详情页原文摘要 / Detail excerpt</summary><pre>You need to enable JavaScript to run this app. menumenu Weekly Cashback in2DAYS9HRS42MIN33SECCasinochevron_rightLobbyOriginalsJackpotProvably FairTable GamesGrid SlotsBuy FeatureMegawaysHold &amp; WinNew GamesLive Casinochevron_rightLobbyRouletteBlackjackBaccaratGame ShowsDiceVIP TablesSportschevron_rightLobbyMy BetsLiveUpcoming EventsFavouritesSoccerBasketballIce HockeyTennisFifaEsportschevron_rightLobbyMy BetsLiveUpcoming EventsFavouritesCounter-StrikeLeague of LegendsDota 2FifaNBA2KPromotionschevron_rightCasinoSportsAll PromotionsSponsorshipslanguageEnglish (en)Download AppPromotionsSign-Up OfferUp to 1 BTC in our casino bonus complete the requirement and get rewarded.Read moreExclusive RakebackClimb to Bamboo Guardian and enjoy daily rakeback on every spin.Weekly CashbackGet 10% guaranteed cashback on your real money losses between Wednesdays.Read moreLive Casino Cashback BoostPlay live casino with 5% extra cashback, up to 15% back weekly on Evolution live games.Weekly RafflePlay any slots with real money and collect tickets for a chance to win one of 20 weekly €500 prizes.Get Rewarded For Your PlayPlay as you normally do, and we'll reward you every time you achieve a new level.Read moreGet a Weekly Free BetBased on your sports betting from the previous 7 days, we’ll credit you with a free bet every Monday.Read MoreEarn Points On Your Winning BetsJoin our Weekly Sportsbook Tournament and compete for new prizes every week.Read MoreUnlock Bigger WinsWin bigger and boost your profits with up to 40% with our COMBOBOOST feature.Read MoreBuild Your Perfect BetCombine multiple markets from the same event into one bet to create your next winning combo.Lock your ProfitsCash out at the right time bank profits and stay ahead.Read More &lt;img height=&quot;1&quot; width=&quot;1&quot; style=&quot;display:none&quot; src=&quot;https://www.facebook.com/tr?id=991738589185829&amp;amp;ev=PageView&amp;amp;noscript=1&quot;&gt; &lt;img src=&quot;https://pixel.everesttech.net/9281/t?ev_Betpanda_Cryptorino_SiteVisitos_ID5=1&amp;amp;ev_transid=&amp;lt;transid&amp;gt;&quot; width=&quot;1&quot; height=&quot;1&quot;&gt; &lt;img src=&quot;//dmp.adform.net/dmp/profile/?pid=12718&amp;amp;sg=BetPanda_AllVisitors&quot; style=&quot;display:none !important&quot;&gt;</pre></details>
+  </article>
+<article class="activity-card detail-ok">
+    <div class="activity-head">
+      <span class="index">2</span>
+      <div>
+        <h2>Welcome Bonus </h2>
+        <p>返现 / Cashback · <span class="detail-pill ok-pill">详情页已采集 / Detail captured</span></p>
+      </div>
+    </div>
+<a class="detail-shot-link" href="../../detail-screenshots/betpanda/betpanda-https-betpanda-partners-en-promo-welcome-bonus.png"><img class="detail-shot" src="../../detail-screenshots/betpanda/betpanda-https-betpanda-partners-en-promo-welcome-bonus.png" alt="Welcome Bonus detail screenshot"></a>
+    <dl>
+      <div><dt>要求 / Requirements</dt><dd>Cashback in2DAYS9HRS42MIN28SECCasinochevron_rightLobbyOriginalsJackpotProvably FairTable GamesGrid SlotsBuy FeatureMegawaysHold; BetsLiveUpcoming EventsFavouritesSoccerBasketballIce HockeyTennisFifaEsportschevron_rightLobbyMy BetsLiveUpcoming EventsFav; Betpanda Priority Club</dd></div>
+      <div><dt>触发条件 / Trigger</dt><dd>新用户注册并完成首充触发</dd></div>
+      <div><dt>奖励方式 / Reward</dt><dd>up to 1 BTC; €10; 100%; 1 BTC; €10.</dd></div>
+      <div><dt>目标用户 / Who</dt><dd>新注册/首充用户；VIP 或高价值活跃用户；Casino/Slots 用户</dd></div>
+      <div><dt>时间 / When</dt><dd>ate the bonus in your account, and start playing to unlock your reward—a cash match of your initial dep;  ate your account.</dd></div>
+      <div><dt>Summary / 总结</dt><dd>Welcome Bonus 面向新注册/首充用户；VIP 或高价值活跃用户；Casino/Slots 用户，通过“新用户注册并完成首充触发”推动用户完成关键行为；奖励为 up to 1 BTC; €10; 100%; 1 BTC; €10.。主要参与要求：Cashback in2DAYS9HRS42MIN28SECCasinochevron_rightLobbyOriginalsJackpotProvably FairTable GamesGrid SlotsBuy FeatureMegawaysHold; BetsLiveUpcoming EventsFavouritesSoccerBasketballIce HockeyTennisFifaEsportschevron_rightLobbyMy BetsLiveUpcoming EventsFav; Betpanda Priority Club。</dd></div>
+      <div><dt>核心目的 / Objective</dt><dd>拉新与首充转化</dd></div>
+      <div><dt>数据预期 / Expected Data</dt><dd>拉新与首充转化；预期观察：注册到首充转化率、首存金额、首周留存上升；充值次数、充值金额、Bonus claim rate 上升；投注额、投注单量、有效投注用户数上升。</dd></div>
+      <div><dt>详情页来源 / Detail Source</dt><dd><a href="https://betpanda.partners/en/promo/welcome-bonus">https://betpanda.partners/en/promo/welcome-bonus</a></dd></div>
+    </dl>
+<details class="detail-excerpt"><summary>详情页原文摘要 / Detail excerpt</summary><pre>You need to enable JavaScript to run this app. menumenu Weekly Cashback in2DAYS9HRS42MIN28SECCasinochevron_rightLobbyOriginalsJackpotProvably FairTable GamesGrid SlotsBuy FeatureMegawaysHold &amp; WinNew GamesLive Casinochevron_rightLobbyRouletteBlackjackBaccaratGame ShowsDiceVIP TablesSportschevron_rightLobbyMy BetsLiveUpcoming EventsFavouritesSoccerBasketballIce HockeyTennisFifaEsportschevron_rightLobbyMy BetsLiveUpcoming EventsFavouritesCounter-StrikeLeague of LegendsDota 2FifaNBA2KPromotionschevron_rightCasinoSportsAll PromotionsSponsorshipslanguageEnglish (en)Download App&lt; All Promotions Betpanda Priority Club CASINO SIGN-UP BONUS Sign up and earn up to 1 BTC with our welcome bonus. Make your first deposit, activate the bonus in your account, and start playing to unlock your reward—a cash match of your initial deposit. * The cash reward from the welcome deal becomes instantly available once you complete the wagering requirement, on your first deposit. Claim Welcome Bonus Betpanda Priority Club 4 Easy Steps to Start 1. Sign Up: Create your account. 2. Deposit: Make your first deposit of €10 or more to activate the bonus. 3. Play: Wager your deposit 40 times on your favorite games. 4. Unlock Cash: Complete the turnover to have your bonus paid out as pure cash—no strings attached. Betpanda Priority Club BONUS DETAILS The welcome bonus offers up to 1 BTC or its equivalent in other currencies. This is a bounty-style bonus, meaning you’ll need to wager first, and the bonus will be paid out in cash once you meet the requirements. Create Account Blackjack VIPEvolutionGates of Olympus 1000Pragmatic PlayCrazy TimeEvolutionWanted Dead or a WildHacksaw GamingRouletteEvolutionFire in the Hole 3Nolimit City Bounty Welcome Bonus Terms Terms &amp; Conditions Eligibility: Only one account per player, household, IP address, or device is eligible for this promotion. Multi-accounting is strictly prohibited and may result in disqualification from this and future promotions. Bonus Details: The Bounty Welcome Bonus offers 100% of your first deposit up to a maxi ... [truncated]</pre></details>
+  </article>
+<article class="activity-card detail-ok">
+    <div class="activity-head">
+      <span class="index">3</span>
+      <div>
+        <h2>Daily Rakeback </h2>
+        <p>返现 / Cashback · <span class="detail-pill ok-pill">详情页已采集 / Detail captured</span></p>
+      </div>
+    </div>
+<a class="detail-shot-link" href="../../detail-screenshots/betpanda/betpanda-https-betpanda-partners-en-promo-daily-rakeback.png"><img class="detail-shot" src="../../detail-screenshots/betpanda/betpanda-https-betpanda-partners-en-promo-daily-rakeback.png" alt="Daily Rakeback detail screenshot"></a>
+    <dl>
+      <div><dt>要求 / Requirements</dt><dd>Cashback in2DAYS9HRS42MIN23SECCasinochevron_rightLobbyOriginalsJackpotProvably FairTable GamesGrid SlotsBuy FeatureMegawaysHold; BetsLiveUpcoming EventsFavouritesSoccerBasketballIce HockeyTennisFifaEsportschevron_rightLobbyMy BetsLiveUpcoming EventsFav; Betpanda Priority Club</dd></div>
+      <div><dt>触发条件 / Trigger</dt><dd>点击参与/报名后，完成活动指定行为触发奖励</dd></div>
+      <div><dt>奖励方式 / Reward</dt><dd>10%; 5%; 3%; 1%; 5% rakeback</dd></div>
+      <div><dt>目标用户 / Who</dt><dd>新注册/首充用户；VIP 或高价值活跃用户；Casino/Slots 用户</dd></div>
+      <div><dt>时间 / When</dt><dd>ated from 00:00 to 23:59 UTC.;  ate</dd></div>
+      <div><dt>Summary / 总结</dt><dd>Daily Rakeback 面向新注册/首充用户；VIP 或高价值活跃用户；Casino/Slots 用户，通过“点击参与/报名后，完成活动指定行为触发奖励”推动用户完成关键行为；奖励为 10%; 5%; 3%; 1%; 5% rakeback。主要参与要求：Cashback in2DAYS9HRS42MIN23SECCasinochevron_rightLobbyOriginalsJackpotProvably FairTable GamesGrid SlotsBuy FeatureMegawaysHold; BetsLiveUpcoming EventsFavouritesSoccerBasketballIce HockeyTennisFifaEsportschevron_rightLobbyMy BetsLiveUpcoming EventsFav; Betpanda Priority Club。</dd></div>
+      <div><dt>核心目的 / Objective</dt><dd>提升留存、降低流失感知并延长生命周期</dd></div>
+      <div><dt>数据预期 / Expected Data</dt><dd>提升留存、降低流失感知并延长生命周期；预期观察：投注额、投注单量、有效投注用户数上升；Casino DAU、游戏启动次数、免费旋转转付费率上升；复玩率、留存率、VIP 活跃和净收入稳定性提升。</dd></div>
+      <div><dt>详情页来源 / Detail Source</dt><dd><a href="https://betpanda.partners/en/promo/daily-rakeback">https://betpanda.partners/en/promo/daily-rakeback</a></dd></div>
+    </dl>
+<details class="detail-excerpt"><summary>详情页原文摘要 / Detail excerpt</summary><pre>You need to enable JavaScript to run this app. menumenu Weekly Cashback in2DAYS9HRS42MIN23SECCasinochevron_rightLobbyOriginalsJackpotProvably FairTable GamesGrid SlotsBuy FeatureMegawaysHold &amp; WinNew GamesLive Casinochevron_rightLobbyRouletteBlackjackBaccaratGame ShowsDiceVIP TablesSportschevron_rightLobbyMy BetsLiveUpcoming EventsFavouritesSoccerBasketballIce HockeyTennisFifaEsportschevron_rightLobbyMy BetsLiveUpcoming EventsFavouritesCounter-StrikeLeague of LegendsDota 2FifaNBA2KPromotionschevron_rightCasinoSportsAll PromotionsSponsorshipslanguageEnglish (en)Download App&lt; All Promotions Betpanda Priority Club Daily Rakeback Turn up the heat with Betpanda’s exclusive daily Rakeback! Every player who has achieved Bamboo Guardian status in the XP Club is eligible for this offer. Every player with Priority status is eligible for daily rakeback. * Reach 62,500 XP and earn daily rakeback every day of the week. Play Now Betpanda Priority Club Rakeback Overview On top of your 10% Weekly Cashback, you’ll also get 5% Daily Rakeback. Rakeback is based on total wagers, regardless of whether you win or lose. Rakeback is calculated from 00:00 to 23:59 UTC. All prizes are paid wager-free in USDT, 08.00 am UTC every day This Daily Rakeback does NOT affect your Weekly Cashback. Betpanda Priority Club Priority Players Game Type Rakeback Rate House Edge Basis Slots 5% Simplified 3% house edge Live &amp; Provably Fair Games 5% Simplified 1% house edge Sportsbook Excluded - Bamboo Guardians Game Type Rakeback Rate House Edge Basis Slots 5% Simplified 3% house edge Live &amp; Provably Fair Games Excluded - Sportsbook Excluded - Play Today, Get Paid Tomorrow. No Opt-in Required. Your daily rewards are paid automatically. Betpanda Terms &amp; Conditions Terms &amp; Conditions Promotion Overview: The Betpanda Daily Rakeback Promotion (“Promotion”) rewards eligible players with a 5% rakeback on total wagers placed during the qualifying period. Rakeback is based on a simplified house edge for ... [truncated]</pre></details>
+  </article>
+<article class="activity-card detail-ok">
+    <div class="activity-head">
+      <span class="index">4</span>
+      <div>
+        <h2>Cashback </h2>
+        <p>返现 / Cashback · <span class="detail-pill ok-pill">详情页已采集 / Detail captured</span></p>
+      </div>
+    </div>
+<a class="detail-shot-link" href="../../detail-screenshots/betpanda/betpanda-https-betpanda-partners-en-promo-cashback.png"><img class="detail-shot" src="../../detail-screenshots/betpanda/betpanda-https-betpanda-partners-en-promo-cashback.png" alt="Cashback detail screenshot"></a>
+    <dl>
+      <div><dt>要求 / Requirements</dt><dd>Cashback in2DAYS9HRS42MIN19SECCasinochevron_rightLobbyOriginalsJackpotProvably FairTable GamesGrid SlotsBuy FeatureMegawaysHold; BetsLiveUpcoming EventsFavouritesSoccerBasketballIce HockeyTennisFifaEsportschevron_rightLobbyMy BetsLiveUpcoming EventsFav; Betpanda Priority Club</dd></div>
+      <div><dt>触发条件 / Trigger</dt><dd>用户达到指定投注额或流水触发</dd></div>
+      <div><dt>奖励方式 / Reward</dt><dd>10% cashback</dd></div>
+      <div><dt>目标用户 / Who</dt><dd>新注册/首充用户；VIP 或高价值活跃用户；Casino/Slots 用户</dd></div>
+      <div><dt>时间 / When</dt><dd>ated based on the player's net losses in eligible games during the qualifying period. Net losses are de;  ately withdrawable.</dd></div>
+      <div><dt>Summary / 总结</dt><dd>Cashback 面向新注册/首充用户；VIP 或高价值活跃用户；Casino/Slots 用户，通过“用户达到指定投注额或流水触发”推动用户完成关键行为；奖励为 10% cashback。主要参与要求：Cashback in2DAYS9HRS42MIN19SECCasinochevron_rightLobbyOriginalsJackpotProvably FairTable GamesGrid SlotsBuy FeatureMegawaysHold; BetsLiveUpcoming EventsFavouritesSoccerBasketballIce HockeyTennisFifaEsportschevron_rightLobbyMy BetsLiveUpcoming EventsFav; Betpanda Priority Club。</dd></div>
+      <div><dt>核心目的 / Objective</dt><dd>提升留存、降低流失感知并延长生命周期</dd></div>
+      <div><dt>数据预期 / Expected Data</dt><dd>提升留存、降低流失感知并延长生命周期；预期观察：投注额、投注单量、有效投注用户数上升；Casino DAU、游戏启动次数、免费旋转转付费率上升；复玩率、留存率、VIP 活跃和净收入稳定性提升。</dd></div>
+      <div><dt>详情页来源 / Detail Source</dt><dd><a href="https://betpanda.partners/en/promo/cashback">https://betpanda.partners/en/promo/cashback</a></dd></div>
+    </dl>
+<details class="detail-excerpt"><summary>详情页原文摘要 / Detail excerpt</summary><pre>You need to enable JavaScript to run this app. menumenu Weekly Cashback in2DAYS9HRS42MIN19SECCasinochevron_rightLobbyOriginalsJackpotProvably FairTable GamesGrid SlotsBuy FeatureMegawaysHold &amp; WinNew GamesLive Casinochevron_rightLobbyRouletteBlackjackBaccaratGame ShowsDiceVIP TablesSportschevron_rightLobbyMy BetsLiveUpcoming EventsFavouritesSoccerBasketballIce HockeyTennisFifaEsportschevron_rightLobbyMy BetsLiveUpcoming EventsFavouritesCounter-StrikeLeague of LegendsDota 2FifaNBA2KPromotionschevron_rightCasinoSportsAll PromotionsSponsorshipslanguageEnglish (en)Download App&lt; All Promotions Betpanda Priority Club WEEKLY CASHBACK Enjoy a guaranteed 10% cashback on your casino net losses every week! Your cashback will be added to your account's reward section every Wednesday at 13:00 UTC, giving you even more chances to play and win! * Get 10% cashback on all casino net losses, every week from Wednesday 12:00 UTC to the following Wednesday 12:00 UTC. Play Now Weekly Cashback Promotion Terms Terms &amp; Conditions Promotion Overview: The Betpanda Weekly Cashback Promotion (&quot;Promotion&quot;) offers players a cashback on their net losses during the qualifying period. The cashback amount is 10% of the player's net losses. Eligibility: This Promotion is open to all registered Betpanda players who play with real money. Net losses incurred using bonus funds are not eligible. Net losses in Live Casino and Slots count toward the promotion, but Sportsbetting net losses are excluded. A minimum of 50 casino wagers is required during the cashback period every week from Wednesday 12:00 UTC to the following Wednesday 12:00 UTC. (excluding free spins and bonus play) Qualifying Period: The qualifying period for cashback calculation is from Wednesday 12:00 UTC to the following Wednesday 12:00 UTC. Cashback Calculation: The cashback is calculated based on the player's net losses in eligible games during the qualifying period. Net losses are defined as the total amount lost minus total winnings in real money. Payment of Cashback: The cashback will be credited to eligible players' accounts every Wednesday at 13:00 UTC and can ... [truncated]</pre></details>
+  </article>
+<article class="activity-card detail-ok">
+    <div class="activity-head">
+      <span class="index">5</span>
+      <div>
+        <h2>Live Casino </h2>
+        <p>返现 / Cashback · <span class="detail-pill ok-pill">详情页已采集 / Detail captured</span></p>
+      </div>
+    </div>
+<a class="detail-shot-link" href="../../detail-screenshots/betpanda/betpanda-https-betpanda-partners-en-promo-live-casino.png"><img class="detail-shot" src="../../detail-screenshots/betpanda/betpanda-https-betpanda-partners-en-promo-live-casino.png" alt="Live Casino detail screenshot"></a>
+    <dl>
+      <div><dt>要求 / Requirements</dt><dd>Cashback in2DAYS9HRS42MIN13SECCasinochevron_rightLobbyOriginalsJackpotProvably FairTable GamesGrid SlotsBuy FeatureMegawaysHold; BetsLiveUpcoming EventsFavouritesSoccerBasketballIce HockeyTennisFifaEsportschevron_rightLobbyMy BetsLiveUpcoming EventsFav; Betpanda Priority Club</dd></div>
+      <div><dt>触发条件 / Trigger</dt><dd>用户达到指定投注额或流水触发</dd></div>
+      <div><dt>奖励方式 / Reward</dt><dd>5% cashback; 5% extra</dd></div>
+      <div><dt>目标用户 / Who</dt><dd>新注册/首充用户；VIP 或高价值活跃用户；Casino/Slots 用户</dd></div>
+      <div><dt>时间 / When</dt><dd>ately to your 10% weekly cashback. This promo runs until further notice—when it’s time to wrap things u;  ated and paid separately from other cashback offers on Betpanda, including but not limited to the 10% w</dd></div>
+      <div><dt>Summary / 总结</dt><dd>Live Casino 面向新注册/首充用户；VIP 或高价值活跃用户；Casino/Slots 用户，通过“用户达到指定投注额或流水触发”推动用户完成关键行为；奖励为 5% cashback; 5% extra。主要参与要求：Cashback in2DAYS9HRS42MIN13SECCasinochevron_rightLobbyOriginalsJackpotProvably FairTable GamesGrid SlotsBuy FeatureMegawaysHold; BetsLiveUpcoming EventsFavouritesSoccerBasketballIce HockeyTennisFifaEsportschevron_rightLobbyMy BetsLiveUpcoming EventsFav; Betpanda Priority Club。</dd></div>
+      <div><dt>核心目的 / Objective</dt><dd>提升留存、降低流失感知并延长生命周期</dd></div>
+      <div><dt>数据预期 / Expected Data</dt><dd>提升留存、降低流失感知并延长生命周期；预期观察：投注额、投注单量、有效投注用户数上升；Casino DAU、游戏启动次数、免费旋转转付费率上升；复玩率、留存率、VIP 活跃和净收入稳定性提升。</dd></div>
+      <div><dt>详情页来源 / Detail Source</dt><dd><a href="https://betpanda.partners/en/promo/live-casino">https://betpanda.partners/en/promo/live-casino</a></dd></div>
+    </dl>
+<details class="detail-excerpt"><summary>详情页原文摘要 / Detail excerpt</summary><pre>You need to enable JavaScript to run this app. menumenu Weekly Cashback in2DAYS9HRS42MIN13SECCasinochevron_rightLobbyOriginalsJackpotProvably FairTable GamesGrid SlotsBuy FeatureMegawaysHold &amp; WinNew GamesLive Casinochevron_rightLobbyRouletteBlackjackBaccaratGame ShowsDiceVIP TablesSportschevron_rightLobbyMy BetsLiveUpcoming EventsFavouritesSoccerBasketballIce HockeyTennisFifaEsportschevron_rightLobbyMy BetsLiveUpcoming EventsFavouritesCounter-StrikeLeague of LegendsDota 2FifaNBA2KPromotionschevron_rightCasinoSportsAll PromotionsSponsorshipslanguageEnglish (en)Download App&lt; All Promotions Betpanda Priority Club From Loss to Lift-Off Had a tough week at the tables? We’ve got your back. With our 5% cashback boost on net losses at Evolution you’ll get a second shot—paid in real cash, no wagering, and no limits. * This cashback is counted and paid separately to your 10% weekly cashback. This promo runs until further notice—when it’s time to wrap things up, we’ll let you know. See All Games Betpanda Priority Club HOW IT WORKS Coverage Period: Only net losses from Evolution live games, played between Saturday 00:01 and Friday 23:59 UTC, qualify for 5% extra cashback. Payout Time: Cashback will be paid out every Saturday by 14:00 UTC. Payout Currency: Cashback will be paid out in USDT, regardless of the currency used for gameplay. Minimum Amount: The minimum cashback payout is 1 USDT. No Limits: There is no maximum limit on the cashback you can receive. Blackjack AEvolutionSpeed RouletteEvolutionCrazy TimeEvolutionCrapsEvolutionBaccarat AEvolution Weekly Cashback Promotion Terms Terms &amp; Conditions Campaign Overview: Receive 5% cashback on net losses from Evolution live casino games during the promotional period. Eligibility: This promotion is available to all players with an active Betpanda account. Qualifying Bets: Only bets placed with real money on Evolution live casino games qualify for this promotion. Bonus funds and promotional credits are excluded. Net Losses: Net losses are defined as the total value of qualifying real-money bets on Evolution live casino games ... [truncated]</pre></details>
+  </article>
+<article class="activity-card detail-ok">
+    <div class="activity-head">
+      <span class="index">6</span>
+      <div>
+        <h2>Weekly Raffle </h2>
+        <p>返现 / Cashback · <span class="detail-pill ok-pill">详情页已采集 / Detail captured</span></p>
+      </div>
+    </div>
+<a class="detail-shot-link" href="../../detail-screenshots/betpanda/betpanda-https-betpanda-partners-en-promo-weekly-raffle.png"><img class="detail-shot" src="../../detail-screenshots/betpanda/betpanda-https-betpanda-partners-en-promo-weekly-raffle.png" alt="Weekly Raffle detail screenshot"></a>
+    <dl>
+      <div><dt>要求 / Requirements</dt><dd>Cashback in2DAYS9HRS42MIN8SECCasinochevron_rightLobbyOriginalsJackpotProvably FairTable GamesGrid SlotsBuy FeatureMegawaysHold &amp;; BetsLiveUpcoming EventsFavouritesSoccerBasketballIce HockeyTennisFifaEsportschevron_rightLobbyMy BetsLiveUpcoming EventsFav; Betpanda Priority Club</dd></div>
+      <div><dt>触发条件 / Trigger</dt><dd>点击参与/报名后，完成活动指定行为触发奖励</dd></div>
+      <div><dt>奖励方式 / Reward</dt><dd>€10,000; €500</dd></div>
+      <div><dt>目标用户 / Who</dt><dd>新注册/首充用户；VIP 或高价值活跃用户；Casino/Slots 用户</dd></div>
+      <div><dt>时间 / When</dt><dd>ategory, unless otherwise stated. Betpanda reserves the right to exclude specific games from the raffle;  ate raffle tickets.</dd></div>
+      <div><dt>Summary / 总结</dt><dd>Weekly Raffle 面向新注册/首充用户；VIP 或高价值活跃用户；Casino/Slots 用户，通过“点击参与/报名后，完成活动指定行为触发奖励”推动用户完成关键行为；奖励为 €10,000; €500。主要参与要求：Cashback in2DAYS9HRS42MIN8SECCasinochevron_rightLobbyOriginalsJackpotProvably FairTable GamesGrid SlotsBuy FeatureMegawaysHold &amp;; BetsLiveUpcoming EventsFavouritesSoccerBasketballIce HockeyTennisFifaEsportschevron_rightLobbyMy BetsLiveUpcoming EventsFav; Betpanda Priority Club。</dd></div>
+      <div><dt>核心目的 / Objective</dt><dd>提升留存、降低流失感知并延长生命周期</dd></div>
+      <div><dt>数据预期 / Expected Data</dt><dd>提升留存、降低流失感知并延长生命周期；预期观察：投注额、投注单量、有效投注用户数上升；Casino DAU、游戏启动次数、免费旋转转付费率上升；复玩率、留存率、VIP 活跃和净收入稳定性提升。</dd></div>
+      <div><dt>详情页来源 / Detail Source</dt><dd><a href="https://betpanda.partners/en/promo/weekly-raffle">https://betpanda.partners/en/promo/weekly-raffle</a></dd></div>
+    </dl>
+<details class="detail-excerpt"><summary>详情页原文摘要 / Detail excerpt</summary><pre>You need to enable JavaScript to run this app. menumenu Weekly Cashback in2DAYS9HRS42MIN8SECCasinochevron_rightLobbyOriginalsJackpotProvably FairTable GamesGrid SlotsBuy FeatureMegawaysHold &amp; WinNew GamesLive Casinochevron_rightLobbyRouletteBlackjackBaccaratGame ShowsDiceVIP TablesSportschevron_rightLobbyMy BetsLiveUpcoming EventsFavouritesSoccerBasketballIce HockeyTennisFifaEsportschevron_rightLobbyMy BetsLiveUpcoming EventsFavouritesCounter-StrikeLeague of LegendsDota 2FifaNBA2KPromotionschevron_rightCasinoSportsAll PromotionsSponsorshipslanguageEnglish (en)Download App&lt; All Promotions Betpanda Priority Club 20 Weekly Winners Club Get your hands on a share of €10,000 in our weekly Raffle. Every week, 20 random players will win €500 each. * All prizes are paid according to the raffle rules and credited automatically after the draw Play Now Betpanda Priority Club How to Qualify Simply place real-money wagers on eligible slot games during the raffle period to earn tickets automatically. The more you wager, the more tickets you collect. No opt-in required Only real-money wagers count Bonus money and free spins do not qualify Betpanda Priority Club Prize Pool Betpanda Weekly Raffle Terms &amp; Conditions Promotion Period: This raffle runs weekly. The raffle draw takes place every Friday at 20:00 UTC. Eligibility: This raffle is open to all registered players who meet the minimum wagering requirements. Players must be 18 years or older and comply with all applicable laws and regulations in their jurisdiction. Game Eligibility: This raffle is open to all casino games listed under the Slots tag category, unless otherwise stated. Betpanda reserves the right to exclude specific games from the raffle at its sole discretion. Contact customer support for more information about eligible games. Ticket Rules: Tickets are earned automatically through eligible real-money wagers. The more a player wagers, the more raffle tickets they receive. Bonus funds and free spins do not generate raffle tickets. Winner Selection: Winners are selected randomly from al ... [truncated]</pre></details>
+  </article>
+<article class="activity-card detail-ok">
+    <div class="activity-head">
+      <span class="index">7</span>
+      <div>
+        <h2>Vip Club </h2>
+        <p>返现 / Cashback · <span class="detail-pill ok-pill">详情页已采集 / Detail captured</span></p>
+      </div>
+    </div>
+<a class="detail-shot-link" href="../../detail-screenshots/betpanda/betpanda-https-betpanda-partners-en-promo-vip-club.png"><img class="detail-shot" src="../../detail-screenshots/betpanda/betpanda-https-betpanda-partners-en-promo-vip-club.png" alt="Vip Club detail screenshot"></a>
+    <dl>
+      <div><dt>要求 / Requirements</dt><dd>Cashback in2DAYS9HRS42MIN3SECCasinochevron_rightLobbyOriginalsJackpotProvably FairTable GamesGrid SlotsBuy FeatureMegawaysHold &amp;; BetsLiveUpcoming EventsFavouritesSoccerBasketballIce HockeyTennisFifaEsportschevron_rightLobbyMy BetsLiveUpcoming EventsFav; Betpanda Priority Club</dd></div>
+      <div><dt>触发条件 / Trigger</dt><dd>点击参与/报名后，完成活动指定行为触发奖励</dd></div>
+      <div><dt>奖励方式 / Reward</dt><dd>€1.</dd></div>
+      <div><dt>目标用户 / Who</dt><dd>新注册/首充用户；VIP 或高价值活跃用户；Casino/Slots 用户</dd></div>
+      <div><dt>时间 / When</dt><dd>ate and will continue until further notice. Betpanda reserves the right to discontinue the promotion at;  ate the promotion at its sole discretion. Any changes will be reflected in the terms and conditions.</dd></div>
+      <div><dt>Summary / 总结</dt><dd>Vip Club 面向新注册/首充用户；VIP 或高价值活跃用户；Casino/Slots 用户，通过“点击参与/报名后，完成活动指定行为触发奖励”推动用户完成关键行为；奖励为 €1.。主要参与要求：Cashback in2DAYS9HRS42MIN3SECCasinochevron_rightLobbyOriginalsJackpotProvably FairTable GamesGrid SlotsBuy FeatureMegawaysHold &amp;; BetsLiveUpcoming EventsFavouritesSoccerBasketballIce HockeyTennisFifaEsportschevron_rightLobbyMy BetsLiveUpcoming EventsFav; Betpanda Priority Club。</dd></div>
+      <div><dt>核心目的 / Objective</dt><dd>提升留存、降低流失感知并延长生命周期</dd></div>
+      <div><dt>数据预期 / Expected Data</dt><dd>提升留存、降低流失感知并延长生命周期；预期观察：投注额、投注单量、有效投注用户数上升；Casino DAU、游戏启动次数、免费旋转转付费率上升；复玩率、留存率、VIP 活跃和净收入稳定性提升。</dd></div>
+      <div><dt>详情页来源 / Detail Source</dt><dd><a href="https://betpanda.partners/en/promo/vip-club">https://betpanda.partners/en/promo/vip-club</a></dd></div>
+    </dl>
+<details class="detail-excerpt"><summary>详情页原文摘要 / Detail excerpt</summary><pre>You need to enable JavaScript to run this app. menumenu Weekly Cashback in2DAYS9HRS42MIN3SECCasinochevron_rightLobbyOriginalsJackpotProvably FairTable GamesGrid SlotsBuy FeatureMegawaysHold &amp; WinNew GamesLive Casinochevron_rightLobbyRouletteBlackjackBaccaratGame ShowsDiceVIP TablesSportschevron_rightLobbyMy BetsLiveUpcoming EventsFavouritesSoccerBasketballIce HockeyTennisFifaEsportschevron_rightLobbyMy BetsLiveUpcoming EventsFavouritesCounter-StrikeLeague of LegendsDota 2FifaNBA2KPromotionschevron_rightCasinoSportsAll PromotionsSponsorshipslanguageEnglish (en)Download App&lt; All Promotions Betpanda Priority Club Betpanda XP Club Join the Club and earn XP every time you play. Track your progress in the “VIP Level” section and unlock rewards at every level. * All level-up rewards are paid the following morning after levelling up at 08.00 UTC. Max Your XP Max Your XP Different games, different gains — earn XP round by round. Game Type Minimum bet/round XP Gained Slots1 EUR10 XP Blackjack1 EUR1 XP Roulette1 EUR1 XP Poker-0 XP Provably Fair-0 XP Baccarat-0 XP Table Games-0 XP Sports Betting-0 XP Betpanda Priority Club Level Up &amp; Win Every Betpanda player is part of the XP Club from day one. As you climb the levels, you’ll unlock a steady stream of rewards tailored to your playstyle, including free rounds, free bets, and cashback. VIP players invited by our team automatically receive boosted level up rewards, with higher-value spins and enhanced payouts at every tier. From the Majestic Panda level and above, sportsbook-first players receive free bets instead of free spins. Your XP Roadmap Your XP Roadmap XP Level XP Free Spins Panda Cub Panda Cub II12 50010 Panda Cub III25 00010 Panda Cub IV37 50010 Panda Cub V50 00010 Bamboo Guardian Bamboo Guardian I62 50020 Bamboo Guardian II100 00020 Bamboo Guardian III137 50020 Bamboo Guardian IV175 00020 Bamboo Guardian V212 50020 Majestic Panda Majestic Panda I250 00030 Majestic Panda II450 00030 Majestic Panda III650 00030 Majestic Panda IV850 00030 Majestic P ... [truncated]</pre></details>
+  </article>
+<article class="activity-card detail-ok">
+    <div class="activity-head">
+      <span class="index">8</span>
+      <div>
+        <h2>Monday Freebet </h2>
+        <p>免费投注 / Free Bet · <span class="detail-pill ok-pill">详情页已采集 / Detail captured</span></p>
+      </div>
+    </div>
+<a class="detail-shot-link" href="../../detail-screenshots/betpanda/betpanda-https-betpanda-partners-en-promo-monday-freebet.png"><img class="detail-shot" src="../../detail-screenshots/betpanda/betpanda-https-betpanda-partners-en-promo-monday-freebet.png" alt="Monday Freebet detail screenshot"></a>
+    <dl>
+      <div><dt>要求 / Requirements</dt><dd>odds for free bet usage range from 1.70 to 9.99. The total free bet amount is based o</dd></div>
+      <div><dt>触发条件 / Trigger</dt><dd>用户达到指定投注额或流水触发</dd></div>
+      <div><dt>奖励方式 / Reward</dt><dd>$5; $10; $20; $50; $100; $500; $1,000; $5,000</dd></div>
+      <div><dt>目标用户 / Who</dt><dd>新注册/首充用户；VIP 或高价值活跃用户；Casino/Slots 用户</dd></div>
+      <div><dt>时间 / When</dt><dd>ated as the total amount wagered minus total winnings.;  ate the promotion at its sole discretion. Any changes will be reflected in the terms and conditions.</dd></div>
+      <div><dt>Summary / 总结</dt><dd>Monday Freebet 面向新注册/首充用户；VIP 或高价值活跃用户；Casino/Slots 用户，通过“用户达到指定投注额或流水触发”推动用户完成关键行为；奖励为 $5; $10; $20; $50; $100; $500; $1,000; $5,000。主要参与要求：odds for free bet usage range from 1.70 to 9.99. The total free bet amount is based o。</dd></div>
+      <div><dt>核心目的 / Objective</dt><dd>提升留存、降低流失感知并延长生命周期</dd></div>
+      <div><dt>数据预期 / Expected Data</dt><dd>提升留存、降低流失感知并延长生命周期；预期观察：投注额、投注单量、有效投注用户数上升；Casino DAU、游戏启动次数、免费旋转转付费率上升；复玩率、留存率、VIP 活跃和净收入稳定性提升。</dd></div>
+      <div><dt>详情页来源 / Detail Source</dt><dd><a href="https://betpanda.partners/en/promo/monday-freebet">https://betpanda.partners/en/promo/monday-freebet</a></dd></div>
+    </dl>
+<details class="detail-excerpt"><summary>详情页原文摘要 / Detail excerpt</summary><pre>You need to enable JavaScript to run this app. menumenu Weekly Cashback in2DAYS9HRS41MIN58SECCasinochevron_rightLobbyOriginalsJackpotProvably FairTable GamesGrid SlotsBuy FeatureMegawaysHold &amp; WinNew GamesLive Casinochevron_rightLobbyRouletteBlackjackBaccaratGame ShowsDiceVIP TablesSportschevron_rightLobbyMy BetsLiveUpcoming EventsFavouritesSoccerBasketballIce HockeyTennisFifaEsportschevron_rightLobbyMy BetsLiveUpcoming EventsFavouritesCounter-StrikeLeague of LegendsDota 2FifaNBA2KPromotionschevron_rightCasinoSportsAll PromotionsSponsorshipslanguageEnglish (en)Download App&lt; All Promotions Betpanda XP Club Your Weekly Freebet Did you have a rough streak last week? Don't worry! Based on your sports betting results from the previous 7 days, we’ll credit you with a free bet every Monday. * Paid every Monday at 13:00 UTC, this weekly campaign rewards you for bets placed between Monday 00:01 and Sunday 23:59 UTC. Bet Now Betpanda Priority Club How to Qualify All your real money sportsbook bets placed and settled within the promotional period count towards the Monday Free Bet promotion. Betpanda Priority Club Free Bet Tiers Tier Net Loss Reward Tier 1 €50 $5 Free Bet Tier 2 €100 $10 as Free Bets Tier 3 €200 $20 as Free Bets Tier 4 €500 $50 as Free Bets Tier 5 €1,000 $100 as Free Bets Tier 6 €5,000 $500 as Free Bets Tier 7 €10,000 $1,000 as Free Bets Tier 8 €50,000 $5,000 as Free Bets Betpanda Priority Club Terms &amp; Conditions Promotional Period: The Monday Free Bet promotion runs from Monday at 00:01 UTC to Sunday at 23:59 UTC each week. Free bets are credited on Mondays by 13:00 UTC. Eligibility: The promotion is open to all registered players on Betpanda. Each player is eligible for one free bet per promotional period, depending on the tier reached. Qualifying Bets: Only bets placed and settled within the promotional period count towards the free bet calculation. Cashed-out bets and bets placed using free bets do not qualify for this promotion. Net Loss Calculation and Free ... [truncated]</pre></details>
+  </article>
+<article class="activity-card detail-ok">
+    <div class="activity-head">
+      <span class="index">9</span>
+      <div>
+        <h2>Weekly Tournament </h2>
+        <p>竞赛或抽奖 / Tournament or Raffle · <span class="detail-pill ok-pill">详情页已采集 / Detail captured</span></p>
+      </div>
+    </div>
+<a class="detail-shot-link" href="../../detail-screenshots/betpanda/betpanda-https-betpanda-partners-en-promo-weekly-tournament.png"><img class="detail-shot" src="../../detail-screenshots/betpanda/betpanda-https-betpanda-partners-en-promo-weekly-tournament.png" alt="Weekly Tournament detail screenshot"></a>
+    <dl>
+      <div><dt>要求 / Requirements</dt><dd>odds of 1.50+ count. Cashed-out, comboboost, cancelled, or refunded bets do not quali</dd></div>
+      <div><dt>触发条件 / Trigger</dt><dd>用户在指定赛事/玩法下注触发</dd></div>
+      <div><dt>奖励方式 / Reward</dt><dd>$30,000; $7,000; $5,000; $3,000; $2,000; $1,500; $1,200; $1,000</dd></div>
+      <div><dt>目标用户 / Who</dt><dd>新注册/首充用户；VIP 或高价值活跃用户；Casino/Slots 用户</dd></div>
+      <div><dt>时间 / When</dt><dd>ategies, and aim for the top!;  ates in real-time and is accessible in the sportsbook. The previous week's leaderboard stays visible fo</dd></div>
+      <div><dt>Summary / 总结</dt><dd>Weekly Tournament 面向新注册/首充用户；VIP 或高价值活跃用户；Casino/Slots 用户，通过“用户在指定赛事/玩法下注触发”推动用户完成关键行为；奖励为 $30,000; $7,000; $5,000; $3,000; $2,000; $1,500; $1,200; $1,000。主要参与要求：odds of 1.50+ count. Cashed-out, comboboost, cancelled, or refunded bets do not quali。</dd></div>
+      <div><dt>核心目的 / Objective</dt><dd>提升留存、降低流失感知并延长生命周期</dd></div>
+      <div><dt>数据预期 / Expected Data</dt><dd>提升留存、降低流失感知并延长生命周期；预期观察：投注额、投注单量、有效投注用户数上升；Casino DAU、游戏启动次数、免费旋转转付费率上升；复玩率、留存率、VIP 活跃和净收入稳定性提升。</dd></div>
+      <div><dt>详情页来源 / Detail Source</dt><dd><a href="https://betpanda.partners/en/promo/weekly-tournament">https://betpanda.partners/en/promo/weekly-tournament</a></dd></div>
+    </dl>
+<details class="detail-excerpt"><summary>详情页原文摘要 / Detail excerpt</summary><pre>You need to enable JavaScript to run this app. menumenu Weekly Cashback in2DAYS9HRS41MIN53SECCasinochevron_rightLobbyOriginalsJackpotProvably FairTable GamesGrid SlotsBuy FeatureMegawaysHold &amp; WinNew GamesLive Casinochevron_rightLobbyRouletteBlackjackBaccaratGame ShowsDiceVIP TablesSportschevron_rightLobbyMy BetsLiveUpcoming EventsFavouritesSoccerBasketballIce HockeyTennisFifaEsportschevron_rightLobbyMy BetsLiveUpcoming EventsFavouritesCounter-StrikeLeague of LegendsDota 2FifaNBA2KPromotionschevron_rightCasinoSportsAll PromotionsSponsorshipslanguageEnglish (en)Download App&lt; All Promotions Betpanda Sportsbook Tournament Weekly Sports Race Are you ready to make your bets count? Step into the spotlight with our Weekly Sportsbook Tournament, where your winning bets bring you closer to glory and a share of an incredible $30,000 prize pool! *The tournament runs every Friday from 00:01 UTC to Thursday at 23:59 UTC. Bet Now Betpanda Priority Club How It Works Prizes: A total of $30,000 in free bets, distributed among the Top 150 players each week. Payouts: All prizes are credited directly to your account every Friday by 15:00 UTC. Scoring: Earn points based on your total win per bet minus your stake. The bigger your wins, the higher you climb! Betpanda Priority Club Track in Real Time Stay ahead of the competition with our live leaderboard, available directly in the sportsbook. Monitor your position, adjust your strategies, and aim for the top! Betpanda Priority Club Get Started in Seconds Participating is as easy as placing your bets on your favorite sports events. From thrilling live games to the biggest matchups, every winning bet brings you closer to a share of the prize pool. Your XP Roadmap Prize Pool Position Prize 1$7,000 2$5,000 3$3,000 4$2,000 5$1,500 6$1,200 7$1,000 8$900 9$800 10$700 11$600 12$500 13$400 14$300 15–19$200 20–29$100 30–39$75 40–50$50 51–69$30 70–111$20 112–150$10 Play Now Betpanda Priority Club Terms &amp; Conditions Tournament Period: The Weekly Sportsbook Tournament runs from Friday at 00:01 UTC to Thursday at 23:59 UTC every week. Minimum Bet: €5 or the equ ... [truncated]</pre></details>
+  </article>
+<article class="activity-card detail-ok">
+    <div class="activity-head">
+      <span class="index">10</span>
+      <div>
+        <h2>Win Combo <span class="new-badge">今日新增 / New Today</span></h2>
+        <p>体育投注 / Sports Betting · <span class="detail-pill ok-pill">详情页已采集 / Detail captured</span></p>
+      </div>
+    </div>
+<a class="detail-shot-link" href="../../detail-screenshots/betpanda/betpanda-https-betpanda-partners-en-promo-win-combo.png"><img class="detail-shot" src="../../detail-screenshots/betpanda/betpanda-https-betpanda-partners-en-promo-win-combo.png" alt="Win Combo detail screenshot"></a>
+    <dl>
+      <div><dt>要求 / Requirements</dt><dd>odds get bigger with each selection, but also we give you something extra – COMBOBOOS; odds of 1.40.; odds 1.4) can get up to 40% extra.; odds of 1.40 each.; odds do not qualify.</dd></div>
+      <div><dt>触发条件 / Trigger</dt><dd>用户在指定赛事/玩法下注触发</dd></div>
+      <div><dt>奖励方式 / Reward</dt><dd>40% extra</dd></div>
+      <div><dt>目标用户 / Who</dt><dd>新注册/首充用户；VIP 或高价值活跃用户；Casino/Slots 用户</dd></div>
+      <div><dt>时间 / When</dt><dd>ate.</dd></div>
+      <div><dt>Summary / 总结</dt><dd>Win Combo 面向新注册/首充用户；VIP 或高价值活跃用户；Casino/Slots 用户，通过“用户在指定赛事/玩法下注触发”推动用户完成关键行为；奖励为 40% extra。主要参与要求：odds get bigger with each selection, but also we give you something extra – COMBOBOOS; odds of 1.40.; odds 1.4) can get up to 40% extra.; odds of 1.40 each.; odds do not qualify.。</dd></div>
+      <div><dt>核心目的 / Objective</dt><dd>提升留存、降低流失感知并延长生命周期</dd></div>
+      <div><dt>数据预期 / Expected Data</dt><dd>提升留存、降低流失感知并延长生命周期；预期观察：投注额、投注单量、有效投注用户数上升；Casino DAU、游戏启动次数、免费旋转转付费率上升；复玩率、留存率、VIP 活跃和净收入稳定性提升。</dd></div>
+      <div><dt>详情页来源 / Detail Source</dt><dd><a href="https://betpanda.partners/en/promo/win-combo">https://betpanda.partners/en/promo/win-combo</a></dd></div>
+    </dl>
+<details class="detail-excerpt"><summary>详情页原文摘要 / Detail excerpt</summary><pre>You need to enable JavaScript to run this app. menumenu Weekly Cashback in2DAYS9HRS41MIN48SECCasinochevron_rightLobbyOriginalsJackpotProvably FairTable GamesGrid SlotsBuy FeatureMegawaysHold &amp; WinNew GamesLive Casinochevron_rightLobbyRouletteBlackjackBaccaratGame ShowsDiceVIP TablesSportschevron_rightLobbyMy BetsLiveUpcoming EventsFavouritesSoccerBasketballIce HockeyTennisFifaEsportschevron_rightLobbyMy BetsLiveUpcoming EventsFavouritesCounter-StrikeLeague of LegendsDota 2FifaNBA2KPromotionschevron_rightCasinoSportsAll PromotionsSponsorshipslanguageEnglish (en)Download App&lt; All Promotions Betpanda Priority Club Combo Your Way Up Betting on accumulators can get you bigger profits. Not only the odds get bigger with each selection, but also we give you something extra – COMBOBOOST. Betpanda Priority Club Boost Accas by 40% Place an accumulator with 3 or more selections Each selection must have minimum odds of 1.40. The more selections you add, the bigger your boost! Up to 40% extra winnings when you include 14+ selections. Your XP Roadmap Percentage Table Selections Percentage Boost 35% 45% 510% 610% 710% 815% 915% 1020% 1120% 1230% 1330% 14+40% Bet Now Betpanda Terms &amp; Conditions Terms &amp; Conditions Overview: Betting on accumulators pays extra. Each selection increases your percentage boost. Bets with 3+ selections (min odds 1.4) can get up to 40% extra. Eligibility: Available to all sportsbook players. Duration: This promotion runs with no fixed end date. Boost Criteria: Applies to winnings from accumulator bets of 3+ selections with min odds of 1.40 each. Real Money Only: Bonus funds, Free Bets, or enhanced odds do not qualify. Cashed Out Bets: Boost does not apply to fully or partially cashed out bets. Settlement: Boost is paid once all results are confirmed and the bet is settled. Payout: The boost is added to winnings and paid as cash. Voids: Voided selections reduce the total boost. Example: 10-leg bet with 1 void and 9 wins = 15% boost. Early Payout Restriction: Early payout does not apply to bets p ... [truncated]</pre></details>
+  </article>
+<article class="activity-card detail-ok">
+    <div class="activity-head">
+      <span class="index">11</span>
+      <div>
+        <h2>Bet Builder </h2>
+        <p>体育投注 / Sports Betting · <span class="detail-pill ok-pill">详情页已采集 / Detail captured</span></p>
+      </div>
+    </div>
+<a class="detail-shot-link" href="../../detail-screenshots/betpanda/betpanda-https-betpanda-partners-en-promo-bet-builder.png"><img class="detail-shot" src="../../detail-screenshots/betpanda/betpanda-https-betpanda-partners-en-promo-bet-builder.png" alt="Bet Builder detail screenshot"></a>
+    <dl>
+      <div><dt>要求 / Requirements</dt><dd>odds of the Bet Builder</dd></div>
+      <div><dt>触发条件 / Trigger</dt><dd>用户在指定赛事/玩法下注触发</dd></div>
+      <div><dt>奖励方式 / Reward</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>目标用户 / Who</dt><dd>新注册/首充用户；VIP 或高价值活跃用户；Casino/Slots 用户</dd></div>
+      <div><dt>时间 / When</dt><dd>ate your next winning combo.;  ate to the Bet Builder tab.</dd></div>
+      <div><dt>Summary / 总结</dt><dd>Bet Builder 面向新注册/首充用户；VIP 或高价值活跃用户；Casino/Slots 用户，通过“用户在指定赛事/玩法下注触发”推动用户完成关键行为；奖励为 列表页未显示。主要参与要求：odds of the Bet Builder。</dd></div>
+      <div><dt>核心目的 / Objective</dt><dd>提升留存、降低流失感知并延长生命周期</dd></div>
+      <div><dt>数据预期 / Expected Data</dt><dd>提升留存、降低流失感知并延长生命周期；预期观察：投注额、投注单量、有效投注用户数上升；Casino DAU、游戏启动次数、免费旋转转付费率上升；复玩率、留存率、VIP 活跃和净收入稳定性提升。</dd></div>
+      <div><dt>详情页来源 / Detail Source</dt><dd><a href="https://betpanda.partners/en/promo/bet-builder">https://betpanda.partners/en/promo/bet-builder</a></dd></div>
+    </dl>
+<details class="detail-excerpt"><summary>详情页原文摘要 / Detail excerpt</summary><pre>You need to enable JavaScript to run this app. menumenu Weekly Cashback in2DAYS9HRS41MIN43SECCasinochevron_rightLobbyOriginalsJackpotProvably FairTable GamesGrid SlotsBuy FeatureMegawaysHold &amp; WinNew GamesLive Casinochevron_rightLobbyRouletteBlackjackBaccaratGame ShowsDiceVIP TablesSportschevron_rightLobbyMy BetsLiveUpcoming EventsFavouritesSoccerBasketballIce HockeyTennisFifaEsportschevron_rightLobbyMy BetsLiveUpcoming EventsFavouritesCounter-StrikeLeague of LegendsDota 2FifaNBA2KPromotionschevron_rightCasinoSportsAll PromotionsSponsorshipslanguageEnglish (en)Download App&lt; All Promotions Betpanda XP Club BUILD YOUR PERFECT BET At Betpanda, you can combine multiple markets from the same event into one custom bet. Bet Builder gives you a fast, flexible, and tailored betting experience designed around your style and expertise. * Try the Bet Builder today and create your next winning combo. Betpanda Priority Club HOW TO USE IT Open an eligible event and navigate to the Bet Builder tab. Combine multiple markets from the same event, such as totals, 1X2, team stats, player props, and more. Betpanda Priority Club BET BUILDER OVERVIEW Create your Bet Builder by selecting markets within the Bet Builder tab of the event. You can combine multiple markets from the same event into one bet. To win, every selection in your Bet Builder must be predicted correctly. If any selection loses, the entire Bet Builder is settled as a loss. Betpanda Priority Club GOOD TO KNOW Winnings are calculated as stake × total odds of the Bet Builder Bet Builder may be available in selected sports, clearly marked with the Bet Builder tab. Bet Builder bets can be included in combo/system bets, along with other Bet Builder or standard sportsbook selections Build My Next Bet Bet Builder Terms Terms &amp; Conditions Availability: Bet Builder may not be available for all sports, events, or markets. Availability is at the exclusive discretion of the Sportsbook and may be removed or suspended at any time for any reason (e.g. technical issues or integrity concerns). Settlement: T ... [truncated]</pre></details>
+  </article>
+<article class="activity-card detail-limited">
+    <div class="activity-head">
+      <span class="index">12</span>
+      <div>
+        <h2>Sports Cashout </h2>
+        <p>体育投注 / Sports Betting · <span class="detail-pill limited-pill">详情页正文有限 / Limited detail</span></p>
+      </div>
+    </div>
+<a class="detail-shot-link" href="../../detail-screenshots/betpanda/betpanda-https-betpanda-partners-en-promo-sports-cashout.png"><img class="detail-shot" src="../../detail-screenshots/betpanda/betpanda-https-betpanda-partners-en-promo-sports-cashout.png" alt="Sports Cashout detail screenshot"></a>
+    <dl>
+      <div><dt>要求 / Requirements</dt><dd>odds or technical delays (one or more markets in the betslip are suspended/not availa</dd></div>
+      <div><dt>触发条件 / Trigger</dt><dd>用户在指定赛事/玩法下注触发</dd></div>
+      <div><dt>奖励方式 / Reward</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>目标用户 / Who</dt><dd>新注册/首充用户；VIP 或高价值活跃用户；Casino/Slots 用户</dd></div>
+      <div><dt>时间 / When</dt><dd>ate of the game, the original odds, and the probability of the outcome. This amount can be:;  ate-game surprises or unpredictable finishes.</dd></div>
+      <div><dt>Summary / 总结</dt><dd>Sports Cashout 面向新注册/首充用户；VIP 或高价值活跃用户；Casino/Slots 用户，通过“用户在指定赛事/玩法下注触发”推动用户完成关键行为；奖励为 列表页未显示。主要参与要求：odds or technical delays (one or more markets in the betslip are suspended/not availa。</dd></div>
+      <div><dt>核心目的 / Objective</dt><dd>提升留存、降低流失感知并延长生命周期</dd></div>
+      <div><dt>数据预期 / Expected Data</dt><dd>提升留存、降低流失感知并延长生命周期；预期观察：投注额、投注单量、有效投注用户数上升；Casino DAU、游戏启动次数、免费旋转转付费率上升；复玩率、留存率、VIP 活跃和净收入稳定性提升。</dd></div>
+      <div><dt>详情页来源 / Detail Source</dt><dd><a href="https://betpanda.partners/en/promo/sports-cashout">https://betpanda.partners/en/promo/sports-cashout</a></dd></div>
+    </dl>
+<details class="detail-excerpt"><summary>详情页原文摘要 / Detail excerpt</summary><pre>You need to enable JavaScript to run this app. menumenu Weekly Cashback in2DAYS9HRS41MIN38SECCasinochevron_rightLobbyOriginalsJackpotProvably FairTable GamesGrid SlotsBuy FeatureMegawaysHold &amp; WinNew GamesLive Casinochevron_rightLobbyRouletteBlackjackBaccaratGame ShowsDiceVIP TablesSportschevron_rightLobbyMy BetsLiveUpcoming EventsFavouritesSoccerBasketballIce HockeyTennisFifaEsportschevron_rightLobbyMy BetsLiveUpcoming EventsFavouritesCounter-StrikeLeague of LegendsDota 2FifaNBA2KPromotionschevron_rightCasinoSportsAll PromotionsSponsorshipslanguageEnglish (en)Download App&lt; All Promotions Betpanda XP Club Bank Your Profits The cashout feature is a popular betting option that allows you to settle bets before the final outcome of an event. * This feature gives you more control over your bets and helps manage risk or secure profit early. Betpanda Priority Club How It Works When you place a bet on a sporting event, the sportsbook dynamically offers a cashout value based on the current state of the game, the original odds, and the probability of the outcome. This amount can be: Less than the original stake (if the bet is likely to lose), More than the original stake (if the bet is likely to win), or Close to the expected profit (if the bet is balanced or the outcome is near). The cashout value changes in real time and is usually available for both pre-match and in-play/live bets. The entire bet is settled, and the user receives the offered amount. You can check Cashout availability in your MyBets section. Go to Sportsbook Betpanda Priority Club WHEN TO USE IT Locking in Profits: If a bet is winning and you want to secure some returns without waiting until the end. Cutting Losses: If the event is going poorly, you can minimize losses by cashing out a portion of the stake. Avoid Uncertainty: You can avoid late-game surprises or unpredictable finishes. Betpanda Priority Club KEY CONSIDERATIONS Not Always Available: Some markets or bets may not support cashout, especially if there are rapid changes in odds or technical delays (one or more markets i ... [truncated]</pre></details>
+  </article>
+<article class="activity-card detail-limited">
+    <div class="activity-head">
+      <span class="index">13</span>
+      <div>
+        <h2>Weekend Cashrace </h2>
+        <p>返现 / Cashback · <span class="detail-pill limited-pill">详情页正文有限 / Limited detail</span></p>
+      </div>
+    </div>
+<a class="detail-shot-link" href="../../detail-screenshots/betpanda/betpanda-read-more-https-betpanda-partners-en-promo-weekend-cashrace.png"><img class="detail-shot" src="../../detail-screenshots/betpanda/betpanda-read-more-https-betpanda-partners-en-promo-weekend-cashrace.png" alt="Weekend Cashrace detail screenshot"></a>
+    <dl>
+      <div><dt>要求 / Requirements</dt><dd>Cashback in2DAYS9HRS41MIN33SECCasinochevron_rightLobbyOriginalsJackpotProvably FairTable GamesGrid SlotsBuy FeatureMegawaysHold; BetsLiveUpcoming EventsFavouritesSoccerBasketballIce HockeyTennisFifaEsportschevron_rightLobbyMy BetsLiveUpcoming EventsFav; play:none&quot; src=&quot;https://www.facebook.com/tr?id=991738589185829&amp;amp;ev=PageView&amp;amp;noscript=1&quot;&gt;</dd></div>
+      <div><dt>触发条件 / Trigger</dt><dd>用户发生符合条件的亏损或投注行为后按周期触发返现</dd></div>
+      <div><dt>奖励方式 / Reward</dt><dd><span class="missing-text">列表页未显示 / Not shown on listing page</span></dd></div>
+      <div><dt>目标用户 / Who</dt><dd>新注册/首充用户；VIP 或高价值活跃用户；Casino/Slots 用户</dd></div>
+      <div><dt>时间 / When</dt><dd>每周周期</dd></div>
+      <div><dt>Summary / 总结</dt><dd>Weekend Cashrace 面向新注册/首充用户；VIP 或高价值活跃用户；Casino/Slots 用户，通过“用户发生符合条件的亏损或投注行为后按周期触发返现”推动用户完成关键行为；奖励为 列表页未显示。主要参与要求：Cashback in2DAYS9HRS41MIN33SECCasinochevron_rightLobbyOriginalsJackpotProvably FairTable GamesGrid SlotsBuy FeatureMegawaysHold; BetsLiveUpcoming EventsFavouritesSoccerBasketballIce HockeyTennisFifaEsportschevron_rightLobbyMy BetsLiveUpcoming EventsFav; play:none&quot; src=&quot;https://www.facebook.com/tr?id=991738589185829&amp;amp;ev=PageView&amp;amp;noscript=1&quot;&gt;。</dd></div>
+      <div><dt>核心目的 / Objective</dt><dd>提升留存、降低流失感知并延长生命周期</dd></div>
+      <div><dt>数据预期 / Expected Data</dt><dd>提升留存、降低流失感知并延长生命周期；预期观察：投注额、投注单量、有效投注用户数上升；Casino DAU、游戏启动次数、免费旋转转付费率上升；复玩率、留存率、VIP 活跃和净收入稳定性提升。</dd></div>
+      <div><dt>详情页来源 / Detail Source</dt><dd><a href="https://betpanda.partners/en/404">https://betpanda.partners/en/404</a></dd></div>
+    </dl>
+<details class="detail-excerpt"><summary>详情页原文摘要 / Detail excerpt</summary><pre>You need to enable JavaScript to run this app. menumenu Weekly Cashback in2DAYS9HRS41MIN33SECCasinochevron_rightLobbyOriginalsJackpotProvably FairTable GamesGrid SlotsBuy FeatureMegawaysHold &amp; WinNew GamesLive Casinochevron_rightLobbyRouletteBlackjackBaccaratGame ShowsDiceVIP TablesSportschevron_rightLobbyMy BetsLiveUpcoming EventsFavouritesSoccerBasketballIce HockeyTennisFifaEsportschevron_rightLobbyMy BetsLiveUpcoming EventsFavouritesCounter-StrikeLeague of LegendsDota 2FifaNBA2KPromotionschevron_rightCasinoSportsAll PromotionsSponsorshipslanguageEnglish (en)Download App &lt;img height=&quot;1&quot; width=&quot;1&quot; style=&quot;display:none&quot; src=&quot;https://www.facebook.com/tr?id=991738589185829&amp;amp;ev=PageView&amp;amp;noscript=1&quot;&gt; &lt;img src=&quot;https://pixel.everesttech.net/9281/t?ev_Betpanda_Cryptorino_SiteVisitos_ID5=1&amp;amp;ev_transid=&amp;lt;transid&amp;gt;&quot; width=&quot;1&quot; height=&quot;1&quot;&gt; &lt;img src=&quot;//dmp.adform.net/dmp/profile/?pid=12718&amp;amp;sg=BetPanda_AllVisitors&quot; style=&quot;display:none !important&quot;&gt;</pre></details>
+  </article>
+    </section>
+
+    <details class="raw">
+      <summary>查看原始页面文字 / Raw visible text</summary>
+      <pre>You need to enable JavaScript to run this app.
+ 
+ 
+ 
+ menumenu Casinochevron_rightLobbyOriginalsJackpotProvably FairTable GamesGrid SlotsBuy FeatureMegawaysHold &amp; WinNew GamesLive Casinochevron_rightLobbyRouletteBlackjackBaccaratGame ShowsDiceVIP TablesSportschevron_rightLobbyMy BetsLiveUpcoming EventsFavouritesSoccerBasketballIce HockeyTennisFifaEsportschevron_rightLobbyMy BetsLiveUpcoming EventsFavouritesCounter-StrikeLeague of LegendsDota 2FifaNBA2KPromotionschevron_rightCasinoSportsAll PromotionsSponsorshipslanguageEnglish (en)Download AppPromotionsSign-Up OfferUp to 1 BTC in our casino bonus complete the requirement and get rewarded.Read moreExclusive RakebackClimb to Bamboo Guardian and enjoy daily rakeback on every spin.Weekly CashbackGet 10% guaranteed cashback on your real money losses between Wednesdays.Read moreLive Casino Cashback BoostPlay live casino with 5% extra cashback, up to 15% back weekly on Evolution live games.Weekly RafflePlay any slots with real money and collect tickets for a chance to win one of 20 weekly €500 prizes.Get Rewarded For Your PlayPlay as you normally do, and we'll reward you every time you achieve a new level.Read moreGet a Weekly Free BetBased on your sports betting from the previous 7 days, we’ll credit you with a free bet every Monday.Read MoreEarn Points On Your Winning BetsJoin our Weekly Sportsbook Tournament and compete for new prizes every week.Read MoreUnlock Bigger WinsWin bigger and boost your profits with up to 40% with our COMBOBOOST feature.Read MoreBuild Your Perfect BetCombine multiple markets from the same event into one bet to create your next winning combo.Lock your ProfitsCash out at the right time bank profits and stay ahead.Read More
+ 
+
+&lt;img height=&quot;1&quot; width=&quot;1&quot; style=&quot;display:none&quot; src=&quot;https://www.facebook.com/tr?id=991738589185829&amp;amp;ev=PageView&amp;amp;noscript=1&quot;&gt;
+
+&lt;img src=&quot;https://pixel.everesttech.net/9281/t?ev_Betpanda_Cryptorino_SiteVisitos_ID5=1&amp;amp;ev_transid=&amp;lt;transid&amp;gt;&quot; width=&quot;1&quot; height=&quot;1&quot;&gt;
+
+ &lt;img src=&quot;//dmp.adform.net/dmp/profile/?pid=12718&amp;amp;sg=BetPanda_AllVisitors&quot; style=&quot;display:none !important&quot;&gt;</pre>
+    </details>
+  </main>
+</body>
+</html>

@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Campeonbet 活动详情</title>
+  <style>
+    :root { --bg:#f5f6f2; --panel:#fff; --ink:#15201b; --muted:#66736d; --line:#d8ddd4; --green:#0d7658; --blue:#245c9e; --amber:#9a6816; --red:#a54040; --soft:#eef4f0; }
+    * { box-sizing:border-box; }
+    body { margin:0; background:var(--bg); color:var(--ink); font-family:Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; line-height:1.45; }
+    .page { max-width:1280px; margin:0 auto; padding:28px 18px 56px; }
+    .hero { background:var(--panel); border:1px solid var(--line); border-radius:8px; padding:24px; display:grid; grid-template-columns:minmax(0,1fr) 280px; gap:18px; align-items:end; margin-bottom:18px; }
+    .brand-hero { margin-bottom:16px; }
+    .eyebrow { margin:0 0 8px; color:var(--green); font-size:12px; font-weight:800; text-transform:uppercase; letter-spacing:.04em; }
+    h1 { margin:0 0 8px; font-size:32px; line-height:1.12; letter-spacing:0; }
+    h2 { margin:0 0 6px; font-size:18px; letter-spacing:0; }
+    p { margin:0; }
+    .sub, .meta { color:var(--muted); }
+    .status { display:inline-flex; align-items:center; border-radius:999px; padding:3px 8px; font-size:12px; font-weight:800; white-space:nowrap; }
+    .ok { color:var(--green); background:#e5f3ed; }
+    .mid { color:var(--amber); background:#fff4df; }
+    .blue { color:var(--blue); background:#e9f0fb; }
+    .low { color:var(--red); background:#faeeee; }
+    .meta { background:#f8faf7; border:1px solid var(--line); border-radius:8px; padding:14px; }
+    .meta b { display:inline-block; min-width:92px; color:var(--ink); }
+    .brand-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:14px; }
+    .brand-card { display:grid; grid-template-columns:220px minmax(0,1fr); gap:14px; padding:14px; color:var(--ink); text-decoration:none; background:var(--panel); border:1px solid var(--line); border-radius:8px; }
+    .brand-card img, .visual img { width:100%; border:1px solid var(--line); border-radius:8px; background:#edf0ea; object-fit:cover; }
+    .brand-card img { aspect-ratio:16/10; }
+    .brand-card span { display:inline-flex; margin-top:10px; color:var(--blue); font-weight:700; }
+    .new-badge { display:inline-flex; align-items:center; border-radius:999px; background:#fff4df; color:#9a6816; padding:3px 8px; font-size:12px; font-weight:800; margin-left:6px; vertical-align:middle; }
+    .topnav { margin-bottom:12px; }
+    .topnav a { color:var(--blue); font-weight:700; text-decoration:none; }
+    .visual { background:var(--panel); border:1px solid var(--line); border-radius:8px; padding:14px; margin-bottom:16px; }
+    .visual img { max-height:520px; object-fit:contain; }
+    .activity-list { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:14px; }
+    .activity-card { background:var(--panel); border:1px solid var(--line); border-radius:8px; padding:16px; }
+    .activity-card.detail-ok { border-left:4px solid var(--green); }
+    .activity-card.detail-limited { border-left:4px solid var(--amber); }
+    .activity-card.detail-missing { border-left:4px solid #a8b1ac; }
+    .activity-head { display:grid; grid-template-columns:36px minmax(0,1fr); gap:10px; align-items:start; margin-bottom:12px; }
+    .index { display:inline-grid; place-items:center; width:30px; height:30px; border-radius:999px; background:var(--soft); color:var(--green); font-weight:800; }
+    .detail-shot-link { display:block; margin:8px 0 12px; }
+    .detail-shot { width:100%; max-height:360px; object-fit:cover; object-position:top; border:1px solid var(--line); border-radius:8px; background:#edf0ea; }
+    dl { display:grid; gap:8px; margin:0; }
+    dl div { display:grid; grid-template-columns:150px minmax(0,1fr); gap:10px; border-top:1px solid var(--line); padding-top:8px; }
+    dt { color:var(--muted); font-size:12px; font-weight:800; }
+    dd { margin:0; font-size:13px; }
+    .missing-text { color:var(--muted); }
+    .detail-pill { display:inline-flex; align-items:center; border-radius:999px; padding:3px 8px; font-size:12px; font-weight:800; }
+    .ok-pill { background:#e5f3ed; color:var(--green); }
+    .limited-pill { background:#fff4df; color:var(--amber); }
+    .fallback-pill { background:#eef0ea; color:var(--muted); }
+    .detail-excerpt { margin-top:12px; border-top:1px solid var(--line); padding-top:10px; }
+    .detail-excerpt summary { cursor:pointer; color:var(--blue); font-weight:800; }
+    .raw { background:var(--panel); border:1px solid var(--line); border-radius:8px; padding:14px; margin-top:16px; }
+    pre { white-space:pre-wrap; word-break:break-word; background:#111714; color:#eef6f0; padding:12px; border-radius:8px; max-height:320px; overflow:auto; font-size:12px; }
+    a { color:var(--blue); }
+    @media (max-width:900px) { .hero, .brand-grid, .brand-card, .activity-list { grid-template-columns:1fr; } h1 { font-size:27px; } dl div { grid-template-columns:1fr; } }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <nav class="topnav"><a href="../index.html">返回品牌入口 / Back to brands</a></nav>
+    <section class="hero brand-hero">
+      <div>
+        <p class="eyebrow">Brand Promotion Page</p>
+        <h1>Campeonbet</h1>
+        <p class="sub">来源 Source：<a href="https://campeonbet.io/promotions?modal=WyJwcm9tb3Rpb25zIiwiMCJd">https://campeonbet.io/promotions?modal=WyJwcm9tb3Rpb25zIiwiMCJd</a></p>
+        <p class="sub">本页优先使用活动详情页 full-page screenshot 与可见正文，输出要求、Trigger、Reward、Who、When、Summary、核心目的和数据预期。</p>
+        <p class="sub"><span class="status ok">可访问 / OK</span></p>
+      </div>
+      <div class="meta">
+        <b>活动 Activities</b>1<br>
+        <b>详情 Details</b>1<br>
+        <b>详情截图 Shots</b>1<br>
+        <b>状态 Status</b>ok
+      </div>
+    </section>
+
+    <section class="visual">
+      <img src="../../browser-screenshots/campeonbet-campeonbet-promotions.png" alt="Campeonbet screenshot">
+    </section>
+
+    <section class="activity-list">
+      <article class="activity-card detail-ok">
+    <div class="activity-head">
+      <span class="index">1</span>
+      <div>
+        <h2>​Welcome Casino PackageStart with 350% up to €2000 &amp; 1000 FS </h2>
+        <p>返现 / Cashback · <span class="detail-pill ok-pill">详情页已采集 / Detail captured</span></p>
+      </div>
+    </div>
+<a class="detail-shot-link" href="../../detail-screenshots/campeonbet/campeonbet-promotions-https-campeonbet-io-promotions.png"><img class="detail-shot" src="../../detail-screenshots/campeonbet/campeonbet-promotions-https-campeonbet-io-promotions.png" alt="​Welcome Casino PackageStart with 350% up to €2000 &amp; 1000 FS detail screenshot"></a>
+    <dl>
+      <div><dt>要求 / Requirements</dt><dd>odds every dayLearn moreEarly Payout FootballWin early if your team is two goals ahea</dd></div>
+      <div><dt>触发条件 / Trigger</dt><dd>新用户注册并完成首充触发</dd></div>
+      <div><dt>奖励方式 / Reward</dt><dd>25% Cashback</dd></div>
+      <div><dt>目标用户 / Who</dt><dd>新注册/首充用户；VIP 或高价值活跃用户；Casino/Slots 用户</dd></div>
+      <div><dt>时间 / When</dt><dd>ate your own bet combination!Learn moreGeneral Bonus T&amp;CsAbout UsTerms &amp; ConditionsPrivacy policyFAQRes;  ated by Green Champions Leader SRL, registration number: 3-102-917157, registered address: Costa Rica,</dd></div>
+      <div><dt>Summary / 总结</dt><dd>​Welcome Casino PackageStart with 350% up to €2000 &amp; 1000 FS 面向新注册/首充用户；VIP 或高价值活跃用户；Casino/Slots 用户，通过“新用户注册并完成首充触发”推动用户完成关键行为；奖励为 25% Cashback。主要参与要求：odds every dayLearn moreEarly Payout FootballWin early if your team is two goals ahea。</dd></div>
+      <div><dt>核心目的 / Objective</dt><dd>拉新与首充转化</dd></div>
+      <div><dt>数据预期 / Expected Data</dt><dd>拉新与首充转化；预期观察：注册到首充转化率、首存金额、首周留存上升；充值次数、充值金额、Bonus claim rate 上升；投注额、投注单量、有效投注用户数上升。</dd></div>
+      <div><dt>详情页来源 / Detail Source</dt><dd><a href="https://campeonbet.io/promotions?modal=WyJwcm9tb3Rpb25zIiwiMCJd">https://campeonbet.io/promotions?modal=WyJwcm9tb3Rpb25zIiwiMCJd</a></dd></div>
+    </dl>
+<details class="detail-excerpt"><summary>详情页原文摘要 / Detail excerpt</summary><pre>SportsLive sportsCasinoLive casinoPromotionsVIP ClubenLoginRegisterPromotionsALLCASINOSPORTSWelcome Casino PackageStart with 350% up to €2000 &amp; 1000 FSLearn moreCampeonbet is shortlistedOne vote brings €20 Free Bet &amp; 150 FS!Learn moreDrops &amp; Wins - 2026 EditionClaim your share of €25.000.000!Learn moreRewards Every Sunday€25,000 from Playson &amp; Booongo GamesLearn moreSeason of Legends by Evoplay€512,000 in total prizesLearn moreSpinoleague 2026 by Spinomenal!€12,000,000 in cash prizesLearn moreKash Drops by Kalamba Games€10,000,000 total prizes!Learn moreWelcome Sports BonusBoost your bets with a 100% up to €100 Bonus!Learn moreWelcome Sports FreebetKick off with a €25 Freebet!Learn moreWelcome Crypto COMBO150% Crypto Bonus up to 1 BTC &amp; 150 FS!Learn moreMonday's Reload Bonus100% Casino Reload Bonus lined up for you!Learn moreTuesday on the reels1000 FS to spin you around!Learn moreWednesday's double funGet €5 Live Casino Bonus &amp; 150 FSLearn moreLive Casino Thursday25% Cashback to fuel more action!Learn moreFriday's Free SpinsLet 350 FS kick off the funLearn moreSaturday's action is LIVE100% Live Casino Reload Bonus up to €150Learn moreSunday's Spinning Treat350 Free Spins up for grabs!Learn more100% Crypto BonusUnlock a Crypto Bonus of up to 1 BTC!Learn moreWeekend Sports Reload BonusEnjoy all the weekend sports action with a 50% up to up to €100 Sports Reload!Learn moreMidweek Sports Reload Cheer with a 50% up to €100 Reload!Learn moreAccumulator BoostBoost you winning betLearn more3+1 Every 4th bet is freeBetting on sports is more exciting with our unmatched '3+1' offer!Learn more0% MarginThe best odds every dayLearn moreEarly Payout FootballWin early if your team is two goals ahead!Learn moreEarly Payout BasketballWin your bet early if your team leads by 20 points at any stage of the match!Learn moreEarly Payout TennisWin your bet early if your player is leading by a set and a break at any point in the match!Learn moreEarly Payout Ice HockeyWin your bet early if your team leads by 3 goals at any stage of the match!Learn moreEarly Payout VolleyballWin your bet early if your team takes a 12-point lead in any set at any stage of the match!Lea ... [truncated]</pre></details>
+  </article>
+    </section>
+
+    <details class="raw">
+      <summary>查看原始页面文字 / Raw visible text</summary>
+      <pre>SportsLive sportsCasinoLive casinoPromotionsVIP ClubenLoginRegisterPromotionsALLCASINOSPORTSWelcome Casino PackageStart with 350% up to €2000 &amp; 1000 FSLearn moreCampeonbet is shortlistedOne vote brings €20 Free Bet &amp; 150 FS!Learn moreDrops &amp; Wins - 2026 EditionClaim your share of €25.000.000!Learn moreRewards Every Sunday€25,000 from Playson &amp; Booongo GamesLearn moreSeason of Legends by Evoplay€512,000 in total prizesLearn moreSpinoleague 2026 by Spinomenal!€12,000,000 in cash prizesLearn moreKash Drops by Kalamba Games€10,000,000 total prizes!Learn moreWelcome Sports BonusBoost your bets with a 100% up to €100 Bonus!Learn moreWelcome Sports FreebetKick off with a €25 Freebet!Learn moreWelcome Crypto COMBO150% Crypto Bonus up to 1 BTC &amp; 150 FS!Learn moreMonday's Reload Bonus100% Casino Reload Bonus lined up for you!Learn moreTuesday on the reels1000 FS to spin you around!Learn moreWednesday's double funGet €5 Live Casino Bonus &amp; 150 FSLearn moreLive Casino Thursday25% Cashback to fuel more action!Learn moreFriday's Free SpinsLet 350 FS kick off the funLearn moreSaturday's action is LIVE100% Live Casino Reload Bonus up to €150Learn moreSunday's Spinning Treat350 Free Spins up for grabs!Learn more100% Crypto BonusUnlock a Crypto Bonus of up to 1 BTC!Learn moreWeekend Sports Reload BonusEnjoy all the weekend sports action with a 50% up to up to €100 Sports Reload!Learn moreMidweek Sports Reload Cheer with a 50% up to €100 Reload!Learn moreAccumulator BoostBoost you winning betLearn more3+1 Every 4th bet is freeBetting on sports is more exciting with our unmatched '3+1' offer!Learn more0% MarginThe best odds every dayLearn moreEarly Payout FootballWin early if your team is two goals ahead!Learn moreEarly Payout BasketballWin your bet early if your team leads by 20 points at any stage of the match!Learn moreEarly Payout TennisWin your bet early if your player is leading by a set and a break at any point in the match!Learn moreEarly Payout Ice HockeyWin your bet early if your team leads by 3 goals at any stage of the match!Learn moreEarly Payout VolleyballWin your bet early if your team takes a 12-point lead in any set at any stage of the match!Learn moreEarly Payout American FootballWin your bet early if your team leads by 17 points at any stage of the match!Learn moreRugby Early PayoutBet pays early if your team takes a 12+ point lead!Learn moreEarly Payout BaseballWin your bet early if your team takes a 5-run lead at any point in the match!Learn moreBore Draw BonusMake 0-0 your favourite match result!Learn moreBet BuilderCreate your own bet combination!Learn moreGeneral Bonus T&amp;CsAbout UsTerms &amp; ConditionsPrivacy policyFAQResponsible Gaming &amp; Self-Exclusion PolicyContact usKYC &amp; AML PoliciesUnderage Gaming PolicySport Betting RulesPayments &amp; WithdrawalsShow allcampeonbet.io is owned and operated by Green Champions Leader SRL, registration number: 3-102-917157, registered address: Costa Rica, San José, Montes de Oca, San Pedro, Los Yoses, Avenidas Ocho y Diez, Calle Treinta y Nueve, LY Center. Contact us [support@campeonbet.io]. campeonbet.io is licensed and regulated by the Government of the Autonomous Island of Anjouan, Union of Comoros and operates under License ALSI-202502014-FI1. Payment processor is Widoma Trading Co. Limited (reg. nr. HE 468781) a company having its registered address at Lefkonos 22, 2nd floor, Strovolos 2064, Nicosia, Cyprus. campeonbet.io has passed all regulatory compliance and is legally authorized to conduct gaming operations for any and all games of chance and wagering.© 2026 Campeonbet | All rights reserved.Gambling can be addictive
+ 
+
+ 
+
+ 
+ 
+
+​Welcome Casino PackageStart with 350% up to €2000 &amp; 1000 FS
+ Make the most of your Welcome Casino Package with up to €2000 in Casino Bonuses and 1000 Free Spins on &quot;Bigger Bass Splash&quot; across your first three deposits!
+ •125% 1st Deposit Casino Bonus up to €750 &amp; 250 FS
+ •100% 2nd Deposit Casino Bonus up to €750 &amp; 250 FS
+ •125% 3rd Deposit Casino Bonus up to €500 &amp; 500 FS
+ How it works:
+ 
+ 
+ 1 Choose your preferred payment option
+ 2 Select this offer from the drop-down list and
+ 3 Deposit €25 or more
+ 4 Repeat the process to unlock your next Bonus &amp; FS
+ 
+ 
+ 
+ 
+ DEPOSIT NOW 
+ 
+ 
+ Terms &amp; Conditions
+
+1. Only new players are eligible for the bonus. Each player is eligible for this promotion only once and only on the first 3 deposits.
+
+2. On your first deposit, to claim the 125% up to €750 Deposit Bonus &amp; 250 FS, select the following from the drop-down list: &quot;125% 1st Deposit Casino Bonus up to €750 &amp; 250 FS on Bigger Bass Splash&quot;.
+
+3. On your second deposit, to claim the 100% up to €750 Deposit Bonus &amp; 250 FS, select the following from the drop-down list: &quot;100% 2nd Deposit Casino Bonus up to €750 &amp; 250 FS on Bigger Bass Splash&quot;.
+
+4. On your third deposit, to claim the 125% up to €500 Deposit Bonus &amp; 500 FS, select the following from the drop-down list: &quot;125% 3rd Deposit Casino Bonus up to €500 &amp; 500 FS on Bigger Bass Splash&quot;.
+
+5. Minimum deposit required for the Welcome Casino Package Bonuses is €25.
+
+6. The maximum Deposit Bonus a player may receive on their 1st Deposit is €750 and 250 Free Spins.
+
+7. The maximum Deposit Bonus a player may receive on their 2nd Deposit is €750 and 250 Free Spins.
+
+8. The maximum Deposit Bonus a player may receive on their 3rd Deposit is €500 and 500 Free Spins.
+
+9. The Free Spins are awarded on the slot &quot;Bigger Bass Splash&quot; (value per spin €0.10).
+
+10. Welcome Casino Package Bonuses are subject to wagering requirement of x30 times both on the deposit and Bonus amounts.
+
+11. The Free Spins winnings should be wagered x30 times before players are eligible to withdraw funds.
+
+12. Once you activate a Casino Bonus from the Welcome Package, you have 30 days to complete the wagering requirement otherwise wagered amount, bonus and any generated winnings will be forfeit.
+
+13. The Free Spins are valid for 7 days from the time that they have been activated. All unused Freespins will be lost.
+
+14. General T&amp;Cs apply.
+
+15. In case of discrepancy, the English version shall prevail.</pre>
+    </details>
+  </main>
+</body>
+</html>

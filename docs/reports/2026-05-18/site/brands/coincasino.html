@@ -1,0 +1,378 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CoinCasino 活动详情</title>
+  <style>
+    :root { --bg:#f5f6f2; --panel:#fff; --ink:#15201b; --muted:#66736d; --line:#d8ddd4; --green:#0d7658; --blue:#245c9e; --amber:#9a6816; --red:#a54040; --soft:#eef4f0; }
+    * { box-sizing:border-box; }
+    body { margin:0; background:var(--bg); color:var(--ink); font-family:Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; line-height:1.45; }
+    .page { max-width:1280px; margin:0 auto; padding:28px 18px 56px; }
+    .hero { background:var(--panel); border:1px solid var(--line); border-radius:8px; padding:24px; display:grid; grid-template-columns:minmax(0,1fr) 280px; gap:18px; align-items:end; margin-bottom:18px; }
+    .brand-hero { margin-bottom:16px; }
+    .eyebrow { margin:0 0 8px; color:var(--green); font-size:12px; font-weight:800; text-transform:uppercase; letter-spacing:.04em; }
+    h1 { margin:0 0 8px; font-size:32px; line-height:1.12; letter-spacing:0; }
+    h2 { margin:0 0 6px; font-size:18px; letter-spacing:0; }
+    p { margin:0; }
+    .sub, .meta { color:var(--muted); }
+    .status { display:inline-flex; align-items:center; border-radius:999px; padding:3px 8px; font-size:12px; font-weight:800; white-space:nowrap; }
+    .ok { color:var(--green); background:#e5f3ed; }
+    .mid { color:var(--amber); background:#fff4df; }
+    .blue { color:var(--blue); background:#e9f0fb; }
+    .low { color:var(--red); background:#faeeee; }
+    .meta { background:#f8faf7; border:1px solid var(--line); border-radius:8px; padding:14px; }
+    .meta b { display:inline-block; min-width:92px; color:var(--ink); }
+    .brand-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:14px; }
+    .brand-card { display:grid; grid-template-columns:220px minmax(0,1fr); gap:14px; padding:14px; color:var(--ink); text-decoration:none; background:var(--panel); border:1px solid var(--line); border-radius:8px; }
+    .brand-card img, .visual img { width:100%; border:1px solid var(--line); border-radius:8px; background:#edf0ea; object-fit:cover; }
+    .brand-card img { aspect-ratio:16/10; }
+    .brand-card span { display:inline-flex; margin-top:10px; color:var(--blue); font-weight:700; }
+    .new-badge { display:inline-flex; align-items:center; border-radius:999px; background:#fff4df; color:#9a6816; padding:3px 8px; font-size:12px; font-weight:800; margin-left:6px; vertical-align:middle; }
+    .topnav { margin-bottom:12px; }
+    .topnav a { color:var(--blue); font-weight:700; text-decoration:none; }
+    .visual { background:var(--panel); border:1px solid var(--line); border-radius:8px; padding:14px; margin-bottom:16px; }
+    .visual img { max-height:520px; object-fit:contain; }
+    .activity-list { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:14px; }
+    .activity-card { background:var(--panel); border:1px solid var(--line); border-radius:8px; padding:16px; }
+    .activity-card.detail-ok { border-left:4px solid var(--green); }
+    .activity-card.detail-limited { border-left:4px solid var(--amber); }
+    .activity-card.detail-missing { border-left:4px solid #a8b1ac; }
+    .activity-head { display:grid; grid-template-columns:36px minmax(0,1fr); gap:10px; align-items:start; margin-bottom:12px; }
+    .index { display:inline-grid; place-items:center; width:30px; height:30px; border-radius:999px; background:var(--soft); color:var(--green); font-weight:800; }
+    .detail-shot-link { display:block; margin:8px 0 12px; }
+    .detail-shot { width:100%; max-height:360px; object-fit:cover; object-position:top; border:1px solid var(--line); border-radius:8px; background:#edf0ea; }
+    dl { display:grid; gap:8px; margin:0; }
+    dl div { display:grid; grid-template-columns:150px minmax(0,1fr); gap:10px; border-top:1px solid var(--line); padding-top:8px; }
+    dt { color:var(--muted); font-size:12px; font-weight:800; }
+    dd { margin:0; font-size:13px; }
+    .missing-text { color:var(--muted); }
+    .detail-pill { display:inline-flex; align-items:center; border-radius:999px; padding:3px 8px; font-size:12px; font-weight:800; }
+    .ok-pill { background:#e5f3ed; color:var(--green); }
+    .limited-pill { background:#fff4df; color:var(--amber); }
+    .fallback-pill { background:#eef0ea; color:var(--muted); }
+    .detail-excerpt { margin-top:12px; border-top:1px solid var(--line); padding-top:10px; }
+    .detail-excerpt summary { cursor:pointer; color:var(--blue); font-weight:800; }
+    .raw { background:var(--panel); border:1px solid var(--line); border-radius:8px; padding:14px; margin-top:16px; }
+    pre { white-space:pre-wrap; word-break:break-word; background:#111714; color:#eef6f0; padding:12px; border-radius:8px; max-height:320px; overflow:auto; font-size:12px; }
+    a { color:var(--blue); }
+    @media (max-width:900px) { .hero, .brand-grid, .brand-card, .activity-list { grid-template-columns:1fr; } h1 { font-size:27px; } dl div { grid-template-columns:1fr; } }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <nav class="topnav"><a href="../index.html">返回品牌入口 / Back to brands</a></nav>
+    <section class="hero brand-hero">
+      <div>
+        <p class="eyebrow">Brand Promotion Page</p>
+        <h1>CoinCasino</h1>
+        <p class="sub">来源 Source：<a href="https://www.coincasino.com/en/promotions">https://www.coincasino.com/en/promotions</a></p>
+        <p class="sub">本页优先使用活动详情页 full-page screenshot 与可见正文，输出要求、Trigger、Reward、Who、When、Summary、核心目的和数据预期。</p>
+        <p class="sub"><span class="status ok">可访问 / OK</span></p>
+      </div>
+      <div class="meta">
+        <b>活动 Activities</b>9<br>
+        <b>详情 Details</b>9<br>
+        <b>详情截图 Shots</b>9<br>
+        <b>状态 Status</b>ok
+      </div>
+    </section>
+
+    <section class="visual">
+      <img src="../../browser-screenshots/coincasino-coincasino-promotions.png" alt="CoinCasino screenshot">
+    </section>
+
+    <section class="activity-list">
+      <article class="activity-card detail-ok">
+    <div class="activity-head">
+      <span class="index">1</span>
+      <div>
+        <h2>Jump into the action in three simple steps: </h2>
+        <p>充值或欢迎奖励 / Deposit or Welcome Bonus · <span class="detail-pill ok-pill">详情页已采集 / Detail captured</span></p>
+      </div>
+    </div>
+<a class="detail-shot-link" href="../../detail-screenshots/coincasino/coincasino-read-more-https-www-coincasino-com-en-promotions-welcome-offer.png"><img class="detail-shot" src="../../detail-screenshots/coincasino/coincasino-read-more-https-www-coincasino-com-en-promotions-welcome-offer.png" alt="Jump into the action in three simple steps: detail screenshot"></a>
+    <dl>
+      <div><dt>要求 / Requirements</dt><dd>PlayMy BetsFavouritesVIP ClubPromotionsTelegram CasinoBuy CryptoHelpDownload CoinPokerLog inSign upWelcome to CoinCasino!Get; deposit bonus is here to boost your experience with rewards worth up to $30,000, plus Super Spins!How to Claim Your Welcome Off; Deposit of $10 or More:Choose your deposit amount to activate your bonus.</dd></div>
+      <div><dt>触发条件 / Trigger</dt><dd>新用户注册并完成首充触发</dd></div>
+      <div><dt>奖励方式 / Reward</dt><dd>200% bonus; $30,000; $30,000,; $10; $99.99; $0.20; $100; $249.99</dd></div>
+      <div><dt>目标用户 / Who</dt><dd>新注册/首充用户；VIP 或高价值活跃用户；Casino/Slots 用户</dd></div>
+      <div><dt>时间 / When</dt><dd>ate or Log in to Your Account:Already registered? Log in and head to the Cashier.;  ate your bonus.</dd></div>
+      <div><dt>Summary / 总结</dt><dd>Jump into the action in three simple steps: 面向新注册/首充用户；VIP 或高价值活跃用户；Casino/Slots 用户，通过“新用户注册并完成首充触发”推动用户完成关键行为；奖励为 200% bonus; $30,000; $30,000,; $10; $99.99; $0.20; $100; $249.99。主要参与要求：PlayMy BetsFavouritesVIP ClubPromotionsTelegram CasinoBuy CryptoHelpDownload CoinPokerLog inSign upWelcome to CoinCasino!Get; deposit bonus is here to boost your experience with rewards worth up to $30,000, plus Super Spins!How to Claim Your Welcome Off; Deposit of $10 or More:Choose your deposit amount to activate your bonus.。</dd></div>
+      <div><dt>核心目的 / Objective</dt><dd>拉新与首充转化</dd></div>
+      <div><dt>数据预期 / Expected Data</dt><dd>拉新与首充转化；预期观察：注册到首充转化率、首存金额、首周留存上升；充值次数、充值金额、Bonus claim rate 上升；投注额、投注单量、有效投注用户数上升。</dd></div>
+      <div><dt>详情页来源 / Detail Source</dt><dd><a href="https://www.coincasino.com/en/promotions/welcome-offer">https://www.coincasino.com/en/promotions/welcome-offer</a></dd></div>
+    </dl>
+<details class="detail-excerpt"><summary>详情页原文摘要 / Detail excerpt</summary><pre>CasinoSportsCasinoSlotsLive CasinoGame ShowsCasual GamesSportsIn PlayMy BetsFavouritesVIP ClubPromotionsTelegram CasinoBuy CryptoHelpDownload CoinPokerLog inSign upWelcome to CoinCasino!Get Your 200% Welcome Bonus – Up to $30,000 + 50 Super Spins!Start your gaming journey with one of the most exciting Welcome Offers around. Whether you're into Casino games, slots, or both, our 200% deposit bonus is here to boost your experience with rewards worth up to $30,000, plus Super Spins!How to Claim Your Welcome Offer: Jump into the action in three simple steps: Create or Log in to Your Account:Already registered? Log in and head to the Cashier. Make Your First Deposit of $10 or More:Choose your deposit amount to activate your bonus. Enjoy Your Bonus and Play Your Way!Use your bonus on Casino games, slots, or both—your rewards, your choice! Deposit Amount (USD) Bonus (200%) Spins $10 – $99.99 ✅ 20 Free Spins ($0.20 each) $100 – $249.99 ✅ 20 Free Spins ($1.00 each) $250 – $999.99 ✅ 50 Free Spins ($1.00 each) $1,000+ ✅ 50 Super Spins ($4.00 each) Bonus Highlights: 200% Welcome Bonus – Up to $30,000: Get a huge boost on your first deposit to maximize your gaming potential. Super Spins Included: Earn up to $200 in Super Spins on the popular game Wanted Dead or a Wild based on your deposit amount. Flexibility: Use your bonus for Casino games or slots.Deposit NowTerms &amp; Conditions: This sign-up offer is valid for players registered at CoinCasino after December 2024 and for the first deposit only. The first deposit needs to be made within 7 days from the registration day. The welcome Offer consists of a up to 200% bonus on the first deposit up to $30,000 and Free Spin. The minimum deposit to access the bonuses is $10. Different deposits amounts qualifiy for different Free Spins and Free Bets amount according to the following table: Deposit $10- $99.99: Get 200% + 20 Free Spins valued at $0.20 each for Wanted Dead or a Wild Deposit $100-$249.99: Get 200% + 20 Free Spins valued at $1.00 each for Wanted Dead or a Wild Deposit $250- $999.99: Get 200% + 50 Free Spins valued at $1.00 each for Wanted Dead or a Wild Deposit $1,000+: ... [truncated]</pre></details>
+  </article>
+<article class="activity-card detail-ok">
+    <div class="activity-head">
+      <span class="index">2</span>
+      <div>
+        <h2>And that’s just the beginning. </h2>
+        <p>返现 / Cashback · <span class="detail-pill ok-pill">详情页已采集 / Detail captured</span></p>
+      </div>
+    </div>
+<a class="detail-shot-link" href="../../detail-screenshots/coincasino/coincasino-read-more-https-www-coincasino-com-en-promotions-vip-match.png"><img class="detail-shot" src="../../detail-screenshots/coincasino/coincasino-read-more-https-www-coincasino-com-en-promotions-vip-match.png" alt="And that’s just the beginning. detail screenshot"></a>
+    <dl>
+      <div><dt>要求 / Requirements</dt><dd>PlayMy BetsFavouritesVIP ClubPromotionsTelegram CasinoBuy CryptoHelpDownload CoinPokerLog inSign upSwitch Your VIP Status &amp;; bet, Rollbit, or another casino? Switch your status to CoinCasino and we’ll match your level instantly — plus reward you wi; Cashback: Get rewarded every week! Your VIP level determines how much you get back. 💎 Top-Up Perks: We don’t just match your cu</dd></div>
+      <div><dt>触发条件 / Trigger</dt><dd>新用户注册并完成首充触发</dd></div>
+      <div><dt>奖励方式 / Reward</dt><dd>$30,000</dd></div>
+      <div><dt>目标用户 / Who</dt><dd>新注册/首充用户；VIP 或高价值活跃用户；Casino/Slots 用户</dd></div>
+      <div><dt>时间 / When</dt><dd>ated Service: 24/7 VIP host and concierge support.;  ated version, the English version shall prevail.</dd></div>
+      <div><dt>Summary / 总结</dt><dd>And that’s just the beginning. 面向新注册/首充用户；VIP 或高价值活跃用户；Casino/Slots 用户，通过“新用户注册并完成首充触发”推动用户完成关键行为；奖励为 $30,000。主要参与要求：PlayMy BetsFavouritesVIP ClubPromotionsTelegram CasinoBuy CryptoHelpDownload CoinPokerLog inSign upSwitch Your VIP Status &amp;; bet, Rollbit, or another casino? Switch your status to CoinCasino and we’ll match your level instantly — plus reward you wi; Cashback: Get rewarded every week! Your VIP level determines how much you get back. 💎 Top-Up Perks: We don’t just match your cu。</dd></div>
+      <div><dt>核心目的 / Objective</dt><dd>拉新与首充转化</dd></div>
+      <div><dt>数据预期 / Expected Data</dt><dd>拉新与首充转化；预期观察：注册到首充转化率、首存金额、首周留存上升；充值次数、充值金额、Bonus claim rate 上升；投注额、投注单量、有效投注用户数上升。</dd></div>
+      <div><dt>详情页来源 / Detail Source</dt><dd><a href="https://www.coincasino.com/en/promotions/vip-match">https://www.coincasino.com/en/promotions/vip-match</a></dd></div>
+    </dl>
+<details class="detail-excerpt"><summary>详情页原文摘要 / Detail excerpt</summary><pre>CasinoSportsCasinoSlotsLive CasinoGame ShowsCasual GamesSportsIn PlayMy BetsFavouritesVIP ClubPromotionsTelegram CasinoBuy CryptoHelpDownload CoinPokerLog inSign upSwitch Your VIP Status &amp; Get a Welcome Bonus up to $30,000! Match Your VIP Level. Boost Your Perks. Why start over? Already a VIP at Stake, BC.Game, Rainbet, Rollbit, or another casino? Switch your status to CoinCasino and we’ll match your level instantly — plus reward you with a Welcome Bonus of up to $30,000 and 50 Super Spins. And that’s just the beginning. Why Choose CoinCasino VIP Match? 💎 Up to $30,000 Welcome Bonus: An instant boost to kickstart your journey.💎 Weekly Cashback: Get rewarded every week! Your VIP level determines how much you get back. 💎 Top-Up Perks: We don’t just match your current benefits, we add more.💎 No Limits: Unlimited crypto deposits and withdrawals, priority payments, and personalized bonuses!💎 Weekly Rewards: Unlock up to 50% VIP weekly rewards! 💎 24/7 VIP Service: Your personal host, always on call. How It Works Submit Proof of Status: Show us your current VIP tier from another casino. Instant Match: We’ll place you at the equivalent level in CoinCasino. Collect Your Bonus: Claim up to 50% in weekly rewards, a $30,000 Welcome Bonus, and more exclusive bonuses. Your Exclusive Rewards Matched Tier: Your current level mirrored instantly. Boosted Perks: Bigger spins, cashback, and bonuses than before. Freedom to Play: No deposit or withdrawal limits when you use crypto. Dedicated Service: 24/7 VIP host and concierge support. Switch Today. Win Tonight. Your VIP status deserves more, and at CoinCasino it comes with cash in hand, unlimited freedom, and round-the-clock service.Switch NowTerms and Conditions Our general bonus terms apply. This offer is only available to first-time players. Current CoinCasino VIP members do not qualify. In the event of any discrepancy or inconsistency between the English version of these terms and any translated version, the English version shall prevail. &lt;img src=&quot;https://ib.adnxs.com/pixie?pi=7aeaf9fc-0c8c-4657-a236-ba10f01c4340&amp;amp;e=PageView&amp;amp;script=0&quot; width=&quot;1&quot; height=&quot;1&quot; style ... [truncated]</pre></details>
+  </article>
+<article class="activity-card detail-ok">
+    <div class="activity-head">
+      <span class="index">3</span>
+      <div>
+        <h2>Place an ACCA bet with at least 3 selections. </h2>
+        <p>体育投注 / Sports Betting · <span class="detail-pill ok-pill">详情页已采集 / Detail captured</span></p>
+      </div>
+    </div>
+<a class="detail-shot-link" href="../../detail-screenshots/coincasino/coincasino-read-more-https-www-coincasino-com-en-promotions-acca-boost-club.png"><img class="detail-shot" src="../../detail-screenshots/coincasino/coincasino-read-more-https-www-coincasino-com-en-promotions-acca-boost-club.png" alt="Place an ACCA bet with at least 3 selections. detail screenshot"></a>
+    <dl>
+      <div><dt>要求 / Requirements</dt><dd>odds of 1.5.; odds of 1.5 per selection.</dd></div>
+      <div><dt>触发条件 / Trigger</dt><dd>点击参与/报名后，完成活动指定行为触发奖励</dd></div>
+      <div><dt>奖励方式 / Reward</dt><dd>40% Extra</dd></div>
+      <div><dt>目标用户 / Who</dt><dd>VIP 或高价值活跃用户；Casino/Slots 用户；体育投注用户</dd></div>
+      <div><dt>时间 / When</dt><dd>ate in this promotion unlimited times.</dd></div>
+      <div><dt>Summary / 总结</dt><dd>Place an ACCA bet with at least 3 selections. 面向VIP 或高价值活跃用户；Casino/Slots 用户；体育投注用户，通过“点击参与/报名后，完成活动指定行为触发奖励”推动用户完成关键行为；奖励为 40% Extra。主要参与要求：odds of 1.5.; odds of 1.5 per selection.。</dd></div>
+      <div><dt>核心目的 / Objective</dt><dd>提升体育投注投注额和赛事活跃</dd></div>
+      <div><dt>数据预期 / Expected Data</dt><dd>提升体育投注投注额和赛事活跃；预期观察：投注额、投注单量、有效投注用户数上升；Casino DAU、游戏启动次数、免费旋转转付费率上升；复玩率、留存率、VIP 活跃和净收入稳定性提升。</dd></div>
+      <div><dt>详情页来源 / Detail Source</dt><dd><a href="https://www.coincasino.com/en/promotions/acca-boost-club">https://www.coincasino.com/en/promotions/acca-boost-club</a></dd></div>
+    </dl>
+<details class="detail-excerpt"><summary>详情页原文摘要 / Detail excerpt</summary><pre>CasinoSportsCasinoSlotsLive CasinoGame ShowsCasual GamesSportsIn PlayMy BetsFavouritesVIP ClubPromotionsTelegram CasinoBuy CryptoHelpDownload CoinPokerLog inSign upACCA Boost ClubUp to 40% Extra Winnings on Accumulators!Get ready for bigger wins with the ACCA Boost Club! Place accumulator bets with 3 or more selections on any sports market, and we’ll boost your winnings by up to 40%.How It Works: Place an ACCA bet with at least 3 selections. Each selection must have minimum odds of 1.5. The more selections you add, the bigger your boost – up to 40% extra winnings! Boosts are paid out as cash once all results are confirmed and the bet is fully settled. Boost Breakdown: Selections Boost % 3 3% 4 6% 5 10% 6 15% 7 20% 8 22% 9 25% 10 27% 11 30% 12 33% 13 35% 14+ 40% Why Join the ACCA Boost Club? Unlimited Claims: You can qualify for the boost multiple times, as long as you meet the betting requirements! Void Selections? No Problem: The boost still applies based on the number of winning selections. For example, a 10-fold ACCA with 9 wins and 1 void will still receive a 25% boost! No Restrictions: Feel free to bet on any sports market or event of your choice. Ready to Boost Your Wins?The ACCA Boost Club is here to make your accumulator bets more exciting than ever. Don’t miss out – place your bets and watch your winnings soar!SportsTerms &amp; Conditions: The boost applies to winnings on accumulator bets of 3 or more selections at minimum odds of 1.5 per selection. Any sports market within the promotion period. Players can participate in this promotion unlimited times. Only bets placed with real money (not bonus funds or free bets) will qualify for this promotion. Boosts are paid out once all full time results are confirmed and the bet is fully settled. The boost will be added to your bet winnings and paid as cash. If any selections are void, then the boost will still apply, but the percentage boost added will reflect the number of winning selections. For example a 10 fold accumulator bet, with 9 wins and 1 void bet, will receive a 25% boost to their winnings. The boost will not apply where a bet has been Cashed Out ... [truncated]</pre></details>
+  </article>
+<article class="activity-card detail-ok">
+    <div class="activity-head">
+      <span class="index">4</span>
+      <div>
+        <h2>Our offers go live on 1 June, giving you ten days to get set up before the first match. Here's what's waiting for you:World Cup Odds Boosts </h2>
+        <p>竞赛或抽奖 / Tournament or Raffle · <span class="detail-pill ok-pill">详情页已采集 / Detail captured</span></p>
+      </div>
+    </div>
+<a class="detail-shot-link" href="../../detail-screenshots/coincasino/coincasino-read-more-https-www-coincasino-com-en-promotions-world-cup.png"><img class="detail-shot" src="../../detail-screenshots/coincasino/coincasino-read-more-https-www-coincasino-com-en-promotions-world-cup.png" alt="Our offers go live on 1 June, giving you ten days to get set up before the first match. Here's what's waiting for you:World Cup Odds Boosts detail screenshot"></a>
+    <dl>
+      <div><dt>要求 / Requirements</dt><dd>Odds Boosts; odds on the tournament's biggest matches, so you get more value out of every winning; Odds boosts are applied automatically on qualifying fixtures throughout the World Cup</dd></div>
+      <div><dt>触发条件 / Trigger</dt><dd>用户完成指定充值触发</dd></div>
+      <div><dt>奖励方式 / Reward</dt><dd>$100; $20; $10; $25; $30</dd></div>
+      <div><dt>目标用户 / Who</dt><dd>新注册/首充用户；VIP 或高价值活跃用户；Casino/Slots 用户</dd></div>
+      <div><dt>时间 / When</dt><dd>ate your predictions, the more points you earn and the higher you rank. Prizes are awarded at the end o;  ated, and prizes are paid out. In the event of a tie, the player who submitted their predictions first</dd></div>
+      <div><dt>Summary / 总结</dt><dd>Our offers go live on 1 June, giving you ten days to get set up before the first match. Here's what's waiting for you:World Cup Odds Boosts 面向新注册/首充用户；VIP 或高价值活跃用户；Casino/Slots 用户，通过“用户完成指定充值触发”推动用户完成关键行为；奖励为 $100; $20; $10; $25; $30。主要参与要求：Odds Boosts; odds on the tournament's biggest matches, so you get more value out of every winning; Odds boosts are applied automatically on qualifying fixtures throughout the World Cup。</dd></div>
+      <div><dt>核心目的 / Objective</dt><dd>提升充值频次和充值金额</dd></div>
+      <div><dt>数据预期 / Expected Data</dt><dd>提升充值频次和充值金额；预期观察：充值次数、充值金额、Bonus claim rate 上升；投注额、投注单量、有效投注用户数上升；Casino DAU、游戏启动次数、免费旋转转付费率上升。</dd></div>
+      <div><dt>详情页来源 / Detail Source</dt><dd><a href="https://www.coincasino.com/en/promotions/world-cup">https://www.coincasino.com/en/promotions/world-cup</a></dd></div>
+    </dl>
+<details class="detail-excerpt"><summary>详情页原文摘要 / Detail excerpt</summary><pre>CasinoSportsCasinoSlotsLive CasinoGame ShowsCasual GamesSportsIn PlayMy BetsFavouritesVIP ClubPromotionsTelegram CasinoBuy CryptoHelpDownload CoinPokerLog inSign upCoinCasino World Cup FestivalMore ways to win. One tournament. Live from 1 June.The FIFA World Cup 2026 kicks off on 11 June. 48 teams. 104 matches. The biggest football event on the planet is here, and it only comes around once every four years. Our offers go live on 1 June, giving you ten days to get set up before the first match. Here's what's waiting for you:World Cup Odds Boosts We're offering better odds on the tournament's biggest matches, so you get more value out of every winning bet! Odds boosts are applied automatically on qualifying fixtures throughout the World Cup. Match X Pick match results and exact scores across tournament rounds. The more accurate your predictions, the more points you earn and the higher you rank. Prizes are awarded at the end of each round. How to play: Go to Match X and select a live game. Open the active round and view the available matches. Click Play and enter your score predictions. One entry covers all matches in that round. Edit your picks any time while the round is still open. Once the round ends, entries are locked, points are calculated, and prizes are paid out. In the event of a tie, the player who submitted their predictions first ranks higher. Valid for players with 1+ deposit. World Cup Daily Drop Log in every day during the tournament and reveal a card. Each day brings a new chance to win a reward, be it points, free bets, or free spins. The more days you check in, the more cards you uncover! Valid for players with 2+ deposits. World Cup Missions Five progressive missions, each one unlocking the next. Work through all of them, and win more than $100 in football free bets! Mission Requirement Reward Kick Off Place 1 single bet of $20+ on any World Cup match. $10 free bet Hat Trick Place 3 separate single bets of $10+ across Match Result, Goalscorer, and Live markets. $20 free bet Victory Streak Place 3 single bets of $10+ on Match Result. Win at least 2. $20 free bet Combo Win Win 1 accumulator with 4+ leg ... [truncated]</pre></details>
+  </article>
+<article class="activity-card detail-ok">
+    <div class="activity-head">
+      <span class="index">5</span>
+      <div>
+        <h2>How to play: </h2>
+        <p>竞赛或抽奖 / Tournament or Raffle · <span class="detail-pill ok-pill">详情页已采集 / Detail captured</span></p>
+      </div>
+    </div>
+<a class="detail-shot-link" href="../../detail-screenshots/coincasino/coincasino-read-more-https-www-coincasino-com-en-promotions-spinoleague-tourname.png"><img class="detail-shot" src="../../detail-screenshots/coincasino/coincasino-read-more-https-www-coincasino-com-en-promotions-spinoleague-tourname.png" alt="How to play: detail screenshot"></a>
+    <dl>
+      <div><dt>要求 / Requirements</dt><dd>PlayMy BetsFavouritesVIP ClubPromotionsTelegram CasinoBuy CryptoHelpDownload CoinPokerLog inSign upSpinoleague: Epic €12M To; play! The bigger your win multiplier, the more points you score. No complex calculations - just pure gaming excitement that; play:</dd></div>
+      <div><dt>触发条件 / Trigger</dt><dd>点击参与/报名后，完成活动指定行为触发奖励</dd></div>
+      <div><dt>奖励方式 / Reward</dt><dd>€12; €12,000,000; €1,; €10</dd></div>
+      <div><dt>目标用户 / Who</dt><dd>VIP 或高价值活跃用户；Casino/Slots 用户；体育投注用户</dd></div>
+      <div><dt>时间 / When</dt><dd>ated using this formula: Amount Won / Amount Wagered = Points;  ated in the tournament tool (“Max Bet Limit”). Any bets in excess of the Max Bet Limit will not be coun</dd></div>
+      <div><dt>Summary / 总结</dt><dd>How to play: 面向VIP 或高价值活跃用户；Casino/Slots 用户；体育投注用户，通过“点击参与/报名后，完成活动指定行为触发奖励”推动用户完成关键行为；奖励为 €12; €12,000,000; €1,; €10。主要参与要求：PlayMy BetsFavouritesVIP ClubPromotionsTelegram CasinoBuy CryptoHelpDownload CoinPokerLog inSign upSpinoleague: Epic €12M To; play! The bigger your win multiplier, the more points you score. No complex calculations - just pure gaming excitement that; play:。</dd></div>
+      <div><dt>核心目的 / Objective</dt><dd>提升投注/游戏频次，制造排行榜竞争和连续参与</dd></div>
+      <div><dt>数据预期 / Expected Data</dt><dd>提升投注/游戏频次，制造排行榜竞争和连续参与；预期观察：投注额、投注单量、有效投注用户数上升；Casino DAU、游戏启动次数、免费旋转转付费率上升；复玩率、留存率、VIP 活跃和净收入稳定性提升。</dd></div>
+      <div><dt>详情页来源 / Detail Source</dt><dd><a href="https://www.coincasino.com/en/promotions/spinoleague-tournament">https://www.coincasino.com/en/promotions/spinoleague-tournament</a></dd></div>
+    </dl>
+<details class="detail-excerpt"><summary>详情页原文摘要 / Detail excerpt</summary><pre>CasinoSportsCasinoSlotsLive CasinoGame ShowsCasual GamesSportsIn PlayMy BetsFavouritesVIP ClubPromotionsTelegram CasinoBuy CryptoHelpDownload CoinPokerLog inSign upSpinoleague: Epic €12M Tournament Series!8 Stages of Tournament Fun with SpinomenalReady to level up your gaming adventure? Join the Spinoleague, where every spin writes your legend! With an incredible €12,000,000 in total prizes across eight thrilling stages, this is your chance to become a true casino champion. The rules? As simple as hitting play! The bigger your win multiplier, the more points you score. No complex calculations - just pure gaming excitement that rewards your best moments. How to play: Choose your favorite Spinomenal games Place your bets in real money mode Score points based on your win multiplier Track your progress on the leaderboard Claim your rewards when you reach the top How it is scored: Your points are calculated using this formula: Amount Won / Amount Wagered = Points For example: Bet €1, Win €10 = 10 points. The higher your multiplier, the more points you earn! Plus, reach special score thresholds to multiply your prize pool share by 2x-20x. Good luck. Play now!Play NowTerms and Conditions“SPINOLEAGUE 2026” TERMS AND CONDITIONSScore Gathering Mechanism:• Each win will reward the player with a certain amount of points, based on the following formula: amount won / amount wagered (for example, if you wagered 1 EUR and won 10 EUR, you will be rewarded with 10 points).• The more points a player collects, the higher the player’s position is on the tournament leaderboard, which shall include all players from the platforms participating in each tournament (the “Leaderboard”). The number of winning players sharing the prize pool in each round shall be specified in the tournament tool.• The Spinoleague is divided into several tournaments, with each tournament comprising of several rounds and one final “Super Round”.• Each round of each tournament shall have a max bet limit as indicated in the tournament tool (“Max Bet Limit”). Any bets in excess of the Max Bet Limit will not be counted towards the players' score on the Leaderboard. For the avoidance of d ... [truncated]</pre></details>
+  </article>
+<article class="activity-card detail-ok">
+    <div class="activity-head">
+      <span class="index">6</span>
+      <div>
+        <h2>How to participate: </h2>
+        <p>竞赛或抽奖 / Tournament or Raffle · <span class="detail-pill ok-pill">详情页已采集 / Detail captured</span></p>
+      </div>
+    </div>
+<a class="detail-shot-link" href="../../detail-screenshots/coincasino/coincasino-read-more-https-www-coincasino-com-en-promotions-drops-and-wins.png"><img class="detail-shot" src="../../detail-screenshots/coincasino/coincasino-read-more-https-www-coincasino-com-en-promotions-drops-and-wins.png" alt="How to participate: detail screenshot"></a>
+    <dl>
+      <div><dt>要求 / Requirements</dt><dd>PlayMy BetsFavouritesVIP ClubPromotionsTelegram CasinoBuy CryptoHelpDownload CoinPokerLog inSign upPragmatic Drops &amp; Wins: €; Play's Drops &amp; Wins is back at CoinCasino until 3 March 2027, with a jaw-dropping weekly prizes and a massive €25,000,000 pr; wagering requirements! 🔥</dd></div>
+      <div><dt>触发条件 / Trigger</dt><dd>点击参与/报名后，完成活动指定行为触发奖励</dd></div>
+      <div><dt>奖励方式 / Reward</dt><dd>€25,000,000; €0.15; €1; €0.20</dd></div>
+      <div><dt>目标用户 / Who</dt><dd>新注册/首充用户；VIP 或高价值活跃用户；Casino/Slots 用户</dd></div>
+      <div><dt>时间 / When</dt><dd>ate:;  ated by Pragmatic Play, with prize pools shared across multiple participating operators.</dd></div>
+      <div><dt>Summary / 总结</dt><dd>How to participate: 面向新注册/首充用户；VIP 或高价值活跃用户；Casino/Slots 用户，通过“点击参与/报名后，完成活动指定行为触发奖励”推动用户完成关键行为；奖励为 €25,000,000; €0.15; €1; €0.20。主要参与要求：PlayMy BetsFavouritesVIP ClubPromotionsTelegram CasinoBuy CryptoHelpDownload CoinPokerLog inSign upPragmatic Drops &amp; Wins: €; Play's Drops &amp; Wins is back at CoinCasino until 3 March 2027, with a jaw-dropping weekly prizes and a massive €25,000,000 pr; wagering requirements! 🔥。</dd></div>
+      <div><dt>核心目的 / Objective</dt><dd>拉新与首充转化</dd></div>
+      <div><dt>数据预期 / Expected Data</dt><dd>拉新与首充转化；预期观察：注册到首充转化率、首存金额、首周留存上升；投注额、投注单量、有效投注用户数上升；Casino DAU、游戏启动次数、免费旋转转付费率上升。</dd></div>
+      <div><dt>详情页来源 / Detail Source</dt><dd><a href="https://www.coincasino.com/en/promotions/drops-and-wins">https://www.coincasino.com/en/promotions/drops-and-wins</a></dd></div>
+    </dl>
+<details class="detail-excerpt"><summary>详情页原文摘要 / Detail excerpt</summary><pre>CasinoSportsCasinoSlotsLive CasinoGame ShowsCasual GamesSportsIn PlayMy BetsFavouritesVIP ClubPromotionsTelegram CasinoBuy CryptoHelpDownload CoinPokerLog inSign upPragmatic Drops &amp; Wins: €25,000,000 Prize PoolSpin for Daily Tournaments &amp; Weekly WinsReady for more non-stop action? Pragmatic Play's Drops &amp; Wins is back at CoinCasino until 3 March 2027, with a jaw-dropping weekly prizes and a massive €25,000,000 prize pool! 🤯 From collecting pieces to dominating tournament leaderboards, we've packed this adventure with multiple ways to win. The best part? All prizes come as real cash with zero wagering requirements! 🔥 How to participate: Daily Tournaments Opt in once per promotional week through any participating game. Place bets of at least €0.15 on your favorite Pragmatic slots. Earn points based on your win multipliers. Check your rank in real-time through the tournament menu. Weekly Wheel Drops Play any participating Pragmatic game in real money mode. Collect all wheel pieces from your qualifying bets. Spin the full-screen wheel that appears once complete. Track your progress in real-time through the in-game interface. Whether spinning for wheel pieces or chasing tournament glory, every bet gets you closer to claiming your share of the massive prize pool. Ready to play? 👀🎰Play NowTerms and ConditionsWheel Drops T&amp;Cs The Drops &amp; Wins Weekly Wheel Drops run from 4 March 2026 at 19:01 CET until 3 March 2027 at 18:59 CET (the “Promotional Term”). This is a network-wide promotion operated by Pragmatic Play, with prize pools shared across multiple participating operators. Each Weekly Wheel Drop operates on a weekly cycle, starting on Wednesday at 19:01 CET and ending the following Wednesday at 18:59 CET. To take part in a Weekly Wheel Drop, you are required to join or opt-in through any of the participating games through the promotional welcome pop-up. Opting in is required once per Weekly Wheel Drop to qualify for the entire week. Players who choose to opt-out will be excluded only from that week’s Weekly Wheel Drop and may opt-in again for subsequent Weekly Wheel Drops. By opting in for the Weekly Wheel Drops, you hereby agre ... [truncated]</pre></details>
+  </article>
+<article class="activity-card detail-ok">
+    <div class="activity-head">
+      <span class="index">7</span>
+      <div>
+        <h2>The Tournaments <span class="new-badge">今日新增 / New Today</span></h2>
+        <p>竞赛或抽奖 / Tournament or Raffle · <span class="detail-pill ok-pill">详情页已采集 / Detail captured</span></p>
+      </div>
+    </div>
+<a class="detail-shot-link" href="../../detail-screenshots/coincasino/coincasino-read-more-https-www-coincasino-com-en-promotions-3-oaks-lucky-races.png"><img class="detail-shot" src="../../detail-screenshots/coincasino/coincasino-read-more-https-www-coincasino-com-en-promotions-3-oaks-lucky-races.png" alt="The Tournaments detail screenshot"></a>
+    <dl>
+      <div><dt>要求 / Requirements</dt><dd>PlayMy BetsFavouritesVIP ClubPromotionsTelegram CasinoBuy CryptoHelpDownload CoinPokerLog inSign up3 Oaks Lucky RacesTournam; Play between 15:00–20:00 UTC and you're automatically climbing two leaderboards at once: the Short Tournament Leaderboard an; play your usual games. Bet €0.10 or more on any featured title during tournament hours and any spin could randomly trigger a</dd></div>
+      <div><dt>触发条件 / Trigger</dt><dd>用户完成订阅、关注或社群动作后触发</dd></div>
+      <div><dt>奖励方式 / Reward</dt><dd>€2,500,000; €151,000; €1,812,000; €0.10; up to €350</dd></div>
+      <div><dt>目标用户 / Who</dt><dd>VIP 或高价值活跃用户；Casino/Slots 用户；体育投注用户</dd></div>
+      <div><dt>时间 / When</dt><dd>ated earlier.;  ated to Short Tournament Series</dd></div>
+      <div><dt>Summary / 总结</dt><dd>The Tournaments 面向VIP 或高价值活跃用户；Casino/Slots 用户；体育投注用户，通过“用户完成订阅、关注或社群动作后触发”推动用户完成关键行为；奖励为 €2,500,000; €151,000; €1,812,000; €0.10; up to €350。主要参与要求：PlayMy BetsFavouritesVIP ClubPromotionsTelegram CasinoBuy CryptoHelpDownload CoinPokerLog inSign up3 Oaks Lucky RacesTournam; Play between 15:00–20:00 UTC and you're automatically climbing two leaderboards at once: the Short Tournament Leaderboard an; play your usual games. Bet €0.10 or more on any featured title during tournament hours and any spin could randomly trigger a。</dd></div>
+      <div><dt>核心目的 / Objective</dt><dd>提升投注/游戏频次，制造排行榜竞争和连续参与</dd></div>
+      <div><dt>数据预期 / Expected Data</dt><dd>提升投注/游戏频次，制造排行榜竞争和连续参与；预期观察：投注额、投注单量、有效投注用户数上升；Casino DAU、游戏启动次数、免费旋转转付费率上升；复玩率、留存率、VIP 活跃和净收入稳定性提升。</dd></div>
+      <div><dt>详情页来源 / Detail Source</dt><dd><a href="https://www.coincasino.com/en/promotions/3-oaks-lucky-races">https://www.coincasino.com/en/promotions/3-oaks-lucky-races</a></dd></div>
+    </dl>
+<details class="detail-excerpt"><summary>详情页原文摘要 / Detail excerpt</summary><pre>CasinoSportsCasinoSlotsLive CasinoGame ShowsCasual GamesSportsIn PlayMy BetsFavouritesVIP ClubPromotionsTelegram CasinoBuy CryptoHelpDownload CoinPokerLog inSign up3 Oaks Lucky RacesTournaments + Lucky Drops. €2,500,000 in Prizes.Two Promos. One Campaign. €2,500,000 to Win. Every month from the 1st to the 7th, 3 Oaks brings you a short tournament series and Lucky Drops — running at the same time, across the same games. More ways to win without doing anything extra. The Tournaments One tournament every day for 7 days. Play between 15:00–20:00 UTC and you're automatically climbing two leaderboards at once: the Short Tournament Leaderboard and the Lucky Drops Leaderboard. Two shots at prizes every single day. €151,000 up for grabs each month. €1,812,000 across the full campaign. The Lucky Drops Just play your usual games. Bet €0.10 or more on any featured title during tournament hours and any spin could randomly trigger a cash prize — up to €350 a drop. Up to 3 drops per player per month.Play NowTerms and Conditions The Lucky Races campaign (“Promotion”) is organised by 3 Oaks Network and runs from 1 February 2026 at 15:00 UTC until 7 January 2027 at 20:00 UTC, unless terminated earlier. The Promotion combines two mechanics running in parallel: Short Tournament Series and Lucky Drops, both available from the 1st to the 7th day of each calendar month during the campaign period. The total prize pool for the Promotion is EUR 2,500,000, split as follows: EUR 1,812,000 allocated to Short Tournament Series EUR 588,000 allocated to Lucky Drops Participating Games: More Magic Apple, Lucky Penny, Coin Volcano, Lucky Penny 2, Sun of Egypt 3, 3 Hot Chillies, Sun of Egypt 2, 4 Pots of Egypt, Coin UP, 3 Super Hot Chillies, 777 Coins, Coin Lightning, Sun of Egypt 5, 3 Coin Volcanoes, Coin Princess x1000, 3 Pots of Egypt, Magic Apple, Green Chilli 2, 3 Hot Teapots, and Super China Pots. One Short Tournament Series is held monthly from the 1st to the 7th, consisting of 7 Regular Tournaments, each running daily between 15:00 UTC and 20:00 UTC. Each Regular Tournament lasts 5 consecutive hours. Players accumulate scores according to the applicable tournam ... [truncated]</pre></details>
+  </article>
+<article class="activity-card detail-ok">
+    <div class="activity-head">
+      <span class="index">8</span>
+      <div>
+        <h2>How it works: </h2>
+        <p>VIP 或忠诚度 / VIP or Loyalty · <span class="detail-pill ok-pill">详情页已采集 / Detail captured</span></p>
+      </div>
+    </div>
+<a class="detail-shot-link" href="../../detail-screenshots/coincasino/coincasino-read-more-https-www-coincasino-com-en-promotions-spin-express.png"><img class="detail-shot" src="../../detail-screenshots/coincasino/coincasino-read-more-https-www-coincasino-com-en-promotions-spin-express.png" alt="How it works: detail screenshot"></a>
+    <dl>
+      <div><dt>要求 / Requirements</dt><dd>PlayMy BetsFavouritesVIP ClubPromotionsTelegram CasinoBuy CryptoHelpDownload CoinPokerLog inSign upSpin Express: €1M Gamzix; qualifying games, rack up points automatically, and watch your position rise on the real-time leaderboard.; Place real-money bets of €0.30 or more</dd></div>
+      <div><dt>触发条件 / Trigger</dt><dd>点击参与/报名后，完成活动指定行为触发奖励</dd></div>
+      <div><dt>奖励方式 / Reward</dt><dd>€1; €1,000,000; €1,000,000.; €20,000; €0.30</dd></div>
+      <div><dt>目标用户 / Who</dt><dd>VIP 或高价值活跃用户；Casino/Slots 用户；体育投注用户</dd></div>
+      <div><dt>时间 / When</dt><dd>ated: Points are awarded automatically for every round using the formula: winning / bet = points. Point;  ates in real time every time you open it.</dd></div>
+      <div><dt>Summary / 总结</dt><dd>How it works: 面向VIP 或高价值活跃用户；Casino/Slots 用户；体育投注用户，通过“点击参与/报名后，完成活动指定行为触发奖励”推动用户完成关键行为；奖励为 €1; €1,000,000; €1,000,000.; €20,000; €0.30。主要参与要求：PlayMy BetsFavouritesVIP ClubPromotionsTelegram CasinoBuy CryptoHelpDownload CoinPokerLog inSign upSpin Express: €1M Gamzix; qualifying games, rack up points automatically, and watch your position rise on the real-time leaderboard.; Place real-money bets of €0.30 or more。</dd></div>
+      <div><dt>核心目的 / Objective</dt><dd>提升投注/游戏频次，制造排行榜竞争和连续参与</dd></div>
+      <div><dt>数据预期 / Expected Data</dt><dd>提升投注/游戏频次，制造排行榜竞争和连续参与；预期观察：投注额、投注单量、有效投注用户数上升；Casino DAU、游戏启动次数、免费旋转转付费率上升；复玩率、留存率、VIP 活跃和净收入稳定性提升。</dd></div>
+      <div><dt>详情页来源 / Detail Source</dt><dd><a href="https://www.coincasino.com/en/promotions/spin-express">https://www.coincasino.com/en/promotions/spin-express</a></dd></div>
+    </dl>
+<details class="detail-excerpt"><summary>详情页原文摘要 / Detail excerpt</summary><pre>CasinoSportsCasinoSlotsLive CasinoGame ShowsCasual GamesSportsIn PlayMy BetsFavouritesVIP ClubPromotionsTelegram CasinoBuy CryptoHelpDownload CoinPokerLog inSign upSpin Express: €1M Gamzix Tournament€1,000,000 Total Prize Pool in 2026Join the year-long Spin Express tournament and compete for your share of €1,000,000. Starting 8 January and running through 31 December 2026, be in with a chance to claim €20,000 in prizes every weekend. Spin qualifying games, rack up points automatically, and watch your position rise on the real-time leaderboard. How it works: Launch any participating Gamzix game Place real-money bets of €0.30 or more Earn points automatically (winning / bet = points) Check your rank on the in-game leaderboard Qualifying Gamzix games include: Coin Win 2: Hold the Spin, Coin Win: Hold the Spin, 3x5 Hold The Spin, Sunny Coin 10000: Hold The Spin, Jack O'Wild, 3X3: Hold The Spin, Sticky Coin: Hold The Spin, 3x3: 27 ways, 9 Jalapenos, Only Coins Express, 40 Chilli Fruits Superior, Joker Catcher, Only Coins, Billie Wild, Yummy Dumplings: Hold The Spin, 3x5 Joker: Hold The Spin and 9 Thunderbolts. Ready to compete? Jump in and spin today.Play NowTerms and Conditions How to Join: Just launch any participating Gamzix game. Only real-money bets from 0.30 EUR and above count toward the tournament. Tournament Period: The tournament runs every weekend, from Thursday 3 PM UTC to Saturday 10 PM UTC, throughout the entire 2026 year. Prize Pool: - Total yearly prize pool: 1,000,000 EUR. - Prize pool per each stage: 20,000 EUR. How Points Are Calculated: Points are awarded automatically for every round using the formula: winning / bet = points. Points from all rounds are added up and displayed in the leaderboard. Leaderboard: Your position, potential prize, and full ranking of all players are available directly in the game via the “Tournament” button. If two players have the same number of points, the one who reached the score earlier ranks higher. The leaderboard updates in real time every time you open it. Prizes: Cash prizes can be claimed within 24 hours after the tournament ends. To receive your prize, you must make one losing ... [truncated]</pre></details>
+  </article>
+<article class="activity-card detail-ok">
+    <div class="activity-head">
+      <span class="index">9</span>
+      <div>
+        <h2>Here’s how to join the fun: </h2>
+        <p>竞赛或抽奖 / Tournament or Raffle · <span class="detail-pill ok-pill">详情页已采集 / Detail captured</span></p>
+      </div>
+    </div>
+<a class="detail-shot-link" href="../../detail-screenshots/coincasino/coincasino-read-more-https-www-coincasino-com-en-promotions-non-stop-drops-races.png"><img class="detail-shot" src="../../detail-screenshots/coincasino/coincasino-read-more-https-www-coincasino-com-en-promotions-non-stop-drops-races.png" alt="Here’s how to join the fun: detail screenshot"></a>
+    <dl>
+      <div><dt>要求 / Requirements</dt><dd>PlayMy BetsFavouritesVIP ClubPromotionsTelegram CasinoBuy CryptoHelpDownload CoinPokerLog inSign upPlayson Non Stop Drops &amp;; Playson Non Stop Drops &amp; Races are here with a massive €10,000,000 prize pool spread across an entire year from 1 July 2025; Playson Short Races (€2,000,000): Back-to-back mini tournaments with resetting leaderboards from the 9th to the end of each</dd></div>
+      <div><dt>触发条件 / Trigger</dt><dd>点击参与/报名后，完成活动指定行为触发奖励</dd></div>
+      <div><dt>奖励方式 / Reward</dt><dd>€10,000,000; €4,750,000; €3,250,000; €300,000; €30,000.</dd></div>
+      <div><dt>目标用户 / Who</dt><dd>新注册/首充用户；VIP 或高价值活跃用户；Casino/Slots 用户</dd></div>
+      <div><dt>时间 / When</dt><dd>ate gaming marathon at CoinCasino! The Playson Non Stop Drops &amp; Races are here with a massive €10,000,0;  ated by Playson that runs between 00:00 UTC on 01.07.2025 and 30.06.2026 until 23:59 UTC</dd></div>
+      <div><dt>Summary / 总结</dt><dd>Here’s how to join the fun: 面向新注册/首充用户；VIP 或高价值活跃用户；Casino/Slots 用户，通过“点击参与/报名后，完成活动指定行为触发奖励”推动用户完成关键行为；奖励为 €10,000,000; €4,750,000; €3,250,000; €300,000; €30,000.。主要参与要求：PlayMy BetsFavouritesVIP ClubPromotionsTelegram CasinoBuy CryptoHelpDownload CoinPokerLog inSign upPlayson Non Stop Drops &amp;; Playson Non Stop Drops &amp; Races are here with a massive €10,000,000 prize pool spread across an entire year from 1 July 2025; Playson Short Races (€2,000,000): Back-to-back mini tournaments with resetting leaderboards from the 9th to the end of each。</dd></div>
+      <div><dt>核心目的 / Objective</dt><dd>提升投注/游戏频次，制造排行榜竞争和连续参与</dd></div>
+      <div><dt>数据预期 / Expected Data</dt><dd>提升投注/游戏频次，制造排行榜竞争和连续参与；预期观察：投注额、投注单量、有效投注用户数上升；Casino DAU、游戏启动次数、免费旋转转付费率上升；复玩率、留存率、VIP 活跃和净收入稳定性提升。</dd></div>
+      <div><dt>详情页来源 / Detail Source</dt><dd><a href="https://www.coincasino.com/en/promotions/non-stop-drops-races">https://www.coincasino.com/en/promotions/non-stop-drops-races</a></dd></div>
+    </dl>
+<details class="detail-excerpt"><summary>详情页原文摘要 / Detail excerpt</summary><pre>CasinoSportsCasinoSlotsLive CasinoGame ShowsCasual GamesSportsIn PlayMy BetsFavouritesVIP ClubPromotionsTelegram CasinoBuy CryptoHelpDownload CoinPokerLog inSign upPlayson Non Stop Drops &amp; Races: €10,000,000 Prize Pool Your Year-Long Adventure to Big Wins Starts Here!Get ready for the ultimate gaming marathon at CoinCasino! The Playson Non Stop Drops &amp; Races are here with a massive €10,000,000 prize pool spread across an entire year from 1 July 2025 to 30 June 2026. Over 200,000 prizes are waiting for you – that's one prize every 2.5 minutes for 365 days straight! With three exciting promotions running simultaneously, there's never a dull moment in your quest for victory. Here’s how to join the fun: Experience non-stop action with three concurrent promotions designed to keep you spinning: Non-Stop Drop (€4,750,000): Random cash prizes awarded every hour, every day through our Cash Blast tool. No pause, no breaks – just pure excitement around the clock! CashDays &amp; CashDays X-TREME (€3,250,000): High-stakes tournaments running the first 8 days of each month, plus exclusive X-TREME events offering massive €300,000 prize pools with top prizes of €30,000. Every €1 won = 10 points. Playson Short Races (€2,000,000): Back-to-back mini tournaments with resetting leaderboards from the 9th to the end of each month. Every €1 won = 10 points. Plus, December 2025 and January 2026 feature boosted prize tables for the holiday season, giving you even more chances to score big during the most wonderful time of the year. Qualifying games include any Playson game, such as Coin Strike: Hold &amp; Win and Thunder Coins: Hold &amp; Win, plus all other exciting Playson titles. New releases are automatically added to keep the action fresh! Ready to join the longest gaming celebration of the year? Your adventure awaits! Play NowTerms and Conditions The Non-Stop Drops &amp; Races 10,000,000 EUR is a network promotion operated by Playson that runs between 00:00 UTC on 01.07.2025 and 30.06.2026 until 23:59 UTC During this promotional period, Playson offers non-stop engagement for your players with 2 concurrent promotions running at the same time, as presented below: a. Non-Sto ... [truncated]</pre></details>
+  </article>
+    </section>
+
+    <details class="raw">
+      <summary>查看原始页面文字 / Raw visible text</summary>
+      <pre>CasinoSportsCasinoSlotsLive CasinoGame ShowsCasual GamesSportsIn PlayMy BetsFavouritesVIP ClubPromotionsTelegram CasinoBuy CryptoHelpDownload CoinPokerLog inSign upPromotionsWelcome to CoinCasino!Get Your 200% Welcome Bonus – Up to $30,000 + 50 Super Spins!Deposit NowRead MoreSwitch Your VIP Status!Match Your VIP Level, Boost Your Perks &amp; Get 200% up to $30,000!
+ Switch NowRead MoreACCA Boost ClubUp to 40% Extra Winnings on Accumulators!Bet NowRead MoreCoinCasino World Cup FestivalMore ways to win. One tournament. Live from 1 June.Bet NowRead MoreSpinoleague: Epic €12M Tournament Series!8 Stages of Tournament Fun with Spinomenal
+ Play NowRead MorePragmatic Drops &amp; Wins: €25,000,000 Prize PoolSpin for Daily Tournaments &amp; Weekly Wins
+ Play NowRead More3 Oaks Lucky RacesTournaments + Lucky Drops. €2,500,000 in Prizes.Play NowRead MoreSpin Express: €1M Gamzix Tournament€1,000,000 Total Prize Pool in 2026Play NowRead MorePlayson Non Stop Drops &amp; Races: €10,000,000 Prize PoolYour Year-Long Adventure to Big Wins Starts Here!
+ Play NowRead MoreCoinCasino Promotions | Welcome Bonus, Free Spins &amp; Crypto OffersBitcoin Casino Bonuses &amp; Promotions for Crypto Players
+If you’re looking for the best Bitcoin casino bonus available today, you’re bound to find it at CoinCasino!
+The casino has the best promotions for all crypto Players, starting with a massive 200% up to $30,000 first deposit bonus and 50 free spins. 
+Types of Crypto Promotions at CoinCasino 
+At CoinCasino, there are a variety of crypto offers suitable for everyone, from casual Players to VIPs. At any time, you could find free spins, a no-deposit bonus, or an epic tournament with massive prizes. 
+Keep your eyes on the promos page for offers such as these:
+🎁CoinCasino Crypto Welcome Bonus 
+Start your CoinCasino adventure with some serious change by claiming the welcome offer. 
+There’s no crypto casino bonus code required. Simply make an initial deposit of $10 to unlock a deposit bonus up to 200%, and up to 50 free spins. This makes it perfect for low-stakes players, and also VIPs because the cap is 30K.
+To unlock the full 50 free spins, you'll need to deposit at least $250. If you’re depositing less, you can still get the option to claim 20 free spins. 
+The value of the spins can vary depending on the deposit size. For example, with a $20 deposit, each spin is worth $0.20, and with a $100 deposit, the value rises to $1 apiece.
+Want more details? Check out CoinCasino’s welcome offer terms and conditions.
+🎁VIP Program
+For VIPs, it’s all about enjoying being a main character. We are here to make sure you’re well taken care of. High-rollers get the complete VIP treatment with a tailored VIP program, personal account host, and exclusive offers. 
+🎁Up to $100k in Weekly Bonuses
+Once you’ve signed up, you’ll get the chance to get up to $100,000 weekly in BTC casino bonuses. You'll have plenty of chances to win, from cashback to reload bonuses, free bets with Best Wallet to tournaments, there's a lot to choose from.
+🎁Free Spins
+Free spins are part of many fantastic promotions at CoinCasino, including the sign-up bonus. Try out popular slot games without betting from your own funds.
+🎁Deposit Bonus
+On top of the generous welcome bonus, we often offer reload bonuses to boost your balance. It could be bonus money and/or free spins.
+🎁Tournaments
+When you’re feeling competitive, keep your eyes peeled for tournaments. We feature casino competitions from top game developers so you can compete for huge prizes. We’re looking at you, slot fans and Players who enjoy the real live action.
+🎁Drop &amp; Wins
+Look out for daily prize drops in selected games. No need to opt in—just random prizes like free spins, cash, and bonus money.
+🎁Giveaways
+We often run exciting giveaways for a chance to win eye-opening prizes. Follow us on social media to stay in the loop. We're on Facebook, X, Telegram, Instagram, and Discord. 
+🎁Sports Betting Promos
+CoinCasino is also a hot spot for sports bettors, and a promo that most Players enjoy is free bets. If you’re a casino Player who enjoys sports betting from time to time, you can place qualifying bets to receive a free bet.
+Why Choose a Bitcoin Casino Welcome Bonus?
+There are plenty of reasons why people choose a crypto casino bonus over classic fiat offers:
+
+Bigger Bonuses: Crypto casino offers tend to be more generous than offers that require fiat deposits. Crypto is all about the big bucks.
+Anonymous Play: Playing with crypto means you deposit, play, and withdraw winnings anonymously. 
+Secure Payments: When using crypto, your data isn’t stored, like it would be with credit card payments. So you can enjoy secure play.
+Lower Fees: Crypto fees are typically lower than bank transfers or credit cards. This means you can keep more cash in your pocket when crypto gambling.
+Fast Withdrawals: Forget waiting hours, days, or weeks — withdraw your crypto instantly and enjoy your winnings within minutes. 
+
+How To Get The Most Out Of Your Bitcoin Casino Bonus
+Want to know how to turn the best Bitcoin casino bonuses into real cash? Here are some simple tips to help you get the most out of your bonus:
+
+Read the T&amp;Cs: Don't skip the fine print! Know which games in our vast game library count toward wagering, and keep an eye on the deadlines so you don't miss out. Read through the bonus terms and conditions.
+Pick Low-Fee Cryptos: Certain cryptos have higher network fees than others. Low-fee options like Ripple or Litecoin help you minimize any transaction costs.
+Stay Up to Date With New Offers: New bonuses drop all the time. Check our promotions page regularly to claim the latest deals.
+
+How Do Crypto Casino Bonuses Work?
+Crypto casino bonuses can work differently, as it depends on how the promotion is built. To get started, you may need to opt in or use a bonus code, or it could be as simple as clicking a link from socials or from the promos page. 
+How to Claim a Crypto Bonus
+The type of bonus can vary. It could be free spins or bonus money. The promotion page will outline how to claim and use the bonus. Generally, it comes down to these 3 steps: 
+1. Claim The Bonus
+To claim a CoinCasino bonus, you usually need to make a minimum deposit. Other times, it can be a crypto casino no-deposit bonus or automatic entry when you play eligible games. Entering a Bitcoin casino bonus code is usually not necessary at CoinCasino. But do check the T&amp;Cs to see if you need to opt in to claim the offer. 
+2. Understand The Terms &amp; Play!
+Every bonus comes with terms and conditions. So, take the time to read them and play responsibly.
+The T&amp;Cs could explain how many times you need to wager the bonus before cash-out is possible. You'll also learn the time limits of the bonus so you don't miss out on its full potential. Remember that different games contribute to the turnover targets at varying levels. 
+3. Cash Out Your Winnings
+Once you’ve hit the wagering target, pick your crypto, and instantly withdraw your winnings. It’s as simple as that.
+Crypto Casino Offer Terms and Conditions
+Here's a quick breakdown of the most important terms you need to know for claiming and cashing out a bonus at CoinCasino:
+
+Deposit Requirement: Many Bitcoin casino bonuses require a deposit. The payment size can also impact how much of a reward you receive.
+Wagering Requirements: You'll need to bet a certain amount to convert the bonus into real money. So, keep this in mind when playing.
+Bet Limits: You can only bet a certain amount per round when fulfilling the wagering requirements. Some games, such as slots, contribute more than others.
+Expiry Periods: Don't let your crypto bonus expire! Make sure to meet the requirements before time runs out.
+
+If there’s one thing to take away from all of this, It’s that you should always take time to understand how a bonus works before getting started.
+Play smart – Win big! ☑️
+ 
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+&lt;img src=&quot;https://ib.adnxs.com/pixie?pi=7aeaf9fc-0c8c-4657-a236-ba10f01c4340&amp;amp;e=PageView&amp;amp;script=0&quot; width=&quot;1&quot; height=&quot;1&quot; style=&quot;display:none&quot;&gt;
+
+ 
+
+ 
+
+&lt;img src=&quot;https://ib.adnxs.com/pixie?pi=7aeaf9fc-0c8c-4657-a236-ba10f01c4340&amp;amp;e=PageView&amp;amp;script=0&amp;amp;consent=1&quot; width=&quot;1&quot; height=&quot;1&quot; style=&quot;display:none&quot;&gt;</pre>
+    </details>
+  </main>
+</body>
+</html>

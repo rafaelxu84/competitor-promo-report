@@ -16,7 +16,6 @@ const publishReportRoot = path.join(publishRoot, "reports", date);
 await assertDir(sourceSite);
 await assertDir(sourceScreenshots);
 
-await fs.rm(path.join(publishRoot, "reports"), { recursive: true, force: true });
 await fs.mkdir(publishReportRoot, { recursive: true });
 await copyDir(sourceSite, path.join(publishReportRoot, "site"));
 await copyDir(sourceScreenshots, path.join(publishReportRoot, "browser-screenshots"));

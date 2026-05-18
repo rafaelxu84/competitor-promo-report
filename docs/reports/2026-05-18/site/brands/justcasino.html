@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>JustCasino 活动详情</title>
+  <style>
+    :root { --bg:#f5f6f2; --panel:#fff; --ink:#15201b; --muted:#66736d; --line:#d8ddd4; --green:#0d7658; --blue:#245c9e; --amber:#9a6816; --red:#a54040; --soft:#eef4f0; }
+    * { box-sizing:border-box; }
+    body { margin:0; background:var(--bg); color:var(--ink); font-family:Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; line-height:1.45; }
+    .page { max-width:1280px; margin:0 auto; padding:28px 18px 56px; }
+    .hero { background:var(--panel); border:1px solid var(--line); border-radius:8px; padding:24px; display:grid; grid-template-columns:minmax(0,1fr) 280px; gap:18px; align-items:end; margin-bottom:18px; }
+    .brand-hero { margin-bottom:16px; }
+    .eyebrow { margin:0 0 8px; color:var(--green); font-size:12px; font-weight:800; text-transform:uppercase; letter-spacing:.04em; }
+    h1 { margin:0 0 8px; font-size:32px; line-height:1.12; letter-spacing:0; }
+    h2 { margin:0 0 6px; font-size:18px; letter-spacing:0; }
+    p { margin:0; }
+    .sub, .meta { color:var(--muted); }
+    .status { display:inline-flex; align-items:center; border-radius:999px; padding:3px 8px; font-size:12px; font-weight:800; white-space:nowrap; }
+    .ok { color:var(--green); background:#e5f3ed; }
+    .mid { color:var(--amber); background:#fff4df; }
+    .blue { color:var(--blue); background:#e9f0fb; }
+    .low { color:var(--red); background:#faeeee; }
+    .meta { background:#f8faf7; border:1px solid var(--line); border-radius:8px; padding:14px; }
+    .meta b { display:inline-block; min-width:92px; color:var(--ink); }
+    .brand-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:14px; }
+    .brand-card { display:grid; grid-template-columns:220px minmax(0,1fr); gap:14px; padding:14px; color:var(--ink); text-decoration:none; background:var(--panel); border:1px solid var(--line); border-radius:8px; }
+    .brand-card img, .visual img { width:100%; border:1px solid var(--line); border-radius:8px; background:#edf0ea; object-fit:cover; }
+    .brand-card img { aspect-ratio:16/10; }
+    .brand-card span { display:inline-flex; margin-top:10px; color:var(--blue); font-weight:700; }
+    .new-badge { display:inline-flex; align-items:center; border-radius:999px; background:#fff4df; color:#9a6816; padding:3px 8px; font-size:12px; font-weight:800; margin-left:6px; vertical-align:middle; }
+    .topnav { margin-bottom:12px; }
+    .topnav a { color:var(--blue); font-weight:700; text-decoration:none; }
+    .visual { background:var(--panel); border:1px solid var(--line); border-radius:8px; padding:14px; margin-bottom:16px; }
+    .visual img { max-height:520px; object-fit:contain; }
+    .activity-list { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:14px; }
+    .activity-card { background:var(--panel); border:1px solid var(--line); border-radius:8px; padding:16px; }
+    .activity-card.detail-ok { border-left:4px solid var(--green); }
+    .activity-card.detail-limited { border-left:4px solid var(--amber); }
+    .activity-card.detail-missing { border-left:4px solid #a8b1ac; }
+    .activity-head { display:grid; grid-template-columns:36px minmax(0,1fr); gap:10px; align-items:start; margin-bottom:12px; }
+    .index { display:inline-grid; place-items:center; width:30px; height:30px; border-radius:999px; background:var(--soft); color:var(--green); font-weight:800; }
+    .detail-shot-link { display:block; margin:8px 0 12px; }
+    .detail-shot { width:100%; max-height:360px; object-fit:cover; object-position:top; border:1px solid var(--line); border-radius:8px; background:#edf0ea; }
+    dl { display:grid; gap:8px; margin:0; }
+    dl div { display:grid; grid-template-columns:150px minmax(0,1fr); gap:10px; border-top:1px solid var(--line); padding-top:8px; }
+    dt { color:var(--muted); font-size:12px; font-weight:800; }
+    dd { margin:0; font-size:13px; }
+    .missing-text { color:var(--muted); }
+    .detail-pill { display:inline-flex; align-items:center; border-radius:999px; padding:3px 8px; font-size:12px; font-weight:800; }
+    .ok-pill { background:#e5f3ed; color:var(--green); }
+    .limited-pill { background:#fff4df; color:var(--amber); }
+    .fallback-pill { background:#eef0ea; color:var(--muted); }
+    .detail-excerpt { margin-top:12px; border-top:1px solid var(--line); padding-top:10px; }
+    .detail-excerpt summary { cursor:pointer; color:var(--blue); font-weight:800; }
+    .raw { background:var(--panel); border:1px solid var(--line); border-radius:8px; padding:14px; margin-top:16px; }
+    pre { white-space:pre-wrap; word-break:break-word; background:#111714; color:#eef6f0; padding:12px; border-radius:8px; max-height:320px; overflow:auto; font-size:12px; }
+    a { color:var(--blue); }
+    @media (max-width:900px) { .hero, .brand-grid, .brand-card, .activity-list { grid-template-columns:1fr; } h1 { font-size:27px; } dl div { grid-template-columns:1fr; } }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <nav class="topnav"><a href="../index.html">返回品牌入口 / Back to brands</a></nav>
+    <section class="hero brand-hero">
+      <div>
+        <p class="eyebrow">Brand Promotion Page</p>
+        <h1>JustCasino</h1>
+        <p class="sub">来源 Source：<a href="https://www.justcasino.io/entry">https://www.justcasino.io/entry</a></p>
+        <p class="sub">本页优先使用活动详情页 full-page screenshot 与可见正文，输出要求、Trigger、Reward、Who、When、Summary、核心目的和数据预期。</p>
+        <p class="sub"><span class="status ok">可访问 / OK</span></p>
+      </div>
+      <div class="meta">
+        <b>活动 Activities</b>1<br>
+        <b>详情 Details</b>1<br>
+        <b>详情截图 Shots</b>1<br>
+        <b>状态 Status</b>ok
+      </div>
+    </section>
+
+    <section class="visual">
+      <img src="../../browser-screenshots/justcasino-justcasino-promotions.png" alt="JustCasino screenshot">
+    </section>
+
+    <section class="activity-list">
+      <article class="activity-card detail-ok">
+    <div class="activity-head">
+      <span class="index">1</span>
+      <div>
+        <h2>JustCasino Crypto Promotions – Bonuses, Free Spins &amp; Crypto Rewards </h2>
+        <p>返现 / Cashback · <span class="detail-pill ok-pill">详情页已采集 / Detail captured</span></p>
+      </div>
+    </div>
+<a class="detail-shot-link" href="../../detail-screenshots/justcasino/justcasino-promotions-https-www-justcasino-io-promotions.png"><img class="detail-shot" src="../../detail-screenshots/justcasino/justcasino-promotions-https-www-justcasino-io-promotions.png" alt="JustCasino Crypto Promotions – Bonuses, Free Spins &amp; Crypto Rewards detail screenshot"></a>
+    <dl>
+      <div><dt>要求 / Requirements</dt><dd>odds of winning on your favourite games.Free Spins &amp; Slot PromotionsFree Spins grant</dd></div>
+      <div><dt>触发条件 / Trigger</dt><dd>点击参与/报名后，完成活动指定行为触发奖励</dd></div>
+      <div><dt>奖励方式 / Reward</dt><dd>5% Cashback; 20% Cashback; $500; $50,000; $1,000; $100; $20,000; $70,000</dd></div>
+      <div><dt>目标用户 / Who</dt><dd>新注册/首充用户；VIP 或高价值活跃用户；Casino/Slots 用户</dd></div>
+      <div><dt>时间 / When</dt><dd>ated VIP serviceYour own VIP account manager, VIP events and gifts. Money can’t buy experiences.Sign up;  ate rewardHighest level of reward and gratificationSign upFAQSee allHow do I open an account at JustCas</dd></div>
+      <div><dt>Summary / 总结</dt><dd>JustCasino Crypto Promotions – Bonuses, Free Spins &amp; Crypto Rewards 面向新注册/首充用户；VIP 或高价值活跃用户；Casino/Slots 用户，通过“点击参与/报名后，完成活动指定行为触发奖励”推动用户完成关键行为；奖励为 5% Cashback; 20% Cashback; $500; $50,000; $1,000; $100; $20,000; $70,000。主要参与要求：odds of winning on your favourite games.Free Spins &amp; Slot PromotionsFree Spins grant。</dd></div>
+      <div><dt>核心目的 / Objective</dt><dd>拉新与首充转化</dd></div>
+      <div><dt>数据预期 / Expected Data</dt><dd>拉新与首充转化；预期观察：注册到首充转化率、首存金额、首周留存上升；充值次数、充值金额、Bonus claim rate 上升；投注额、投注单量、有效投注用户数上升。</dd></div>
+      <div><dt>详情页来源 / Detail Source</dt><dd><a href="https://www.justcasino.io/promotions">https://www.justcasino.io/promotions</a></dd></div>
+    </dl>
+<details class="detail-excerpt"><summary>详情页原文摘要 / Detail excerpt</summary><pre>&lt;iframe src=&quot;https://www.googletagmanager.com/ns.html?id=GTM-TQSLNXJ&amp;gtm_auth=&amp;gtm_preview=&amp;gtm_cookies_win=x&quot; height=&quot;0&quot; width=&quot;0&quot; style=&quot;display:none;visibility:hidden&quot; id=&quot;tag-manager&quot;&gt;&lt;/iframe&gt;Level 1Crypto NovaTokens EarnedFor each 20 €/$ wagered on slots you receive 1 point0ExchangeSign Up to UnlockDuring the first week20% daily cashbackLog InSign UpCasinoLive CasinoSportsPredictions Promotions Space Club Tournaments Provably Fair Crypto Guide All Promotions Welcome Offer Slots Live Prize Drops SportsWelcome BonusIncredible 20% DAILY Cashback during your first week!Join Now!More InfoTurbo Cashback10% up to $500 on all games, every week!Join NowMore InfoWeekly $50,000 Raffle50 lucky winners will walk away with $1,000 Cash!Join NowMore InfoChooseday ChallengeSelect your challenge and start playing to unlock your reward up to $100!Join NowMore InfoSlots Cashback BoostPlay selected Slots for an extra 5% Cashback Boost!Join NowMore InfoLive Cashback BoostPlay Live Casino games for an extra 5% Cashback Boost!Join NowMore InfoSecond Chance FridaysSafety net on your deposit: 100% refund if you loseJoin NowMore InfoSupersized PayoutsSpin into mega payouts on selected SlotsJoin NowMore InfoVoltent Jackpot Drops$20,000 of Cash Drops this monthJoin NowMore InfoBlooming Cash$70,000Collect Cash Prize Drops all month long with BGamingJoin NowMore Info$10,000,000 Kash DropsTrigger random cash drops on selected Kalamba SlotsJoin NowMore InfoTaDa Gaming Jackpot Drops$15,000 Of Random Prize Drops Throughout MayJoin NowMore InfoPragmatic Drops &amp; WinsWeekly Wheel Drops &amp; Daily Tournaments!Join NowMore InfoInterested in Sports?Click below to check out our JustSport PromotionsJoin NowGo to SportsRewards and ServicesDedicated VIP serviceYour own VIP account manager, VIP events and gifts. Money can’t buy experiences.Sign upBetter value for moneyDelivering Excellence while raising affordability.Sign upExclusive promotionsUnlocking Delights,Just for youSign upThe ultimate rewardHighest level of reward and gratificationSign upFAQSee allHow do I open an account at JustCasino.io?That's easier than ever. Click on Join Now on the main page of JustCasino.io, fill in t ... [truncated]</pre></details>
+  </article>
+    </section>
+
+    <details class="raw">
+      <summary>查看原始页面文字 / Raw visible text</summary>
+      <pre>&lt;iframe src=&quot;https://www.googletagmanager.com/ns.html?id=GTM-TQSLNXJ&amp;gtm_auth=&amp;gtm_preview=&amp;gtm_cookies_win=x&quot;
+ height=&quot;0&quot; width=&quot;0&quot; style=&quot;display:none;visibility:hidden&quot; id=&quot;tag-manager&quot;&gt;&lt;/iframe&gt;Level 1Crypto NovaTokens EarnedFor each 20 €/$ wagered on slots you receive 1 point0ExchangeSign Up to UnlockDuring the first week20% daily cashbackLog InSign UpCasinoLive CasinoSportsPredictions Promotions Space Club Tournaments Provably Fair Crypto GuideWelcome Bonus20% Daily CashbackSign up &amp; get rewardedEmail*Email*Join Now!or join withHuge selectionOver 9500 games24/7 supportLive Chat AvailableNo waitingFast withdrawalsJustCasino OriginalsAll 15Experience outer spacePlay our new Crash GamesJoin Now!Play nowPlay nowPlay nowPlay nowPlay nowPlay nowPlay nowPlay nowPlay nowPlay nowPlay nowPlay nowPlay nowPlay nowPlay nowMore Games15 gamesPopularAll 41Play nowPlay nowJackpotPlay nowHotPlay nowPlay nowPlay nowPlay nowJackpotPlay nowPlay nowPlay nowJackpotPlay nowJackpotPlay nowPlay nowPlay nowPlay nowMore Games41 gamesNew GamesAll 58Play nownewPlay nownewPlay nownewJackpotPlay nownewJackpotPlay nownewJackpotPlay nownewPlay nownewPlay nownewJackpotPlay nownewJackpotPlay nownewPlay nownewJackpotPlay nownewJackpotPlay nownewPlay nownewPlay nownewJackpotMore Games58 gamesLive GamesAll 25Play nowPlay nowPlay nowPlay nowPlay nowPlay nowPlay nowPlay nowPlay nowPlay nowPlay nowPlay nowPlay nowPlay nowPlay nowMore Games25 gamesProvidersRewards and ServicesDedicated VIP serviceYour own VIP account manager, VIP events and gifts. Money can’t buy experiences.Sign upBetter value for moneyDelivering Excellence while raising affordability.Sign upExclusive promotionsUnlocking Delights,Just for youSign upThe ultimate rewardHighest level of reward and gratificationSign upFAQSee allHow do I open an account at JustCasino.io?That's easier than ever. Click on Join Now on the main page of JustCasino.io, fill in the registration form and click 'Sign Up'. You will land on the deposit page immediately and a welcome message will be sent to the e-mail address you provided in the registration form.Am I authorised to have more than one account?No, we allow one registration account per person to keep things fair.I have forgotten my password. What shall I do?The fastest way to reset your password is to click 'Log In', then the 'Forgot Password?' link. You will then receive an email with a link to create a new password. It takes about 30 seconds to do. If you can't reset the password yourself or you can't get into your email account, contact our customer care team via live chat or email support@justcasino.io and once we've confirmed you are who you are, we can reset your password.How do I add another currency to my account?Just sign in, go into your personal profile 'My Account', then click the 'Add Currency' button and select a currency from the dropdown menu.JustCasino.io gives you the best Crypto casino experienceWelcome to JustCasino Сrypto, the rising star in the galaxy of online crypto casinos! As the ultimate entertainment hub in the vast space of the internet, JustCasino Сrypto offers a vast selection of games, unlimited payment options, spectacular bonuses, promotional deals, and an exclusive Space Program. Experience the thrill of intergalactic gaming right from the comfort of your own planet, without the need for any fancy dress or travel. Our mobile-first online casino design ensures a seamless user experience, with all the excitement just a touch away.Dive into the Cosmic Casino Games CollectionBlast off with our extensive collection of online casino games, accessible from anywhere in the universe. With all your favorite game providers and titles in one place, you can play as many online slots as you desire. Whether you're a newcomer or a seasoned gambler, JustCasino Сrypto has everything you need. With contributions from the most renowned gambling providers, you'll find titles from the likes of Bgaming, NetEnt and Betsoft Gaming, all under one cosmic roof. Our casino games are regularly audited for fairness to ensure that every spin, deal, and bet is truly out of this world.Big Online Casino Bonuses and Rewards Beyond the StarsJoin the JustCasino Сrypto mission and receive a 100% casino welcome offer, as our tribute to your loyalty. Our casino bonuses are crafted with the player in mind, designed by players and delivered with expert knowledge. Enhance your gaming experience and boost your balance with this generous gift. As you continue your cosmic voyage, you'll encounter reload bonuses, cashback offers, and even astronomical tournaments with colossal prize pools. Keep on the lookout for our promotions page, where we unveil limited-time offers that will leave you starry-eyed.Secure Transactions and Cosmic Customer SupportAt the heart of Just Casino Сrypto is the safekeeping of our customers' funds, with deposits and withdrawals always top priority. We strive to become the best crypto casino online in the industry and continuously update our payment methods to ensure secure transactions.Our dedicated customer support team is always available to assist you, answering any questions or concerns you may have. Feel supported on your journey through the stars with JustCasino. Classic Casino Table Games Where Cosmic Fortunes AwaitSet your sights on our classic table games, with high stakes and a vast selection to choose from. Whether you're a master tactician at blackjack, a fearless bluffer at poker, or a roulette enthusiast predicting where the cosmic ball will land, our table games offer an experience like no other. Play like a pro and experience the excitement that only JustCasino Сrypto can deliver.Read MorePlay withBitcoinbtcEtheriumethUSDTusdtLitecoinltcSolanasolUSDCusdcToncointonTrontrxRipplexprBNB ChainbnbDogecoinDOGEBitcoin CashbchCardanoadaBitcoinbtcEtheriumethUSDTusdtLitecoinltcSolanasolUSDCusdcToncointonTrontrxRipplexprBNB ChainbnbDogecoinDOGEBitcoin CashbchCardanoadaBitcoinbtcEtheriumethUSDTusdtLitecoinltcSolanasolUSDCusdcToncointonTrontrxRipplexprBNB ChainbnbDogecoinDOGEBitcoin CashbchCardanoadaBitcoinbtcEtheriumethUSDTusdtLitecoinltcSolanasolUSDCusdcToncointonTrontrxRipplexprBNB ChainbnbDogecoinDOGEBitcoin CashbchCardanoadaBitcoinbtcEtheriumethUSDTusdtLitecoinltcSolanasolUSDCusdcToncointonTrontrxRipplexprBNB ChainbnbDogecoinDOGEBitcoin CashbchCardanoadaBitcoinbtcEtheriumethUSDTusdtLitecoinltcSolanasolUSDCusdcToncointonTrontrxRipplexprBNB ChainbnbDogecoinDOGEBitcoin CashbchCardanoadaBitcoinbtcEtheriumethUSDTusdtLitecoinltcSolanasolUSDCusdcToncointonTrontrxRipplexprBNB ChainbnbDogecoinDOGEBitcoin CashbchCardanoadaBitcoinbtcEtheriumethUSDTusdtLitecoinltcSolanasolUSDCusdcToncointonTrontrxRipplexprBNB ChainbnbDogecoinDOGEBitcoin CashbchCardanoadaBitcoinbtcEtheriumethUSDTusdtLitecoinltcSolanasolUSDCusdcToncointonTrontrxRipplexprBNB ChainbnbDogecoinDOGEBitcoin CashbchCardanoadaBitcoinbtcEtheriumethUSDTusdtLitecoinltcSolanasolUSDCusdcToncointonTrontrxRipplexprBNB ChainbnbDogecoinDOGEBitcoin CashbchCardanoadaBitcoinbtcEtheriumethUSDTusdtLitecoinltcSolanasolUSDCusdcToncointonTrontrxRipplexprBNB ChainbnbDogecoinDOGEBitcoin CashbchCardanoadaBitcoinbtcEtheriumethUSDTusdtLitecoinltcSolanasolUSDCusdcToncointonTrontrxRipplexprBNB ChainbnbDogecoinDOGEBitcoin CashbchCardanoadaBitcoinbtcEtheriumethUSDTusdtLitecoinltcSolanasolUSDCusdcToncointonTrontrxRipplexprBNB ChainbnbDogecoinDOGEBitcoin CashbchCardanoadaBitcoinbtcEtheriumethUSDTusdtLitecoinltcSolanasolUSDCusdcToncointonTrontrxRipplexprBNB ChainbnbDogecoinDOGEBitcoin CashbchCardanoadaBitcoinbtcEtheriumethUSDTusdtLitecoinltcSolanasolUSDCusdcToncointonTrontrxRipplexprBNB ChainbnbDogecoinDOGEBitcoin CashbchCardanoadaBitcoinbtcEtheriumethUSDTusdtLitecoinltcSolanasolUSDCusdcToncointonTrontrxRipplexprBNB ChainbnbDogecoinDOGEBitcoin CashbchCardanoadaBitcoinbtcEtheriumethUSDTusdtLitecoinltcSolanasolUSDCusdcToncointonTrontrxRipplexprBNB ChainbnbDogecoinDOGEBitcoin CashbchCardanoadaBitcoinbtcEtheriumethUSDTusdtLitecoinltcSolanasolUSDCusdcToncointonTrontrxRipplexprBNB ChainbnbDogecoinDOGEBitcoin CashbchCardanoadaBitcoinbtcEtheriumethUSDTusdtLitecoinltcSolanasolUSDCusdcToncointonTrontrxRipplexprBNB ChainbnbDogecoinDOGEBitcoin CashbchCardanoadaBitcoinbtcEtheriumethUSDTusdtLitecoinltcSolanasolUSDCusdcToncointonTrontrxRipplexprBNB ChainbnbDogecoinDOGEBitcoin CashbchCardanoadaBitcoinbtcEtheriumethUSDTusdtLitecoinltcSolanasolUSDCusdcToncointonTrontrxRipplexprBNB ChainbnbDogecoinDOGEBitcoin CashbchCardanoadaBitcoinbtcEtheriumethUSDTusdtLitecoinltcSolanasolUSDCusdcToncointonTrontrxRipplexprBNB ChainbnbDogecoinDOGEBitcoin CashbchCardanoadaBitcoinbtcEtheriumethUSDTusdtLitecoinltcSolanasolUSDCusdcToncointonTrontrxRipplexprBNB ChainbnbDogecoinDOGEBitcoin CashbchCardanoadaBitcoinbtcEtheriumethUSDTusdtLitecoinltcSolanasolUSDCusdcToncointonTrontrxRipplexprBNB ChainbnbDogecoinDOGEBitcoin CashbchCardanoadaBitcoinbtcEtheriumethUSDTusdtLitecoinltcSolanasolUSDCusdcToncointonTrontrxRipplexprBNB ChainbnbDogecoinDOGEBitcoin CashbchCardanoadaBitcoinbtcEtheriumethUSDTusdtLitecoinltcSolanasolUSDCusdcToncointonTrontrxRipplexprBNB ChainbnbDogecoinDOGEBitcoin CashbchCardanoadaJoin NowWe use cookies to improve your experience. By using our website you are accepting our Cookie Policy.AcceptCurrently Unavailable in MalaysiaTravelling? Use a VPNView Unavailable CountriesContact Support for more info.</pre>
+    </details>
+  </main>
+</body>
+</html>

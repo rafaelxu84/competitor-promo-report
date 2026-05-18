@@ -550,6 +550,10 @@ function enrichRowsWithDetails(items, detailByBrand) {
       if (!detail) {
         row.detailStatus = "fallback";
         row.detailStatusLabel = "列表页兜底 / Listing fallback";
+        row.detailUrl = item.finalUrl || item.url || "";
+        row.detailScreenshot = item.screenshot ? normalizeScreenshotPath(item.screenshot) : "";
+        row.detailExcerpt = clean(row.note || item.text || "").slice(0, 1600);
+        row.analysis = buildActivityAnalysis(row);
         stats.fallback += 1;
         continue;
       }

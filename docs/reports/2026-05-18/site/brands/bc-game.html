@@ -1,0 +1,237 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>BC Game 活动详情</title>
+  <style>
+    :root { --bg:#f5f6f2; --panel:#fff; --ink:#15201b; --muted:#66736d; --line:#d8ddd4; --green:#0d7658; --blue:#245c9e; --amber:#9a6816; --red:#a54040; --soft:#eef4f0; }
+    * { box-sizing:border-box; }
+    body { margin:0; background:var(--bg); color:var(--ink); font-family:Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; line-height:1.45; }
+    .page { max-width:1280px; margin:0 auto; padding:28px 18px 56px; }
+    .hero { background:var(--panel); border:1px solid var(--line); border-radius:8px; padding:24px; display:grid; grid-template-columns:minmax(0,1fr) 280px; gap:18px; align-items:end; margin-bottom:18px; }
+    .brand-hero { margin-bottom:16px; }
+    .eyebrow { margin:0 0 8px; color:var(--green); font-size:12px; font-weight:800; text-transform:uppercase; letter-spacing:.04em; }
+    h1 { margin:0 0 8px; font-size:32px; line-height:1.12; letter-spacing:0; }
+    h2 { margin:0 0 6px; font-size:18px; letter-spacing:0; }
+    p { margin:0; }
+    .sub, .meta { color:var(--muted); }
+    .status { display:inline-flex; align-items:center; border-radius:999px; padding:3px 8px; font-size:12px; font-weight:800; white-space:nowrap; }
+    .ok { color:var(--green); background:#e5f3ed; }
+    .mid { color:var(--amber); background:#fff4df; }
+    .blue { color:var(--blue); background:#e9f0fb; }
+    .low { color:var(--red); background:#faeeee; }
+    .meta { background:#f8faf7; border:1px solid var(--line); border-radius:8px; padding:14px; }
+    .meta b { display:inline-block; min-width:92px; color:var(--ink); }
+    .brand-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:14px; }
+    .brand-card { display:grid; grid-template-columns:220px minmax(0,1fr); gap:14px; padding:14px; color:var(--ink); text-decoration:none; background:var(--panel); border:1px solid var(--line); border-radius:8px; }
+    .brand-card img, .visual img { width:100%; border:1px solid var(--line); border-radius:8px; background:#edf0ea; object-fit:cover; }
+    .brand-card img { aspect-ratio:16/10; }
+    .brand-card span { display:inline-flex; margin-top:10px; color:var(--blue); font-weight:700; }
+    .new-badge { display:inline-flex; align-items:center; border-radius:999px; background:#fff4df; color:#9a6816; padding:3px 8px; font-size:12px; font-weight:800; margin-left:6px; vertical-align:middle; }
+    .topnav { margin-bottom:12px; }
+    .topnav a { color:var(--blue); font-weight:700; text-decoration:none; }
+    .visual { background:var(--panel); border:1px solid var(--line); border-radius:8px; padding:14px; margin-bottom:16px; }
+    .visual img { max-height:520px; object-fit:contain; }
+    .activity-list { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:14px; }
+    .activity-card { background:var(--panel); border:1px solid var(--line); border-radius:8px; padding:16px; }
+    .activity-card.detail-ok { border-left:4px solid var(--green); }
+    .activity-card.detail-limited { border-left:4px solid var(--amber); }
+    .activity-card.detail-missing { border-left:4px solid #a8b1ac; }
+    .activity-head { display:grid; grid-template-columns:36px minmax(0,1fr); gap:10px; align-items:start; margin-bottom:12px; }
+    .index { display:inline-grid; place-items:center; width:30px; height:30px; border-radius:999px; background:var(--soft); color:var(--green); font-weight:800; }
+    .detail-shot-link { display:block; margin:8px 0 12px; }
+    .detail-shot { width:100%; max-height:360px; object-fit:cover; object-position:top; border:1px solid var(--line); border-radius:8px; background:#edf0ea; }
+    dl { display:grid; gap:8px; margin:0; }
+    dl div { display:grid; grid-template-columns:150px minmax(0,1fr); gap:10px; border-top:1px solid var(--line); padding-top:8px; }
+    dt { color:var(--muted); font-size:12px; font-weight:800; }
+    dd { margin:0; font-size:13px; }
+    .missing-text { color:var(--muted); }
+    .detail-pill { display:inline-flex; align-items:center; border-radius:999px; padding:3px 8px; font-size:12px; font-weight:800; }
+    .ok-pill { background:#e5f3ed; color:var(--green); }
+    .limited-pill { background:#fff4df; color:var(--amber); }
+    .fallback-pill { background:#eef0ea; color:var(--muted); }
+    .detail-excerpt { margin-top:12px; border-top:1px solid var(--line); padding-top:10px; }
+    .detail-excerpt summary { cursor:pointer; color:var(--blue); font-weight:800; }
+    .raw { background:var(--panel); border:1px solid var(--line); border-radius:8px; padding:14px; margin-top:16px; }
+    pre { white-space:pre-wrap; word-break:break-word; background:#111714; color:#eef6f0; padding:12px; border-radius:8px; max-height:320px; overflow:auto; font-size:12px; }
+    a { color:var(--blue); }
+    @media (max-width:900px) { .hero, .brand-grid, .brand-card, .activity-list { grid-template-columns:1fr; } h1 { font-size:27px; } dl div { grid-template-columns:1fr; } }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <nav class="topnav"><a href="../index.html">返回品牌入口 / Back to brands</a></nav>
+    <section class="hero brand-hero">
+      <div>
+        <p class="eyebrow">Brand Promotion Page</p>
+        <h1>BC Game</h1>
+        <p class="sub">来源 Source：<a href="https://bc.fun/en-IN/promotions/promotion">https://bc.fun/en-IN/promotions/promotion</a></p>
+        <p class="sub">本页优先使用活动详情页 full-page screenshot 与可见正文，输出要求、Trigger、Reward、Who、When、Summary、核心目的和数据预期。</p>
+        <p class="sub"><span class="status ok">可访问 / OK</span></p>
+      </div>
+      <div class="meta">
+        <b>活动 Activities</b>5<br>
+        <b>详情 Details</b>0<br>
+        <b>详情截图 Shots</b>5<br>
+        <b>状态 Status</b>ok
+      </div>
+    </section>
+
+    <section class="visual">
+      <img src="../../browser-screenshots/bc-game-bc-game-promotions.png" alt="BC Game screenshot">
+    </section>
+
+    <section class="activity-list">
+      <article class="activity-card detail-missing">
+    <div class="activity-head">
+      <span class="index">1</span>
+      <div>
+        <h2>FREE SPINS GIVEAWAY </h2>
+        <p>免费旋转 / Free Spins · <span class="detail-pill fallback-pill">列表页兜底 / Listing fallback</span></p>
+      </div>
+    </div>
+<a class="detail-shot-link" href="../../browser-screenshots/bc-game-bc-game-promotions.png"><img class="detail-shot" src="../../browser-screenshots/bc-game-bc-game-promotions.png" alt="FREE SPINS GIVEAWAY detail screenshot"></a>
+    <dl>
+      <div><dt>要求 / Requirements</dt><dd>Bet €10 every day and get 20 Free Spins daily!</dd></div>
+      <div><dt>触发条件 / Trigger</dt><dd>用户进入指定老虎机/游戏或完成每日任务触发</dd></div>
+      <div><dt>奖励方式 / Reward</dt><dd>20 FREE SPINS; €10; 20 Free Spins</dd></div>
+      <div><dt>目标用户 / Who</dt><dd>新注册/首充用户；Casino/Slots 用户</dd></div>
+      <div><dt>时间 / When</dt><dd>May 20</dd></div>
+      <div><dt>Summary / 总结</dt><dd>FREE SPINS GIVEAWAY 面向新注册/首充用户；Casino/Slots 用户，通过“用户进入指定老虎机/游戏或完成每日任务触发”推动用户完成关键行为；奖励为 20 FREE SPINS; €10; 20 Free Spins。主要参与要求：Bet €10 every day and get 20 Free Spins daily!。</dd></div>
+      <div><dt>核心目的 / Objective</dt><dd>引导 Casino/Slots 试玩与日活</dd></div>
+      <div><dt>数据预期 / Expected Data</dt><dd>引导 Casino/Slots 试玩与日活；预期观察：投注额、投注单量、有效投注用户数上升；Casino DAU、游戏启动次数、免费旋转转付费率上升。</dd></div>
+      <div><dt>详情页来源 / Detail Source</dt><dd><a href="https://bc.fun/en-IN/promotions/promotion">https://bc.fun/en-IN/promotions/promotion</a></dd></div>
+    </dl>
+<details class="detail-excerpt"><summary>详情页原文摘要 / Detail excerpt</summary><pre>Promotion All Casino BC Exclusive New Release 20 FREE SPINS FREE SPINS GIVEAWAY Bet €10 every day and get 20 Free Spins daily! Ends May 20 120 FREE SPINS CHOP CHOP 7-DAY GIFT Complete daily tasks for 7 days &amp; win up to 120 FREE SPINS! Ends May 21 EXCLUSIVE 98% RTP NOLIMITCITY EXCLUSIVE 98% RTP Enjoy 98% RTP for higher returns on every bet. Ends May 25 10 FREE SPINS 3 CURSED CHESTS FREE SPINS Bet €10 daily, get 10 Free Spins Ends May 28 EARLY RELEASE TRIPLE TREASURE COVE Exclusive early release, only on BC.GAME Ends May 22 Archived 列表页兜底 / Listing fallback: BC Game Chrome page did not expose independent promotion detail links during capture.</pre></details>
+  </article>
+<article class="activity-card detail-missing">
+    <div class="activity-head">
+      <span class="index">2</span>
+      <div>
+        <h2>CHOP CHOP 7-DAY GIFT </h2>
+        <p>免费旋转 / Free Spins · <span class="detail-pill fallback-pill">列表页兜底 / Listing fallback</span></p>
+      </div>
+    </div>
+<a class="detail-shot-link" href="../../browser-screenshots/bc-game-bc-game-promotions.png"><img class="detail-shot" src="../../browser-screenshots/bc-game-bc-game-promotions.png" alt="CHOP CHOP 7-DAY GIFT detail screenshot"></a>
+    <dl>
+      <div><dt>要求 / Requirements</dt><dd>Complete daily tasks for 7 days &amp; win up to 120 FREE SPINS!</dd></div>
+      <div><dt>触发条件 / Trigger</dt><dd>用户进入指定老虎机/游戏或完成每日任务触发</dd></div>
+      <div><dt>奖励方式 / Reward</dt><dd>120 FREE SPINS; up to 120 FREE SPINS</dd></div>
+      <div><dt>目标用户 / Who</dt><dd>新注册/首充用户；Casino/Slots 用户</dd></div>
+      <div><dt>时间 / When</dt><dd>May 21</dd></div>
+      <div><dt>Summary / 总结</dt><dd>CHOP CHOP 7-DAY GIFT 面向新注册/首充用户；Casino/Slots 用户，通过“用户进入指定老虎机/游戏或完成每日任务触发”推动用户完成关键行为；奖励为 120 FREE SPINS; up to 120 FREE SPINS。主要参与要求：Complete daily tasks for 7 days &amp; win up to 120 FREE SPINS!。</dd></div>
+      <div><dt>核心目的 / Objective</dt><dd>引导 Casino/Slots 试玩与日活</dd></div>
+      <div><dt>数据预期 / Expected Data</dt><dd>引导 Casino/Slots 试玩与日活；预期观察：投注额、投注单量、有效投注用户数上升；Casino DAU、游戏启动次数、免费旋转转付费率上升。</dd></div>
+      <div><dt>详情页来源 / Detail Source</dt><dd><a href="https://bc.fun/en-IN/promotions/promotion">https://bc.fun/en-IN/promotions/promotion</a></dd></div>
+    </dl>
+<details class="detail-excerpt"><summary>详情页原文摘要 / Detail excerpt</summary><pre>Promotion All Casino BC Exclusive New Release 20 FREE SPINS FREE SPINS GIVEAWAY Bet €10 every day and get 20 Free Spins daily! Ends May 20 120 FREE SPINS CHOP CHOP 7-DAY GIFT Complete daily tasks for 7 days &amp; win up to 120 FREE SPINS! Ends May 21 EXCLUSIVE 98% RTP NOLIMITCITY EXCLUSIVE 98% RTP Enjoy 98% RTP for higher returns on every bet. Ends May 25 10 FREE SPINS 3 CURSED CHESTS FREE SPINS Bet €10 daily, get 10 Free Spins Ends May 28 EARLY RELEASE TRIPLE TREASURE COVE Exclusive early release, only on BC.GAME Ends May 22 Archived 列表页兜底 / Listing fallback: BC Game Chrome page did not expose independent promotion detail links during capture.</pre></details>
+  </article>
+<article class="activity-card detail-missing">
+    <div class="activity-head">
+      <span class="index">3</span>
+      <div>
+        <h2>NOLIMITCITY EXCLUSIVE 98% RTP </h2>
+        <p>综合活动 / General Promotion · <span class="detail-pill fallback-pill">列表页兜底 / Listing fallback</span></p>
+      </div>
+    </div>
+<a class="detail-shot-link" href="../../browser-screenshots/bc-game-bc-game-promotions.png"><img class="detail-shot" src="../../browser-screenshots/bc-game-bc-game-promotions.png" alt="NOLIMITCITY EXCLUSIVE 98% RTP detail screenshot"></a>
+    <dl>
+      <div><dt>要求 / Requirements</dt><dd>Enjoy 98% RTP for higher returns on every bet.</dd></div>
+      <div><dt>触发条件 / Trigger</dt><dd>用户进入指定老虎机/游戏或完成每日任务触发</dd></div>
+      <div><dt>奖励方式 / Reward</dt><dd>98%</dd></div>
+      <div><dt>目标用户 / Who</dt><dd>新注册/首充用户；Casino/Slots 用户</dd></div>
+      <div><dt>时间 / When</dt><dd>May 25</dd></div>
+      <div><dt>Summary / 总结</dt><dd>NOLIMITCITY EXCLUSIVE 98% RTP 面向新注册/首充用户；Casino/Slots 用户，通过“用户进入指定老虎机/游戏或完成每日任务触发”推动用户完成关键行为；奖励为 98%。主要参与要求：Enjoy 98% RTP for higher returns on every bet.。</dd></div>
+      <div><dt>核心目的 / Objective</dt><dd>引导 Casino/Slots 试玩与日活</dd></div>
+      <div><dt>数据预期 / Expected Data</dt><dd>引导 Casino/Slots 试玩与日活；预期观察：投注额、投注单量、有效投注用户数上升；Casino DAU、游戏启动次数、免费旋转转付费率上升。</dd></div>
+      <div><dt>详情页来源 / Detail Source</dt><dd><a href="https://bc.fun/en-IN/promotions/promotion">https://bc.fun/en-IN/promotions/promotion</a></dd></div>
+    </dl>
+<details class="detail-excerpt"><summary>详情页原文摘要 / Detail excerpt</summary><pre>Promotion All Casino BC Exclusive New Release 20 FREE SPINS FREE SPINS GIVEAWAY Bet €10 every day and get 20 Free Spins daily! Ends May 20 120 FREE SPINS CHOP CHOP 7-DAY GIFT Complete daily tasks for 7 days &amp; win up to 120 FREE SPINS! Ends May 21 EXCLUSIVE 98% RTP NOLIMITCITY EXCLUSIVE 98% RTP Enjoy 98% RTP for higher returns on every bet. Ends May 25 10 FREE SPINS 3 CURSED CHESTS FREE SPINS Bet €10 daily, get 10 Free Spins Ends May 28 EARLY RELEASE TRIPLE TREASURE COVE Exclusive early release, only on BC.GAME Ends May 22 Archived 列表页兜底 / Listing fallback: BC Game Chrome page did not expose independent promotion detail links during capture.</pre></details>
+  </article>
+<article class="activity-card detail-missing">
+    <div class="activity-head">
+      <span class="index">4</span>
+      <div>
+        <h2>3 CURSED CHESTS FREE SPINS </h2>
+        <p>免费旋转 / Free Spins · <span class="detail-pill fallback-pill">列表页兜底 / Listing fallback</span></p>
+      </div>
+    </div>
+<a class="detail-shot-link" href="../../browser-screenshots/bc-game-bc-game-promotions.png"><img class="detail-shot" src="../../browser-screenshots/bc-game-bc-game-promotions.png" alt="3 CURSED CHESTS FREE SPINS detail screenshot"></a>
+    <dl>
+      <div><dt>要求 / Requirements</dt><dd>Bet €10 daily, get 10 Free Spins</dd></div>
+      <div><dt>触发条件 / Trigger</dt><dd>用户进入指定老虎机/游戏或完成每日任务触发</dd></div>
+      <div><dt>奖励方式 / Reward</dt><dd>10 FREE SPINS; €10; 10 Free Spins</dd></div>
+      <div><dt>目标用户 / Who</dt><dd>新注册/首充用户；Casino/Slots 用户</dd></div>
+      <div><dt>时间 / When</dt><dd>May 28</dd></div>
+      <div><dt>Summary / 总结</dt><dd>3 CURSED CHESTS FREE SPINS 面向新注册/首充用户；Casino/Slots 用户，通过“用户进入指定老虎机/游戏或完成每日任务触发”推动用户完成关键行为；奖励为 10 FREE SPINS; €10; 10 Free Spins。主要参与要求：Bet €10 daily, get 10 Free Spins。</dd></div>
+      <div><dt>核心目的 / Objective</dt><dd>引导 Casino/Slots 试玩与日活</dd></div>
+      <div><dt>数据预期 / Expected Data</dt><dd>引导 Casino/Slots 试玩与日活；预期观察：投注额、投注单量、有效投注用户数上升；Casino DAU、游戏启动次数、免费旋转转付费率上升。</dd></div>
+      <div><dt>详情页来源 / Detail Source</dt><dd><a href="https://bc.fun/en-IN/promotions/promotion">https://bc.fun/en-IN/promotions/promotion</a></dd></div>
+    </dl>
+<details class="detail-excerpt"><summary>详情页原文摘要 / Detail excerpt</summary><pre>Promotion All Casino BC Exclusive New Release 20 FREE SPINS FREE SPINS GIVEAWAY Bet €10 every day and get 20 Free Spins daily! Ends May 20 120 FREE SPINS CHOP CHOP 7-DAY GIFT Complete daily tasks for 7 days &amp; win up to 120 FREE SPINS! Ends May 21 EXCLUSIVE 98% RTP NOLIMITCITY EXCLUSIVE 98% RTP Enjoy 98% RTP for higher returns on every bet. Ends May 25 10 FREE SPINS 3 CURSED CHESTS FREE SPINS Bet €10 daily, get 10 Free Spins Ends May 28 EARLY RELEASE TRIPLE TREASURE COVE Exclusive early release, only on BC.GAME Ends May 22 Archived 列表页兜底 / Listing fallback: BC Game Chrome page did not expose independent promotion detail links during capture.</pre></details>
+  </article>
+<article class="activity-card detail-missing">
+    <div class="activity-head">
+      <span class="index">5</span>
+      <div>
+        <h2>TRIPLE TREASURE COVE </h2>
+        <p>综合活动 / General Promotion · <span class="detail-pill fallback-pill">列表页兜底 / Listing fallback</span></p>
+      </div>
+    </div>
+<a class="detail-shot-link" href="../../browser-screenshots/bc-game-bc-game-promotions.png"><img class="detail-shot" src="../../browser-screenshots/bc-game-bc-game-promotions.png" alt="TRIPLE TREASURE COVE detail screenshot"></a>
+    <dl>
+      <div><dt>要求 / Requirements</dt><dd>Exclusive early release, only on BC.GAME</dd></div>
+      <div><dt>触发条件 / Trigger</dt><dd>用户进入指定老虎机/游戏或完成每日任务触发</dd></div>
+      <div><dt>奖励方式 / Reward</dt><dd>EARLY RELEASE</dd></div>
+      <div><dt>目标用户 / Who</dt><dd>新注册/首充用户；Casino/Slots 用户</dd></div>
+      <div><dt>时间 / When</dt><dd>May 22</dd></div>
+      <div><dt>Summary / 总结</dt><dd>TRIPLE TREASURE COVE 面向新注册/首充用户；Casino/Slots 用户，通过“用户进入指定老虎机/游戏或完成每日任务触发”推动用户完成关键行为；奖励为 EARLY RELEASE。主要参与要求：Exclusive early release, only on BC.GAME。</dd></div>
+      <div><dt>核心目的 / Objective</dt><dd>引导 Casino/Slots 试玩与日活</dd></div>
+      <div><dt>数据预期 / Expected Data</dt><dd>引导 Casino/Slots 试玩与日活；预期观察：投注额、投注单量、有效投注用户数上升；Casino DAU、游戏启动次数、免费旋转转付费率上升。</dd></div>
+      <div><dt>详情页来源 / Detail Source</dt><dd><a href="https://bc.fun/en-IN/promotions/promotion">https://bc.fun/en-IN/promotions/promotion</a></dd></div>
+    </dl>
+<details class="detail-excerpt"><summary>详情页原文摘要 / Detail excerpt</summary><pre>Promotion All Casino BC Exclusive New Release 20 FREE SPINS FREE SPINS GIVEAWAY Bet €10 every day and get 20 Free Spins daily! Ends May 20 120 FREE SPINS CHOP CHOP 7-DAY GIFT Complete daily tasks for 7 days &amp; win up to 120 FREE SPINS! Ends May 21 EXCLUSIVE 98% RTP NOLIMITCITY EXCLUSIVE 98% RTP Enjoy 98% RTP for higher returns on every bet. Ends May 25 10 FREE SPINS 3 CURSED CHESTS FREE SPINS Bet €10 daily, get 10 Free Spins Ends May 28 EARLY RELEASE TRIPLE TREASURE COVE Exclusive early release, only on BC.GAME Ends May 22 Archived 列表页兜底 / Listing fallback: BC Game Chrome page did not expose independent promotion detail links during capture.</pre></details>
+  </article>
+    </section>
+
+    <details class="raw">
+      <summary>查看原始页面文字 / Raw visible text</summary>
+      <pre>Promotion
+All
+Casino
+BC Exclusive
+New Release
+20 FREE SPINS
+FREE SPINS GIVEAWAY
+Bet €10 every day and get 20 Free Spins daily!
+Ends
+May 20
+120 FREE SPINS
+CHOP CHOP 7-DAY GIFT
+Complete daily tasks for 7 days &amp; win up to 120 FREE SPINS!
+Ends
+May 21
+EXCLUSIVE
+98% RTP
+NOLIMITCITY EXCLUSIVE 98% RTP
+Enjoy 98% RTP for higher returns on every bet.
+Ends
+May 25
+10 FREE SPINS
+3 CURSED CHESTS FREE SPINS
+Bet €10 daily, get 10 Free Spins
+Ends
+May 28
+EARLY RELEASE
+TRIPLE TREASURE COVE
+Exclusive early release, only on BC.GAME
+Ends
+May 22
+Archived
+
+列表页兜底 / Listing fallback: BC Game Chrome page did not expose independent promotion detail links during capture.</pre>
+    </details>
+  </main>
+</body>
+</html>

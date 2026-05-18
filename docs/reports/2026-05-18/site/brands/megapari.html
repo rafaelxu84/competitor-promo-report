@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Megapari 活动详情</title>
+  <style>
+    :root { --bg:#f5f6f2; --panel:#fff; --ink:#15201b; --muted:#66736d; --line:#d8ddd4; --green:#0d7658; --blue:#245c9e; --amber:#9a6816; --red:#a54040; --soft:#eef4f0; }
+    * { box-sizing:border-box; }
+    body { margin:0; background:var(--bg); color:var(--ink); font-family:Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; line-height:1.45; }
+    .page { max-width:1280px; margin:0 auto; padding:28px 18px 56px; }
+    .hero { background:var(--panel); border:1px solid var(--line); border-radius:8px; padding:24px; display:grid; grid-template-columns:minmax(0,1fr) 280px; gap:18px; align-items:end; margin-bottom:18px; }
+    .brand-hero { margin-bottom:16px; }
+    .eyebrow { margin:0 0 8px; color:var(--green); font-size:12px; font-weight:800; text-transform:uppercase; letter-spacing:.04em; }
+    h1 { margin:0 0 8px; font-size:32px; line-height:1.12; letter-spacing:0; }
+    h2 { margin:0 0 6px; font-size:18px; letter-spacing:0; }
+    p { margin:0; }
+    .sub, .meta { color:var(--muted); }
+    .status { display:inline-flex; align-items:center; border-radius:999px; padding:3px 8px; font-size:12px; font-weight:800; white-space:nowrap; }
+    .ok { color:var(--green); background:#e5f3ed; }
+    .mid { color:var(--amber); background:#fff4df; }
+    .blue { color:var(--blue); background:#e9f0fb; }
+    .low { color:var(--red); background:#faeeee; }
+    .meta { background:#f8faf7; border:1px solid var(--line); border-radius:8px; padding:14px; }
+    .meta b { display:inline-block; min-width:92px; color:var(--ink); }
+    .brand-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:14px; }
+    .brand-card { display:grid; grid-template-columns:220px minmax(0,1fr); gap:14px; padding:14px; color:var(--ink); text-decoration:none; background:var(--panel); border:1px solid var(--line); border-radius:8px; }
+    .brand-card img, .visual img { width:100%; border:1px solid var(--line); border-radius:8px; background:#edf0ea; object-fit:cover; }
+    .brand-card img { aspect-ratio:16/10; }
+    .brand-card span { display:inline-flex; margin-top:10px; color:var(--blue); font-weight:700; }
+    .new-badge { display:inline-flex; align-items:center; border-radius:999px; background:#fff4df; color:#9a6816; padding:3px 8px; font-size:12px; font-weight:800; margin-left:6px; vertical-align:middle; }
+    .topnav { margin-bottom:12px; }
+    .topnav a { color:var(--blue); font-weight:700; text-decoration:none; }
+    .visual { background:var(--panel); border:1px solid var(--line); border-radius:8px; padding:14px; margin-bottom:16px; }
+    .visual img { max-height:520px; object-fit:contain; }
+    .activity-list { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:14px; }
+    .activity-card { background:var(--panel); border:1px solid var(--line); border-radius:8px; padding:16px; }
+    .activity-card.detail-ok { border-left:4px solid var(--green); }
+    .activity-card.detail-limited { border-left:4px solid var(--amber); }
+    .activity-card.detail-missing { border-left:4px solid #a8b1ac; }
+    .activity-head { display:grid; grid-template-columns:36px minmax(0,1fr); gap:10px; align-items:start; margin-bottom:12px; }
+    .index { display:inline-grid; place-items:center; width:30px; height:30px; border-radius:999px; background:var(--soft); color:var(--green); font-weight:800; }
+    .detail-shot-link { display:block; margin:8px 0 12px; }
+    .detail-shot { width:100%; max-height:360px; object-fit:cover; object-position:top; border:1px solid var(--line); border-radius:8px; background:#edf0ea; }
+    dl { display:grid; gap:8px; margin:0; }
+    dl div { display:grid; grid-template-columns:150px minmax(0,1fr); gap:10px; border-top:1px solid var(--line); padding-top:8px; }
+    dt { color:var(--muted); font-size:12px; font-weight:800; }
+    dd { margin:0; font-size:13px; }
+    .missing-text { color:var(--muted); }
+    .detail-pill { display:inline-flex; align-items:center; border-radius:999px; padding:3px 8px; font-size:12px; font-weight:800; }
+    .ok-pill { background:#e5f3ed; color:var(--green); }
+    .limited-pill { background:#fff4df; color:var(--amber); }
+    .fallback-pill { background:#eef0ea; color:var(--muted); }
+    .detail-excerpt { margin-top:12px; border-top:1px solid var(--line); padding-top:10px; }
+    .detail-excerpt summary { cursor:pointer; color:var(--blue); font-weight:800; }
+    .raw { background:var(--panel); border:1px solid var(--line); border-radius:8px; padding:14px; margin-top:16px; }
+    pre { white-space:pre-wrap; word-break:break-word; background:#111714; color:#eef6f0; padding:12px; border-radius:8px; max-height:320px; overflow:auto; font-size:12px; }
+    a { color:var(--blue); }
+    @media (max-width:900px) { .hero, .brand-grid, .brand-card, .activity-list { grid-template-columns:1fr; } h1 { font-size:27px; } dl div { grid-template-columns:1fr; } }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <nav class="topnav"><a href="../index.html">返回品牌入口 / Back to brands</a></nav>
+    <section class="hero brand-hero">
+      <div>
+        <p class="eyebrow">Brand Promotion Page</p>
+        <h1>Megapari</h1>
+        <p class="sub">来源 Source：<a href="https://5189305mp.pro/en/promotions/uefa-boost">https://5189305mp.pro/en/promotions/uefa-boost</a></p>
+        <p class="sub">本页优先使用活动详情页 full-page screenshot 与可见正文，输出要求、Trigger、Reward、Who、When、Summary、核心目的和数据预期。</p>
+        <p class="sub"><span class="status ok">可访问 / OK</span></p>
+      </div>
+      <div class="meta">
+        <b>活动 Activities</b>1<br>
+        <b>详情 Details</b>1<br>
+        <b>详情截图 Shots</b>1<br>
+        <b>状态 Status</b>ok
+      </div>
+    </section>
+
+    <section class="visual">
+      <img src="../../browser-screenshots/megapari-megapari-bonus-rules.png" alt="Megapari screenshot">
+    </section>
+
+    <section class="activity-list">
+      <article class="activity-card detail-ok">
+    <div class="activity-head">
+      <span class="index">1</span>
+      <div>
+        <h2>Bonus Rules <span class="new-badge">今日新增 / New Today</span></h2>
+        <p>体育投注 / Sports Betting · <span class="detail-pill ok-pill">详情页已采集 / Detail captured</span></p>
+      </div>
+    </div>
+<a class="detail-shot-link" href="../../detail-screenshots/megapari/megapari-bonuses-https-5189305mp-pro-en-bonus-rules.png"><img class="detail-shot" src="../../detail-screenshots/megapari/megapari-bonuses-https-5189305mp-pro-en-bonus-rules.png" alt="Bonus Rules detail screenshot"></a>
+    <dl>
+      <div><dt>要求 / Requirements</dt><dd>odds of 1.5 or higher. At least one selection must be placed on a UEFA match (UEFA Ch</dd></div>
+      <div><dt>触发条件 / Trigger</dt><dd>用户完成指定充值触发</dd></div>
+      <div><dt>奖励方式 / Reward</dt><dd>up to 601 MYR; 70 MYR; 5%; 3.47 MYR; 7%</dd></div>
+      <div><dt>目标用户 / Who</dt><dd>Casino/Slots 用户；体育投注用户；电竞投注用户</dd></div>
+      <div><dt>时间 / When</dt><dd>ated), email address, country of residence.You must agree to receiving sports bonuses either in your ac</dd></div>
+      <div><dt>Summary / 总结</dt><dd>Bonus Rules 面向Casino/Slots 用户；体育投注用户；电竞投注用户，通过“用户完成指定充值触发”推动用户完成关键行为；奖励为 up to 601 MYR; 70 MYR; 5%; 3.47 MYR; 7%。主要参与要求：odds of 1.5 or higher. At least one selection must be placed on a UEFA match (UEFA Ch。</dd></div>
+      <div><dt>核心目的 / Objective</dt><dd>提升充值频次和充值金额</dd></div>
+      <div><dt>数据预期 / Expected Data</dt><dd>提升充值频次和充值金额；预期观察：充值次数、充值金额、Bonus claim rate 上升；投注额、投注单量、有效投注用户数上升；Casino DAU、游戏启动次数、免费旋转转付费率上升。</dd></div>
+      <div><dt>详情页来源 / Detail Source</dt><dd><a href="https://5189305mp.pro/en/promotions/uefa-boost">https://5189305mp.pro/en/promotions/uefa-boost</a></dd></div>
+    </dl>
+<details class="detail-excerpt"><summary>详情页原文摘要 / Detail excerpt</summary><pre>1RegistrationLog in11:20enCricketLiveSportsBonusesLive CasinoCasinoMegaGamesCrashCrystal21Scratch CardApple Of FortuneBurning HotWestern slotUnder and Over 7SolitaireVampire CurseCrash PointSpin and WinGems OdysseyMidgard ZombiesMayan TombShow allEsportsMoreVirtual sportsFast betHunting and FishingBingoTV GamesScratch Cardsuefa boostGet a free bet of up to 601 MYR!How to place bets successfullyTake partPress the &quot;Take part&quot; buttonMake a deposit of 70 MYR or more ? Get a free bet of up to 601 MYR for all periods ? Promotion periods1 periodApril 1 - 11, 2026Make a deposit2 periodApril 12 - 24, 2026Make a deposit3 periodApril 25 - May 14, 2026Make a deposit4 periodMay 15 - May 29, 2026Make a depositTerms and ConditionsCustomer SupportTerms and Conditions📌 Terms of participationTo confirm your participation, press the &quot;Take part&quot; button.Only registered customers may take part. The following fields must be filled in: full name, mobile phone number (must be activated), email address, country of residence.You must agree to receiving sports bonuses either in your account settings in My Account, or directly on the Deposit page.📅 Promotion periodsYou can receive free bets between April 1 and May 29 2026.Period 1: April 1 - 11, 2026Period 2: April 12 - 24, 2026Period 3: April 25 - May 14, 2026Period 4: May 15 - May 29, 2026🔥 How to get free betsMake a deposit of at least 70 MYR during each promotion period and increase the free bet percentage.Period 1: 5% free bet (maximum free bet: 70 MYR, minimum free bet: 3.47 MYR)Period 2: 7% free bet (maximum free bet: 116 MYR, minimum free bet: 4.86 MYR)Period 3: 12% free bet (maximum free bet: 162 MYR, minimum free bet: 8.32 MYR)Period 4: 20% free bet (maximum free bet: 255 MYR, minimum free bet: 14 MYR)Each bonus will be credited within 24 hours of making a deposit and will be equal to a percentage of the deposit amount corresponding to the relevant period.For the percentage to increase, you must make a deposit at each stage.If you miss a stage, the percentage will be reset to 5%.Example:You make a deposit during the first stage → you get a 5% free bet.Then you make a deposit during the second stage → you get ... [truncated]</pre></details>
+  </article>
+    </section>
+
+    <details class="raw">
+      <summary>查看原始页面文字 / Raw visible text</summary>
+      <pre>1RegistrationLog in11:20enCricketLiveSportsBonusesLive CasinoCasinoMegaGamesCrashCrystal21Scratch CardApple Of FortuneBurning HotWestern slotUnder and Over 7SolitaireVampire CurseCrash PointSpin and WinGems OdysseyMidgard ZombiesMayan TombShow allEsportsMoreVirtual sportsFast betHunting and FishingBingoTV GamesScratch Cardsuefa boostGet a free bet of up to !How to place bets successfullyTake partPress the &quot;Take part&quot; buttonMake a deposit of or more ? Get a free bet of up to for all periods ? Promotion periodsTerms and ConditionsCustomer Support</pre>
+    </details>
+  </main>
+</body>
+</html>
